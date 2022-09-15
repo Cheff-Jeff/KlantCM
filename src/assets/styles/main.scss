@@ -1,35 +1,50 @@
 @import "./base.scss";
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+.not-bootstrap{
+  cm-conversation{
+    cm-conversation-bubble{
+      width: 53%;
+    }
+    .row{
+      margin-bottom: 10px;
+    }
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+body{
+  width: 100%;
+  min-height: unset;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+.speek-icon-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .cm-icon{
+    margin-left: 5px;
+  }
+}
+
+a{
+  text-decoration: none !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .not-bootstrap{
+    cm-conversation{
+      cm-conversation-bubble{
+        width: 75%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .not-bootstrap{
+    cm-conversation{
+      cm-conversation-bubble{
+        width: 90%;
+      }
+    }
   }
 }
