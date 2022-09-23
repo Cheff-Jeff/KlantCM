@@ -41,19 +41,19 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+
 jobs:
   unit_test:
     runs-on: ubuntu-latest
-    working-directory: ./user-front-end
+    strategy:
+      matrix: { dir: ['./user-front-end', './serviceWorker-front-end'] }
+
     steps:
-      - name: check-code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: install
+      - name: Test vuejs projects
+        working-directory: ${{ matrix.dir }}
         run: npm install
-
-      - name: build
         run: npm run build
-
-      - name: tets
         run: npm run test:unit
