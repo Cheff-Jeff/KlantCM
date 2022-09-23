@@ -45,18 +45,30 @@ jobs:
   unit_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: user
       working-directory: ./user-front-end
-      - run: npm install
-      - run: npm run build
-      - run: npm run test:unit
+      - name: check-code
+        uses: actions/checkout@v2
+
+      - name: install
+        run: npm install
+
+      - name: build
+        run: npm run build
+
+      - name: tets
+        run: npm run test:unit
   admin_unit_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: user
       working-directory: ./serviceWorker-front-end
-      - run: npm install
-      - run: npm run build
-      - run: npm run test:unit   
+      - name: check-code
+        uses: actions/checkout@v2
+
+      - name: install
+        run: npm install
+
+      - name: build
+        run: npm run build
+
+      - name: tets
+        run: npm run test:unit
