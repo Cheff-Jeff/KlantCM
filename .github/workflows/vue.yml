@@ -52,6 +52,8 @@ jobs:
               npm install
               npm run build
               npm run test:unit
+  admin_unit_test:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: user
@@ -59,4 +61,4 @@ jobs:
       - run: |
               npm install
               npm run build
-              npm run test:unit
+              npm run test:unit    
