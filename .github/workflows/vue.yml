@@ -57,18 +57,3 @@ jobs:
 
       - name: tets
         run: npm run test:unit
-  admin_unit_test:
-    runs-on: ubuntu-latest
-    steps:
-      working-directory: ./serviceWorker-front-end
-      - name: check-code
-        uses: actions/checkout@v2
-
-      - name: install
-        run: npm install
-
-      - name: build
-        run: npm run build
-
-      - name: tets
-        run: npm run test:unit
