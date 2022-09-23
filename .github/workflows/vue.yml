@@ -54,6 +54,7 @@ jobs:
 
       - name: Test vuejs projects
         working-directory: ${{ matrix.dir }}
-        run: npm install
-        run: npm run build
-        run: npm run test:unit
+        run: | 
+              npm install
+              npm run build
+              npm run test:unit
