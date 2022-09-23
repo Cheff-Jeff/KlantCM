@@ -44,8 +44,8 @@ on:
 jobs:
   unit_test:
     runs-on: ubuntu-latest
+    working-directory: ./user-front-end
     steps:
-      working-directory: ./user-front-end
       - name: check-code
         uses: actions/checkout@v2
 
