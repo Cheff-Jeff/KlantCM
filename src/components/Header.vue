@@ -14,7 +14,7 @@
   <header>
     <div class="brand-wrap">
       <h1>
-        <RouterLink to="/">
+        <RouterLink :to="{name: 'home'}">
           {{ CompanyName }}
         </RouterLink>
       </h1>
