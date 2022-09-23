@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "6StSwvJJQwFgV34aVpG818srLBP7QDQmyIzrPM/h4nhVrGyrOvv4tPoSOMm7CMmdR/MtuOFw2IdzRx94t8cWzA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\CM-API\\CM-API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512"
+  ],
+  "logs": []
+}
