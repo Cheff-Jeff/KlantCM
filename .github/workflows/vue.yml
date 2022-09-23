@@ -34,7 +34,7 @@
 #         run: |
 #           echo Add other actions to build,
 #           echo test, and deploy your project.
-name: Run unit tests and build
+name: VUE/CI
 on:
   push:
     branches: [ "main" ]
