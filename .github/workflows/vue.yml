@@ -40,12 +40,13 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 jobs:
   unit_test:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v2
-    - run: |
-            npm ci
-            npm run build
-            npm run test:unit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+              npm ci
+              npm run build
+              npm run test:unit
