@@ -24,8 +24,13 @@
 
               <ConverzationSend Text="Thank you." Time="00:15"/>
 
+              <div id="newChat">
+              </div>
             </div>
             <div class="footer">
+              <button @click="test">
+                Test btn
+              </button>
               <Input />
             </div>
           </cm-conversation>
@@ -34,6 +39,20 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    methods: {
+      test() {
+        const bubble = () => {import '../components/ConverzationSend.vue';}
+        const test = new bubble({propsData: {
+          Text: 'Test',
+          Time: '12:21'
+        }}).$mount('#newChat');
+      }
+    }
+  };
+</script>
 
 <style lang="scss">
   @import "../assets/styles/pages/home.scss";

@@ -27,8 +27,12 @@ a{
   text-decoration: none !important;
 }
 
+.noHover{
+  pointer-events: none !important;
+}
+
 .container.customize{
-  padding: 0;
+  padding: 0 !important;
   display: flex;
   align-items: center;
   justify-content: center;
