@@ -45,7 +45,7 @@
         this.$router.push("account");
       },
       Logout(){
-        this.$router.push("Customer");
+        console.log("logout");
       },
     }
   };
