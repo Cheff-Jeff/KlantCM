@@ -45,10 +45,6 @@
     },
     methods: {
       checkKeyEnter() {
-        // if(e.keyCode === 13)
-        // {
-        //   this.submit()
-        // }
         this.checkInput();
       },
       checkInput()
