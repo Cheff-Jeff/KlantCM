@@ -8,6 +8,7 @@
     "test:unit": "vitest --environment jsdom"
   },
   "dependencies": {
+    "@microsoft/signalr": "^6.0.9",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "pinia": "^2.0.21",
