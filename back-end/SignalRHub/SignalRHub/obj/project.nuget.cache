@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "xFPlUVEa0h1w4ypiN2oa0UlJvKTayMKIbg6ZNfvWxBL99xSdT4yaU6YcQ4MZuz3SaQeqrGkT22HGz0kNyQY2Tg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\6.0.9\\microsoft.aspnetcore.connections.abstractions.6.0.9.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.aspnetcore.signalr.common\\6.0.9\\microsoft.aspnetcore.signalr.common.6.0.9.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.extensions.features\\6.0.9\\microsoft.extensions.features.6.0.9.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
