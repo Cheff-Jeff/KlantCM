@@ -12,6 +12,7 @@
                 placeholder="Start typing… "
                 v-model="input"
                 @keyup="checkKeyEnter"
+                @blur="checkInput"
               />
               <span class="input-left icon noHover">
                 <span class="cm-icon cm-icon-comment noHover" aria-hidden="true"></span>
@@ -45,7 +46,10 @@
     },
     methods: {
       checkKeyEnter() {
-        this.checkInput();
+        if(this.input.length != 0)
+        {
+          this.inputError = '';
+        }
       },
       checkInput()
       {
