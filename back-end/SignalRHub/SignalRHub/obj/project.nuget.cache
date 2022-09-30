@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Zp17ndptROqbud+8bILDf6RuwR4DLZ015+O4Jyzu7/chE/lcyY38rO0/kFOVAxw5NNwJJRQCkHFc89fpZXQPwA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512"
+  ],
+  "logs": []
+}
