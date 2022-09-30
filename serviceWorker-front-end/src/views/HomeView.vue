@@ -2,7 +2,6 @@
   import ConverzationSend from '../components/ConverzationSend.vue';
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
-  import {ConnectHub} from '../assets/javascript/Chat.js'
 </script>
 
 <template>
@@ -80,9 +79,6 @@
   </div>
 
 </template>
-<script>
-  ConnectHub()
-</script>
 <style lang="scss">
   @import "../assets/styles/pages/home.scss";
 </style>

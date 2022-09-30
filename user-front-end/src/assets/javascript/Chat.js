@@ -23,13 +23,6 @@ export const ConnectUser = function (){
     )
 }
 
-export const AddUser = function (RoomId){
-    connection.invoke("AddEndUserToRoom",RoomId).catch(function (err) {
-        return console.error(err.toString())
-    }
-    )
-}
-
 export const SendMessage = function (message,RoomId){
     connection.invoke("SendMessage", message,RoomId).catch(function (err) {
         return console.error(err.toString())
