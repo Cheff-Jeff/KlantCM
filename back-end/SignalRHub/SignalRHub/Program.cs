@@ -15,7 +15,8 @@ builder.Services.AddCors(options =>
                                               "https://localhost:44357/signalr",
                                               "http://localhost:54621/",
                                               "https://localhost:44334/",
-                                              "https://localhost:44357");
+                                              "https://localhost:44357",
+                                              "http://127.0.0.1:5173/");
                       });
 });
 
@@ -28,7 +29,8 @@ app.UseCors(builder =>
                                               "https://localhost:44357/signalr",
                                               "http://localhost:54621/",
                                               "https://localhost:44334/",
-                                                  "https://localhost:44357")
+                                                  "https://localhost:44357", "http://127.0.0.1:5173/"
+                                                  )
         .AllowAnyHeader()
         .WithMethods("GET", "POST")
         .AllowCredentials();
