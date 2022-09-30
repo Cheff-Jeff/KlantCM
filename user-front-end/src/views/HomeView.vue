@@ -24,14 +24,19 @@
 
               <ConverzationSend Text="Thank you." Time="00:15"/>
 
-              <div id="newChat">
+              <div 
+                v-for="chat in newChats"
+              >
+                <div v-if="chat.White">
+                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
+                </div>
+                <div v-else>
+                  <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                </div>
               </div>
             </div>
             <div class="footer">
-              <button @click="test">
-                Test btn
-              </button>
-              <Input />
+              <Input @text="sendConverzation"/>
             </div>
           </cm-conversation>
         </div>
@@ -42,13 +47,33 @@
 
 <script>
   export default {
+    data() {
+      return {
+        newChats: []
+      }
+    },
     methods: {
-      test() {
-        const bubble = () => {import '../components/ConverzationSend.vue';}
-        const test = new bubble({propsData: {
-          Text: 'Test',
-          Time: '12:21'
-        }}).$mount('#newChat');
+      sendConverzation(text) {
+        const time = new Date();
+
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false
+        };
+
+        this.newChats = [...this.newChats, bubble];
+      },
+      reciveConverzation(text) {
+        const time = new Date();
+
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: true
+        };
+
+        this.newChats = [...this.newChats, bubble];
       }
     }
   };
