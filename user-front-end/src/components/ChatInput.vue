@@ -20,7 +20,7 @@
                 <span class="cm-icon cm-icon-attachment m-r-8" aria-hidden="true"></span>
               </span>
             </div>
-            <span v-if="inputError">
+            <span v-if="inputError" class="small text-danger mt-1 d-block errorBlock">
               {{inputError}}
             </span>
           </div>
@@ -57,6 +57,7 @@
         {
           this.$emit('text', this.input);
           this.input = '';
+          this.inputError = '';
         }
       }
     }
