@@ -1,6 +1,12 @@
-﻿namespace SignalRHub.Hubs
+﻿using Microsoft.AspNetCore.SignalR;
+
+namespace SignalRHub.Hubs
 {
-    public class Chathub
+    public class Chathub :Hub
     {
+        public async Task SendMessage(string user, string message)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
     }
 }
