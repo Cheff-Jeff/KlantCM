@@ -1,6 +1,7 @@
-﻿namespace SignalRHub
+﻿using SignalRHub.Models;
+namespace SignalRHub
 {
-    public class RepoRoom<Room>
+    public class RepoRoom
     {
         private readonly Dictionary<int, Room> _data =
             new Dictionary<int, Room>();
@@ -12,6 +13,11 @@
         public void Add(Room r, int key)
         {
             _data.Add(key, r);
+        }
+
+        public void Update(Room r, int key)
+        {
+            _data[key] = r;
         }
         public bool Exists(int key)
         {
