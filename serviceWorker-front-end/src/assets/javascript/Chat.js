@@ -5,6 +5,7 @@ export class ChatHub {
     constructor(){
         console.log("in hub")
         this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
+        
 
         this.connection.onclose(async () => {
             await this.connect();
@@ -12,20 +13,19 @@ export class ChatHub {
 
         this.connect()
 
-        this.connection.on("ReceiveMessage", function (message) {
-            console.log(message)
+        this.connection.on("ReceiveMessageWorker", function (message) {
+            //Here we have to input revieved message in correct chat
         });
 
         this.connection.on("ReceiveRoomId", function (message) {
-                console.log(message)
                 this.RoomId = message
+                localStorage.setItem('roomId', this.RoomId)
         });
 
-        this.connection.on("nattebafkont28", function (message) {
+        this.connection.on("RecieveEndUserId", function (message) {
             ///Event to get message 
             ///here you get the connection id of the end user
-            console.log(message)
-            this.demorecieve =message
+            localStorage.setItem('demo', message) // here for demostation 
         });
     }
 
@@ -35,7 +35,6 @@ export class ChatHub {
             console.log("SignalR Connected.");
         } catch (err) {
             console.log(err);
-            setTimeout(start, 5000);
         }  
     }
 
@@ -43,13 +42,16 @@ export class ChatHub {
         // this.connection.invoke("SendMessage", message,RoomId,EndUser).catch(function (err) {
         //     return console.error(err.toString())
         // })
-            this.connection.invoke("SendMessage", message,this.RoomId,this.demorecieve).catch(function (err) {
+            let demo = localStorage.getItem('demo')
+            let roomid = localStorage.getItem('roomId')
+            this.connection.invoke("SendMessage", message,roomid,demo).catch(function (err) {
             return console.error(err.toString())
          })
     }
 
     AddUser(){
-        this.connection.invoke("AddEndUserToRoom",this.RoomId).catch(function (err) {
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("AddEndUserToRoom",RoomId).catch(function (err) {
             return console.error(err.toString())
         }
         )

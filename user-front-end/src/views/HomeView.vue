@@ -12,8 +12,6 @@ import { ChatHub } from '../assets/javascript/Chat';
         <div class="converzation-wrap">
           <cm-conversation style="height: 95vh">
             <div class="body">
-              <button @click="chat.ConnectUser()" />
-              <button/>
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>

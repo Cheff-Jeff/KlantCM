@@ -16,11 +16,10 @@ export class ChatHub {
             ///here you have to imput the message in the chatbox
         });
 
-        this.connection.on("kutjebefje", function (message) {
+        this.connection.on("RecieveRoomId ", function (message) {
             ///Event to get message 
-            ///here you get the connection id of the end user
-            console.log(message)
-            this.RoomId = message
+            ///here you get the room id
+            localStorage.setItem('roomId', this.RoomId)
         });
     }
 
@@ -30,7 +29,6 @@ export class ChatHub {
             console.log("SignalR Connected.");
         } catch (err) {
             console.log(err);
-            setTimeout(start, 5000);
         }  
     }
 
