@@ -97,10 +97,10 @@
 <script>
   export default {
     data(){
-    return{
-      chat: null,
-      newChats: []
-    }
+      return{
+        chat: null,
+        newChats: []
+      }
     },
     mounted(){
       console.log("test")
