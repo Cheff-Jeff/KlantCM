@@ -13,13 +13,19 @@ export class ChatHub {
         this.connect()
 
         this.connection.on("ReceiveMessage", function (message) {
-            ///Event to get message 
-            ///here you have to imput the message in the chatbox
+            console.log(message)
+        });
+
+        this.connection.on("ReceiveRoomId", function (message) {
+                console.log(message)
+                this.RoomId = message
         });
 
         this.connection.on("nattebafkont28", function (message) {
             ///Event to get message 
             ///here you get the connection id of the end user
+            console.log(message)
+            this.demorecieve =message
         });
     }
 
@@ -33,14 +39,17 @@ export class ChatHub {
         }  
     }
 
-    SendMessage(){
-        this.connection.invoke("SendMessage", message,RoomId,EndUser).catch(function (err) {
+    SendMessage(message){
+        // this.connection.invoke("SendMessage", message,RoomId,EndUser).catch(function (err) {
+        //     return console.error(err.toString())
+        // })
+            this.connection.invoke("SendMessage", message,this.RoomId,this.demorecieve).catch(function (err) {
             return console.error(err.toString())
-        })
+         })
     }
 
     AddUser(){
-        this.connection.invoke("AddEndUserToRoom",RoomId).catch(function (err) {
+        this.connection.invoke("AddEndUserToRoom",this.RoomId).catch(function (err) {
             return console.error(err.toString())
         }
         )

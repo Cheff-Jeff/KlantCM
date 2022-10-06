@@ -1,31 +1,52 @@
 import  { HubConnectionBuilder } from "@microsoft/signalr"
 
+export class ChatHub {
+    constructor(){
+        console.log("in hub")
+        this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
 
-export const ConnectHub = function(){
-    const connection = new HubConnectionBuilder().withUrl("localhost:/signalr").build()
+        this.connection.onclose(async () => {
+            await this.connect();
+        })
 
-    connection.on("ReceiveMessage", function (message) {
-        ///Event to get message 
-        ///here you have to imput the message in the chatbox
-    });
-    
-    connection.on("kutjebefje", function (message) {
-        ///Event to get message 
-        ///here you get the  id of the room nesssecary for the send message
-    });
-}
+        this.connect()
 
+        this.connection.on("ReceiveMessage", function (message) {
+            ///Event to get message 
+            ///here you have to imput the message in the chatbox
+        });
 
-export const ConnectUser = function (){
-    connection.invoke("ConnectUser").catch(function (err) {
-        return console.error(err.toString())
+        this.connection.on("kutjebefje", function (message) {
+            ///Event to get message 
+            ///here you get the connection id of the end user
+            console.log(message)
+            this.RoomId = message
+        });
     }
-    )
-}
 
-export const SendMessage = function (message,RoomId){
-    connection.invoke("SendMessage", message,RoomId).catch(function (err) {
-        return console.error(err.toString())
+    async connect(){
+        try {
+            await this.connection.start();
+            console.log("SignalR Connected.");
+        } catch (err) {
+            console.log(err);
+            setTimeout(start, 5000);
+        }  
     }
-    )
+
+    SendMessage(message){
+        this.connection.invoke("SendMessage", message,this.RoomId).catch(function (err) {
+            return console.error(err.toString())
+        })
+    }
+
+    ConnectUser(){
+        console.log("connect user")
+        this.connection.invoke("ConnectUser").catch(function (err) {
+            return console.error(err.toString())
+        }
+        )
+    }
+
+
 }
