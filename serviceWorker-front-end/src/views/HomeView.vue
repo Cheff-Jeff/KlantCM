@@ -71,9 +71,17 @@
 
               <ConverzationHelp Text="Thank you." Time="00:15"/>
 
+              <div v-for="chat in newChats">
+                <div v-if="chat.White">
+                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
+                </div>
+                <div v-else>
+                  <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                </div>
+              </div>
             </div>
             <div class="footer">
-              <Input />
+              <Input @text="sendConverzation"/>
             </div>
           </cm-conversation>
         </div>
@@ -82,6 +90,41 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        newChats: []
+      }
+    },
+    methods: {
+      sendConverzation(text) {
+        const time = new Date();
+
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false
+        };
+
+        console.log("tets");
+        this.newChats = [...this.newChats, bubble];
+      },
+      reciveConverzation(text) {
+        const time = new Date();
+
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: true
+        };
+
+        this.newChats = [...this.newChats, bubble];
+      }
+    }
+  };
+</script>
 
 <script>
   export default {
