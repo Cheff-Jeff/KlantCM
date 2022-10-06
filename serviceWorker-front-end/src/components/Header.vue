@@ -47,7 +47,7 @@
       },
       LogoutBtn(){
         if(Logout()){
-          this.$router.push("/");
+          this.$router.push("login");
         }
         else{
           //error
