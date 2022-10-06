@@ -121,19 +121,12 @@
         };
 
         this.newChats = [...this.newChats, bubble];
-      }
-    }
-  };
-</script>
-
-<script>
-  export default {
-    methods:{
+      },
       sendPost(){
         createPost(1, "hoi")
       }
     }
-  }
+  };
 </script>
 
 
