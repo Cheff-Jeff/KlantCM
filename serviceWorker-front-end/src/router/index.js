@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
+import { RouteGaurd } from '../assets/javascript/Authenticate'
 
 const router = createRouter({
     history: createWebHistory(
@@ -12,14 +13,30 @@ const router = createRouter({
         {
             path: '/home',
             name: 'home',
-            component: () => import ('../views/HomeView.vue')
+            beforeEnter: (to, from, next) => {
+                if(!RouteGaurd()){
+                    next({name: 'error'});
+                    return false
+                }
+                else{
+                    next();
+                }
+            },
+            component: () => 
+                import ('../views/HomeView.vue')
         },
         {
             path: '/account',
             name: 'account',
-            // route level code-splitting
-            // this generates a separate chunk (About.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
+            beforeEnter: (to, from, next) => {
+                if(!RouteGaurd()){
+                    next({name: 'error'});
+                    return false
+                }
+                else{
+                    next();
+                }
+            },
             component: () =>
                 import ('../views/AccountView.vue')
         },

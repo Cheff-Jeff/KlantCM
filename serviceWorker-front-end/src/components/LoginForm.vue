@@ -1,3 +1,7 @@
+<script setup>
+import {Login} from '../assets/javascript/Authenticate'
+</script>
+
 <template>
   <form @submit.prevent="submit">
     <div class="row">
@@ -100,7 +104,13 @@ export default {
 
       if(this.passwordError == '' && this.emailError == '')
       {
-        console.log("submit");
+        if(Login(this.email, this.password))
+        {
+          this.$router.push("home");
+        }
+        else{
+          //error
+        }
       }
     }
   }
