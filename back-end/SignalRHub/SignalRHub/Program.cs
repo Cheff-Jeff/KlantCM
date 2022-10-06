@@ -4,39 +4,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSignalR();
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("https://localhost:44357/",
-                                              "https://localhost:44357/signalr",
-                                              "http://localhost:54621/",
-                                              "https://localhost:44334/",
-                                              "https://localhost:44357");
-                      });
-});
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+        builder =>
+        {
+            builder.AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .SetIsOriginAllowed((host) => true)
+                   .AllowCredentials();
+        }));
 
 var app = builder.Build();
 
 
-app.UseCors(builder =>
-{
-    builder.WithOrigins("https://localhost:44357/",
-                                              "https://localhost:44357/signalr",
-                                              "http://localhost:54621/",
-                                              "https://localhost:44334/",
-                                                  "https://localhost:44357")
-        .AllowAnyHeader()
-        .WithMethods("GET", "POST")
-        .AllowCredentials();
-});
 
 app.UseRouting();
-app.UseCors(MyAllowSpecificOrigins);
-
+app.UseCors("CorsPolicy");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
