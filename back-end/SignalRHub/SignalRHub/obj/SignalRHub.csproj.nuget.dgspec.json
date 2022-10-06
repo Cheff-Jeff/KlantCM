@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj": {}
+    "C:\\Users\\nooit\\Desktop\\Internet Explorer\\S3\\Groepsproject\\Code\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj": {
+    "C:\\Users\\nooit\\Desktop\\Internet Explorer\\S3\\Groepsproject\\Code\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
+        "projectUniqueName": "C:\\Users\\nooit\\Desktop\\Internet Explorer\\S3\\Groepsproject\\Code\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
         "projectName": "SignalRHub",
-        "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
-        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\obj\\",
+        "projectPath": "C:\\Users\\nooit\\Desktop\\Internet Explorer\\S3\\Groepsproject\\Code\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
+        "packagesPath": "C:\\Users\\nooit\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nooit\\Desktop\\Internet Explorer\\S3\\Groepsproject\\Code\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nooit\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -47,6 +47,10 @@
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.15.1, )"
+            },
+            "SignalR.UnitTestingSupport.MSTest": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -55,7 +59,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -67,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
