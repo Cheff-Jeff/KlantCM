@@ -6,20 +6,7 @@
   import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
 </script>
-<script>
-export default
-{
-  data(){
-    return{
-      chat : null
-    }
-  },
-  mounted(){
-    console.log("test")
-    this.chat = new ChatHub()
-  }
-}
-</script>
+
 <template>
 <Header />
   <div class="container-fluid">
@@ -109,9 +96,42 @@ export default
 
 <script>
   export default {
+    data(){
+    return{
+      chat: null,
+      newChats: []
+    }
+    },
+    mounted(){
+      console.log("test")
+      this.chat = new ChatHub()
+    },
     methods:{
       sendPost(){
         createPost(1, "hoi")
+      },
+      sendConverzation(text) {
+        const time = new Date();
+
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false
+        };
+
+        console.log("tets");
+        this.newChats = [...this.newChats, bubble];
+      },
+      reciveConverzation(text) {
+        const time = new Date();
+
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: true
+        };
+
+        this.newChats = [...this.newChats, bubble];
       }
     }
   }
