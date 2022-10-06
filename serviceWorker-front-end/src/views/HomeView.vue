@@ -3,9 +3,12 @@
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
   import {ChatHub} from '../assets/javascript/Chat'
-
+  import {createPost} from '../assets/javascript/MessageReceiver2';
+  import Header from '../components/Header.vue';
 </script>
+
 <template>
+<Header />
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2 col-md-3">
@@ -69,9 +72,17 @@
 
               <ConverzationHelp Text="Thank you." Time="00:15"/>
 
+              <div v-for="chat in newChats" :key="chat">
+                <div v-if="chat.White">
+                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
+                </div>
+                <div v-else>
+                  <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                </div>
+              </div>
             </div>
             <div class="footer">
-              <Input />
+              <Input @text="sendConverzation"/>
             </div>
           </cm-conversation>
         </div>
@@ -80,6 +91,48 @@
   </div>
 </template>
 
+<script>
+  export default {
+    data(){
+      return{
+        chat: null,
+        newChats: []
+      }
+    },
+    mounted(){
+      console.log("test")
+      this.chat = new ChatHub()
+    },
+    methods:{
+      sendPost(){
+        createPost(1, "hoi")
+      },
+      sendConverzation(text) {
+        const time = new Date();
+
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false
+        };
+
+        console.log("tets");
+        this.newChats = [...this.newChats, bubble];
+      },
+      reciveConverzation(text) {
+        const time = new Date();
+
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: true
+        };
+
+        this.newChats = [...this.newChats, bubble];
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
   @import "../assets/styles/pages/home.scss";

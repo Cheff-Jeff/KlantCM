@@ -1,5 +1,6 @@
 <script setup>
   import { RouterLink } from 'vue-router'
+  import {Logout} from '../assets/javascript/Authenticate'
 
   defineProps({
     CompanyName: {
@@ -31,7 +32,7 @@
         data-button-style="cta"
         data-button-size="medium"
         data-custom-classes="logout"
-        @click="Logout">
+        @click="LogoutBtn">
       </cm-button>
     </div>
   </header>
@@ -44,8 +45,13 @@
         //Navigeer naar test view;
         this.$router.push("account");
       },
-      Logout(){
-        console.log("logout");
+      LogoutBtn(){
+        if(Logout()){
+          this.$router.push("login");
+        }
+        else{
+          //error
+        }
       },
     }
   };
