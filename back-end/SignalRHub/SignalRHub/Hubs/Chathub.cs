@@ -10,20 +10,23 @@ namespace SignalRHub.Hubs
         private readonly static RepoEndUser _EndUserdata = new();
         private readonly static RepoRoom<Room> _Roomdata = new();
 
-        public async Task SendMessage(string message, int RoomId, string? ConnectionId)
+        public async Task <bool> SendMessage(string message, int RoomId, string? ConnectionId)
         {
             Room r = _Roomdata.get(RoomId);
             if (r == null || !r.EndUserIds.Contains(Context.ConnectionId))
             {
                 //Naar error sturen
+                return false;
             }
             if (ConnectionId != null)
             {
                 await Clients.Client(ConnectionId).SendAsync(message);
+                return true;
             }
             else
             {
                 await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessage", message);
+                return true;
             }
         }
         /// <summary>
