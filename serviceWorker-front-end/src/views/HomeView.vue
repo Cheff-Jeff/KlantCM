@@ -2,6 +2,7 @@
   import ConverzationSend from '../components/ConverzationSend.vue';
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
+  import {createPost} from '../assets/javascript/MessageReceiver2';
 </script>
 
 <template>
@@ -75,10 +76,22 @@
           </cm-conversation>
         </div>
       </div>
+      <button @click="sendPost"></button>
     </div>
   </div>
-
 </template>
+
+<script>
+  export default {
+    methods:{
+      sendPost(){
+        createPost(1, "hoi")
+      }
+    }
+  }
+</script>
+
+
 <style lang="scss">
   @import "../assets/styles/pages/home.scss";
 </style>
