@@ -14,7 +14,6 @@ export default
     }
   },
   mounted(){
-    console.log("test")
     this.chat = new ChatHub()
   }
 }
