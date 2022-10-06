@@ -5,19 +5,6 @@
   import {ChatHub} from '../assets/javascript/Chat'
 
 </script>
-<script>
-export default
-{
-  data(){
-    return{
-      chat : null
-    }
-  },
-  mounted(){
-    this.chat = new ChatHub()
-  }
-}
-</script>
 <template>
   <div class="container-fluid">
     <div class="row">
