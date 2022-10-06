@@ -11,26 +11,30 @@ const router = createRouter({
             component: LoginView
         },
         {
+            path: '/login',
+            name: 'login',
+            component: LoginView
+        },
+        {
             path: '/home',
             name: 'home',
             beforeEnter: (to, from, next) => {
                 if(!RouteGaurd()){
-                    next({name: 'error'});
+                    next({name: 'login'});
                     return false
                 }
                 else{
                     next();
                 }
             },
-            component: () => 
-                import ('../views/HomeView.vue')
+            component: () => import ('../views/HomeView.vue')
         },
         {
             path: '/account',
             name: 'account',
             beforeEnter: (to, from, next) => {
                 if(!RouteGaurd()){
-                    next({name: 'error'});
+                    next({name: 'login'});
                     return false
                 }
                 else{

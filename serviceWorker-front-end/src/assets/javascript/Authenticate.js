@@ -15,6 +15,17 @@ export const Login = (email, password) => {
   }
 }
 
+export const Logout = () => {
+  const user = JSON.parse(localStorage.getItem('user'))
+  if(user !== null){
+    localStorage.removeItem('user');
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
 export const RouteGaurd = () =>{
   const user = JSON.parse(localStorage.getItem('user'));
   if(user !== null){
