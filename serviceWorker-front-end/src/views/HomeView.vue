@@ -118,6 +118,7 @@
 
         console.log("tets");
         this.newChats = [...this.newChats, bubble];
+        this.chat.SendMessage(text)
       },
       reciveConverzation(text) {
         const time = new Date();
