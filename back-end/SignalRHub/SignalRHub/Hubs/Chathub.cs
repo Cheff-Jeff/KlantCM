@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using SignalRHub.Models;
+using SignalRHub.Repo;
 
 namespace SignalRHub.Hubs
 {
     public class Chathub :Hub
     {
-        private Dictionary<int, Room>? Dict = new();
-        private List<string> EndUsers = new();
+
+        private readonly static RepoEndUser _EndUserdata = new();
+        private readonly static RepoRoom<Room> _Roomdata = new();
 
         public async Task SendMessage(string message, int RoomId, string? ConnectionId)
         {
-            Room r = Dict[RoomId];
+            Room r = _Roomdata.get(RoomId);
             if (r == null || !r.EndUserIds.Contains(Context.ConnectionId))
             {
                 //Naar error sturen
@@ -24,7 +26,20 @@ namespace SignalRHub.Hubs
                 await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessage", message);
             }
         }
-
+        /// <summary>
+        /// Add new user to the room that requested it.
+        /// </summary>
+        /// <param name="RoomId"></param>
+        /// <returns></returns>
+        public async Task AddEndUserToRoom(int RoomId)
+        {
+            Room r = _Roomdata.get(RoomId);
+            EndUser EndUser = _EndUserdata.FindFreeUser();
+            r.EndUserIds.Add(EndUser.ConnectionString);
+            _Roomdata.Add(r, r.Id);
+            await Clients.Client(EndUser.ConnectionString).SendAsync("kutjebefje", RoomId.ToString());
+            await Clients.Client(r.employee.ConnectionString).SendAsync("nattebafkont28", EndUser);
+        }
         /// <summary>
         /// Function of the employee to start his room. De end-User is not allowed to acces this
         /// </summary>
@@ -35,8 +50,9 @@ namespace SignalRHub.Hubs
         {
             Employee e = new Employee {Id = id,ConnectionString = Context.ConnectionId, FirstName = FirstName };
             List<string> l = new();
-            Room r = new() { Id = Dict.Count + 1,employee = e, EndUserIds = l };
-            Dict.Add(r.Id, r);
+            Room r = new() { Id = _Roomdata.Count + 1,employee = e, EndUserIds = l };
+
+            _Roomdata.Add(r, _Roomdata.Count);
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
         }   
 
@@ -46,22 +62,9 @@ namespace SignalRHub.Hubs
         /// <returns></returns>
         public void ConnectUser()
         {
-            EndUsers.Add(Context.ConnectionId);
+            EndUser e = new(Context.ConnectionId);
+            _EndUserdata.Add(e,_EndUserdata.Count);
         }
-        /// <summary>
-        /// Add new user to the room that requested it.
-        /// </summary>
-        /// <param name="RoomId"></param>
-        /// <returns></returns>
-        public async Task AddEndUserToRoom(int RoomId)
-        {
-            Room r = Dict[RoomId];
-            string EndUser = EndUsers[0].ToString();
-            EndUsers.RemoveAt(0);
-            r.EndUserIds.Add(EndUser);
-            Dict[RoomId] = r;
-            await Clients.Client(EndUser).SendAsync("kutjebefje",RoomId.ToString());
-            await Clients.Client(r.employee.ConnectionString).SendAsync("nattebafkont28",EndUser);
-        }
+
     }
 }

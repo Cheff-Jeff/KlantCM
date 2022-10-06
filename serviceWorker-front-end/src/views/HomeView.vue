@@ -25,6 +25,9 @@ export default
       <div class="col-lg-2 col-md-3">
         <div class="chat-controller">
           <div class="chat-btn-wrap">
+            <button style="height:100px" @click="chat.StartRoom(1,'andreas')"/>
+            <button style="height:100px" @click="chat.AddUser(1,'andreas')"/>
+            <button style="height:100px" @click="chat.SendMessage('test van button')"/>
             <div class="queue">
               <span>20 people waiting in line.</span>
             </div>
