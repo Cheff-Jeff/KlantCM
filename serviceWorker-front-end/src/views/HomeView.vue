@@ -71,7 +71,7 @@
 
               <ConverzationHelp Text="Thank you." Time="00:15"/>
 
-              <div v-for="chat in newChats">
+              <div v-for="chat in newChats" :key="chat">
                 <div v-if="chat.White">
                   <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
                 </div>
