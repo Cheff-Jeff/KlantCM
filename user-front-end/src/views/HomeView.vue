@@ -2,6 +2,7 @@
   import ConverzationSend from '../components/ConverzationSend.vue';
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
+import { ChatHub } from '../assets/javascript/Chat';
 </script>
 
 <template>
@@ -11,6 +12,8 @@
         <div class="converzation-wrap">
           <cm-conversation style="height: 95vh">
             <div class="body">
+              <button @click="chat.ConnectUser()" />
+              <button/>
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>
@@ -49,8 +52,12 @@
   export default {
     data() {
       return {
-        newChats: []
+        newChats: [],
+        chat :null
       }
+    },
+    mounted(){
+      this.chat = new ChatHub()
     },
     methods: {
       sendConverzation(text) {
@@ -63,6 +70,7 @@
         };
 
         this.newChats = [...this.newChats, bubble];
+        this.chat.SendMessage(text)
       },
       reciveConverzation(text) {
         const time = new Date();
