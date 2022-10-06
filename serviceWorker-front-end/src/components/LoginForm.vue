@@ -5,6 +5,11 @@ import {Login} from '../assets/javascript/Authenticate'
 <template>
   <form @submit.prevent="submit">
     <div class="row">
+      <div class="col-md-12" v-if="loginError">
+        <span class="small text-danger">
+          {{loginError}}
+        </span>
+      </div>
       <div class="col-md-12">
         <div class="form-group">
           <div class="form-row">
@@ -80,6 +85,7 @@ export default {
       emailError: '',
       password: '',
       passwordError: '',
+      loginError: '',
       inputType: 'password',
     }
   },
@@ -88,6 +94,7 @@ export default {
       this.inputType = this.inputType == 'password' ? 'text' : 'password' 
     },
     checkEmail() {
+      this.loginError = this.loginError.length > 0 ? '' : ''
       this.emailError = this.email.length == 0 ? 'Email can not be empty.' 
       : (this.validateEmail(this.email) ? '' : this.email + ' is not an email.')
     },
@@ -96,6 +103,7 @@ export default {
       return re.test(email);
     },
     checkPassword() {
+      this.loginError = this.loginError.length > 0 ? '' : ''
       this.passwordError = this.password.length == 0 ? 'Password can not be empty.' : ''
     },
     submit() {
@@ -109,7 +117,7 @@ export default {
           this.$router.push("home");
         }
         else{
-          //error
+          this.loginError = 'password or email did not match'
         }
       }
     }
