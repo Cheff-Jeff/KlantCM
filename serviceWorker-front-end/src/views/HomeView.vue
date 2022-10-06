@@ -3,9 +3,11 @@
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
   import {createPost} from '../assets/javascript/MessageReceiver2';
+  import Header from './components/Header.vue';
 </script>
 
 <template>
+<Header />
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2 col-md-3">

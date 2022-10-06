@@ -1,0 +1,44 @@
+svg{
+  max-width: 25px;
+  min-width: 25px;
+  max-height: 25px;
+  min-height: 25px;
+}
+
+.pass-wrap{
+  position: relative;
+  display: flex;
+  input{
+    width: 100%;
+    z-index: 1;
+    padding-right: 35px;
+    font-family: var(--font-family-base),sans-serif;
+  }
+  span.small{
+    font-family: var(--font-family-base),sans-serif;
+  }
+  svg{
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    z-index: 2;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+
+input{
+  font-family: var(--font-family-base),sans-serif;
+}
+span.small{
+  font-family: var(--font-family-base),sans-serif;
+}
+
+label{
+  padding-left: 0px !important;
+}
+
+.spacing{
+  margin-bottom: 30px;
+}
