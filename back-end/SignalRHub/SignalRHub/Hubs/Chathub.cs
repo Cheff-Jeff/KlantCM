@@ -8,20 +8,23 @@ namespace SignalRHub.Hubs
         private Dictionary<int, Room>? Dict = new();
         private List<string> EndUsers = new();
 
-        public async Task SendMessage(string message, int RoomId, string? ConnectionId)
+        public async Task <bool> SendMessage(string message, int RoomId, string? ConnectionId)
         {
             Room r = Dict[RoomId];
             if (r == null || !r.EndUserIds.Contains(Context.ConnectionId))
             {
                 //Naar error sturen
+                return false;
             }
             if (ConnectionId != null)
             {
                 await Clients.Client(ConnectionId).SendAsync(message);
+                return true;
             }
             else
             {
                 await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessage", message);
+                return true;
             }
         }
 
