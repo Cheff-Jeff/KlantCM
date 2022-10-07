@@ -5,7 +5,6 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
-import { connect } from 'http2';
 </script>
 
 <template>
@@ -118,13 +117,12 @@ import { connect } from 'http2';
     mounted(){
       this.chat = new ChatHub()
       window.addEventListener('NewChat',()=>{
-        console.log(localStorage.getItem('NewChat'))
         this.reciveConverzation(localStorage.getItem('NewChat'))
       })
 
       window.addEventListener('NewUser',()=>{
-        console.log(localStorage.getItem('NewUser'))
-        AddUser(localStorage.getItem('NewUser'))
+        console.log(localStorage.getItem('User'))
+        this.AddUser(localStorage.getItem('User'))
       })
 
       this.reciveConverzation('hi')
@@ -142,7 +140,7 @@ import { connect } from 'http2';
           White: false
         };
 
-        this.ChatWindows[this.activeChatKey].newChats = [...this.ChatWindows[this.activeChatKey].newChats, bubble];
+        this.ChatWindows[this.activeChatKey].newChats.push(bubble);
         this.chat.SendMessage(text,this.ChatWindows[this.activeChatKey].UserConnection)
       },
       reciveConverzation(text) {
@@ -164,6 +162,7 @@ import { connect } from 'http2';
           if(e.UserConnection == ''){
             e.UserConnection = connection
           }
+      
         });
       }
     }

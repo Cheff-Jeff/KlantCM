@@ -13,10 +13,11 @@ export class ChatHub {
 
         this.connect()
 
-        this.connection.on("ReceiveMessageWorker", function (message) {
+        this.connection.on("ReceiveMessageWorker", function (message, connection) {
             //Here we have to input revieved message in correct chat
-            console.log(message)
+
             localStorage.setItem('NewChat',message)
+            localStorage.setItem('FormUser',connection)
             window.dispatchEvent(NewChat)
         });
 

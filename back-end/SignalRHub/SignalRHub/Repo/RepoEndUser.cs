@@ -18,6 +18,10 @@ namespace SignalRHub.Repo
         {
             return _data.ContainsKey(key);
         }
+        public void Update(EndUser e, int key)
+        {
+            _data[key] = e;
+        }
 
         public EndUser? get(int key)
         {
@@ -32,6 +36,8 @@ namespace SignalRHub.Repo
                 EndUser e = _data[i];
                 if (!e.inRoom)
                 {
+                    e.inRoom = true;
+                    Update(e, i);
                     return e;
                 }
             }

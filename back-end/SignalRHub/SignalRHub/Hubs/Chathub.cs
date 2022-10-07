@@ -26,7 +26,7 @@ namespace SignalRHub.Hubs
             }
             else
             {
-                await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessageWorker", message);
+                await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessageWorker", message, Context.ConnectionId);
             }
         }
         /// <summary>
