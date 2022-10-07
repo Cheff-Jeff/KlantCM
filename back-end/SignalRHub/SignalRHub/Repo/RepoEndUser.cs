@@ -10,9 +10,11 @@ namespace SignalRHub.Repo
             get { return _data.Count; }
         }
 
-        public void Add(EndUser r, int key)
+        public bool Add(EndUser r, int key)
         {
             _data.Add(key, r);
+            if(key != null && r != null) { return true; }
+            return false;
         }
         public bool Exists(int key)
         {
@@ -25,7 +27,8 @@ namespace SignalRHub.Repo
             return p;
         }
 
-        internal EndUser? FindFreeUser() /// this can be done better
+        //dit was internal
+        public EndUser? FindFreeUser() /// this can be done better
         {
             for (int i = 0; i < _data.Count; i++)
             {
