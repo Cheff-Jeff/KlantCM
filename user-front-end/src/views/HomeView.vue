@@ -16,17 +16,8 @@ import { ChatHub } from '../assets/javascript/Chat';
                 <span class="title"> Today </span>
               </cm-conversation-divider>
 
-              <ConverzationHelp />
-
-              <ConverzationSend />
-              <ConverzationSend />
-
-              <ConverzationHelp />
-
-              <ConverzationSend Text="Thank you." Time="00:15"/>
-
               <div 
-                v-for="chat in newChats"
+                v-for="chat in newChats" :key="chat"
               >
                 <div v-if="chat.White">
                   <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
