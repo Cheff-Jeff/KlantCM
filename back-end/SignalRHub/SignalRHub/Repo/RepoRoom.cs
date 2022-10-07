@@ -9,9 +9,11 @@
             get { return _data.Count; }
         }
 
-        public void Add(Room r, int key)
+        public bool Add(Room r, int key)
         {
             _data.Add(key, r);
+            if(r != null && key != null) { return true; }
+            return false;
         }
         public bool Exists(int key)
         {
