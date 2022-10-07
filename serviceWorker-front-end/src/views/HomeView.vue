@@ -45,6 +45,13 @@
           </div>
 
           <div class="chat-btn-wrap-bottom">
+            <button type="button" class="btn btn-light mb-3">
+              Start chat
+            </button>
+            <button type="button" class="btn btn-light mb-5">
+              Add client
+            </button>
+
             <cm-button
               data-label="End active chat"
               data-button-style="cta"
