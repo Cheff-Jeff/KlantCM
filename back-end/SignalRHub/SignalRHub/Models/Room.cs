@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public Employee employee { get; set; }
-        public List<string> EndUserIds { get; set; }
+        public List<string> EndUserIds { get; set; } = new();
     }
 }
