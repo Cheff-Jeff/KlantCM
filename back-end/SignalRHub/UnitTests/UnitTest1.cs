@@ -47,5 +47,58 @@ namespace SignalRTest
             Assert.AreEqual(room.EndUserIds[0], endUser.ConnectionString);
             Assert.AreEqual(room.EndUserIds.Count, ExpectedOutcome);
         }
+
+        //[TestMethod]
+        public async Task Test_StartRoom()
+        {
+            ////arrange
+            //Chathub chathub = new Chathub();
+
+            //List<string> l = new();
+            //l.Add("1");
+
+            //int id = 3;
+            //string firstname = "Pieter";
+
+            //Employee employee = new Employee();
+            //employee.Id = id;
+            //employee.FirstName = firstname;
+
+            //Room room = new Room();
+            //room.Id = 6;
+            //room.employee = employee;
+            //room.EndUserIds = l;
+
+
+            ////act
+            //Room expected = new Room();
+            //Room actual = new Room();
+            //actual = await chathub.StartRoom(id, firstname);
+            //expected = room;
+
+
+            ////assert
+            //Assert.AreEqual(actual, expected);
+        }
+
+        //[TestMethod]
+        public void Test_ConnectUser()
+        {
+            ////arrange
+            //Chathub chathub = new Chathub();
+            //string connectionString = "test";
+
+            //EndUser e = new EndUser(connectionString);
+
+
+            ////act
+            //bool actual = chathub.ConnectUser();
+            //bool expected = true;
+
+
+            ////assert
+            //Assert.AreEqual(actual, expected);
+
+        }
     }
 }
