@@ -56,6 +56,7 @@ import { ChatHub } from '../assets/javascript/Chat';
     },
     mounted(){
       this.chat = new ChatHub()
+      this.chat.ConnectUser()
     },
     methods: {
       sendConverzation(text) {
