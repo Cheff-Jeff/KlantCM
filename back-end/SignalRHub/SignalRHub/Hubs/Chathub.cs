@@ -40,7 +40,7 @@ namespace SignalRHub.Hubs
             EndUser EndUser = _EndUserdata.FindFreeUser();
             r.EndUserIds.Add(EndUser.ConnectionString);
             _Roomdata.Update(r, r.Id);
-            await Clients.Client(EndUser.ConnectionString).SendAsync("kutjebefje", RoomId.ToString());
+            await Clients.Client(EndUser.ConnectionString).SendAsync("RecieveRoomId", RoomId.ToString());
             await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", EndUser.ConnectionString);
         }
         /// <summary>

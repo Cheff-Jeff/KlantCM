@@ -62,8 +62,10 @@
     align-items: center;
 
     button{
+      &:last-child{
+        background-color: #dc3545 !important;
+      }
       min-width: 200px !important;
-      background-color: #dc3545 !important;
     }
   }
 }

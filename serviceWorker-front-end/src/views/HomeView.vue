@@ -45,6 +45,13 @@
           </div>
 
           <div class="chat-btn-wrap-bottom">
+            <button type="button" class="btn btn-light mb-3" @click="chat.StartRoom(1,'andreas')">
+              Start chat
+            </button>
+            <button type="button" class="btn btn-light mb-5" @click="chat.AddUser()">
+              Add client
+            </button>
+
             <cm-button
               data-label="End active chat"
               data-button-style="cta"
@@ -62,7 +69,7 @@
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>
-
+<!-- 
               <ConverzationHelp />
 
               <ConverzationSend />
@@ -70,7 +77,7 @@
               <ConverzationSend />
 
 
-              <ConverzationHelp Text="Thank you." Time="00:15"/>
+              <ConverzationHelp Text="Thank you." Time="00:15"/> -->
 
               <div v-for="chat in newChats" :key="chat">
                 <div v-if="chat.White">
@@ -102,6 +109,10 @@
     mounted(){
       console.log("test")
       this.chat = new ChatHub()
+      window.addEventListener('NewChat',()=>{
+        console.log(localStorage.getItem('NewChat'))
+        this.reciveConverzation(localStorage.getItem('NewChat'))
+      })
     },
     methods:{
       sendPost(){
@@ -118,6 +129,7 @@
 
         console.log("tets");
         this.newChats = [...this.newChats, bubble];
+        this.chat.SendMessage(text)
       },
       reciveConverzation(text) {
         const time = new Date();
