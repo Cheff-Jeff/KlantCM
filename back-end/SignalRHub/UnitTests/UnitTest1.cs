@@ -32,13 +32,9 @@ namespace SignalRTest
         [TestMethod]
         public async Task Test_AddEndUserToRoom()
         {
-            //arrange
-                            
-            Chathub chathub = new Chathub();
+            //arrange                        
             string connectionid = "test";
             bool inRoom = false;
-            Employee henk = new Employee();
-            int roomid = 1;
 
             Room room = new Room();
             room.EndUserIds = new List<string>();
