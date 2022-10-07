@@ -1,4 +1,5 @@
-﻿using SignalRHub.Models;
+﻿using SignalRHub.Exceptions;
+using SignalRHub.Models;
 namespace SignalRHub.Repo
 {
     public class RepoEndUser
@@ -38,7 +39,7 @@ namespace SignalRHub.Repo
                     return e;
                 }
             }
-            return null;
+            throw new RepoEndUserException("There are no free users");
         }
     }
 }
