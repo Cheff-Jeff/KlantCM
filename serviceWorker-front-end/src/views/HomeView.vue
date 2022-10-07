@@ -69,7 +69,7 @@
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>
-
+<!-- 
               <ConverzationHelp />
 
               <ConverzationSend />
@@ -77,7 +77,7 @@
               <ConverzationSend />
 
 
-              <ConverzationHelp Text="Thank you." Time="00:15"/>
+              <ConverzationHelp Text="Thank you." Time="00:15"/> -->
 
               <div v-for="chat in newChats" :key="chat">
                 <div v-if="chat.White">
