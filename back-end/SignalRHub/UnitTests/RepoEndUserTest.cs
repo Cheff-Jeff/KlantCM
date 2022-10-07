@@ -19,6 +19,7 @@ namespace UnitTests
             EndUser user = new EndUser("sdifsoidf");
             int key = 3;
 
+
             //act
             bool actual = repoEndUser.Add(user, key);
             bool expected = true;
@@ -82,6 +83,7 @@ namespace UnitTests
 
             actual = repoEndUser.FindFreeUser();
             expected = null;
+
 
             //assert
             Assert.AreEqual(actual, expected);
