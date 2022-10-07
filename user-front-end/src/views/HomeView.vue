@@ -51,12 +51,21 @@ import { ChatHub } from '../assets/javascript/Chat';
     data() {
       return {
         newChats: [],
-        chat :null
+        chat :null,
+        get RoomId(){
+          return localStorage.getItem('roomId')
+        },
+        set RoomId(value){
+          localStorage.setItem('roomId', value)
+        }
       }
     },
     mounted(){
       this.chat = new ChatHub()
-      this.chat.ConnectUser()
+      
+      setTimeout(()=>{
+        this.chat.ConnectUser()
+      },3000)
     },
     methods: {
       sendConverzation(text) {

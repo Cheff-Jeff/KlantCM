@@ -45,10 +45,10 @@
           </div>
 
           <div class="chat-btn-wrap-bottom">
-            <button type="button" class="btn btn-light mb-3">
+            <button type="button" class="btn btn-light mb-3" @click="chat.StartRoom(1,'andreas')">
               Start chat
             </button>
-            <button type="button" class="btn btn-light mb-5">
+            <button type="button" class="btn btn-light mb-5" @click="chat.AddUser()">
               Add client
             </button>
 

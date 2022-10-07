@@ -20,12 +20,14 @@ export class ChatHub {
         this.connection.on("ReceiveRoomId", function (message) {
                 this.RoomId = message
                 localStorage.setItem('roomId', this.RoomId)
+                console.log(message)
         });
 
         this.connection.on("RecieveEndUserId", function (message) {
             ///Event to get message 
             ///here you get the connection id of the end user
             localStorage.setItem('demo', message) // here for demostation 
+            console.log(message)
         });
     }
 
