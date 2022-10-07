@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SignalRHub;
 using SignalRHub.Hubs;
+using SignalRHub.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,29 @@ namespace SignalRTest
             bool actual = await chathub.SendMessage(message, id, connectionid);
             //Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public async Task Test_AddEndUserToRoom()
+        {
+            //arrange
+                            
+            Chathub chathub = new Chathub();
+            string connectionid = "test";
+            bool inRoom = false;
+            Employee henk = new Employee();
+            int roomid = 1;
+
+            Room room = new Room();
+            room.EndUserIds = new List<string>();
+            EndUser endUser = new EndUser(connectionid, inRoom ) ;
+
+            int ExpectedOutcome = 1;
+            //act
+            room.EndUserIds.Add(endUser.ConnectionString);
+            //assert
+            Assert.AreEqual(room.EndUserIds[0], endUser.ConnectionString);
+            Assert.AreEqual(room.EndUserIds.Count, ExpectedOutcome);
         }
     }
 }
