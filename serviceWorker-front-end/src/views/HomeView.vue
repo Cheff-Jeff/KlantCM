@@ -5,6 +5,7 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
+import { connect } from 'http2';
 </script>
 
 <template>
@@ -100,11 +101,16 @@
         chat: null,
         newChats: [],
         ChatWindows:[
-          {newChats:[]},
-          {newChats:[]},
-          {newChats:[]},
-          {newChats:[]},
-          {newChats:[]},
+          {newChats:[],
+          UserConnection:''},
+          {newChats:[],
+          UserConnection:''},
+          {newChats:[],
+          UserConnection:''},
+          {newChats:[],
+          UserConnection:''},
+          {newChats:[],
+          UserConnection:''},
         ],
         activeChatKey : 0
       }
@@ -114,6 +120,11 @@
       window.addEventListener('NewChat',()=>{
         console.log(localStorage.getItem('NewChat'))
         this.reciveConverzation(localStorage.getItem('NewChat'))
+      })
+
+      window.addEventListener('NewUser',()=>{
+        console.log(localStorage.getItem('NewUser'))
+        AddUser(localStorage.getItem('NewUser'))
       })
 
       this.reciveConverzation('hi')
@@ -132,7 +143,7 @@
         };
 
         this.ChatWindows[this.activeChatKey].newChats = [...this.ChatWindows[this.activeChatKey].newChats, bubble];
-        this.chat.SendMessage(text)
+        this.chat.SendMessage(text,this.ChatWindows[this.activeChatKey].UserConnection)
       },
       reciveConverzation(text) {
         const time = new Date();
@@ -147,6 +158,13 @@
       },
       ActivateChat(index){
         this.activeChatKey = index
+      },
+      AddUser(connection){
+        this.ChatWindows.forEach(e => {
+          if(e.UserConnection == ''){
+            e.UserConnection = connection
+          }
+        });
       }
     }
   }

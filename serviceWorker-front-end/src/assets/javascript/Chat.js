@@ -29,11 +29,13 @@ export class ChatHub {
         this.connection.on("RecieveEndUserId", function (message) {
             ///Event to get message 
             ///here you get the connection id of the end user
-            localStorage.setItem('demo', message) // here for demostation 
+            localStorage.setItem('User', message) // here for demostation 
             console.log(message)
+            window.dispatchEvent(NewUser)
         });
 
         const NewChat = new Event('NewChat')
+        const NewUser = new Event('NewUser')
     }
 
     async connect(){
@@ -45,13 +47,12 @@ export class ChatHub {
         }  
     }
 
-    SendMessage(message){
+    SendMessage(message,connection){
         // this.connection.invoke("SendMessage", message,RoomId,EndUser).catch(function (err) {
         //     return console.error(err.toString())
         // })
-            let demo = localStorage.getItem('demo')
             let roomid = localStorage.getItem('roomId')
-            this.connection.invoke("SendMessage", message,roomid,demo).catch(function (err) {
+            this.connection.invoke("SendMessage", message,roomid,connection).catch(function (err) {
             return console.error(err.toString())
          })
     }
