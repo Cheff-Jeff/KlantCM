@@ -43,12 +43,6 @@ import { ChatHub } from '../assets/javascript/Chat';
       return {
         newChats: [],
         chat :null,
-        get RoomId(){
-          return localStorage.getItem('roomId')
-        },
-        set RoomId(value){
-          localStorage.setItem('roomId', value)
-        }
       }
     },
     mounted(){
@@ -57,6 +51,10 @@ import { ChatHub } from '../assets/javascript/Chat';
       setTimeout(()=>{
         this.chat.ConnectUser()
       },3000)
+
+      window.addEventListener('NewChat',()=>{
+        this.reciveConverzation(localStorage.getItem('NewChat'))
+      })
     },
     methods: {
       sendConverzation(text) {

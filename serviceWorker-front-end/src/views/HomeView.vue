@@ -109,6 +109,10 @@
     mounted(){
       console.log("test")
       this.chat = new ChatHub()
+      window.addEventListener('NewChat',()=>{
+        console.log(localStorage.getItem('NewChat'))
+        this.reciveConverzation(localStorage.getItem('NewChat'))
+      })
     },
     methods:{
       sendPost(){

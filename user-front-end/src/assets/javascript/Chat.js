@@ -11,16 +11,22 @@ export class ChatHub {
 
         this.connect()
 
+
+
         this.connection.on("ReceiveMessage", function (message) {
             ///Event to get message 
             ///here you have to imput the message in the chatbox
+            localStorage.setItem('NewChat',message)
+            window.dispatchEvent(NewChat)
         });
 
-        this.connection.on("RecieveRoomId ", function (message) {
+        this.connection.on("RecieveRoomId", function (message) {
             ///Event to get message 
             ///here you get the room id
-            localStorage.setItem('roomId', this.RoomId)
+            localStorage.setItem('roomId', message)
         });
+
+        const NewChat = new Event('NewChat')
     }
 
     async connect(){
@@ -33,7 +39,7 @@ export class ChatHub {
     }
 
     SendMessage(message){
-        this.connection.invoke("SendMessage", message,this.RoomId).catch(function (err) {
+        this.connection.invoke("SendMessage", message,localStorage.getItem('roomId'),null).catch(function (err) {
             return console.error(err.toString())
         })
     }

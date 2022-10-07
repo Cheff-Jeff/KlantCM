@@ -15,6 +15,9 @@ export class ChatHub {
 
         this.connection.on("ReceiveMessageWorker", function (message) {
             //Here we have to input revieved message in correct chat
+            console.log(message)
+            localStorage.setItem('NewChat',message)
+            window.dispatchEvent(NewChat)
         });
 
         this.connection.on("ReceiveRoomId", function (message) {
@@ -29,6 +32,8 @@ export class ChatHub {
             localStorage.setItem('demo', message) // here for demostation 
             console.log(message)
         });
+
+        const NewChat = new Event('NewChat')
     }
 
     async connect(){
