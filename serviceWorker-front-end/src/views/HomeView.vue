@@ -18,29 +18,34 @@
               <span>20 people waiting in line.</span>
             </div>
             <cm-button
-                data-label="active chat"
+                data-label="active chat 1"
                 data-button-style="ghost"
-                data-button-size="medium">
+                data-button-size="medium"
+                @click="ActivateChat(0)">
             </cm-button><br>
             <cm-button
-                data-label="2 new message('s')"
+                data-label="chat 2"
                 data-button-style="primary"
-                data-button-size="medium">
+                data-button-size="medium"
+                @click="ActivateChat(1)">
             </cm-button><br>
             <cm-button
-                data-label="2 new message('s')"
+                data-label="chat 3"
                 data-button-style="primary"
-                data-button-size="medium">
+                data-button-size="medium"
+                @click="ActivateChat(2)">
             </cm-button><br>
             <cm-button
-                data-label="2 new message('s')"
+                data-label="chat 4"
                 data-button-style="primary"
-                data-button-size="medium">
+                data-button-size="medium"
+                @click="ActivateChat(3)">
             </cm-button><br>
             <cm-button
-                data-label="2 new message('s')"
+                data-label="chat 5"
                 data-button-style="primary"
-                data-button-size="medium">
+                data-button-size="medium"
+                @click="ActivateChat(4)">
             </cm-button><br>
           </div>
 
@@ -69,17 +74,7 @@
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>
-<!-- 
-              <ConverzationHelp />
-
-              <ConverzationSend />
-              <ConverzationSend />
-              <ConverzationSend />
-
-
-              <ConverzationHelp Text="Thank you." Time="00:15"/> -->
-
-              <div v-for="chat in newChats" :key="chat">
+              <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
                   <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
                 </div>
@@ -103,16 +98,25 @@
     data(){
       return{
         chat: null,
-        newChats: []
+        newChats: [],
+        ChatWindows:[
+          {newChats:[]},
+          {newChats:[]},
+          {newChats:[]},
+          {newChats:[]},
+          {newChats:[]},
+        ],
+        activeChatKey : 0
       }
     },
     mounted(){
-      console.log("test")
       this.chat = new ChatHub()
       window.addEventListener('NewChat',()=>{
         console.log(localStorage.getItem('NewChat'))
         this.reciveConverzation(localStorage.getItem('NewChat'))
       })
+
+      this.reciveConverzation('hi')
     },
     methods:{
       sendPost(){
@@ -127,8 +131,7 @@
           White: false
         };
 
-        console.log("tets");
-        this.newChats = [...this.newChats, bubble];
+        this.ChatWindows[this.activeChatKey].newChats = [...this.ChatWindows[this.activeChatKey].newChats, bubble];
         this.chat.SendMessage(text)
       },
       reciveConverzation(text) {
@@ -140,7 +143,10 @@
           White: true
         };
 
-        this.newChats = [...this.newChats, bubble];
+        this.ChatWindows[this.activeChatKey].newChats = [...this.ChatWindows[this.activeChatKey].newChats, bubble];
+      },
+      ActivateChat(index){
+        this.activeChatKey = index
       }
     }
   }

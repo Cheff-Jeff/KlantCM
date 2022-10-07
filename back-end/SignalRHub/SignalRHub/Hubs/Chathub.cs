@@ -5,7 +5,8 @@ using SignalRHub.Repo;
 namespace SignalRHub.Hubs
 {
     public class Chathub :Hub
-    {
+    { // TODO: Add error handeling 
+ 
 
         private readonly static RepoEndUser _EndUserdata = new();
         private readonly static RepoRoom _Roomdata = new();
