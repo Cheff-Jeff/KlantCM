@@ -1,40 +1,37 @@
 ﻿using SignalRHub.Models;
 namespace SignalRHub.Repo
 {
-    public class RepoEndUser:IRepo<EndUser>
+    public class RepoEndUser:IRepo<EndUser, string>
     {
-        private readonly Dictionary<int, EndUser> _data =
-        new Dictionary<int, EndUser>();
+        private readonly Dictionary<string, EndUser> _data =
+        new Dictionary<string, EndUser>();
 
-        public void Add(EndUser r, int key)
+        public void Add(EndUser r, string key)
         {
             _data.Add(key, r);
         }
-        public bool Exists(int key)
+        public bool Exists(string key)
         {
             return _data.ContainsKey(key);
         }
-        public void Update(EndUser e, int key)
+        public void Update(EndUser e, string key)
         {
             _data[key] = e;
         }
 
-        public EndUser? get(int key)
+        public EndUser? get(string key)
         {
             _data.TryGetValue(key, out var p);
             return p;
         }
 
-        public EndUser? FindFreeUser() /// this can be done better
+        public EndUser? FindFreeUser() /// this can be done better hash set ?
         {
-            for (int i = 0; i < _data.Count; i++)
+            foreach (KeyValuePair<string, EndUser> entry in _data)
             {
-                EndUser e = _data[i];
-                if (!e.inRoom)
+                if (!entry.Value.inRoom)
                 {
-                    e.inRoom = true;
-                    Update(e, i);
-                    return e;
+                    return entry.Value;
                 }
             }
             return null;
@@ -44,5 +41,11 @@ namespace SignalRHub.Repo
         {
             return Convert.ToInt32(_data.Count);
         }
+
+        public void remove(string key)
+        {
+           _data.Remove(key);
+        }
+
     }
 }

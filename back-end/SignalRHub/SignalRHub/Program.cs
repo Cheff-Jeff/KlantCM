@@ -10,9 +10,9 @@ builder.Services.AddSignalR(options =>
     options.EnableDetailedErrors = true;
 });
 
-builder.Services.AddSingleton<IRepo<EndUser>, RepoEndUser>();
+builder.Services.AddSingleton<IRepo<EndUser, string>, RepoEndUser>();
 
-builder.Services.AddSingleton<IRepo<Room>, RepoRoom>();
+builder.Services.AddSingleton<IRepo<Room, int>, RepoRoom>();
 
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",

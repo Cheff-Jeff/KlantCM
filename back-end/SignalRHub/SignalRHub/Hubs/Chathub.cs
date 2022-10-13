@@ -8,10 +8,10 @@ namespace SignalRHub.Hubs
     { // TODO: Add error handeling 
 
 
-        private readonly IRepo<EndUser> _EndUserdata;
-        private readonly  IRepo<Room> _Roomdata;
+        private readonly IRepo<EndUser, string> _EndUserdata;
+        private readonly  IRepo<Room, int> _Roomdata;
 
-        public Chathub(IRepo<EndUser> eud, IRepo<Room>rd)
+        public Chathub(IRepo<EndUser, string> eud, IRepo<Room, int>rd)
         {
             _EndUserdata = eud;
             _Roomdata = rd;
@@ -22,9 +22,10 @@ namespace SignalRHub.Hubs
             int RoomId = Convert.ToInt32(roomId);
 
             Room r = _Roomdata.get(RoomId);
-            if (r == null || !r.EndUserIds.Contains(Context.ConnectionId))
+            if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
             {
                 //Naar error sturen
+                return;
             }
             if (ConnectionId != null)
             {
@@ -44,11 +45,16 @@ namespace SignalRHub.Hubs
         {
             int RoomId = Convert.ToInt32(roomId);
             Room r = _Roomdata.get(RoomId);
-            EndUser EndUser = _EndUserdata.FindFreeUser();
-            r.EndUserIds.Add(EndUser.ConnectionString);
+            if (r == null) return;
+            EndUser e = _EndUserdata.FindFreeUser();
+            if (e == null) return;
+            e.RoomId = r.Id;
+            e.inRoom = true;
+            _EndUserdata.Update(e, e.ConnectionString);
+            r.EndUserIds.Add(e.ConnectionString);
             _Roomdata.Update(r, r.Id);
-            await Clients.Client(EndUser.ConnectionString).SendAsync("RecieveRoomId", RoomId.ToString());
-            await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", EndUser.ConnectionString);
+            await Clients.Client(e.ConnectionString).SendAsync("RecieveRoomId", RoomId.ToString());
+            await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", e.ConnectionString);
         }
         /// <summary>
         /// Function of the employee to start his room. De end-User is not allowed to acces this
@@ -72,8 +78,30 @@ namespace SignalRHub.Hubs
         /// <returns></returns>
         public void ConnectUser()
         {
-            EndUser e = new(Context.ConnectionId);
-            _EndUserdata.Add(e,_EndUserdata.Count());
+            string id = Context.ConnectionId;
+            EndUser e = new(id);
+            _EndUserdata.Add(e,id);
+        }
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            string Connection = Context.ConnectionId;
+            if (Connection != null)
+            {
+                EndUser e = _EndUserdata.get(Connection);
+                if (e != null)
+                {
+                    if (e.RoomId != -1)
+                    {
+                        Room r = _Roomdata.get(e.RoomId);
+                        r.EndUserIds.Remove(e.ConnectionString);
+                    }
+                }
+            }
+
+            _EndUserdata.remove(Connection);
+
+            await base.OnDisconnectedAsync(exception);
         }
 
     }

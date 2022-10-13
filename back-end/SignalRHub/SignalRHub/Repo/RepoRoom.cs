@@ -3,7 +3,7 @@ using SignalRHub.Repo;
 
 namespace SignalRHub
 {
-    public class RepoRoom:IRepo<Room>
+    public class RepoRoom:IRepo<Room, int>
     {
         private readonly Dictionary<int, Room> _data =
             new Dictionary<int, Room>();
@@ -34,6 +34,16 @@ namespace SignalRHub
         }
 
         public Room? FindFreeUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void remove(int key)
+        {
+            _data.Remove(key);
+        }
+
+        public Room? Find(string connection)
         {
             throw new NotImplementedException();
         }
