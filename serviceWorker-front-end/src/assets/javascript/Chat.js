@@ -35,6 +35,11 @@ export class ChatHub {
             window.dispatchEvent(NewUser)
         });
 
+        this.connection.on("DisconnectUser", function (message) {
+            // user has to get disconnected from the chatwindow  
+
+         });
+
         const NewChat = new Event('NewChat')
         const NewUser = new Event('NewUser')
     }

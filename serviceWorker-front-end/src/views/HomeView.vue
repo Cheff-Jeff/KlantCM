@@ -124,6 +124,10 @@
         this.AddUser(localStorage.getItem('User'))
       })
 
+      window.addEventListener('DisconnectUser',()=>{
+        //User gets disconnected
+      })
+
     },
     methods:{
       sendPost(){

@@ -95,6 +95,7 @@ namespace SignalRHub.Hubs
                     {
                         Room r = _Roomdata.get(e.RoomId);
                         r.EndUserIds.Remove(e.ConnectionString);
+                        await Clients.Client(r.employee.ConnectionString).SendAsync("DisconnectUser", e.ConnectionString);
                     }
                 }
             }
