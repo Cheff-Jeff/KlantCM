@@ -5,7 +5,6 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
-import { end } from '@popperjs/core';
 </script>
 
 <template>
