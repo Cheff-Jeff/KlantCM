@@ -5,6 +5,7 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
+import { end } from '@popperjs/core';
 </script>
 
 <template>
@@ -117,7 +118,7 @@
     mounted(){
       this.chat = new ChatHub()
       window.addEventListener('NewChat',()=>{
-        this.reciveConverzation(localStorage.getItem('NewChat'))
+        this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
       })
 
       window.addEventListener('NewUser',()=>{
@@ -125,7 +126,6 @@
         this.AddUser(localStorage.getItem('User'))
       })
 
-      this.reciveConverzation('hi')
     },
     methods:{
       sendPost(){
@@ -141,9 +141,10 @@
         };
 
         this.ChatWindows[this.activeChatKey].newChats.push(bubble);
+        console.log(this.ChatWindows[this.activeChatKey].UserConnection)
         this.chat.SendMessage(text,this.ChatWindows[this.activeChatKey].UserConnection)
       },
-      reciveConverzation(text) {
+      reciveConverzation(text, connection) {
         const time = new Date();
 
         const bubble = {
@@ -151,19 +152,30 @@
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: true
         };
-
-        this.ChatWindows[this.activeChatKey].newChats = [...this.ChatWindows[this.activeChatKey].newChats, bubble];
+        let User = this.FindUser(connection)
+        this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
       },
       ActivateChat(index){
         this.activeChatKey = index
+        console.log(this.activeChatKey)
       },
       AddUser(connection){
-        this.ChatWindows.forEach(e => {
+        for (const e of this.ChatWindows) {
           if(e.UserConnection == ''){
             e.UserConnection = connection
+            break
           }
-      
-        });
+        }
+        console.log(this.ChatWindows)
+      },
+      FindUser(Connection){
+        for (let i = 0; i < this.ChatWindows.length; i++) {
+          if(Connection == this.ChatWindows[i].UserConnection){
+            console.log(Connection)
+            console.log(this.ChatWindows[i].UserConnection)
+            return i
+          }
+        }
       }
     }
   }

@@ -17,7 +17,7 @@ export class ChatHub {
             //Here we have to input revieved message in correct chat
 
             localStorage.setItem('NewChat',message)
-            localStorage.setItem('FormUser',connection)
+            localStorage.setItem('FromUser',connection)
             window.dispatchEvent(NewChat)
         });
 
