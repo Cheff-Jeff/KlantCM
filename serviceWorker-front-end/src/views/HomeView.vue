@@ -122,7 +122,6 @@ import { end } from '@popperjs/core';
       })
 
       window.addEventListener('NewUser',()=>{
-        console.log(localStorage.getItem('User'))
         this.AddUser(localStorage.getItem('User'))
       })
 
@@ -141,7 +140,6 @@ import { end } from '@popperjs/core';
         };
 
         this.ChatWindows[this.activeChatKey].newChats.push(bubble);
-        console.log(this.ChatWindows[this.activeChatKey].UserConnection)
         this.chat.SendMessage(text,this.ChatWindows[this.activeChatKey].UserConnection)
       },
       reciveConverzation(text, connection) {
@@ -157,7 +155,6 @@ import { end } from '@popperjs/core';
       },
       ActivateChat(index){
         this.activeChatKey = index
-        console.log(this.activeChatKey)
       },
       AddUser(connection){
         for (const e of this.ChatWindows) {
@@ -171,8 +168,6 @@ import { end } from '@popperjs/core';
       FindUser(Connection){
         for (let i = 0; i < this.ChatWindows.length; i++) {
           if(Connection == this.ChatWindows[i].UserConnection){
-            console.log(Connection)
-            console.log(this.ChatWindows[i].UserConnection)
             return i
           }
         }
