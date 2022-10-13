@@ -6,10 +6,16 @@ namespace SignalRHub.Hubs
 {
     public class Chathub :Hub
     { // TODO: Add error handeling 
- 
 
-        private readonly static RepoEndUser _EndUserdata = new();
-        private readonly static RepoRoom _Roomdata = new();
+
+        private readonly IRepo<EndUser> _EndUserdata;
+        private readonly  IRepo<Room> _Roomdata;
+
+        public Chathub(IRepo<EndUser> eud, IRepo<Room>rd)
+        {
+            _EndUserdata = eud;
+            _Roomdata = rd;
+        }
 
         public async Task SendMessage(string message, string roomId, string? ConnectionId)
         {
@@ -54,9 +60,9 @@ namespace SignalRHub.Hubs
         {
             Employee e = new Employee {Id = id,ConnectionString = Context.ConnectionId, FirstName = FirstName };
             List<string> l = new();
-            Room r = new() { Id = _Roomdata.Count ,employee = e, EndUserIds = l };
+            Room r = new() { Id = _Roomdata.Count() ,employee = e, EndUserIds = l };
 
-            _Roomdata.Add(r, _Roomdata.Count);
+            _Roomdata.Add(r, _Roomdata.Count());
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
         }   
 
@@ -67,7 +73,7 @@ namespace SignalRHub.Hubs
         public void ConnectUser()
         {
             EndUser e = new(Context.ConnectionId);
-            _EndUserdata.Add(e,_EndUserdata.Count);
+            _EndUserdata.Add(e,_EndUserdata.Count());
         }
 
     }

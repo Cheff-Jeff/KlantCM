@@ -1,14 +1,12 @@
 ﻿using SignalRHub.Models;
+using SignalRHub.Repo;
+
 namespace SignalRHub
 {
-    public class RepoRoom
+    public class RepoRoom:IRepo<Room>
     {
         private readonly Dictionary<int, Room> _data =
             new Dictionary<int, Room>();
-        public int Count 
-        { 
-            get { return _data.Count; }
-        }
 
         public void Add(Room r, int key)
         {
@@ -28,6 +26,16 @@ namespace SignalRHub
         {
             _data.TryGetValue(key, out var p);
             return p;
+        }
+
+        public int Count()
+        {
+            return Convert.ToInt32(_data.Count);
+        }
+
+        public Room? FindFreeUser()
+        {
+            throw new NotImplementedException();
         }
     }
 }

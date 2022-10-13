@@ -1,4 +1,7 @@
+using SignalRHub;
 using SignalRHub.Hubs;
+using SignalRHub.Models;
+using SignalRHub.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +9,11 @@ builder.Services.AddSignalR(options =>
 {
     options.EnableDetailedErrors = true;
 });
+
+builder.Services.AddSingleton<IRepo<EndUser>, RepoEndUser>();
+
+builder.Services.AddSingleton<IRepo<Room>, RepoRoom>();
+
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
         builder =>

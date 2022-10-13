@@ -162,7 +162,6 @@
             break
           }
         }
-        console.log(this.ChatWindows)
       },
       FindUser(Connection){
         for (let i = 0; i < this.ChatWindows.length; i++) {

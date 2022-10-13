@@ -1,14 +1,10 @@
 ﻿using SignalRHub.Models;
 namespace SignalRHub.Repo
 {
-    public class RepoEndUser
+    public class RepoEndUser:IRepo<EndUser>
     {
         private readonly Dictionary<int, EndUser> _data =
         new Dictionary<int, EndUser>();
-        public int Count
-        {
-            get { return _data.Count; }
-        }
 
         public void Add(EndUser r, int key)
         {
@@ -29,7 +25,7 @@ namespace SignalRHub.Repo
             return p;
         }
 
-        internal EndUser? FindFreeUser() /// this can be done better
+        public EndUser? FindFreeUser() /// this can be done better
         {
             for (int i = 0; i < _data.Count; i++)
             {
@@ -42,6 +38,11 @@ namespace SignalRHub.Repo
                 }
             }
             return null;
+        }
+
+        public int Count()
+        {
+            return Convert.ToInt32(_data.Count);
         }
     }
 }
