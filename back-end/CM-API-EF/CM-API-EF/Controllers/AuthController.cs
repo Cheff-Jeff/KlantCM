@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CM_API_EF.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 
 namespace CM_API_EF.Controllers
