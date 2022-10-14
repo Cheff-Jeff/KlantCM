@@ -37,11 +37,14 @@ export class ChatHub {
 
         this.connection.on("DisconnectUser", function (message) {
             // user has to get disconnected from the chatwindow  
-
+            localStorage.setItem('DiscUser',message)
+            console.log(message)
+            window.dispatchEvent(DisconnectUser)
          });
 
         const NewChat = new Event('NewChat')
         const NewUser = new Event('NewUser')
+        const DisconnectUser = new Event('DisconnectUser')
     }
 
     async connect(){
@@ -78,6 +81,13 @@ export class ChatHub {
             return console.error(err)
         }
     )
+    }
+    StopChat(UserConnection){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("StopChat",UserConnection,RoomId).catch((err)=>{
+            return console.error(err.toString())
+        })
+
     }
 
 

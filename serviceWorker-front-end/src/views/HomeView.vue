@@ -5,6 +5,7 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
+import ChatIndexButton from '../components/ChatIndexButton.vue';
 </script>
 
 <template>
@@ -17,36 +18,9 @@
             <div class="queue">
               <span>20 people waiting in line.</span>
             </div>
-            <cm-button
-                data-label="active chat 1"
-                data-button-style="ghost"
-                data-button-size="medium"
-                @click="ActivateChat(0)">
-            </cm-button><br>
-            <cm-button
-                data-label="chat 2"
-                data-button-style="primary"
-                data-button-size="medium"
-                @click="ActivateChat(1)">
-            </cm-button><br>
-            <cm-button
-                data-label="chat 3"
-                data-button-style="primary"
-                data-button-size="medium"
-                @click="ActivateChat(2)">
-            </cm-button><br>
-            <cm-button
-                data-label="chat 4"
-                data-button-style="primary"
-                data-button-size="medium"
-                @click="ActivateChat(3)">
-            </cm-button><br>
-            <cm-button
-                data-label="chat 5"
-                data-button-style="primary"
-                data-button-size="medium"
-                @click="ActivateChat(4)">
-            </cm-button><br>
+            <div v-for="(chats,index) in ChatWindows">
+              <ChatIndexButton :index="index" :active="chats.active" @click="ActivateChat(index)" />
+            </div>
           </div>
 
           <div class="chat-btn-wrap-bottom">
@@ -56,6 +30,10 @@
             <button type="button" class="btn btn-light mb-5" @click="chat.AddUser()">
               Add client
             </button>
+            <button type="button" class="btn btn-light mb-5" @click="stopChat()">
+              stopChat
+            </button>
+
 
             <cm-button
               data-label="End active chat"
@@ -98,19 +76,16 @@
     data(){
       return{
         chat: null,
-        newChats: [],
         ChatWindows:[
           {newChats:[],
-          UserConnection:''},
-          {newChats:[],
-          UserConnection:''},
-          {newChats:[],
-          UserConnection:''},
-          {newChats:[],
-          UserConnection:''},
-          {newChats:[],
-          UserConnection:''},
+          UserConnection:'',
+        active:true}
         ],
+        newUser:{
+          newChats:[],
+          UserConnection:'',
+          active:false
+        },
         activeChatKey : 0
       }
     },
@@ -126,13 +101,11 @@
 
       window.addEventListener('DisconnectUser',()=>{
         //User gets disconnected
+        this.RemoveUser(localStorage.getItem('DiscUser'))
       })
 
     },
     methods:{
-      sendPost(){
-        createPost(1, "hoi")
-      },
       sendConverzation(text) {
         const time = new Date();
 
@@ -158,14 +131,12 @@
       },
       ActivateChat(index){
         this.activeChatKey = index
+        this.ChatWindows[index].active = !this.ChatWindows[index].active
       },
       AddUser(connection){
-        for (const e of this.ChatWindows) {
-          if(e.UserConnection == ''){
-            e.UserConnection = connection
-            break
-          }
-        }
+        const json = this.newUser
+        json.UserConnection = connection
+        this.ChatWindows.push(json)
       },
       FindUser(Connection){
         for (let i = 0; i < this.ChatWindows.length; i++) {
@@ -173,6 +144,19 @@
             return i
           }
         }
+      },
+      RemoveUser(Connection){
+        const i = this.FindUser(Connection)
+        this.ChatWindows[i].newChats = []
+        this.ChatWindows[i].UserConnection = ''
+        const emptyChat = this.ChatWindows[i]
+        this.ChatWindows.splice(i,1)
+        this.ChatWindows.push(emptyChat)
+      },
+      stopChat(){
+        const connection = this.ChatWindows[this.activeChatKey].UserConnection
+        this.RemoveUser(connection)
+        this.chat.StopChat(connection)
       }
     }
   }

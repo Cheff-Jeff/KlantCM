@@ -2,7 +2,7 @@
   import ConverzationSend from '../components/ConverzationSend.vue';
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
-import { ChatHub } from '../assets/javascript/Chat';
+  import { ChatHub } from '../assets/javascript/Chat';
 </script>
 
 <template>

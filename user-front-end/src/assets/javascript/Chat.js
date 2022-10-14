@@ -26,6 +26,10 @@ export class ChatHub {
             localStorage.setItem('roomId', message)
         });
 
+        this.connection.on("CloseChat", () =>{
+            this.connection.stop();
+        })
+
         const NewChat = new Event('NewChat')
     }
 

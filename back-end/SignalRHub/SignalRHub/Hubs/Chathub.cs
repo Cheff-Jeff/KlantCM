@@ -16,7 +16,13 @@ namespace SignalRHub.Hubs
             _EndUserdata = eud;
             _Roomdata = rd;
         }
-
+        /// <summary>
+        /// Sends message to enduser or to the worker
+        /// </summary>
+        /// <param name="message">text of the message</param>
+        /// <param name="roomId">the room in which everyone resides</param>
+        /// <param name="ConnectionId">used by to direct the message to the correct EndUser</param>
+        /// <returns></returns>
         public async Task SendMessage(string message, string roomId, string? ConnectionId)
         {
             int RoomId = Convert.ToInt32(roomId);
@@ -72,6 +78,25 @@ namespace SignalRHub.Hubs
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
         }   
 
+        public async Task StopChat(string Connection, string roomId)
+        {
+            int RoomId = Convert.ToInt32(roomId);
+            try{
+                Room r = _Roomdata.get(RoomId);
+                string connectionValidaded = r.EndUserIds.Find(x => x == Connection);
+                if (connectionValidaded != null)
+                {
+                    r.EndUserIds.Remove(connectionValidaded);
+                }
+            }
+            catch(Exception ex)
+            {
+                return;
+            }
+            await Clients.Client(Connection).SendAsync("CloseChat");
+        
+        }
+
         /// <summary>
         /// New EndUser use this function
         /// </summary>
@@ -82,7 +107,11 @@ namespace SignalRHub.Hubs
             EndUser e = new(id);
             _EndUserdata.Add(e,id);
         }
-
+        /// <summary>
+        /// Removes the user when they disconnect
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <returns></returns>
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             string Connection = Context.ConnectionId;
@@ -101,7 +130,6 @@ namespace SignalRHub.Hubs
             }
 
             _EndUserdata.remove(Connection);
-
             await base.OnDisconnectedAsync(exception);
         }
 
