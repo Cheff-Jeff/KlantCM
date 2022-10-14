@@ -2,7 +2,7 @@
   import ConverzationSend from '../components/ConverzationSend.vue';
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
-  // import { ChatHub } from '../assets/javascript/Chat';
+  import { ChatHub } from '../assets/javascript/Chat';
 </script>
 
 <template>
@@ -16,11 +16,6 @@
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>
-              <ConverzationSend Text="Test" Time="15.11"/>
-              <ConverzationHelp Text="Test" Time="15.11"/>
-              <ConverzationSend Text="Test" Time="15.11"/>
-              <ConverzationSend Text="Test" Time="15.11"/>
-              <ConverzationSend Text="Test" Time="15.11"/>
 
               <div 
                 v-for="chat in newChats" :key="chat"
@@ -46,13 +41,6 @@
       </svg>
     </button>
   </div>
-  <!-- <div class="container customize">
-    <div class="row justify-content-center">
-      <div class="col-md-12 not-bootstrap">
-        
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -65,43 +53,43 @@
       }
     },
     mounted(){
-      // this.chat = new ChatHub()
+      this.chat = new ChatHub()
       
-      // setTimeout(()=>{
-      //   this.chat.ConnectUser()
-      // },3000)
+      setTimeout(()=>{
+        this.chat.ConnectUser()
+      },3000)
 
-      // window.addEventListener('NewChat',()=>{
-      //   this.reciveConverzation(localStorage.getItem('NewChat'))
-      // })
+      window.addEventListener('NewChat',()=>{
+        this.reciveConverzation(localStorage.getItem('NewChat'))
+      })
     },
     methods: {
       toggleModal(){
         this.modal = this.modal == '' ? 'open' : ''
       },
-      // sendConverzation(text) {
-      //   const time = new Date();
+      sendConverzation(text) {
+        const time = new Date();
 
-      //   const bubble = {
-      //     Text: text, 
-      //     Time: `${time.getHours()}:${time.getMinutes()}`, 
-      //     White: false
-      //   };
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false
+        };
 
-      //   this.newChats = [...this.newChats, bubble];
-      //   this.chat.SendMessage(text)
-      // },
-      // reciveConverzation(text) {
-      //   const time = new Date();
+        this.newChats = [...this.newChats, bubble];
+        this.chat.SendMessage(text)
+      },
+      reciveConverzation(text) {
+        const time = new Date();
 
-      //   const bubble = {
-      //     Text: text, 
-      //     Time: `${time.getHours()}:${time.getMinutes()}`, 
-      //     White: true
-      //   };
+        const bubble = {
+          Text: text, 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: true
+        };
 
-      //   this.newChats = [...this.newChats, bubble];
-      // }
+        this.newChats = [...this.newChats, bubble];
+      }
     }
   };
 </script>
