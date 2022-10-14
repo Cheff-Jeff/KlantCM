@@ -9,10 +9,9 @@
                 id="sendBox"
                 type="text"
                 class="form-control spacing-right-icons-2"
+                autocomplete="off"
                 placeholder="Start typing… "
                 v-model="input"
-                @keyup="checkKeyEnter"
-                @blur="checkInput"
               />
               <span class="input-left icon">
                 <span class="cm-icon cm-icon-comment" aria-hidden="true"></span>
