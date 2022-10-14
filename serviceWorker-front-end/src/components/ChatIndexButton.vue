@@ -9,7 +9,6 @@ defineProps({
 <script>
  export default{
     mounted(){
-        console.log(this.active)
     }
 }
 </script>

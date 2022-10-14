@@ -77,7 +77,6 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
   export default {
     data(){
       return{
-        chat: null,
         ChatWindows:[
           {newChats:[],
           UserConnection:'',
@@ -94,19 +93,17 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
     },
     mounted(){
       this.chat = new ChatHub()
+
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
       })
-
       window.addEventListener('NewUser',()=>{
         this.AddUser(localStorage.getItem('User'))
       })
-
       window.addEventListener('DisconnectUser',()=>{
         //User gets disconnected
         this.RemoveUser(localStorage.getItem('DiscUser'))
       })
-
     },
     methods:{
       sendConverzation(text) {
