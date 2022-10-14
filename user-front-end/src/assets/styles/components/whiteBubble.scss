@@ -1,0 +1,17 @@
+.row{
+  margin-bottom: 15px;
+  width: 95%;
+  margin-right: auto;
+}
+
+.cm-conversation-bubble{
+  background-color: #e3edf3 !important;
+}
+
+.cm-icon.cm-icon-user-fill{
+  &::before{
+    color: #c8c8c8 !important;
+
+  }
+  color: #c8c8c8 !important;
+}
