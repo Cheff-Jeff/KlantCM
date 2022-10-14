@@ -19,7 +19,9 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
               <span>20 people waiting in line.</span>
             </div>
             <div v-for="(chats,index) in ChatWindows">
-              <ChatIndexButton :index="index" :active="chats.active" @click="ActivateChat(index)" />
+              <span @click="ActivateChat(index)">
+                <ChatIndexButton  :active="chats.active" :key="chats.active" />
+              </span>
             </div>
           </div>
 
@@ -86,7 +88,8 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           UserConnection:'',
           active:false
         },
-        activeChatKey : 0
+        activeChatKey : 0,
+        FirstUser:true
       }
     },
     mounted(){
@@ -131,12 +134,21 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
       },
       ActivateChat(index){
         this.activeChatKey = index
+        this.ChatWindows.forEach(element => {
+          element.active =false;
+        });
         this.ChatWindows[index].active = !this.ChatWindows[index].active
       },
       AddUser(connection){
         const json = this.newUser
         json.UserConnection = connection
-        this.ChatWindows.push(json)
+        if(!this.FirstUser){
+          this.ChatWindows.push(json)
+        }
+        else{
+          this.FirstUser = false;
+          this.ChatWindows[0].UserConnection = connection
+        }
       },
       FindUser(Connection){
         for (let i = 0; i < this.ChatWindows.length; i++) {
