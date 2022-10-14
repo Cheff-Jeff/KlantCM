@@ -22,6 +22,12 @@
     </div>
     <div class="nav-wrap">
       <cm-button
+        data-label="Register"
+        data-button-style="cta"
+        data-button-size="medium"
+        >
+      </cm-button>
+      <cm-button
         data-label="My profile"
         data-button-style="cta"
         data-button-size="medium"
