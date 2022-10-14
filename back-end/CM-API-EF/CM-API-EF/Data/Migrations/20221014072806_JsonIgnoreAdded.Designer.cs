@@ -4,6 +4,7 @@ using CM_API_EF.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CM_API_EF.Data.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221014072806_JsonIgnoreAdded")]
+    partial class JsonIgnoreAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,22 @@ namespace CM_API_EF.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("CM_API_EF.Models.Role", b =>
+                {
+                    b.Property<int>("roleID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("roleID"), 1L, 1);
+
+                    b.Property<int>("roleType")
+                        .HasColumnType("int");
+
+                    b.HasKey("roleID");
+
+                    b.ToTable("Role");
+                });
 
             modelBuilder.Entity("CM_API_EF.Models.User", b =>
                 {
@@ -30,8 +48,8 @@ namespace CM_API_EF.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"), 1L, 1);
 
-                    b.Property<bool>("isAdmin")
-                        .HasColumnType("bit");
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("passwordHash")
                         .IsRequired()
@@ -47,7 +65,20 @@ namespace CM_API_EF.Data.Migrations
 
                     b.HasKey("userId");
 
+                    b.HasIndex("RoleID");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CM_API_EF.Models.User", b =>
+                {
+                    b.HasOne("CM_API_EF.Models.Role", "role")
+                        .WithMany()
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("role");
                 });
 #pragma warning restore 612, 618
         }
