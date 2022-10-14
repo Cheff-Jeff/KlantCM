@@ -71,7 +71,7 @@ namespace SignalRHub.Hubs
         public async Task StartRoom(int id, string FirstName)
         {
             Employee e = new Employee {Id = id,ConnectionString = Context.ConnectionId, FirstName = FirstName };
-            Room r = new() { Id = _Roomdata.Count ,employee = e };
+            Room r = new() { Id = _Roomdata.Count() ,employee = e };
 
             _Roomdata.Add(r, _Roomdata.Count());
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
