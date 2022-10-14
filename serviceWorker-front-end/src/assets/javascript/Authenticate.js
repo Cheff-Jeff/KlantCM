@@ -1,8 +1,13 @@
-export const Login = (email, password) => {
-  const user = {
-    id: 1,
-    isAdmin: true
-  }
+import axios from 'axios'
+import {HashPassword} from "./passwordHash";
+
+export const Login = async (email, password) => {
+  const result = await HashPassword(password);
+  axios.post(`https://localhost:7117/login?userName=${email}&Password=${result}`)
+  .then(response => {
+    console.log(response);
+  })
+
 
   if(email == 'admin@adminmail.com' && password == 'adminadmin'){
     localStorage.setItem('user', JSON.stringify(user))
