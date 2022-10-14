@@ -5,6 +5,7 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
+import ChatIndexButton from '../components/ChatIndexButton.vue';
 </script>
 
 <template>
@@ -17,31 +18,11 @@
             <div class="queue">
               <span>20 people waiting in line.</span>
             </div>
-            <cm-button
-                data-label="active chat"
-                data-button-style="ghost"
-                data-button-size="medium">
-            </cm-button><br>
-            <cm-button
-                data-label="2 new message('s')"
-                data-button-style="primary"
-                data-button-size="medium">
-            </cm-button><br>
-            <cm-button
-                data-label="2 new message('s')"
-                data-button-style="primary"
-                data-button-size="medium">
-            </cm-button><br>
-            <cm-button
-                data-label="2 new message('s')"
-                data-button-style="primary"
-                data-button-size="medium">
-            </cm-button><br>
-            <cm-button
-                data-label="2 new message('s')"
-                data-button-style="primary"
-                data-button-size="medium">
-            </cm-button><br>
+            <div v-for="(chats,index) in ChatWindows">
+              <span @click="ActivateChat(index)">
+                <ChatIndexButton  :active="chats.active" :key="chats.active" />
+              </span>
+            </div>
           </div>
 
           <div class="chat-btn-wrap-bottom">
@@ -51,6 +32,10 @@
             <button type="button" class="btn btn-light mb-5" @click="chat.AddUser()">
               Add client
             </button>
+            <button type="button" class="btn btn-light mb-5" @click="stopChat()">
+              stopChat
+            </button>
+
 
             <cm-button
               data-label="End active chat"
@@ -69,17 +54,7 @@
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>
-<!-- 
-              <ConverzationHelp />
-
-              <ConverzationSend />
-              <ConverzationSend />
-              <ConverzationSend />
-
-
-              <ConverzationHelp Text="Thank you." Time="00:15"/> -->
-
-              <div v-for="chat in newChats" :key="chat">
+              <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
                   <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
                 </div>
@@ -102,22 +77,35 @@
   export default {
     data(){
       return{
-        chat: null,
-        newChats: []
+        ChatWindows:[
+          {newChats:[],
+          UserConnection:'',
+        active:true}
+        ],
+        newUser:{
+          newChats:[],
+          UserConnection:'',
+          active:false
+        },
+        activeChatKey : 0,
+        FirstUser:true
       }
     },
     mounted(){
-      console.log("test")
       this.chat = new ChatHub()
+
       window.addEventListener('NewChat',()=>{
-        console.log(localStorage.getItem('NewChat'))
-        this.reciveConverzation(localStorage.getItem('NewChat'))
+        this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
+      })
+      window.addEventListener('NewUser',()=>{
+        this.AddUser(localStorage.getItem('User'))
+      })
+      window.addEventListener('DisconnectUser',()=>{
+        //User gets disconnected
+        this.RemoveUser(localStorage.getItem('DiscUser'))
       })
     },
     methods:{
-      sendPost(){
-        createPost(1, "hoi")
-      },
       sendConverzation(text) {
         const time = new Date();
 
@@ -127,11 +115,10 @@
           White: false
         };
 
-        console.log("tets");
-        this.newChats = [...this.newChats, bubble];
-        this.chat.SendMessage(text)
+        this.ChatWindows[this.activeChatKey].newChats.push(bubble);
+        this.chat.SendMessage(text,this.ChatWindows[this.activeChatKey].UserConnection)
       },
-      reciveConverzation(text) {
+      reciveConverzation(text, connection) {
         const time = new Date();
 
         const bubble = {
@@ -139,8 +126,46 @@
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: true
         };
-
-        this.newChats = [...this.newChats, bubble];
+        let User = this.FindUser(connection)
+        this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
+      },
+      ActivateChat(index){
+        this.activeChatKey = index
+        this.ChatWindows.forEach(element => {
+          element.active =false;
+        });
+        this.ChatWindows[index].active = !this.ChatWindows[index].active
+      },
+      AddUser(connection){
+        const json = this.newUser
+        json.UserConnection = connection
+        if(!this.FirstUser){
+          this.ChatWindows.push(json)
+        }
+        else{
+          this.FirstUser = false;
+          this.ChatWindows[0].UserConnection = connection
+        }
+      },
+      FindUser(Connection){
+        for (let i = 0; i < this.ChatWindows.length; i++) {
+          if(Connection == this.ChatWindows[i].UserConnection){
+            return i
+          }
+        }
+      },
+      RemoveUser(Connection){
+        const i = this.FindUser(Connection)
+        this.ChatWindows[i].newChats = []
+        this.ChatWindows[i].UserConnection = ''
+        const emptyChat = this.ChatWindows[i]
+        this.ChatWindows.splice(i,1)
+        this.ChatWindows.push(emptyChat)
+      },
+      stopChat(){
+        const connection = this.ChatWindows[this.activeChatKey].UserConnection
+        this.RemoveUser(connection)
+        this.chat.StopChat(connection)
       }
     }
   }

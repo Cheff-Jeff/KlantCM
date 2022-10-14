@@ -13,10 +13,11 @@ export class ChatHub {
 
         this.connect()
 
-        this.connection.on("ReceiveMessageWorker", function (message) {
+        this.connection.on("ReceiveMessageWorker", function (message, connection) {
             //Here we have to input revieved message in correct chat
-            console.log(message)
+
             localStorage.setItem('NewChat',message)
+            localStorage.setItem('FromUser',connection)
             window.dispatchEvent(NewChat)
         });
 
@@ -29,11 +30,21 @@ export class ChatHub {
         this.connection.on("RecieveEndUserId", function (message) {
             ///Event to get message 
             ///here you get the connection id of the end user
-            localStorage.setItem('demo', message) // here for demostation 
+            localStorage.setItem('User', message) // here for demostation 
             console.log(message)
+            window.dispatchEvent(NewUser)
         });
 
+        this.connection.on("DisconnectUser", function (message) {
+            // user has to get disconnected from the chatwindow  
+            localStorage.setItem('DiscUser',message)
+            console.log(message)
+            window.dispatchEvent(DisconnectUser)
+         });
+
         const NewChat = new Event('NewChat')
+        const NewUser = new Event('NewUser')
+        const DisconnectUser = new Event('DisconnectUser')
     }
 
     async connect(){
@@ -45,13 +56,12 @@ export class ChatHub {
         }  
     }
 
-    SendMessage(message){
+    SendMessage(message,connection){
         // this.connection.invoke("SendMessage", message,RoomId,EndUser).catch(function (err) {
         //     return console.error(err.toString())
         // })
-            let demo = localStorage.getItem('demo')
             let roomid = localStorage.getItem('roomId')
-            this.connection.invoke("SendMessage", message,roomid,demo).catch(function (err) {
+            this.connection.invoke("SendMessage", message,roomid,connection).catch(function (err) {
             return console.error(err.toString())
          })
     }
@@ -71,6 +81,13 @@ export class ChatHub {
             return console.error(err)
         }
     )
+    }
+    StopChat(UserConnection){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("StopChat",UserConnection,RoomId).catch((err)=>{
+            return console.error(err.toString())
+        })
+
     }
 
 
