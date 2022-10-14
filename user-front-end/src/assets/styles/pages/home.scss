@@ -92,6 +92,23 @@ cm-conversation cm-conversation-divider .title{
   }
 }
 
+svg.close-cross{
+  width: 25px;
+  height: auto;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 999;
+  transform: scale(1);
+  transition: transform .3s ease-in-out;
+
+  &:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+    transition: transform .3s ease-in-out;
+  }
+}
+
 @-webkit-keyframes pulse {
   0% {
     -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
@@ -131,74 +148,25 @@ cm-conversation cm-conversation-divider .title{
   }
 }
 
-// .converzation-wrap{
-//   border: solid #c5c5c5 1.5px;
-//   border-radius: 20px;
-//   position: relative;
-//   display: block;
-//   min-height: 100%;
+.hide{
+  width: 0px;
+  height: 0px;
+}
 
-//   .body{
-//     min-height: 85%;
-//   }
+@media only screen and (max-width: 500px) {
+  .chat-wrap.open{
+    width: 100%;
+    top: 0;
+    right: 0;
+    position: absolute;
+    min-height: 100vh;
+    max-height: 100vh;
+    border-radius: 0px;
+  }
 
-//   .footer{
-//     position: sticky;
-//     bottom: -35px;
-//     left: 0;
-//     width: 100%;
-
-//     .row{
-//       display: flex;
-//     }
-
-//     .btn.btn-cta-icon{
-//       border: solid 1px #f5f5f5;
-//       .cm-icon-send{
-//         margin-bottom: -1px;
-//       }
-//     }
-//   }
-// }
-
-// .chat-controller{
-//   display: flex;
-//   justify-content: space-between;
-//   flex-direction: column;
-//   height: 85vh;
-
-//   .chat-btn-wrap{
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-  
-//     .queue{
-//       background: rgb(255, 229, 181);
-//       width: 95%;
-//       max-width: 270px;
-//       text-align: center;
-//       padding: 10px 0;
-//       margin-bottom: 40px;
-//       border-radius: 5px;
-//       border-left: solid rgb(255, 164, 0) 5px;
-//       span{
-//         color: #000;
-//       }
-//     }
-  
-//     button{
-//       min-width: 200px !important;
-//     }
-//   }
-
-//   .chat-btn-wrap-bottom{
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-
-//     button{
-//       min-width: 200px !important;
-//       background-color: #dc3545 !important;
-//     }
-//   }
-// }
+  .converzation-wrap{
+    cm-conversation{
+      height: 92.5vh !important;
+    }
+  }
+}
