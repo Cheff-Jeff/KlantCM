@@ -7,9 +7,6 @@ namespace CM_API_EF.Controllers
 {
     public class AuthController : Controller
     {
-        User user = new User();
-        VerifyInfo verifyInfo = new VerifyInfo();
-
         public readonly UserDbContext _context;
 
         public AuthController(UserDbContext context)
@@ -17,41 +14,35 @@ namespace CM_API_EF.Controllers
             _context = context;
         }
 
-        //[HttpPost("register")]
-        //public async Task<ActionResult<User>> Register(UserDTO request)
-        //{
-        //    verifyInfo.CreatePasswordHash(request.Password, out byte[] passwordhash, out byte[] passwordsalt);
+        [HttpPost("register")]
+        public async Task<ActionResult<User>> Register(User request)
+        {
+            var newUser = new User
+            {
+                userName = request.userName,
+                Email = request.Email,
+                passwordHash = request.passwordHash,
+                isAdmin = request.isAdmin,
+            };
 
-        //    var newUser = new User
-        //    {
-        //        userName = request.userName,
-        //        passwordHash = passwordhash,
-        //        passwordSalt = passwordsalt,
-        //        isAdmin = false
-        //    };
-            
+            await _context.Users.AddAsync(newUser);
+            await _context.SaveChangesAsync();
 
-        //    await _context.Users.AddAsync(newUser);
-        //    await _context.SaveChangesAsync();
-
-        //    return Ok(user);
-        //}
+            return Ok(newUser);
+        }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDTO request)
+        public async Task<ActionResult<UserDTO>> Login(UserDTO request)
         {
             var Myuser = _context.Users
-                .FirstOrDefault(u => u.userName == request.userName);
-            var DbPassword = System.Text.Encoding.UTF8.GetString(Myuser.passwordHash);
-            if (Myuser == null || request.Password != DbPassword)
+                .FirstOrDefault(u => u.Email == request.Email);
+
+            bool validPassword = BCrypt.Net.BCrypt.Verify(request.Password, Myuser.passwordHash);
+
+            if (Myuser == null || validPassword == false)
             {
                 return BadRequest("user not found");
             }
-
-            //if (Myuser == null || !verifyInfo.VerifyPasswordHash(request.Password, Myuser.passwordHash, Myuser.passwordSalt))
-            //{
-            //    return BadRequest("No matching credentials");
-            //}
 
             return Ok(Myuser.userId);
         }

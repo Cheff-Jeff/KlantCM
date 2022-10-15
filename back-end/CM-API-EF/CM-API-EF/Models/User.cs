@@ -12,6 +12,8 @@ namespace CM_API_EF.Models
         [Required]
         public string userName { get; set; } = string.Empty;
 
+        public string Email { get; set; } = string.Empty;
+
         [Required]
         public bool isAdmin { get; set; }
 
@@ -22,9 +24,6 @@ namespace CM_API_EF.Models
         //public Role role { get; set; }
 
         [Required]
-        public byte[] passwordHash { get; set; }
-
-        [Required]
-        public byte[] passwordSalt { get; set; }
+        public string passwordHash { get; set; } = string.Empty;
     }
 }

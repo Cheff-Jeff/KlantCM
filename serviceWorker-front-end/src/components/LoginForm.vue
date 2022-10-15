@@ -1,5 +1,6 @@
 <script setup>
 import {Login} from '../assets/javascript/Authenticate'
+import {Register} from '../assets/javascript/Authenticate'
 </script>
 
 <template>
@@ -73,6 +74,7 @@ import {Login} from '../assets/javascript/Authenticate'
           data-button-size="medium">
         </cm-button>
       </div>
+      <button v-on:click="RegisterThis()"></button>
     </div>
   </form>
 </template>
@@ -90,6 +92,9 @@ export default {
     }
   },
   methods: {
+    RegisterThis(){
+      Register()
+    },
     switchInputType(){
       this.inputType = this.inputType == 'password' ? 'text' : 'password' 
     },

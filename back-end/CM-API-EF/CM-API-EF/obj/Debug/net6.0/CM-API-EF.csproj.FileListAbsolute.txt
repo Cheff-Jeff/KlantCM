@@ -122,3 +122,4 @@ C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\
 C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\CM-API-EF\CM-API-EF\obj\Debug\net6.0\CM-API-EF.csproj.CopyComplete
 C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\CM-API-EF\CM-API-EF\obj\Debug\net6.0\CM-API-EF.genruntimeconfig.cache
 C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\CM-API-EF\CM-API-EF\obj\Debug\net6.0\ref\CM-API-EF.dll
+C:\Users\matti\Desktop\KlantCM\back-end\CM-API-EF\CM-API-EF\bin\Debug\net6.0\BCrypt.Net-Next.dll
