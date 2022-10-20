@@ -2,24 +2,19 @@ import axios from 'axios'
 import {HashPassword} from "./passwordHash";
 
 export const Login = async (email, password) => {
-  axios.post(`https://localhost:7117/Auth/login` ,{
+  try{
+    let response = await axios.post(`https://localhost:7117/Auth/login` ,{
     Email: email,
     Password: password
   })
-  //.then(response => {
-  //  console.log(response);
-  //})
 
-
-  if(email == 'admin@adminmail.com' && password == 'adminadmin'){
-    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify((await response).data))
     return true
   }
-  else{
-    console.log('Test')
-
+  catch{
+    console.log(response.data)
     return false
-  }
+  } 
 }
 
 export const Logout = () => {
@@ -55,7 +50,4 @@ export const Register = async () => {
     isAdmin: isadmin,
     Password: password
   })
-  //.then(response => {
-  //  console.log(response);
-  //})
 }

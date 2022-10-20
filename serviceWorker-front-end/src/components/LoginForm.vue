@@ -74,7 +74,6 @@ import {Register} from '../assets/javascript/Authenticate'
           data-button-size="medium">
         </cm-button>
       </div>
-      <button v-on:click="RegisterThis()"></button>
     </div>
   </form>
 </template>
@@ -111,13 +110,13 @@ export default {
       this.loginError = this.loginError.length > 0 ? '' : ''
       this.passwordError = this.password.length == 0 ? 'Password can not be empty.' : ''
     },
-    submit() {
+    async submit() {
       this.checkEmail();
       this.checkPassword();
 
       if(this.passwordError == '' && this.emailError == '')
       {
-        if(Login(this.email, this.password))
+        if(await Login(this.email, this.password))
         {
           this.$router.push("home");
         }
