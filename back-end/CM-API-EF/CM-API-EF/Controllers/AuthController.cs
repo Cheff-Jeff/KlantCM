@@ -53,7 +53,7 @@ namespace CM_API_EF.Controllers
                     return Ok(Myuser.userId);
                 }
             }
-            return Unauthorized("user not found");
+            return BadRequest("user not found");
         }
     }
 }
