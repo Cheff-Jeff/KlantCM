@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { compareSync } from 'bcryptjs';
 import {HashPassword} from "./passwordHash";
 
 export const Login = async (email, password) => {
@@ -38,13 +39,8 @@ export const RouteGaurd = () =>{
   }
 }
 
-export const Register = async () => {
-  var username = "admin";
-  var email = "admin@example.com"
-  var password = "admin123";
-  var isadmin = true;
-
-  axios.post(`https://localhost:7117/Auth/register` ,{
+export const Register = async (username, email, password, isadmin) => {
+  await axios.post(`https://localhost:7117/Auth/register` ,{
     userName: username,
     Email: email,
     isAdmin: isadmin,
