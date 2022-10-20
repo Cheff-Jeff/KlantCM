@@ -30,7 +30,6 @@ namespace SignalRHub.Hubs
             Room r = _Roomdata.get(RoomId);
             if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
             {
-                //Naar error sturen
                 return;
             }
             if (ConnectionId != null)

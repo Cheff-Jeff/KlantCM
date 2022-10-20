@@ -28,14 +28,17 @@ export class ChatHub {
         this.connection.on("RecieveEndUserId", function (message) {
             ///Event to get message 
             ///here you get the connection id of the end user
-            localStorage.setItem('User', message) // here for demostation 
+            localStorage.setItem('User', message)
             window.dispatchEvent(NewUser)
+            console.log('waarom werkt dit niet')
+            window.AddSuccessNotification('Added new client')
         });
 
         this.connection.on("DisconnectUser", function (message) {
             // user has to get disconnected from the chatwindow  
             localStorage.setItem('DiscUser',message)
             window.dispatchEvent(DisconnectUser)
+            window.AddErrorNotification('User has exited the chat')
          });
 
         const NewChat = new Event('NewChat')
