@@ -3,7 +3,6 @@ import {createPost} from './MessageReceiver2';
 
 export class ChatHub {
     constructor(){
-        console.log("in hub")
         this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
         
 
@@ -24,21 +23,18 @@ export class ChatHub {
         this.connection.on("ReceiveRoomId", function (message) {
                 this.RoomId = message
                 localStorage.setItem('roomId', this.RoomId)
-                console.log(message)
         });
 
         this.connection.on("RecieveEndUserId", function (message) {
             ///Event to get message 
             ///here you get the connection id of the end user
             localStorage.setItem('User', message) // here for demostation 
-            console.log(message)
             window.dispatchEvent(NewUser)
         });
 
         this.connection.on("DisconnectUser", function (message) {
             // user has to get disconnected from the chatwindow  
             localStorage.setItem('DiscUser',message)
-            console.log(message)
             window.dispatchEvent(DisconnectUser)
          });
 
