@@ -18,7 +18,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
             <div class="queue">
               <span>20 people waiting in line.</span>
             </div>
-            <div v-for="(chats,index) in ChatWindows">
+            <div v-for="(chats,index) in ChatWindows" :key="chats.active">
               <span @click="ActivateChat(index)">
                 <ChatIndexButton  :active="chats.active" :key="chats.active" />
               </span>
