@@ -130,7 +130,6 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           element.active =false;
         });
         this.ChatWindows[index].active = !this.ChatWindows[index].active
-        console.log(this.ChatWindows)
       },
       AddUser(connection){
         let json = {
@@ -149,14 +148,20 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         }
       },
       FindUser(Connection){
+        let found = -1
         for (let i = 0; i < this.ChatWindows.length; i++) {
           if(Connection == this.ChatWindows[i].UserConnection){
-            return i
+            found = i
+            break
           }
+        }
+        if (found != -1){
+          return found
         }
       },
       RemoveUser(Connection){
         const i = this.FindUser(Connection)
+        console.log(i)
         this.ChatWindows[i].newChats = []
         this.ChatWindows[i].UserConnection = ''
         this.ChatWindows.splice(i,1)
@@ -165,6 +170,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         const connection = this.ChatWindows[this.activeChatKey].UserConnection
         this.RemoveUser(connection)
         this.chat.StopChat(connection)
+        console.log(this.activeChatKey)
       }
     }
   }
