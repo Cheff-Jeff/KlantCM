@@ -197,6 +197,6 @@ methods:{
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  @import "../assets/styles/components/login-form.scss";
 </style>
