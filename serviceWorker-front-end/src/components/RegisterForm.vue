@@ -118,6 +118,13 @@
             </span>
               </div>
             </div>
+            <div class="col-md-12">
+              <cm-button
+                data-label="Register new user"
+                data-button-style="primary"
+                data-button-size="medium">
+              </cm-button>
+      </div>
           </div>
   </form>
 
