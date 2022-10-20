@@ -3,7 +3,6 @@
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
   import {ChatHub} from '../assets/javascript/Chat'
-  import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
 import ChatIndexButton from '../components/ChatIndexButton.vue';
 </script>
@@ -48,7 +47,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         </div>
       </div>
       <div class="col-lg-10 col-md-9 not-bootstrap">
-        <div class="converzation-wrap">
+        <div class="converzation-wrap" v-if="ChatWindows.length != 0">
           <cm-conversation style="height: 85vh">
             <div class="body">
               <cm-conversation-divider>
@@ -68,6 +67,9 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
             </div>
           </cm-conversation>
         </div>
+        <div v-else>
+            NO CHAT STARTED
+        </div>
       </div>
     </div>
   </div>
@@ -77,13 +79,8 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
   export default {
     data(){
       return{
-        ChatWindows:[
-          {newChats:[],
-          UserConnection:'',
-        active:true}
-        ],
+        ChatWindows:[],
         activeChatKey : 0,
-        FirstUser:true
       }
     },
     mounted(){
@@ -130,7 +127,6 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           element.active =false;
         });
         this.ChatWindows[index].active = !this.ChatWindows[index].active
-        console.log(this.ChatWindows)
       },
       AddUser(connection){
         let json = {
@@ -139,13 +135,9 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           active:false
         }
         json.UserConnection = connection
-        if(!this.FirstUser){
-          this.ChatWindows.push(json)
-        }
-        else{
-          //might be a better way of doing this
-          this.FirstUser = false;
-          this.ChatWindows[0].UserConnection = connection
+        this.ChatWindows.push(json)
+        if(this.ChatWindows.length === 1){
+          this.ActivateChat(0)
         }
       },
       FindUser(Connection){
@@ -155,10 +147,11 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           }
         }
       },
-      RemoveUser(Connection){
+      RemoveUser(Connection){ 
         const i = this.FindUser(Connection)
         this.ChatWindows[i].newChats = []
         this.ChatWindows[i].UserConnection = ''
+        this.ActivateChat(0)
         this.ChatWindows.splice(i,1)
       },
       stopChat(){

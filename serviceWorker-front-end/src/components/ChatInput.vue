@@ -58,7 +58,6 @@
         this.checkInput();
         if(this.inputError == '')
         {
-          console.log("test");
           this.$emit('text', this.input);
           this.input = '';
           this.inputError = '';

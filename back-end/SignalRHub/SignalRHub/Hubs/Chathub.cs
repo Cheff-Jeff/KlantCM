@@ -87,6 +87,15 @@ namespace SignalRHub.Hubs
                 {
                     r.EndUserIds.Remove(connectionValidaded);
                 }
+
+                EndUser e = _EndUserdata.get(Connection);
+
+                if(e != null)
+                {
+                    e.RoomId = -1;
+                    e.inRoom = false;
+                    _EndUserdata.Update(e,Connection);
+                }
             }
             catch(Exception ex)
             {
