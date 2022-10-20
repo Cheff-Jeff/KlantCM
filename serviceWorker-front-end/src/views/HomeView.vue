@@ -82,11 +82,6 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           UserConnection:'',
         active:true}
         ],
-        newUser:{
-          newChats:[],
-          UserConnection:'',
-          active:false
-        },
         activeChatKey : 0,
         FirstUser:true
       }
@@ -135,14 +130,20 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           element.active =false;
         });
         this.ChatWindows[index].active = !this.ChatWindows[index].active
+        console.log(this.ChatWindows)
       },
       AddUser(connection){
-        const json = this.newUser
+        let json = {
+          newChats:[],
+          UserConnection:'',
+          active:false
+        }
         json.UserConnection = connection
         if(!this.FirstUser){
           this.ChatWindows.push(json)
         }
         else{
+          //might be a better way of doing this
           this.FirstUser = false;
           this.ChatWindows[0].UserConnection = connection
         }
@@ -158,9 +159,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         const i = this.FindUser(Connection)
         this.ChatWindows[i].newChats = []
         this.ChatWindows[i].UserConnection = ''
-        const emptyChat = this.ChatWindows[i]
         this.ChatWindows.splice(i,1)
-        this.ChatWindows.push(emptyChat)
       },
       stopChat(){
         const connection = this.ChatWindows[this.activeChatKey].UserConnection
