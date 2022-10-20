@@ -1,3 +1,7 @@
+<script setup>
+import {Register} from '../assets/javascript/Authenticate';
+</script>
+
 <template>
   <form @submit.prevent="submit">
     <div class="row">
@@ -182,7 +186,7 @@ methods:{
         this.checkPassword();
         this.checkPasswordValidation();
         if(this.emailError == '' && this.passwordError == '' && this.passwordValidationError == ''){
-
+          Register(this.userName, this.email, this.password)
         }
         else{
             this.registerError = 'Something went wrong, please try again!'

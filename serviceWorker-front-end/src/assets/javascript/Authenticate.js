@@ -39,7 +39,8 @@ export const RouteGaurd = () =>{
   }
 }
 
-export const Register = async (username, email, password, isadmin) => {
+export const Register = async (username, email, password) => {
+  const isadmin = false;
   await axios.post(`https://localhost:7117/Auth/register` ,{
     userName: username,
     Email: email,
