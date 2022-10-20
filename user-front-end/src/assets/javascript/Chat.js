@@ -1,6 +1,9 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
 
+let Queuetimer
+
 export class ChatHub {
+
     constructor() {
         console.log("in hub")
 
@@ -11,8 +14,6 @@ export class ChatHub {
         })
 
         this.connect()
-
-
 
         this.connection.on("ReceiveMessage", function(message) {
             ///Event to get message 
@@ -25,10 +26,11 @@ export class ChatHub {
             ///Event to get message 
             ///here you get the room id
             localStorage.setItem('roomId', message)
-                // clearInterval(QueueTimer)
+            console.log("Connected to room")
+            clearInterval(Queuetimer)
         });
 
-        this.connection.on("CloseChat", () =>{
+        this.connection.on("CloseChat", () => {
             this.connection.stop();
         })
 
@@ -55,17 +57,21 @@ export class ChatHub {
             return console.error(err.toString())
         })
 
-        let QueueTimer = setInterval(function() {
-            SendQueueMessage()
-        }, 10000);
-
-        function SendQueueMessage() {
-            localStorage.setItem('NewChat', 'We are busy!')
-
-            const NewChat = new Event('NewChat')
-            window.dispatchEvent(NewChat)
-        }
+        this.startTimer()
     }
 
+    SendQueueMessage() {
+        localStorage.setItem('NewChat', 'We are busy!')
 
+        const NewChat = new Event('NewChat')
+        window.dispatchEvent(NewChat)
+    }
+
+    startTimer() {
+        Queuetimer = setInterval(function() {
+            localStorage.setItem('NewChat', 'We are busy!')
+            const NewChat = new Event('NewChat')
+            window.dispatchEvent(NewChat)
+        }, 10000);
+    }
 }
