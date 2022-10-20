@@ -25,6 +25,7 @@
         data-label="Register"
         data-button-style="cta"
         data-button-size="medium"
+        @click="registerBtn"
         >
       </cm-button>
       <cm-button
@@ -50,6 +51,10 @@
       accountBtn() {
         //Navigeer naar test view;
         this.$router.push("account");
+      },
+      registerBtn() {
+        //Navigeer naar test view;
+        this.$router.push("register");
       },
       LogoutBtn(){
         if(Logout()){
