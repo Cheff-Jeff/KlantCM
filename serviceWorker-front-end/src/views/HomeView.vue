@@ -3,7 +3,6 @@
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
   import {ChatHub} from '../assets/javascript/Chat'
-  import {createPost} from '../assets/javascript/MessageReceiver2';
   import Header from '../components/Header.vue';
 import ChatIndexButton from '../components/ChatIndexButton.vue';
 </script>
