@@ -177,7 +177,7 @@ methods:{
         this.registerError = this.registerError.length > 0 ? '' : ''
         this.passwordValidationError = this.password == this.repassword ? '' : 'Passwords do not match.'
     },
-    submit(){l
+    submit(){
         this.checkEmail();
         this.checkPassword();
         this.checkPasswordValidation();
