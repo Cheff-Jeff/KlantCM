@@ -148,29 +148,23 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         }
       },
       FindUser(Connection){
-        let found = -1
         for (let i = 0; i < this.ChatWindows.length; i++) {
           if(Connection == this.ChatWindows[i].UserConnection){
-            found = i
-            break
+            return i
           }
         }
-        if (found != -1){
-          return found
-        }
       },
-      RemoveUser(Connection){
+      RemoveUser(Connection){ 
         const i = this.FindUser(Connection)
-        console.log(i)
         this.ChatWindows[i].newChats = []
         this.ChatWindows[i].UserConnection = ''
+        this.ActivateChat(0)
         this.ChatWindows.splice(i,1)
       },
       stopChat(){
         const connection = this.ChatWindows[this.activeChatKey].UserConnection
         this.RemoveUser(connection)
         this.chat.StopChat(connection)
-        console.log(this.activeChatKey)
       }
     }
   }
