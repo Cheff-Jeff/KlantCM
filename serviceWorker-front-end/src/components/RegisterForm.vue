@@ -151,7 +151,7 @@ methods:{
       this.inputType = this.inputType == 'password' ? 'text' : 'password' 
     },
     checkName(){
-      this.registerError = this.registerError.length > 0 ? '' : ''
+      // this.registerError = this.registerError.length > 0 ? '' : ''
       this.usernameError = this.userName.length == 0 ? 'The username can not be empty'
       :(this.validateName(this.userName) ? '' : this.userName + 'is not an  valid username')
     },
@@ -169,12 +169,12 @@ methods:{
       return re.test(email);
     },
     checkPassword() {
-      this.registerError = this.registerError.length > 0 ? '' : ''
+      // this.registerError = this.registerError.length > 0 ? '' : ''
       this.passwordError = this.password.length == 0 ? 'Password can not be empty.' : ''
       this.passwordError = this.password.length <= 7 ? 'Password has to be atleast 8 characters long' : ''
     },
     checkPasswordValidation(){
-        this.registerError = this.registerError.length > 0 ? '' : ''
+        // this.registerError = this.registerError.length > 0 ? '' : ''
         this.passwordValidationError = this.password == this.repassword ? '' : 'Passwords do not match.'
     },
     submit(){
