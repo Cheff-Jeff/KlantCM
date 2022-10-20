@@ -7,6 +7,8 @@ namespace CM_API_EF.Controllers
 {
     public class AuthController : Controller
     {
+        VerifyInfo verify = new VerifyInfo();
+
         public readonly UserDbContext _context;
 
         public AuthController(UserDbContext context)
@@ -17,11 +19,14 @@ namespace CM_API_EF.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(User request)
         {
+            verify.CreatePasswordHash(Convert.ToBase64String(request.passwordHash), out byte[] passwordhash, out byte[] passwordsalt);
+
             var newUser = new User
             {
                 userName = request.userName,
                 Email = request.Email,
-                passwordHash = request.passwordHash,
+                passwordHash = passwordhash,
+                passwordSalt = passwordsalt,
                 isAdmin = request.isAdmin,
             };
 
@@ -37,14 +42,13 @@ namespace CM_API_EF.Controllers
             var Myuser = _context.Users
                 .FirstOrDefault(u => u.Email == request.Email);
 
-            bool validPassword = BCrypt.Net.BCrypt.Verify(request.Password, Myuser.passwordHash);
+            //bool validPassword = BCrypt.Net.BCrypt.Verify(request.Password, Myuser.passwordHash);
 
-            if (Myuser == null || validPassword == false)
+            if (Myuser != null || verify.VerifyPasswordHash(request.Password, Myuser.passwordHash, Myuser.passwordSalt))
             {
-                return BadRequest("user not found");
+                return Ok(Myuser.userId);
             }
-
-            return Ok(Myuser.userId);
+            return BadRequest("user not found");
         }
     }
 }

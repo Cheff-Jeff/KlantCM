@@ -24,6 +24,9 @@ namespace CM_API_EF.Models
         //public Role role { get; set; }
 
         [Required]
-        public string passwordHash { get; set; } = string.Empty;
+        public byte[] passwordHash { get; set; }
+
+        [Required]
+        public byte[] passwordSalt { get; set; }
     }
 }
