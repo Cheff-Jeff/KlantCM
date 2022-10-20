@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 
 namespace CM_API_EF.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class AuthController : Controller
     {
         VerifyInfo verify = new VerifyInfo();
@@ -17,9 +19,9 @@ namespace CM_API_EF.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(User request)
+        public async Task<ActionResult<User>> Register(UserDTO request)
         {
-            verify.CreatePasswordHash(Convert.ToBase64String(request.passwordHash), out byte[] passwordhash, out byte[] passwordsalt);
+            verify.CreatePasswordHash(request.Password, out byte[] passwordhash, out byte[] passwordsalt);
 
             var newUser = new User
             {
@@ -44,9 +46,12 @@ namespace CM_API_EF.Controllers
 
             //bool validPassword = BCrypt.Net.BCrypt.Verify(request.Password, Myuser.passwordHash);
 
-            if (Myuser != null || verify.VerifyPasswordHash(request.Password, Myuser.passwordHash, Myuser.passwordSalt))
+            if (Myuser != null)
             {
-                return Ok(Myuser.userId);
+                if(verify.VerifyPasswordHash(request.Password, Myuser.passwordHash, Myuser.passwordSalt))
+                {
+                    return Ok(Myuser.userId);
+                }
             }
             return BadRequest("user not found");
         }

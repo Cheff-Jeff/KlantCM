@@ -2,10 +2,13 @@ import axios from 'axios'
 import {HashPassword} from "./passwordHash";
 
 export const Login = async (email, password) => {
-  axios.post(`https://localhost:7117/login?Email=${email}&Password=${password}`)
-  .then(response => {
-    console.log(response);
+  axios.post(`https://localhost:7117/Auth/login` ,{
+    Email: email,
+    Password: password
   })
+  //.then(response => {
+  //  console.log(response);
+  //})
 
 
   if(email == 'admin@adminmail.com' && password == 'adminadmin'){
@@ -41,18 +44,18 @@ export const RouteGaurd = () =>{
 }
 
 export const Register = async () => {
-  
-  var username = "Pietje";
-  var email = "test6@example.com"
-  var password = "test6";
-  var isadmin = false;
+  var username = "admin";
+  var email = "admin@example.com"
+  var password = "admin123";
+  var isadmin = true;
 
-  const result = await HashPassword(password);
-  console.log("werktie?")
-  console.log(result)
-
-  axios.post(`https://localhost:7117/register?userName=${username}&Email=${email}&isAdmin=${isadmin}&passwordHash=${result}`)
-  .then(response => {
-    console.log(response);
+  axios.post(`https://localhost:7117/Auth/register` ,{
+    userName: username,
+    Email: email,
+    isAdmin: isadmin,
+    Password: password
   })
+  //.then(response => {
+  //  console.log(response);
+  //})
 }
