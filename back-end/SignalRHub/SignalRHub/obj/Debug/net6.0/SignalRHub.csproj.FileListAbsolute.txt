@@ -79,3 +79,30 @@ C:\Users\matti\Desktop\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\r
 C:\Users\matti\Desktop\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.pdb
 C:\Users\matti\Desktop\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.genruntimeconfig.cache
 C:\Users\matti\Desktop\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\ref\SignalRHub.dll
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\appsettings.json
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\libman.json
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\SignalRHub.exe
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\SignalRHub.deps.json
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\SignalRHub.runtimeconfig.json
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\SignalRHub.dll
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\SignalRHub.pdb
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.csproj.AssemblyReference.cache
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.AssemblyInfoInputs.cache
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.AssemblyInfo.cs
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.csproj.CoreCompileInputs.cache
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\scopedcss\bundle\SignalRHub.styles.css
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.csproj.CopyComplete
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.dll
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\refint\SignalRHub.dll
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.pdb
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\SignalRHub.genruntimeconfig.cache
+C:\Users\nooit\Desktop\Internet Explorer\S3\Groepsproject\Code\KlantCM\back-end\SignalRHub\SignalRHub\obj\Debug\net6.0\ref\SignalRHub.dll
