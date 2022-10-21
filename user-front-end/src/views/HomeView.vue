@@ -31,7 +31,7 @@
           </cm-conversation>
         </div>
         <div class="footer">
-          <Input @text="sendConverzation"/>
+          <Input @text="activateBot()"/>
         </div>
       </div>
     </div>
@@ -111,6 +111,10 @@
         };
 
         this.newChats = [...this.newChats, bubble];
+      },
+      activateBot(message) {
+        var botResponse = Bots.sendMessage("bot-before", message, { "USER": "me" });
+        this.sendConverzation(botResponse);
       }
     }
   };

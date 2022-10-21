@@ -8,6 +8,8 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/styles/main.scss'
 import 'bootstrap'
+import './chatbot/source/bots'
+import './chatbot/source/srcbot'
 
 const app = createApp(App)
 
