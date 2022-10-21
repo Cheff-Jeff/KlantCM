@@ -30,7 +30,6 @@ export class ChatHub {
             ///here you get the connection id of the end user
             localStorage.setItem('User', message)
             window.dispatchEvent(NewUser)
-            console.log('waarom werkt dit niet')
             window.AddSuccessNotification('Added new client')
         });
 
@@ -39,6 +38,12 @@ export class ChatHub {
             localStorage.setItem('DiscUser',message)
             window.dispatchEvent(DisconnectUser)
             window.AddErrorNotification('User has exited the chat')
+         });
+
+         this.connection.on("QueueUpdate", function (message) {
+            // Update about the count of free users in system  
+            console.log(message)
+
          });
 
         const NewChat = new Event('NewChat')

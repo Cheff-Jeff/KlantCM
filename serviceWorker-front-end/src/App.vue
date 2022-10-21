@@ -5,7 +5,6 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <main>
     <RouterView/>
-    <cm-overlay></cm-overlay>
   </main>
 </template>
 
