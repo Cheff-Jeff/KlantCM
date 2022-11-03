@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { compareSync } from 'bcryptjs';
-import {HashPassword} from "./passwordHash";
+// import { compareSync } from 'bcryptjs';
+// import {HashPassword} from "./passwordHash";
 
 export const Login = async (email, password) => {
   try{
