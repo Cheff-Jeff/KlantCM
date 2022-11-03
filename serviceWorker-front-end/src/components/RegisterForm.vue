@@ -96,8 +96,8 @@ import { DoubleEmail } from '../assets/javascript/Authenticate';
                 name="password"
                 class="form-control"
                 v-model="repassword"
-                @blur="checkPassword"
-                @keyup="checkPassword"
+                @blur="RePasswordValidation"
+                @keyup="RePasswordValidation"
                 >
                 <div 
                 class="eye-close" 
@@ -118,8 +118,8 @@ import { DoubleEmail } from '../assets/javascript/Authenticate';
                 </svg>
               </div>
             </div>
-            <span v-if="passwordValidationError" class="small text-danger">
-              {{passwordValidationError}}
+            <span v-if="repasswordError" class="small text-danger">
+              {{repasswordError}}
             </span>
               </div>
             </div>
@@ -146,6 +146,7 @@ data(){
         registerError:'',
         emailError:'',
         passwordError:'',
+        repasswordError: '',
         usernameError:'',
         passwordValidationError:''
 
@@ -193,9 +194,10 @@ methods:{
       this.passwordError = this.password.length == 0 ? 'Password can not be empty.' : ''
       this.passwordError = this.password.length <= 7 ? 'Password has to be atleast 8 characters long' : ''
     },
-    checkPasswordValidation(){
+    RePasswordValidation(){
         // this.registerError = this.registerError.length > 0 ? '' : ''
-        this.passwordValidationError = this.password == this.repassword ? '' : 'Passwords do not match.'
+        this.repasswordError = this.repassword.length == 0 ? 'Repassword cannot be empty.' :
+        this.repasswordError = this.password != this.repassword ? 'Password and RePassword do not match.' : ''
     },
     submit(){
         this.checkEmail();
