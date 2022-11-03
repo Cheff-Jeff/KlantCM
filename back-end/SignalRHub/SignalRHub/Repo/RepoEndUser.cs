@@ -25,7 +25,7 @@ namespace SignalRHub.Repo
             return p;
         }
 
-        public EndUser? FindFreeUser() /// this can be done better hash set ?
+        public EndUser? FindFree() /// this can be done better hash set ?
         {
             foreach (KeyValuePair<string, EndUser> entry in _data)
             {
