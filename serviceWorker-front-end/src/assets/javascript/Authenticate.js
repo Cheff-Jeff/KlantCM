@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { compareSync } from 'bcryptjs';
-import {HashPassword} from "./passwordHash";
+// import { compareSync } from 'bcryptjs';
+// import {HashPassword} from "./passwordHash";
 
 export const Login = async (email, password) => {
   try{
@@ -47,4 +47,11 @@ export const Register = async (username, email, password) => {
     isAdmin: isadmin,
     Password: password
   })
+}
+
+export const DoubleEmail = async (email) => {
+  let response = await axios.post(`https://localhost:7117/Auth/doubleemail?email=${email}`) //, {
+  return response.data;
+  //   Email: email,
+  // })
 }
