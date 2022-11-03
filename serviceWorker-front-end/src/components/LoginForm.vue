@@ -1,5 +1,6 @@
 <script setup>
 import {Login} from '../assets/javascript/Authenticate'
+import {Register} from '../assets/javascript/Authenticate'
 </script>
 
 <template>
@@ -106,13 +107,13 @@ export default {
       this.loginError = this.loginError.length > 0 ? '' : ''
       this.passwordError = this.password.length == 0 ? 'Password can not be empty.' : ''
     },
-    submit() {
+    async submit() {
       this.checkEmail();
       this.checkPassword();
 
       if(this.passwordError == '' && this.emailError == '')
       {
-        if(Login(this.email, this.password))
+        if(await Login(this.email, this.password))
         {
           this.$router.push("home");
         }

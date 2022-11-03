@@ -1,18 +1,21 @@
-export const Login = (email, password) => {
-  const user = {
-    id: 1,
-    isAdmin: true
-  }
+import axios from 'axios'
+// import { compareSync } from 'bcryptjs';
+// import {HashPassword} from "./passwordHash";
 
-  if(email == 'admin@adminmail.com' && password == 'adminadmin'){
-    localStorage.setItem('user', JSON.stringify(user))
+export const Login = async (email, password) => {
+  try{
+    let response = await axios.post(`https://localhost:7117/Auth/login` ,{
+    Email: email,
+    Password: password
+  })
+
+    localStorage.setItem('user', JSON.stringify((await response).data))
     return true
   }
-  else{
-    console.log('Test')
-
+  catch{
+    console.log(response.data)
     return false
-  }
+  } 
 }
 
 export const Logout = () => {
@@ -34,4 +37,21 @@ export const RouteGaurd = () =>{
   else{
     return false
   }
+}
+
+export const Register = async (username, email, password) => {
+  const isadmin = false;
+  await axios.post(`https://localhost:7117/Auth/register` ,{
+    userName: username,
+    Email: email,
+    isAdmin: isadmin,
+    Password: password
+  })
+}
+
+export const DoubleEmail = async (email) => {
+  let response = await axios.post(`https://localhost:7117/Auth/doubleemail?email=${email}`) //, {
+  return response.data;
+  //   Email: email,
+  // })
 }

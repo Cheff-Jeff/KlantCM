@@ -22,6 +22,13 @@
     </div>
     <div class="nav-wrap">
       <cm-button
+        data-label="Register"
+        data-button-style="cta"
+        data-button-size="medium"
+        @click="registerBtn"
+        >
+      </cm-button>
+      <cm-button
         data-label="My profile"
         data-button-style="cta"
         data-button-size="medium"
@@ -44,6 +51,10 @@
       accountBtn() {
         //Navigeer naar test view;
         this.$router.push("account");
+      },
+      registerBtn() {
+        //Navigeer naar test view;
+        this.$router.push("register");
       },
       LogoutBtn(){
         if(Logout()){
