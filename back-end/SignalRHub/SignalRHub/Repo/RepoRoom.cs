@@ -5,7 +5,7 @@ namespace SignalRHub
 {
     public class RepoRoom:IRepo<Room, int>
     {
-        private readonly Dictionary<int, Room> _data =
+        public readonly Dictionary<int, Room> _data =
             new Dictionary<int, Room>();
 
         public void Add(Room r, int key)

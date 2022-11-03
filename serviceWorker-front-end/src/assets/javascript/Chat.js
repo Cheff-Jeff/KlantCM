@@ -1,5 +1,5 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
-import {createPost} from './MessageReceiver2';
+// import {createPost} from './MessageReceiver2';
 
 export class ChatHub {
     constructor(){

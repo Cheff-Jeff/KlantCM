@@ -91,9 +91,6 @@ export default {
     }
   },
   methods: {
-    RegisterThis(){
-      Register()
-    },
     switchInputType(){
       this.inputType = this.inputType == 'password' ? 'text' : 'password' 
     },
