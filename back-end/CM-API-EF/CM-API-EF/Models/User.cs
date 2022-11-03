@@ -11,7 +11,7 @@ namespace CM_API_EF.Models
 
         [Required]
         public string userName { get; set; } = string.Empty;
-
+        [Required]
         public string Email { get; set; } = string.Empty;
 
         [Required]
