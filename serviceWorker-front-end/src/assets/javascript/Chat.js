@@ -37,13 +37,6 @@ export class ChatHub {
             // user has to get disconnected from the chatwindow  
             localStorage.setItem('DiscUser',message)
             window.dispatchEvent(DisconnectUser)
-            window.AddErrorNotification('User has exited the chat')
-         });
-
-         this.connection.on("QueueUpdate", function (message) {
-            // Update about the count of free users in system  
-            console.log(message)
-
          });
 
         const NewChat = new Event('NewChat')
@@ -91,8 +84,5 @@ export class ChatHub {
         this.connection.invoke("StopChat",UserConnection,RoomId).catch((err)=>{
             return console.error(err.toString())
         })
-
     }
-
-
 }

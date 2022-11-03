@@ -10,13 +10,11 @@ namespace SignalRHub.Hubs
 
         private readonly IRepo<EndUser, string> _EndUserdata;
         private readonly  IRepo<Room, int> _Roomdata;
-        public int Queue;
 
         public Chathub(IRepo<EndUser, string> eud, IRepo<Room, int>rd)
         {
             _EndUserdata = eud;
             _Roomdata = rd;
-            Queue = 0;
         }
         /// <summary>
         /// Sends message to enduser or to the worker
@@ -60,8 +58,6 @@ namespace SignalRHub.Hubs
             _EndUserdata.Update(e, e.ConnectionString);
             r.EndUserIds.Add(e.ConnectionString);
             _Roomdata.Update(r, r.Id);
-            Queue--;
-            AllUpdateQueue();
             await Clients.Client(e.ConnectionString).SendAsync("RecieveRoomId", RoomId.ToString());
             await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", e.ConnectionString);
         }
@@ -78,7 +74,6 @@ namespace SignalRHub.Hubs
 
             _Roomdata.Add(r, _Roomdata.Count());
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
-            UpdateQueue(r.employee.ConnectionString);
         }   
 
         public async Task StopChat(string Connection, string roomId)
@@ -118,8 +113,6 @@ namespace SignalRHub.Hubs
             string id = Context.ConnectionId;
             EndUser e = new(id);
             _EndUserdata.Add(e,id);
-            Queue++;
-            AllUpdateQueue();
         }
 
         /// <summary>
@@ -141,28 +134,11 @@ namespace SignalRHub.Hubs
                         r.EndUserIds.Remove(e.ConnectionString);
                         await Clients.Client(r.employee.ConnectionString).SendAsync("DisconnectUser", e.ConnectionString);
                     }
-                    Queue--;
-                    AllUpdateQueue();
                 }
             }
 
             _EndUserdata.remove(Connection);
             await base.OnDisconnectedAsync(exception);
-        }
-
-        public async void AllUpdateQueue()
-        {
-            List<string> AllEmployes = GetAllEmploye();
-            if (AllEmployes == null)
-            {
-                return;
-            }
-            await Clients.Clients(AllEmployes).SendAsync("QueueUpdate", Queue);
-        }
-
-        public async void UpdateQueue(string Connection)
-        {
-            await Clients.Client(Connection).SendAsync("QueueUpdate", Queue);
         }
 
         public List<string> GetAllEmploye()
@@ -187,9 +163,6 @@ namespace SignalRHub.Hubs
             }
             return employes;
         }
-
-
-
 
 
     }
