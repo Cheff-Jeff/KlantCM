@@ -129,6 +129,7 @@ namespace SignalRHub.Hubs
             }
             return;
         }
+
         /// <summary>
         /// Removes the user when they disconnect
         /// </summary>
@@ -154,6 +155,30 @@ namespace SignalRHub.Hubs
             _EndUserdata.remove(Connection);
             await base.OnDisconnectedAsync(exception);
         }
+
+        public List<string> GetAllEmploye()
+        {
+            List<string> employes = new List<string>();
+            List<Room> rooms = new List<Room>();
+
+            for (int i = 0; i < _EndUserdata.Count(); i++)
+            {
+                Room r = _Roomdata.get(i);
+                if (r != null)
+                {
+                    rooms.Add(_Roomdata.get(i));
+                }
+            }
+            if(rooms.Count > 0)
+            {
+                foreach (Room room in rooms)
+                {
+                    employes.Add(room.employee.ConnectionString);
+                }
+            }
+            return employes;
+        }
+
 
     }
 }
