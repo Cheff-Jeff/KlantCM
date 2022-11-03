@@ -30,7 +30,6 @@ namespace SignalRHub.Hubs
             Room r = _Roomdata.get(RoomId);
             if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
             {
-                //Naar error sturen
                 return;
             }
             if (ConnectionId != null)
@@ -47,12 +46,11 @@ namespace SignalRHub.Hubs
         /// </summary>
         /// <param name="RoomId"></param>
         /// <returns></returns>
-        public async Task AddEndUserToRoom(string roomId)
+        public async Task AddEndUserToRoom(string roomId, EndUser e)
         {
             int RoomId = Convert.ToInt32(roomId);
             Room r = _Roomdata.get(RoomId);
             if (r == null) return;
-            EndUser e = _EndUserdata.FindFreeUser();
             if (e == null) return;
             e.RoomId = r.Id;
             e.inRoom = true;
@@ -75,6 +73,16 @@ namespace SignalRHub.Hubs
 
             _Roomdata.Add(r, _Roomdata.Count());
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
+            bool loop = true;
+
+            while (loop) 
+            {
+                if (r.EndUserIds.Count>5 || _EndUserdata.FindFree() == null)//5 should come from a congif.ini file
+                {
+                    break;
+                }
+                await  AddEndUserToRoom(r.Id.ToString(), _EndUserdata.FindFree());
+            }
         }   
 
         public async Task StopChat(string Connection, string roomId)
@@ -109,11 +117,17 @@ namespace SignalRHub.Hubs
         /// New EndUser use this function
         /// </summary>
         /// <returns></returns>
-        public void ConnectUser()
+        public async Task ConnectUser()
         {
             string id = Context.ConnectionId;
             EndUser e = new(id);
             _EndUserdata.Add(e,id);
+            Room room = _Roomdata.FindFree();
+            if(room != null)
+            {
+                await AddEndUserToRoom(room.Id.ToString(), e); // have to do a tostring() because the method expects a string from js client side
+            }
+            return;
         }
         /// <summary>
         /// Removes the user when they disconnect

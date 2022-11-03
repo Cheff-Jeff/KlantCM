@@ -2190,24 +2190,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\matti\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\andre\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\CM-API-EF\\CM-API-EF\\CM-API-EF.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\CM-API-EF\\CM-API-EF\\CM-API-EF.csproj",
       "projectName": "CM-API-EF",
-      "projectPath": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\CM-API-EF\\CM-API-EF\\CM-API-EF.csproj",
-      "packagesPath": "C:\\Users\\matti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\CM-API-EF\\CM-API-EF\\obj\\",
+      "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\CM-API-EF\\CM-API-EF\\CM-API-EF.csproj",
+      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\CM-API-EF\\CM-API-EF\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\matti\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

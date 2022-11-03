@@ -118,7 +118,7 @@ namespace Unittests
 
 
             //assert
-            Assert.AreEqual(endUser2, repo.FindFreeUser());
+            Assert.AreEqual(endUser2, repo.FindFree());
         }
         [TestMethod]
         public void Test_Count()
