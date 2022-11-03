@@ -37,14 +37,14 @@ describe('RouteGaurd', () => {
 
   Unit Test Login
 */
-import { Login } from '../../assets/javascript/Authenticate'
-describe('Login', () => {
-  test('User sign in', () => {
-    expect(Login('admin@adminmail.com', 'adminadmin')).toBe(true)
-  })
-})
-describe('Login', () => {
-  test('User sign in faild', () => {
-    expect(Login('fail@mail.com', 'admin')).toBe(false)
-  })
-})
+// import { Login } from '../../assets/javascript/Authenticate'
+// describe('Login', () => {
+//   test('User sign in', () => {
+//     expect(Login('admin@adminmail.com', 'adminadmin')).toBe(true)
+//   })
+// })
+// describe('Login', () => {
+//   test('User sign in faild', () => {
+//     expect(Login('fail@mail.com', 'admin')).toBe(false)
+//   })
+// })
