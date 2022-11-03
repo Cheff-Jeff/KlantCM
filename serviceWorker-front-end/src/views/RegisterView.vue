@@ -1,8 +1,10 @@
 <script setup>
 import RegisterForm from '../components/RegisterForm.vue'
+import Header from '../components/Header.vue';
 </script>
 
 <template>
+  <Header/>
   <section class="login">
     <div class="container fix-padding">
       <div class="wrapper">
@@ -25,6 +27,15 @@ import RegisterForm from '../components/RegisterForm.vue'
     </div>
   </section>
 </template>
+
+<script>
+export default{
+  components:{
+    Header
+  }
+}
+
+</script>
 
 <style lang="scss" scoped>
   @import "../assets/styles/pages/login.scss";

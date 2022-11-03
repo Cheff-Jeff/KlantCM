@@ -66,5 +66,22 @@ namespace CM_API_EF.Controllers
 
             return false;
         }
+
+        [HttpGet("getuser")]
+        public async Task<ActionResult> GetUserById(int id)
+        {
+            var myuser = await _context.Users
+            .Where(u => u.userId == id)
+                         .Select(u => new
+                         {
+                             u.userName,
+                             u.isAdmin,
+                         })
+                         .ToArrayAsync();
+
+            if (myuser == null) { return BadRequest("user not ound"); }
+
+            return Ok(myuser);
+        }
     }
 }
