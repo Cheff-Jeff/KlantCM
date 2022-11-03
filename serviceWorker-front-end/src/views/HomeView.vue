@@ -17,7 +17,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
             <div class="queue">
               <span>20 people waiting in line.</span>
             </div>
-            <div v-for="(chats,index) in ChatWindows" :key="chats.active">
+            <div v-for="(chats,index) in ChatWindows">
               <span @click="ActivateChat(index)">
                 <ChatIndexButton  :active="chats.active" :key="chats.active" />
               </span>
@@ -28,20 +28,13 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
             <button type="button" class="btn btn-light mb-3" @click="chat.StartRoom(1,'andreas')">
               Start chat
             </button>
-            <button type="button" class="btn btn-light mb-5" @click="chat.AddUser()">
-              Add client
-            </button>
-            <button type="button" class="btn btn-light mb-5" @click="stopChat()">
-              stopChat
-            </button>
-
 
             <cm-button
               data-label="End active chat"
               data-button-style="cta"
               data-button-size="medium"
               data-custom-classes="terminate"
-              @click="Logout">
+              @click="stopChat()">
             </cm-button>
           </div>
         </div>
@@ -68,7 +61,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           </cm-conversation>
         </div>
         <div v-else>
-            NO CHAT STARTED
+            NO USERS 
         </div>
       </div>
     </div>
@@ -139,6 +132,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         if(this.ChatWindows.length === 1){
           this.ActivateChat(0)
         }
+        console.log(this.ChatWindows)
       },
       FindUser(Connection){
         for (let i = 0; i < this.ChatWindows.length; i++) {
