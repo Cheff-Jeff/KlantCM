@@ -1,11 +1,14 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
+import { output } from "../../chatbot/index"
 
 let Queuetimer
+let inroom
 
 export class ChatHub {
 
     constructor() {
         console.log("in hub")
+        inroom = false
 
         this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
 
@@ -27,7 +30,7 @@ export class ChatHub {
             ///here you get the room id
             localStorage.setItem('roomId', message)
             console.log("Connected to room")
-            clearInterval(Queuetimer)
+            inroom = true
         });
 
         this.connection.on("CloseChat", () => {
@@ -49,6 +52,9 @@ export class ChatHub {
         this.connection.invoke("SendMessage", message, localStorage.getItem('roomId'), null).catch(function(err) {
             return console.error(err.toString())
         })
+
+        if (inroom == false)
+            this.SendBotMessage(message)
     }
 
     ConnectUser() {
@@ -56,22 +62,10 @@ export class ChatHub {
         this.connection.invoke("ConnectUser").catch(function(err) {
             return console.error(err.toString())
         })
-
-        this.startTimer()
     }
 
-    SendQueueMessage() {
-        localStorage.setItem('NewChat', 'We are busy!')
+    SendBotMessage(myMessage) {
+        output(myMessage)
 
-        const NewChat = new Event('NewChat')
-        window.dispatchEvent(NewChat)
-    }
-
-    startTimer() {
-        Queuetimer = setInterval(function() {
-            localStorage.setItem('NewChat', 'We are busy!')
-            const NewChat = new Event('NewChat')
-            window.dispatchEvent(NewChat)
-        }, 10000);
     }
 }
