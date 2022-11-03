@@ -33,9 +33,15 @@ namespace SignalRHub
             return Convert.ToInt32(_data.Count);
         }
 
-        public Room? FindFreeUser()
+        public Room? FindFree()
         {
-            throw new NotImplementedException();
+            List<Room> free = _data.Values.ToList();
+            free.Sort();
+            if (free[0].EndUserIds.Count == 5) // 5 should not be hardcoded here
+            {
+                return null;
+            }
+            return free[0];
         }
 
         public void remove(int key)

@@ -153,6 +153,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         this.ChatWindows[i].UserConnection = ''
         this.ActivateChat(0)
         this.ChatWindows.splice(i,1)
+        window.AddErrorNotification('User leaved')
       },
       stopChat(){
         const connection = this.ChatWindows[this.activeChatKey].UserConnection

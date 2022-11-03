@@ -8,7 +8,7 @@
         Class? get(Identifier key);
         int Count();
 
-        Class? FindFreeUser(); // should be done different
+        Class? FindFree(); 
 
         void remove(Identifier key);
     }

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\Unittests\\Unittests.csproj": {}
+    "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\Unittests\\Unittests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj": {
+    "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
+        "projectUniqueName": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
         "projectName": "SignalRHub",
-        "projectPath": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
-        "packagesPath": "C:\\Users\\matti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\obj\\",
+        "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj",
+        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\matti\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,21 +71,17 @@
         }
       }
     },
-    "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\Unittests\\Unittests.csproj": {
+    "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\Unittests\\Unittests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\Unittests\\Unittests.csproj",
+        "projectUniqueName": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\Unittests\\Unittests.csproj",
         "projectName": "Unittests",
-        "projectPath": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\Unittests\\Unittests.csproj",
-        "packagesPath": "C:\\Users\\matti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\Unittests\\obj\\",
+        "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\Unittests\\Unittests.csproj",
+        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\Unittests\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\matti\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -103,8 +95,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj": {
-                "projectPath": "C:\\Users\\matti\\Desktop\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj"
+              "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj": {
+                "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\KlantCM\\back-end\\SignalRHub\\SignalRHub\\SignalRHub.csproj"
               }
             }
           }
