@@ -202,9 +202,10 @@ methods:{
     submit(){
         this.checkEmail();
         this.checkPassword();
-        this.checkPasswordValidation();
+        this.RePasswordValidation();
         if(this.emailError == '' && this.passwordError == '' && this.passwordValidationError == ''){
           Register(this.userName, this.email, this.password)
+          this.$router.push({name: 'home'});
         }
         else{
             this.registerError = 'Something went wrong, please try again!'
