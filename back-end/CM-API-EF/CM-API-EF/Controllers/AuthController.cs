@@ -1,6 +1,7 @@
 ﻿using CM_API_EF.Data;
 using CM_API_EF.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 
 namespace CM_API_EF.Controllers
@@ -54,6 +55,16 @@ namespace CM_API_EF.Controllers
                 }
             }
             return BadRequest("user not found");
+        }
+
+        [HttpPost("doubleemail")]
+        public async Task<ActionResult<bool>> DoubleEmailChecker(string email)
+        {
+            bool doubleEmail = await _context.Users.AnyAsync(u => u.Email == email);
+
+            if (doubleEmail) { return true; }
+
+            return false;
         }
     }
 }

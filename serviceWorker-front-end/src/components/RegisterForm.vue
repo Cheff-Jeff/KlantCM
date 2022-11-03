@@ -1,5 +1,6 @@
 <script setup>
 import {Register} from '../assets/javascript/Authenticate';
+import { DoubleEmail } from '../assets/javascript/Authenticate';
 </script>
 
 <template>
@@ -165,8 +166,24 @@ methods:{
     },
 
     checkEmail() {
-      this.emailError = this.email.length == 0 ? 'Email can not be empty.' 
-      : (this.validateEmail(this.email) ? '' : this.email + ' is not an valid email.')
+        if(this.email.length > 0)
+        {
+            //timer aanmaken zodat niet bij elke @keyup de api aangeroepen wordt.
+            if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
+            }
+
+            this.timer = setTimeout(async () => {
+
+            if(await DoubleEmail(this.email)){ this.emailError = 'Email already taken'}
+            else{ this.emailError = ''}
+
+        }, 1200);
+        }
+        
+      this.emailError = this.email.length == 0 ? 'Email cannot be empty.' 
+      : (this.validateEmail(this.email) ? '' : this.email + ' is not an email.')
     },
     validateEmail(email) {
       const re = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;

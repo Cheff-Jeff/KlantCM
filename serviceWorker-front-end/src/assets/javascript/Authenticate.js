@@ -48,3 +48,10 @@ export const Register = async (username, email, password) => {
     Password: password
   })
 }
+
+export const DoubleEmail = async (email) => {
+  let response = await axios.post(`https://localhost:7117/Auth/doubleemail?email=${email}`) //, {
+  return response.data;
+  //   Email: email,
+  // })
+}
