@@ -164,7 +164,6 @@ methods:{
       const re = /^[a-zA-Z]+$/;
       return re.test(userName)
     },
-
     checkEmail() {
         if(this.email.length > 0)
         {
