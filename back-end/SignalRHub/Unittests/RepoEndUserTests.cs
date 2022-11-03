@@ -24,11 +24,13 @@ namespace Unittests
 
             EndUser endUser = new EndUser(connectionstring);
 
+
             //act
             repo.Add(endUser, key);
             EndUser fromrepo = repo.get(key);
+
+
             //assert
-            
             Assert.AreEqual(endUser.ConnectionString, fromrepo.ConnectionString);
             Assert.AreEqual(endUser, fromrepo);
         }
@@ -44,10 +46,14 @@ namespace Unittests
             EndUser endUser1 = new EndUser(connection1);
             EndUser endUser2 = new EndUser(connection2);
             string key = "69";
+
+
             //act
             repo.Add(endUser1, key);
             repo.Update(endUser2, key);
             EndUser fromRepo = repo.get(key);
+
+
             //assert
             Assert.AreEqual(fromRepo, endUser2);
             Assert.AreEqual(fromRepo.ConnectionString, endUser2.ConnectionString);
@@ -65,8 +71,11 @@ namespace Unittests
 
             EndUser endUser = new EndUser(connectionstring);
 
+
             //act
             repo.Add(endUser, key);
+
+
             //assert
             Assert.IsTrue(repo.Exists(key));
         }
@@ -82,8 +91,11 @@ namespace Unittests
 
             EndUser endUser = new EndUser(connectionstring);
 
+
             //act
             repo.Add(endUser, key);
+
+
             //assert
             Assert.AreEqual(endUser, repo.get(key));
         }
@@ -98,9 +110,13 @@ namespace Unittests
             EndUser endUser2 = new EndUser(connection2, false);
             string key = "69";
             string key2 = "420";
+
+
             //act
             repo.Add(endUser1, key);
             repo.Add(endUser2, key2);
+
+
             //assert
             Assert.AreEqual(endUser2, repo.FindFreeUser());
         }
@@ -115,8 +131,11 @@ namespace Unittests
             int expectedcount = 1;
             EndUser endUser = new EndUser(connectionstring);
 
+
             //act
             repo.Add(endUser, key);
+
+
             //assert
             Assert.AreEqual(expectedcount, repo.Count());
         }
@@ -131,9 +150,12 @@ namespace Unittests
 
             EndUser endUser = new EndUser(connectionstring);
 
+
             //act
             repo.Add(endUser, key);
             repo.remove(key);
+
+
             //assert
             Assert.IsFalse(repo.Exists(key));
         }
