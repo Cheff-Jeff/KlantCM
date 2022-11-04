@@ -208,14 +208,13 @@ methods:{
         this.checkEmail();
         this.checkPassword();
         this.RePasswordValidation();
-        if(this.emailError == '' && this.passwordError == '' && this.passwordValidationError == ''){
+        if(this.emailError == '' && this.passwordError == '' && this.RepasswordValidationError == ''){
           Register(this.userName, this.email, this.password)
           this.$router.push({name: 'home'});
         }
         else{
             this.registerError = 'Something went wrong, please try again!'
-        }
-        
+        }  
     }
 }
 }
