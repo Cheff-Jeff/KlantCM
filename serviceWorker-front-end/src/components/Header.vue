@@ -79,6 +79,7 @@
       },
       LogoutBtn(){
         if(Logout()){
+          localStorage.removeItem('ChatWindow')
           this.$router.push("login");
         }
         else{

@@ -79,6 +79,12 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
     mounted(){
       this.chat = new ChatHub()
 
+      if(localStorage.getItem('ChatWindow') != null){
+        this.ChatWindows =JSON.parse( localStorage.getItem('ChatWindow'))
+        this.ActivateChat(0)
+        localStorage.removeItem('ChatWindow')
+      }
+
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
       })
@@ -89,6 +95,12 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         //User gets disconnected
         this.RemoveUser(localStorage.getItem('DiscUser'))
       })
+    },
+    unmounted(){
+      if(this.ChatWindows.length > 0)
+      {
+        localStorage.setItem('ChatWindow',JSON.stringify(this.ChatWindows))
+      }
     },
     methods:{
       sendConverzation(text) {
