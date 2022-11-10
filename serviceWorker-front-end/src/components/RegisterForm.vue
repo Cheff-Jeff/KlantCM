@@ -198,6 +198,7 @@ methods:{
       // this.registerError = this.registerError.length > 0 ? '' : ''
       this.passwordError = this.password.length == 0 ? 'Password can not be empty.' : ''
       this.passwordError = this.password.length <= 7 ? 'Password has to be atleast 8 characters long' : ''
+      this.RePasswordValidation();
     },
     RePasswordValidation(){
         // this.registerError = this.registerError.length > 0 ? '' : ''
@@ -205,10 +206,11 @@ methods:{
         this.repasswordError = this.password != this.repassword ? 'Password and RePassword do not match.' : ''
     },
     submit(){
+        this.checkName();
         this.checkEmail();
         this.checkPassword();
         this.RePasswordValidation();
-        if(this.emailError == '' && this.passwordError == '' && this.passwordValidationError == ''){
+        if(this.usernameError == '' && this.emailError == '' && this.passwordError == '' && this.repasswordError == ''){
           Register(this.userName, this.email, this.password)
           this.$router.push({name: 'home'});
         }
