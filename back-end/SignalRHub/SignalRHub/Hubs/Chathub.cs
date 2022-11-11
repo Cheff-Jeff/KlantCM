@@ -46,19 +46,25 @@ namespace SignalRHub.Hubs
         /// </summary>
         /// <param name="RoomId"></param>
         /// <returns></returns>
-        public async Task AddEndUserToRoom(string roomId, EndUser e)
+        public async Task AddEndUserToRoom(EndUser? enduser, Room? r)
         {
-            int RoomId = Convert.ToInt32(roomId);
-            Room r = _Roomdata.get(RoomId);
+            if(r == null)
+            {
+                 r = _Roomdata.FindFree();
+            }
+            if (enduser == null)
+            {
+                enduser = _EndUserdata.FindFree();
+            }
+            if (enduser == null) return;
             if (r == null) return;
-            if (e == null) return;
-            e.RoomId = r.Id;
-            e.inRoom = true;
-            _EndUserdata.Update(e, e.ConnectionString);
-            r.EndUserIds.Add(e.ConnectionString);
+            enduser.RoomId = r.Id;
+            enduser.inRoom = true;
+            _EndUserdata.Update(enduser, enduser.ConnectionString);
+            r.EndUserIds.Add(enduser.ConnectionString);
             _Roomdata.Update(r, r.Id);
-            await Clients.Client(e.ConnectionString).SendAsync("RecieveRoomId", RoomId.ToString());
-            await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", e.ConnectionString);
+            await Clients.Client(enduser.ConnectionString).SendAsync("RecieveRoomId", r.Id.ToString());
+            await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", enduser.ConnectionString);
         }
         /// <summary>
         /// Function of the employee to start his room. De end-User is not allowed to acces this
@@ -73,16 +79,7 @@ namespace SignalRHub.Hubs
 
             _Roomdata.Add(r, _Roomdata.Count());
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
-            bool loop = true;
 
-            while (loop) 
-            {
-                if (r.EndUserIds.Count>5 || _EndUserdata.FindFree() == null)//5 should come from a congif.ini file
-                {
-                    break;
-                }
-                await  AddEndUserToRoom(r.Id.ToString(), _EndUserdata.FindFree());
-            }
         }   
 
         public async Task StopChat(string Connection, string roomId)
@@ -122,12 +119,7 @@ namespace SignalRHub.Hubs
             string id = Context.ConnectionId;
             EndUser e = new(id);
             _EndUserdata.Add(e,id);
-            Room room = _Roomdata.FindFree();
-            if(room != null)
-            {
-                await AddEndUserToRoom(room.Id.ToString(), e); // have to do a tostring() because the method expects a string from js client side
-            }
-            return;
+            await AddEndUserToRoom(e, null);
         }
 
         /// <summary>
@@ -154,6 +146,25 @@ namespace SignalRHub.Hubs
 
             _EndUserdata.remove(Connection);
             await base.OnDisconnectedAsync(exception);
+        }
+
+        public async void OpenWorker(string roomid)
+        {
+            int RoomId = Convert.ToInt32(roomid);
+            Room r = _Roomdata.get(RoomId);
+            if (r == null) return;
+            r.employee.IsOpen = true;
+            _Roomdata.Update(r, RoomId);
+            await AddEndUserToRoom(null, r);
+        }
+
+        public  void CloseWorker(string roomid)
+        {
+            int RoomId = Convert.ToInt32(roomid);
+            Room r = _Roomdata.get(RoomId);
+            if (r == null) return;
+            r.employee.IsOpen = false;
+            _Roomdata.Update(r, RoomId);
         }
 
         public List<string> GetAllEmploye()
