@@ -25,9 +25,26 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           </div>
 
           <div class="chat-btn-wrap-bottom">
-            <button type="button" class="btn btn-light mb-3" @click="chat.StartRoom(1,'andreas')">
+            <button type="button" class="btn btn-light mb-3" @click="roomStart()">
               Start chat
             </button>
+            <div v-if="Room">
+              <cm-button
+              data-label="Look for Clients"
+              data-button-style="cta"
+              data-button-size="medium"
+              @click="openWorker()"
+              v-if="OpenWorker == false">
+              </cm-button>
+
+              <cm-button
+              data-label="Looking"
+              data-button-style="cta"
+              data-button-size="medium"
+              @click="closeWorker()"
+              v-else>
+              </cm-button>
+           </div>
 
             <cm-button
               data-label="End active chat"
@@ -74,6 +91,8 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
       return{
         ChatWindows:[],
         activeChatKey : 0,
+        OpenWorker:false,
+        Room:false
       }
     },
     mounted(){
@@ -84,6 +103,8 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
       })
       window.addEventListener('NewUser',()=>{
         this.AddUser(localStorage.getItem('User'))
+        this.chat.CloseWorker()
+        this.OpenWorker = false
       })
       window.addEventListener('DisconnectUser',()=>{
         //User gets disconnected
@@ -153,6 +174,19 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         const connection = this.ChatWindows[this.activeChatKey].UserConnection
         this.RemoveUser(connection)
         this.chat.StopChat(connection)
+      },
+      openWorker(){
+          this.OpenWorker = true;
+          this.chat.OpenWorker();
+      },
+      closeWorker(){
+        this.OpenWorker = false;
+        console.log('dit werkt')
+        this.chat.CloseWorker()
+      },
+      roomStart(){
+        this.Room = true
+        this.chat.StartRoom(1,'andreas')
       }
     }
   }

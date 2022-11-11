@@ -37,10 +37,11 @@ namespace SignalRHub
         {
             List<Room> free = _data.Values.ToList();
             free.Sort();
-            if (free[0].EndUserIds.Count == 5) // 5 should not be hardcoded here
+            if (free[0].EndUserIds.Count == 8 || free[0].employee.IsOpen == false) // 8 should not be hardcoded here
             {
                 return null;
             }
+
             return free[0];
         }
 

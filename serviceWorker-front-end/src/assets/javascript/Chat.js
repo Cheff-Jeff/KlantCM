@@ -85,4 +85,16 @@ export class ChatHub {
             return console.error(err.toString())
         })
     }
+    OpenWorker(){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("OpenWorker",RoomId).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
+    CloseWorker(){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("CloseWorker",RoomId).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
 }
