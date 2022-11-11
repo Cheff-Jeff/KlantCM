@@ -1,3 +1,9 @@
+<script setup>
+  import {
+    validateDescription, errDescriptionEmp, errDescription
+  } from '@/assets/javascript/validation'
+</script>
+
 <template>
   <form action="#" @submit.prevent="submit">
     <div class="row">
