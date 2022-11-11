@@ -31,6 +31,14 @@
         >
       </cm-button>
       <cm-button
+        v-if="isadmin"
+        data-label="Register"
+        data-button-style="cta"
+        data-button-size="medium"
+        @click="usermanagementBtn"
+        >
+      </cm-button>
+      <cm-button
         data-label="My profile"
         data-button-style="cta"
         data-button-size="medium"
@@ -76,6 +84,10 @@
       registerBtn() {
         //Navigeer naar test view;
         this.$router.push("register");
+      },
+      usermanagementBtn() {
+        //Navigeer naar test view;
+        this.$router.push("usermanagement");
       },
       LogoutBtn(){
         if(Logout()){
