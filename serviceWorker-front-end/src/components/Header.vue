@@ -31,7 +31,8 @@
         >
       </cm-button>
       <cm-button
-        data-label="My profile"
+        class="My_Profile"
+        data-label="Hallo"
         data-button-style="cta"
         data-button-size="medium"
         @click="accountBtn">

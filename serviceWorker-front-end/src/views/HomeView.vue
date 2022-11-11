@@ -5,6 +5,7 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
 import ChatIndexButton from '../components/ChatIndexButton.vue';
+import {ChangeLanguage} from '../assets/javascript/translate';
 </script>
 
 <template>
@@ -13,9 +14,13 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
     <div class="row">
       <div class="col-lg-2 col-md-3">
         <div class="chat-controller">
+      <div class="langWrap">
+        <a href="#" language="english" class="active" @click="ChangeLanguage()">EN</a>
+        <a href="#" language="dutch" @click="ChangeLanguage()">NL</a>
+      </div>
           <div class="chat-btn-wrap">
             <div class="queue">
-              <span>20 people waiting in line.</span>
+              <span class="WaitingInLine">20 people waiting in line.</span>
             </div>
             <div v-for="(chats,index) in ChatWindows">
               <span @click="ActivateChat(index)">
@@ -25,12 +30,13 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           </div>
 
           <div class="chat-btn-wrap-bottom">
-            <button type="button" class="btn btn-light mb-3" @click="chat.StartRoom(1,'andreas')">
+            <button type="button" class="btn btn-light mb-3 StartRoomBtn" @click="chat.StartRoom(1,'andreas')">
               Start chat
             </button>
 
             <cm-button
-              data-label="End active chat"
+              class="EndChatBtn"
+              :data-label="EndChat"
               data-button-style="cta"
               data-button-size="medium"
               data-custom-classes="terminate"
@@ -74,6 +80,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
       return{
         ChatWindows:[],
         activeChatKey : 0,
+        EndChat: "End active chat"
       }
     },
     mounted(){
@@ -153,6 +160,9 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         const connection = this.ChatWindows[this.activeChatKey].UserConnection
         this.RemoveUser(connection)
         this.chat.StopChat(connection)
+      },
+      translate() {
+        this.EndChat = "Einde"
       }
     }
   }
