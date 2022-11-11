@@ -51,7 +51,7 @@ namespace CM_API_EF.Controllers
                          })
                          .ToListAsync();
 
-            if (myuser == null) { return BadRequest("no users found"); }
+            if (myuser.Count == 0) { return BadRequest("no users found"); }
 
             return Ok(myuser);
         }
@@ -79,7 +79,7 @@ namespace CM_API_EF.Controllers
         }
 
         [HttpDelete("deleteuser")]
-        public async Task<ActionResult> DeleteUser(int id)
+        public async Task<ActionResult> DeleteUserById(int id)
         {
             var myuser = await _context.Users.FindAsync(id);
             if (myuser != null && myuser.isAdmin == false)
