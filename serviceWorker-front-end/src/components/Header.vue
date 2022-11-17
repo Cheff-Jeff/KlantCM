@@ -32,7 +32,7 @@
       </cm-button>
       <cm-button
         v-if="isadmin"
-        data-label="Register"
+        data-label="User management"
         data-button-style="cta"
         data-button-size="medium"
         @click="usermanagementBtn"
@@ -85,7 +85,8 @@
         //Navigeer naar test view;
         this.$router.push("register");
       },
-      usermanagementBtn() {
+      usermanagementBtn(){
+
         //Navigeer naar test view;
         this.$router.push("usermanagement");
       },
