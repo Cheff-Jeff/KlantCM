@@ -11,6 +11,10 @@ namespace CM_API_EF.Data
         {
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Chat> Chats { get; set; }
     }
 }
 
