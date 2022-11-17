@@ -30,7 +30,6 @@ namespace SignalRHub.Hubs
             Room r = _Roomdata.get(RoomId);
             if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
             {
-                //Naar error sturen
                 return;
             }
             if (ConnectionId != null)
@@ -47,20 +46,25 @@ namespace SignalRHub.Hubs
         /// </summary>
         /// <param name="RoomId"></param>
         /// <returns></returns>
-        public async Task AddEndUserToRoom(string roomId)
+        public async Task AddEndUserToRoom(EndUser? enduser, Room? r)
         {
-            int RoomId = Convert.ToInt32(roomId);
-            Room r = _Roomdata.get(RoomId);
+            if(r == null)
+            {
+                 r = _Roomdata.FindFree();
+            }
+            if (enduser == null)
+            {
+                enduser = _EndUserdata.FindFree();
+            }
+            if (enduser == null) return;
             if (r == null) return;
-            EndUser e = _EndUserdata.FindFreeUser();
-            if (e == null) return;
-            e.RoomId = r.Id;
-            e.inRoom = true;
-            _EndUserdata.Update(e, e.ConnectionString);
-            r.EndUserIds.Add(e.ConnectionString);
+            enduser.RoomId = r.Id;
+            enduser.inRoom = true;
+            _EndUserdata.Update(enduser, enduser.ConnectionString);
+            r.EndUserIds.Add(enduser.ConnectionString);
             _Roomdata.Update(r, r.Id);
-            await Clients.Client(e.ConnectionString).SendAsync("RecieveRoomId", RoomId.ToString());
-            await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", e.ConnectionString);
+            await Clients.Client(enduser.ConnectionString).SendAsync("RecieveRoomId", r.Id.ToString());
+            await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", enduser.ConnectionString);
         }
         /// <summary>
         /// Function of the employee to start his room. De end-User is not allowed to acces this
@@ -75,6 +79,7 @@ namespace SignalRHub.Hubs
 
             _Roomdata.Add(r, _Roomdata.Count());
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
+
         }   
 
         public async Task StopChat(string Connection, string roomId)
@@ -109,12 +114,14 @@ namespace SignalRHub.Hubs
         /// New EndUser use this function
         /// </summary>
         /// <returns></returns>
-        public void ConnectUser()
+        public async Task ConnectUser()
         {
             string id = Context.ConnectionId;
             EndUser e = new(id);
             _EndUserdata.Add(e,id);
+            await AddEndUserToRoom(e, null);
         }
+
         /// <summary>
         /// Removes the user when they disconnect
         /// </summary>
@@ -140,6 +147,49 @@ namespace SignalRHub.Hubs
             _EndUserdata.remove(Connection);
             await base.OnDisconnectedAsync(exception);
         }
+
+        public async void OpenWorker(string roomid)
+        {
+            int RoomId = Convert.ToInt32(roomid);
+            Room r = _Roomdata.get(RoomId);
+            if (r == null) return;
+            r.employee.IsOpen = true;
+            _Roomdata.Update(r, RoomId);
+            await AddEndUserToRoom(null, r);
+        }
+
+        public  void CloseWorker(string roomid)
+        {
+            int RoomId = Convert.ToInt32(roomid);
+            Room r = _Roomdata.get(RoomId);
+            if (r == null) return;
+            r.employee.IsOpen = false;
+            _Roomdata.Update(r, RoomId);
+        }
+
+        public List<string> GetAllEmploye()
+        {
+            List<string> employes = new List<string>();
+            List<Room> rooms = new List<Room>();
+
+            for (int i = 0; i < _EndUserdata.Count(); i++)
+            {
+                Room r = _Roomdata.get(i);
+                if (r != null)
+                {
+                    rooms.Add(_Roomdata.get(i));
+                }
+            }
+            if(rooms.Count > 0)
+            {
+                foreach (Room room in rooms)
+                {
+                    employes.Add(room.employee.ConnectionString);
+                }
+            }
+            return employes;
+        }
+
 
     }
 }

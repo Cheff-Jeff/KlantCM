@@ -1,6 +1,7 @@
 <script setup>
   import { RouterLink } from 'vue-router'
   import {Logout} from '../assets/javascript/Authenticate'
+  import {GetUserById} from '../assets/javascript/Authenticate'
 
   defineProps({
     CompanyName: {
@@ -22,10 +23,19 @@
     </div>
     <div class="nav-wrap">
       <cm-button
+        v-if="isadmin"
         data-label="Register"
         data-button-style="cta"
         data-button-size="medium"
         @click="registerBtn"
+        >
+      </cm-button>
+      <cm-button
+        v-if="isadmin"
+        data-label="User management"
+        data-button-style="cta"
+        data-button-size="medium"
+        @click="usermanagementBtn"
         >
       </cm-button>
       <cm-button
@@ -47,7 +57,26 @@
 
 <script>
   export default {
+    data(){
+      return{
+        user: [],
+        username: '',
+        isadmin: ''
+      }
+    },
+    mounted(){
+      this.GetLoggedInUser()
+    },
     methods: {
+      async GetLoggedInUser(){
+        //JSON.parse om de "" weg te halen.
+        var userid = JSON.parse(localStorage.getItem("user"));
+
+        this.user = await GetUserById(userid)
+
+        this.username = this.user[0].userName
+        this.isadmin = this.user[0].isAdmin
+      },
       accountBtn() {
         //Navigeer naar test view;
         this.$router.push("account");
@@ -55,6 +84,11 @@
       registerBtn() {
         //Navigeer naar test view;
         this.$router.push("register");
+      },
+      usermanagementBtn(){
+
+        //Navigeer naar test view;
+        this.$router.push("usermanagement");
       },
       LogoutBtn(){
         if(Logout()){

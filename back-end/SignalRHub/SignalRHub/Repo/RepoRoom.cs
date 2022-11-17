@@ -5,7 +5,7 @@ namespace SignalRHub
 {
     public class RepoRoom:IRepo<Room, int>
     {
-        private readonly Dictionary<int, Room> _data =
+        public readonly Dictionary<int, Room> _data =
             new Dictionary<int, Room>();
 
         public void Add(Room r, int key)
@@ -33,9 +33,16 @@ namespace SignalRHub
             return Convert.ToInt32(_data.Count);
         }
 
-        public Room? FindFreeUser()
+        public Room? FindFree()
         {
-            throw new NotImplementedException();
+            List<Room> free = _data.Values.ToList();
+            free.Sort();
+            if (free[0].EndUserIds.Count == 8 || free[0].employee.IsOpen == false) // 8 should not be hardcoded here
+            {
+                return null;
+            }
+
+            return free[0];
         }
 
         public void remove(int key)

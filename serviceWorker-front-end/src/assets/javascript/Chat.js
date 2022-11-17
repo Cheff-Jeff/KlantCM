@@ -28,8 +28,9 @@ export class ChatHub {
         this.connection.on("RecieveEndUserId", function (message) {
             ///Event to get message 
             ///here you get the connection id of the end user
-            localStorage.setItem('User', message) // here for demostation 
+            localStorage.setItem('User', message)
             window.dispatchEvent(NewUser)
+            window.AddSuccessNotification('Added new client')
         });
 
         this.connection.on("DisconnectUser", function (message) {
@@ -83,8 +84,17 @@ export class ChatHub {
         this.connection.invoke("StopChat",UserConnection,RoomId).catch((err)=>{
             return console.error(err.toString())
         })
-
     }
-
-
+    OpenWorker(){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("OpenWorker",RoomId).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
+    CloseWorker(){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("CloseWorker",RoomId).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
 }
