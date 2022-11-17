@@ -20,7 +20,7 @@ namespace CM_API_EF.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDTO request)
+        public async Task<ActionResult> Register(UserDTO request)
         {
             verify.CreatePasswordHash(request.Password, out byte[] passwordhash, out byte[] passwordsalt);
 
@@ -40,7 +40,7 @@ namespace CM_API_EF.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDTO>> Login(UserDTO request)
+        public async Task<ActionResult> Login(UserDTO request)
         {
             var Myuser = _context.Users
                 .FirstOrDefault(u => u.Email == request.Email);

@@ -51,8 +51,6 @@ namespace CM_API_EF.Controllers
                          })
                          .ToListAsync();
 
-            if (myuser.Count == 0) { return BadRequest("no users found"); }
-
             return Ok(myuser);
         }
 

@@ -25,22 +25,37 @@ namespace CM_API_EF_UnitTests
 
             var context = new UserDbContext(options);
 
-            userController = new UserController(context);
-
             context.Database.EnsureDeleted();
 
+            userController = new UserController(context);
+            
+
             verifyInfo.CreatePasswordHash("peter123", out byte[] passwordhash, out byte[] passwordsalt);
-            var newuser = new User
+
+            var users = new List<User>
             {
+                new User
+                {
                 userId = 1,
                 userName = "Peter",
                 Email = "peter@example.com",
                 passwordHash = passwordhash,
                 passwordSalt = passwordsalt,
                 isAdmin = false,
+                },
+
+                new User
+                {
+                userId = 10,
+                userName = "peet",
+                Email = "peet@example.com",
+                passwordHash = passwordhash,
+                passwordSalt = passwordsalt,
+                isAdmin = false,
+                },
             };
 
-            context.Users.Add(newuser);
+            context.Users.AddRange(users);
             context.SaveChanges();
         }
 
@@ -95,14 +110,77 @@ namespace CM_API_EF_UnitTests
         }
 
         [Fact]
-        public async Task Test_GetAllUsers_BadRequestResult()
+        public async Task Test_EditUser_OKResult()
         {
             //arrange
-            await userController.DeleteUserById(1);
+            var myuser = new UserDTO
+            {
+                Id = 1,
+                userName = "pietjuh",
+                Email = "piet@example.com",
+                Password = "",
+                isAdmin = false
+            };
+
+            //act
+            var user = await userController.EditUser(myuser);
+            var result = (ObjectResult)user;
+
+
+            //assert
+            Assert.NotNull(result);
+            Assert.Equal(200, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task Test_EditUser_BadRequestResult()
+        {
+            //arrange
+            var myuser = new UserDTO
+            {
+                Id = 0,
+                userName = "pietjuh",
+                Email = "piet@example.com",
+                Password = "",
+                isAdmin = false
+            };
 
 
             //act
-            var user = await userController.GetAllUsers();
+            var user = await userController.EditUser(myuser);
+            var result = (ObjectResult)user;
+
+
+            //assert
+            Assert.NotNull(result);
+            Assert.Equal(400, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task Test_DeleteUserById_OKResult()
+        {
+            //arrange
+            int userid = 10;
+
+            //act
+            var user = await userController.DeleteUserById(userid);
+            var result = (ObjectResult)user;
+
+
+            //assert
+            Assert.NotNull(result);
+            Assert.Equal(200, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task Test_DeleteUserById_BadRequestResult()
+        {
+            //arrange
+            int userid = 0;
+
+
+            //act
+            var user = await userController.DeleteUserById(userid);
             var result = (ObjectResult)user;
 
 
