@@ -23,7 +23,7 @@ namespace SignalRHub.Hubs
         /// <param name="roomId">the room in which everyone resides</param>
         /// <param name="ConnectionId">used by to direct the message to the correct EndUser</param>
         /// <returns></returns>
-        public async Task SendMessage(string message, string roomId, string? ConnectionId)
+        public async Task SendMessage( string message, string roomId, string? ConnectionId)
         {
             int RoomId = Convert.ToInt32(roomId);
 
@@ -39,6 +39,47 @@ namespace SignalRHub.Hubs
             else
             {
                 await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessageWorker", message, Context.ConnectionId);
+            }
+        }
+
+        public async Task SendMedia(string base64, string roomId, string? ConnectionId)
+        {
+            int RoomId = Convert.ToInt32(roomId);
+            Room r = _Roomdata.get(RoomId);
+            if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
+            {
+                return;
+            }
+            if (ConnectionId != null)
+            {
+                await Clients.Client(ConnectionId).SendAsync("ReceiveMedia", base64);
+            }
+            else
+            {//change reciever
+                await Clients.Client(Context.ConnectionId).SendAsync("ReceiveMediaWorker", base64, Context.ConnectionId);
+            }
+
+        }
+
+
+
+        public async Task SendMessageMedia(string message, string roomId, string? ConnectionId)
+        {
+            int RoomId = Convert.ToInt32(roomId);
+
+            Room r = _Roomdata.get(RoomId);
+            if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
+            {
+                return;
+            }
+            if (ConnectionId != null)
+            {
+                await Clients.Client(ConnectionId).SendAsync("ReceiveMediaMessage", message);
+            }
+            else
+            {
+                await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMediaMessageWorker", message, Context.ConnectionId);
+                
             }
         }
         /// <summary>

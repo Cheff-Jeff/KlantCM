@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/styles/main.scss'
 import 'bootstrap'
 
+import FormData from 'form-data'
+
 const app = createApp(App)
 
 app.use(createPinia())

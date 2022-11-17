@@ -1,10 +1,10 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
+import {dataURLtoFile} from './ImgToBase64'
 // import {createPost} from './MessageReceiver2';
 
 export class ChatHub {
     constructor(){
         this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
-        
 
         this.connection.onclose(async () => {
             await this.connect();
@@ -39,7 +39,14 @@ export class ChatHub {
             window.dispatchEvent(DisconnectUser)
          });
 
+         this.connection.on("ReceiveMediaWorker", function (message) {
+            console.log(message)
+            localStorage.setItem('img',message)
+            window.dispatchEvent(NewMedia)
+         });
+
         const NewChat = new Event('NewChat')
+        const NewMedia = new Event('NewMedia')
         const NewUser = new Event('NewUser')
         const DisconnectUser = new Event('DisconnectUser')
     }
@@ -82,6 +89,12 @@ export class ChatHub {
     StopChat(UserConnection){
         let RoomId = localStorage.getItem('roomId')
         this.connection.invoke("StopChat",UserConnection,RoomId).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
+    SendMedia(base64){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("SendMedia",base64,RoomId, null).catch((err)=>{
             return console.error(err.toString())
         })
     }

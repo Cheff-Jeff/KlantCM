@@ -17,13 +17,22 @@
         rhoncus fermentum nec felis. Curabitur scelerisque nunc quis turpis blandit, vehicula efficitur nibh
         pellentesque. Nam odio neque, dictum sed purus ut, pulvinar bibendum purus. Nam vitae eleifend ex, a
         lobortis tellus.`
+    },
+    img: {
+      type : Boolean,
+      required:false,
+      default:false
     }
   });
 </script>
 
 <template>
   <div class="row me">
-      <cm-conversation-bubble>
+    <cm-conversation-bubble v-if="img">
+      <img />
+      <div class="time">{{ Time }}</div>
+  </cm-conversation-bubble>
+      <cm-conversation-bubble v-else>
           {{ Text }}
           <div class="time">{{ Time }}</div>
       </cm-conversation-bubble>
@@ -33,3 +42,13 @@
       </div>
   </div>
 </template>
+
+<script>
+export default{
+  mounted(){
+    console.log(document.getElementsByTagName('img'))
+    console.log(document.getElementsByTagName('img')[0])
+    document.getElementsByTagName('img')[0].src= localStorage.getItem('img')
+  }
+}
+</script>

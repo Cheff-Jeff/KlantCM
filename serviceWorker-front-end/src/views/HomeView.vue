@@ -5,6 +5,9 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
 import ChatIndexButton from '../components/ChatIndexButton.vue';
+import {uploadImage} from '../assets/javascript/ImgToBase64'
+import {dataURLtoFile} from '../assets/javascript/ImgToBase64'
+import axios from 'axios';
 </script>
 
 <template>
@@ -29,6 +32,16 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
               Start chat
             </button>
 
+
+              
+              <input
+                  class="form-control form-control-lg"
+                  id="selectAvatar"
+                  type="file"
+                  @change="test($event)"
+              >
+
+
             <cm-button
               data-label="End active chat"
               data-button-style="cta"
@@ -51,7 +64,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
                   <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
                 </div>
                 <div v-else>
-                  <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                  <ConverzationSend :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
                 </div>
               </div>
             </div>
@@ -66,6 +79,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
       </div>
     </div>
   </div>
+  <div id="main"></div>
 </template>
 
 <script>
@@ -89,6 +103,14 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         //User gets disconnected
         this.RemoveUser(localStorage.getItem('DiscUser'))
       })
+      window.addEventListener('NewMedia',()=>{
+        this.AddMedia()
+      })
+
+      // VOOR HET TESTE HAAL WEG
+      this.AddUser('test')
+      
+      //!!!
     },
     methods:{
       sendConverzation(text) {
@@ -109,7 +131,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         const bubble = {
           Text: text, 
           Time: `${time.getHours()}:${time.getMinutes()}`, 
-          White: true
+          White: true,
         };
         let User = this.FindUser(connection)
         this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
@@ -153,7 +175,25 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         const connection = this.ChatWindows[this.activeChatKey].UserConnection
         this.RemoveUser(connection)
         this.chat.StopChat(connection)
+      },
+      async test(e){
+        let img = await uploadImage(e)
+        console.log(dataURLtoFile(img))
+        this.chat.SendMedia(String(img))
+      },
+      AddMedia(){
+        const time = new Date();
+
+        const bubble = {
+          Text: localStorage.getItem('img'),
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false,
+          Img: true
+        };
+        this.ChatWindows[0].newChats = [...this.ChatWindows[0].newChats, bubble];
       }
+
+      
     }
   }
 </script>

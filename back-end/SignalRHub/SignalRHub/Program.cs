@@ -4,10 +4,17 @@ using SignalRHub.Models;
 using SignalRHub.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
 
 builder.Services.AddSignalR(options =>
-{
+{ 
     options.EnableDetailedErrors = true;
+    options.StreamBufferCapacity = 10* 1024 *1024;
+    options.MaximumReceiveMessageSize = 2147483647;
+
+
 });
 
 builder.Services.AddSingleton<IRepo<EndUser, string>, RepoEndUser>();
@@ -40,4 +47,5 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.MapHub<Chathub>("/signalr");
+app.MapControllers();
 app.Run();
