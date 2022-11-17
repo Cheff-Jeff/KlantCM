@@ -86,6 +86,7 @@
         this.$router.push("register");
       },
       usermanagementBtn(){
+
         //Navigeer naar test view;
         this.$router.push("usermanagement");
       },
