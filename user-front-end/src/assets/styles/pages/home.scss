@@ -1,3 +1,4 @@
+@import '../components/chatReview.scss';
 .wraper{
   width: 100%;
   display: block;
@@ -99,13 +100,15 @@ svg.close-cross{
   top: 10px;
   right: 10px;
   z-index: 999;
-  transform: scale(1);
-  transition: transform .3s ease-in-out;
+  fill: rgb(0,0,0);
+  // transform: scale(1);
+  transition: fill .3s ease-in-out;
 
   &:hover{
-    transform: scale(1.2);
+    // transform: scale(1.2);
+    fill: rgb(72,164,255);
     cursor: pointer;
-    transition: transform .3s ease-in-out;
+    transition: fill .3s ease-in-out;
   }
 }
 
