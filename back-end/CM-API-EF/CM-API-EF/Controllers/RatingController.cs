@@ -2,6 +2,7 @@
 using CM_API_EF.DTO_s;
 using CM_API_EF.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Threading.Tasks.Dataflow;
 
@@ -35,7 +36,7 @@ namespace CM_API_EF.Controllers
         [HttpGet("GetAllRatings")]
         public async Task<ActionResult<Rating>> SelectAllRatings()
         {
-            List<Rating> AllRatings = _context.Ratings.ToList();
+            List<Rating> AllRatings = await _context.Ratings.ToListAsync();
             await _context.SaveChangesAsync();
             
             return Ok(AllRatings);
