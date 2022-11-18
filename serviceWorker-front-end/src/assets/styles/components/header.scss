@@ -19,10 +19,26 @@ header {
             color: #000 !important;
         }
     }
-    .langwrap {
-        align-items: right;
+    .nav-wrap {
+        margin-left: auto;
         button {
-            background-color: blue;
+            // margin-right: 5px;
+        }
+    }
+    .langWrap {
+        margin-left: 20px;
+        button {
+            border: none;
+            // margin: 0 5px;
+            background: none;
+            a {
+                text-decoration: none;
+                color: white;
+                img {
+                    width: 40px;
+                    height: 30px;
+                }
+            }
         }
     }
 }

@@ -47,8 +47,16 @@ import {ChangeLanguage} from '../assets/javascript/translate';
       </cm-button>
     </div>
     <div class="langWrap">
-      <button><a href="#" language="english" class="active" @click="ChangeLanguage()">EN</a></button>
-      <button><a href="#" language="dutch" @click="ChangeLanguage()">NL</a></button>
+      <button class="">
+        <a href="#" language="english" class="active" @click="ChangeLanguage()">
+          <img src="../assets/english flag.jpg" alt="">
+        </a>
+      </button>
+      <button class="">
+        <a href="#" language="dutch" @click="ChangeLanguage()">
+          <img src="../assets/dutch flag.webp" alt="">
+        </a>
+      </button>
     </div>
   </header>
 </template>
