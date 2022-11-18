@@ -1,8 +1,3 @@
-<script setup>
-import {Register} from '../assets/javascript/Authenticate';
-import { DoubleEmail } from '../assets/javascript/Authenticate';
-</script>
-
 <template>
   <form @submit.prevent="submit">
     <div class="row">
@@ -137,6 +132,8 @@ import { DoubleEmail } from '../assets/javascript/Authenticate';
 </template>
 
 <script>
+import {Register} from '../assets/javascript/Authenticate';
+import { DoubleEmail } from '../assets/javascript/Authenticate';
 export default {
 data(){
     return{

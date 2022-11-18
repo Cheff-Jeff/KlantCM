@@ -1,8 +1,3 @@
-<script setup>
-import {Login} from '../assets/javascript/Authenticate'
-import {Register} from '../assets/javascript/Authenticate'
-</script>
-
 <template>
   <form @submit.prevent="submit">
     <div class="row">
@@ -79,6 +74,7 @@ import {Register} from '../assets/javascript/Authenticate'
 </template>
 
 <script>
+import {Login} from '../assets/javascript/Authenticate'
 export default {
   data(){
     return{
