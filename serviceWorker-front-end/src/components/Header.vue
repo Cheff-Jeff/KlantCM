@@ -2,6 +2,7 @@
   import { RouterLink } from 'vue-router'
   import {Logout} from '../assets/javascript/Authenticate'
   import {GetUserById} from '../assets/javascript/Authenticate'
+import {ChangeLanguage} from '../assets/javascript/translate';
 
   defineProps({
     CompanyName: {
@@ -32,7 +33,7 @@
       </cm-button>
       <cm-button
         class="My_Profile"
-        data-label="Hallo"
+        data-label="My profile"
         data-button-style="cta"
         data-button-size="medium"
         @click="accountBtn">
@@ -44,6 +45,10 @@
         data-custom-classes="logout"
         @click="LogoutBtn">
       </cm-button>
+    </div>
+    <div class="langWrap">
+      <button><a href="#" language="english" class="active" @click="ChangeLanguage()">EN</a></button>
+      <button><a href="#" language="dutch" @click="ChangeLanguage()">NL</a></button>
     </div>
   </header>
 </template>

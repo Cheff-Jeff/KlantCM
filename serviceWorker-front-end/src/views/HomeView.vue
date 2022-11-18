@@ -5,7 +5,7 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
 import ChatIndexButton from '../components/ChatIndexButton.vue';
-import {ChangeLanguage} from '../assets/javascript/translate';
+import { ChangeLanguage } from '../assets/javascript/translate';
 </script>
 
 <template>
@@ -14,14 +14,11 @@ import {ChangeLanguage} from '../assets/javascript/translate';
     <div class="row">
       <div class="col-lg-2 col-md-3">
         <div class="chat-controller">
-      <div class="langWrap">
-        <a href="#" language="english" class="active" @click="ChangeLanguage()">EN</a>
-        <a href="#" language="dutch" @click="ChangeLanguage()">NL</a>
-      </div>
           <div class="chat-btn-wrap">
             <div class="queue">
               <span class="WaitingInLine">20 people waiting in line.</span>
             </div>
+
             <div v-for="(chats,index) in ChatWindows">
               <span @click="ActivateChat(index)">
                 <ChatIndexButton  :active="chats.active" :key="chats.active" />
@@ -36,7 +33,7 @@ import {ChangeLanguage} from '../assets/javascript/translate';
 
             <cm-button
               class="EndChatBtn"
-              :data-label="EndChat"
+              data-label="EndChat"
               data-button-style="cta"
               data-button-size="medium"
               data-custom-classes="terminate"
@@ -66,7 +63,7 @@ import {ChangeLanguage} from '../assets/javascript/translate';
             </div>
           </cm-conversation>
         </div>
-        <div v-else>
+        <div class="NoUsers" v-else>
             NO USERS 
         </div>
       </div>
