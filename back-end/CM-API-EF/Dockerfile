@@ -32,5 +32,4 @@ ENTRYPOINT ["./CM-API-EF"]
 # docker run -it -p 8000:80 --rm -e ASPNETCORE_ENVIRONMENT=Development --name naam naam
 
 
-
 # naar swagger ui met: http://localhost:8000/swagger/index.html
