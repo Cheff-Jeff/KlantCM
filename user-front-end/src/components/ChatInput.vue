@@ -2,6 +2,8 @@
   import {
     validateDescription, errDescriptionEmp, errDescription, validateFile, errImage, errImageEmp
   } from '@/assets/javascript/validation'
+
+   const SendImg = new Event("MediaSend")
 </script>
 
 <template>
@@ -48,7 +50,7 @@
                 data-label="Submit image"
                 data-button-style="cta"
                 data-button-size="medium"
-                @click="submit">
+                >
               </cm-button>
             </label>
             <input 
@@ -117,6 +119,7 @@
         this.inputError = this.input.length == 0 ? 'Message can not be empty.' : ''
       },
       submit() {
+        console.log('ik perform')
         if(!this.boxWrapper)
         {
           this.checkInput();
@@ -132,7 +135,8 @@
           this.valitImg()
           if(this.imgError == '')
           {
-            //send img
+            this.$emit('uploadFile',this.imgInput)
+            this.toggleImgUpload()
           }
         }
       }

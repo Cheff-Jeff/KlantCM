@@ -67,11 +67,19 @@ export class ChatHub {
         window.dispatchEvent(NewChat)
     }
 
+    SendMedia(base64){
+        console.log('stuur nu bericht')
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("SendMedia",base64,RoomId, null).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
+
     startTimer() {
         Queuetimer = setInterval(function() {
             localStorage.setItem('NewChat', 'We are busy!')
             const NewChat = new Event('NewChat')
             window.dispatchEvent(NewChat)
-        }, 10000);
+        }, 100000);
     }
 }

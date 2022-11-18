@@ -39,10 +39,11 @@ export class ChatHub {
             window.dispatchEvent(DisconnectUser)
          });
 
-         this.connection.on("ReceiveMediaWorker", function (message) {
-            console.log(message)
+         this.connection.on("ReceiveMediaWorker", async function (message, connection) {
             localStorage.setItem('img',message)
-            window.dispatchEvent(NewMedia)
+            localStorage.setItem('FromUser',connection)
+            //Very bad fix but it has been 3 days since i started with this and am exhausted|| localstorage is not async :(
+            setTimeout(window.dispatchEvent(NewMedia),50000)
          });
 
         const NewChat = new Event('NewChat')

@@ -51,37 +51,15 @@ namespace SignalRHub.Hubs
                 return;
             }
             if (ConnectionId != null)
-            {
+            {//currently unused
                 await Clients.Client(ConnectionId).SendAsync("ReceiveMedia", base64);
             }
             else
-            {//change reciever
-                await Clients.Client(Context.ConnectionId).SendAsync("ReceiveMediaWorker", base64, Context.ConnectionId);
+            {
+                await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMediaWorker", base64, Context.ConnectionId);
             }
-
         }
 
-
-
-        public async Task SendMessageMedia(string message, string roomId, string? ConnectionId)
-        {
-            int RoomId = Convert.ToInt32(roomId);
-
-            Room r = _Roomdata.get(RoomId);
-            if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
-            {
-                return;
-            }
-            if (ConnectionId != null)
-            {
-                await Clients.Client(ConnectionId).SendAsync("ReceiveMediaMessage", message);
-            }
-            else
-            {
-                await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMediaMessageWorker", message, Context.ConnectionId);
-                
-            }
-        }
         /// <summary>
         /// Add new user to the room that requested it.
         /// </summary>

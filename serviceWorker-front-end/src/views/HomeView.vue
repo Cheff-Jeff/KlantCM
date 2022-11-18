@@ -7,7 +7,6 @@
 import ChatIndexButton from '../components/ChatIndexButton.vue';
 import {uploadImage} from '../assets/javascript/ImgToBase64'
 import {dataURLtoFile} from '../assets/javascript/ImgToBase64'
-import axios from 'axios';
 </script>
 
 <template>
@@ -31,17 +30,6 @@ import axios from 'axios';
             <button type="button" class="btn btn-light mb-3" @click="chat.StartRoom(1,'andreas')">
               Start chat
             </button>
-
-
-              
-              <input
-                  class="form-control form-control-lg"
-                  id="selectAvatar"
-                  type="file"
-                  @change="test($event)"
-              >
-
-
             <cm-button
               data-label="End active chat"
               data-button-style="cta"
@@ -61,10 +49,10 @@ import axios from 'axios';
               </cm-conversation-divider>
               <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
-                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
+                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
                 </div>
                 <div v-else>
-                  <ConverzationSend :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
+                  <ConverzationSend :Text="chat.Text" :Time="chat.Time" />
                 </div>
               </div>
             </div>
@@ -104,13 +92,8 @@ import axios from 'axios';
         this.RemoveUser(localStorage.getItem('DiscUser'))
       })
       window.addEventListener('NewMedia',()=>{
-        this.AddMedia()
+        this.AddMedia( localStorage.getItem('FromUser'))
       })
-
-      // VOOR HET TESTE HAAL WEG
-      this.AddUser('test')
-      
-      //!!!
     },
     methods:{
       sendConverzation(text) {
@@ -176,21 +159,17 @@ import axios from 'axios';
         this.RemoveUser(connection)
         this.chat.StopChat(connection)
       },
-      async test(e){
-        let img = await uploadImage(e)
-        console.log(dataURLtoFile(img))
-        this.chat.SendMedia(String(img))
-      },
-      AddMedia(){
+      AddMedia(connection){
         const time = new Date();
 
         const bubble = {
-          Text: localStorage.getItem('img'),
+          Text: '',
           Time: `${time.getHours()}:${time.getMinutes()}`, 
-          White: false,
+          White: true,
           Img: true
         };
-        this.ChatWindows[0].newChats = [...this.ChatWindows[0].newChats, bubble];
+        let User = this.FindUser(connection)
+        this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
       }
 
       
