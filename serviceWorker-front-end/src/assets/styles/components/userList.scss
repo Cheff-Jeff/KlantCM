@@ -62,3 +62,102 @@ table{
     }
   }
 }
+
+.modal{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999 !important;
+  overflow: hidden !important;
+  pointer-events: all !important;
+  background: rgba(93,102,119,.8);
+  transition: all .3s ease-in-out;
+  &:hover{
+    cursor: pointer;
+  }
+
+  .modal-dialog{
+    height: auto;
+    &:hover{
+      cursor: auto;
+    }
+  }
+
+  &.hide{
+    padding: 0px;
+    width: 0% !important;
+    height: 0% !important;
+  }
+  &.open{
+    padding: 80px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .modal-body{
+    color: #000;
+  }
+
+  .modal-content{
+    padding: 0;
+    width: 400px;
+    border-radius: 16px;
+    .modal-header{
+      width: 100%;
+      padding: 40px 40px 15px;
+      h5{
+        font-size: 16px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      svg{
+        width: 24px;
+        height: 25px;
+        fill: #989faa;
+        transition: all .3s ease-in-out;
+
+        &:hover{
+          fill: #000;
+          transition: all .3s ease-in-out;
+        }
+      }
+    }
+
+    .modal-body{
+      padding: 20px 40px 0;
+      p{
+        font-size: 14px;
+        color: #000;
+        letter-spacing: .3px;
+        font-weight: 500;
+      }
+    }
+
+    .modal-footer{
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      .btn-close{
+        font-size: 16px;
+        font-weight: 500;
+        transition: all .3s ease-in-out;
+        &:hover{
+          text-decoration: none !important;
+          color: #99CCFF;
+          transition: all .3s ease-in-out;
+        }
+      }
+
+      .btn-save{
+        background-color: #FF495C !important;
+        color: #fff !important;
+        transition: all .3s ease-in-out;
+        &:hover{
+          background-color: #FF929D !important;
+          transition: all .3s ease-in-out;
+        }
+      }
+    }
+  }
+}

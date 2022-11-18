@@ -9,3 +9,12 @@ export const GetAllUsers = async () => {
         console.log(error)
     }
   }
+
+export const DeleteUser = async (id) => {
+    try {
+        let response = await axios.delete(`https://localhost:7117/User/deleteuser?id=${id}`)
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
