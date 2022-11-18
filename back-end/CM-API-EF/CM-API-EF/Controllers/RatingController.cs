@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Threading.Tasks.Dataflow;
 
-namespace CM_API_EF.Controllers
+namespace CM_API_EF.Controllers 
 {
     [ApiController]
     [Route("[controller]")]

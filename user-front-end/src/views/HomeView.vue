@@ -2,6 +2,7 @@
   import ConverzationSend from '../components/ConverzationSend.vue';
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
+  import {GiveRating} from '../assets/javascript/Rating';
   import { ChatHub } from '../assets/javascript/Chat';
 </script>
 
@@ -108,9 +109,12 @@
       },
       ratingGood(){
         this.clickedGood = 'clicked'
+        GiveRating(true, localStorage.getItem('roomId'))
+        console.log('dit werkt wel')
       },
       ratingbad(){
         this.clickedBad = 'clicked'
+        GiveRating(false, localStorage.getItem('roomId'))
       },
       checkWindow() {
         if(window.innerWidth <= 500)
