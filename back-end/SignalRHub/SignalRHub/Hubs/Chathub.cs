@@ -71,13 +71,14 @@ namespace SignalRHub.Hubs
         /// </summary>
         /// <param name="id">id of the employee</param>
         /// <param name="FirstName">The name of the employee</param>
+        /// <param name="RoomId">The highest value of roomid from the database</param>
         /// <returns></returns>
-        public async Task StartRoom(int id, string FirstName)
+        public async Task StartRoom(int id, string FirstName,int RoomId)
         {
             Employee e = new Employee {Id = id,ConnectionString = Context.ConnectionId, FirstName = FirstName };
-            Room r = new() { Id = _Roomdata.Count() ,employee = e };
+            Room r = new() { Id = RoomId ,employee = e };
 
-            _Roomdata.Add(r, _Roomdata.Count());
+            _Roomdata.Add(r, r.Id);
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
 
         }   

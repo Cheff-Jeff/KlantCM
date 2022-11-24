@@ -1,4 +1,5 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
+import { useFetch } from "./fetchData";
 // import {createPost} from './MessageReceiver2';
 
 export class ChatHub {
@@ -74,6 +75,8 @@ export class ChatHub {
         if(this.connection.state != 'Connected'){
             this.connect()
         }
+        const data = useFetch('https://localhost:7117/Rooms/GetMaxRoomId')
+        console.log(data)
         this.connection.invoke("StartRoom",id, FirstName).catch(function (err) {
             return console.error(err)
         }

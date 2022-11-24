@@ -10,7 +10,7 @@ using CM_API_EF.Models;
 
 namespace CM_API_EF.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RoomsController : ControllerBase
     {
