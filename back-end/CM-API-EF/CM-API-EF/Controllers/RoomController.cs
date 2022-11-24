@@ -28,7 +28,7 @@ namespace CM_API_EF.Controllers
             return await _context.Rooms.ToListAsync();
         }
 
-        [HttpGet]
+        [HttpGet("Max")]
         public async Task<int> GetmaxRoomId()
         {
             return await _context.Rooms.MaxAsync(e=> e.RoomId);
