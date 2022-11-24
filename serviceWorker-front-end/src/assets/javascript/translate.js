@@ -1,6 +1,11 @@
 import { useLink } from "vue-router";
+import * as english from "../../languages/english.json"
+import * as dutch from "../../languages/dutch.json"
+import * as turkish from "../../languages/turkish.json"
+
 
 export const ChangeLanguage = async() => {
+    // console.log(data);
 
     const langEl = document.querySelector('.langWrap');
     const link = document.querySelectorAll('a');
@@ -11,31 +16,13 @@ export const ChangeLanguage = async() => {
     const LogOut = CmBtnList[1];
     const EndChat = CmBtnList[2];
     const UsersEmpty = document.querySelector('.NoUsers');
-
-    // console.log(CmBtnList);
-    // console.log(CmBtnList[1])
-    // console.log(CmBtnList[1].__label)
-    // CmBtnList[1].dataset.label = 'hoi'
-    // CmBtnList[0].dataset.label = 'doe'
-
-    // for (let i = 0; i < CmBtnList.length; i++) {
-    //     const el = CmBtnList[i]
-    //     console.log(el)
-    //     el.addEventListener('click', () => {
-    //         langEl.querySelector('.active').classList.remove('active');
-
-    //         console.log(querySelector('.active').classList.remove('active'))
-
-    //         el.classList.add('active');
-
-    //         const attr = el.getAttribute('language');
-
-    //         CmBtnList[1].__label = "hoi"
-    //     });
-    // }
+    const Day = document.querySelector('.title');
+    const Input = document.querySelector('.form-control');
+    // console.log(data["Profile"]);
 
     link.forEach(el => {
             el.addEventListener('click', () => {
+
                 langEl.querySelector('.active').classList.remove('active');
 
                 el.classList.add('active');
@@ -44,33 +31,23 @@ export const ChangeLanguage = async() => {
 
                 console.log(attr)
 
-                QueueText.textContent = data[attr].PeopleInQueue
-                StartRoomText.textContent = data[attr].StartRoom
-                MyProfile.dataset.label = data[attr].Profile
-                LogOut.dataset.label = data[attr].LoggingOut
-                EndChat.dataset.label = data[attr].EndChat
-                UsersEmpty.textContent = data[attr].NoUsers
+                var lang = null
+
+                if (attr == "english") lang = english
+                else if (attr == "dutch") lang = dutch
+                else if (attr == "turkish") lang = turkish
+
+                QueueText.textContent = lang["PeopleInQueue"]
+                StartRoomText.textContent = lang["StartRoom"]
+                MyProfile.dataset.label = lang["Profile"]
+                LogOut.dataset.label = lang["LoggingOut"]
+                EndChat.dataset.label = lang["EndChat"]
+                Day.dataset.label = lang["Today"]
+                Input.ariaPlaceholder = lang["InputPlaceholder"]
+                UsersEmpty.textContent = lang["NoUsers"]
             });
         }
 
     )
 
-    var data = {
-        "english": {
-            "PeopleInQueue": "20 people are waiting in line.",
-            "StartRoom": "Start chat",
-            "Profile": "My profile",
-            "LoggingOut": "Log out",
-            "EndChat": "End active chat",
-            "NoUsers": "NO USERS"
-        },
-        "dutch": {
-            "PeopleInQueue": "Er wachten 20 mensen in de rij.",
-            "StartRoom": "Start gesprek",
-            "Profile": "Mijn profiel",
-            "LoggingOut": "Uitloggen",
-            "EndChat": "Beëindig gesprek",
-            "NoUsers": "GEEN GEBRUIKERS"
-        }
-    }
 }

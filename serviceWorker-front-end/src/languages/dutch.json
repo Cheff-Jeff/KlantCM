@@ -1,3 +1,11 @@
 {
-    "My_Profile": "Mijn profiel"
+    "PeopleInQueue": "Er wachten 20 mensen in de rij.",
+    "StartRoom": "Start gesprek",
+    "Profile": "Mijn profiel",
+    "LoggingOut": "Uitloggen",
+    "EndChat": "Beëindig gesprek",
+    "NoUsers": "GEEN GEBRUIKERS",
+    "Today": "Vandaag",
+    "InputPlaceholder": "Begin met typen...",
+    "You": "U"
 }

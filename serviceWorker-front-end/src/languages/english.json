@@ -1,3 +1,11 @@
 {
-    "My_Profile": "My profile"
+    "PeopleInQueue": "20 people are waiting in line.",
+    "StartRoom": "Start chat",
+    "Profile": "My profile",
+    "LoggingOut": "Log out",
+    "EndChat": "End active chat",
+    "NoUsers": "NO USERS",
+    "Today": "Today",
+    "InputPlaceholder": "Start typing...",
+    "You": "You"
 }

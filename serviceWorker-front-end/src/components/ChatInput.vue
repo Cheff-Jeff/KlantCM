@@ -1,3 +1,7 @@
+<script setup>
+import {ChangeLanguage} from '../assets/javascript/translate';
+</script>
+
 <template>
   <form action="#" @submit.prevent="submit">
     <div class="row">
