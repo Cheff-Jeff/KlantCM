@@ -8,8 +8,8 @@ export const Login = async (email, password) => {
     Email: email,
     Password: password
   })
-
-    localStorage.setItem('user', JSON.stringify((await response).data))
+    
+    sessionStorage.setItem('user', JSON.stringify(await response.data))
     return true
   }
   catch(error){
@@ -19,9 +19,9 @@ export const Login = async (email, password) => {
 }
 
 export const Logout = () => {
-  const user = JSON.parse(localStorage.getItem('user'))
+  const user = JSON.parse(sessionStorage.getItem('user'))
   if(user !== null){
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     return true;
   }
   else{
@@ -30,7 +30,7 @@ export const Logout = () => {
 }
 
 export const RouteGaurd = () =>{
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
   console.log(user)
   if(user !== null){
     return true
@@ -41,7 +41,7 @@ export const RouteGaurd = () =>{
 }
 
 export const RouteGaurdAdmin = async () =>{
-  const userid = JSON.parse(localStorage.getItem('user'));
+  const userid = JSON.parse(sessionStorage.getItem('user'));
   if(userid == null){
     return false;
   }
