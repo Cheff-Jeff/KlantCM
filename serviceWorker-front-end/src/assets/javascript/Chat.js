@@ -3,6 +3,7 @@ import { HubConnectionBuilder } from "@microsoft/signalr"
 
 export class ChatHub {
     constructor(){
+        //signalr runnen met docker = http://localhost:8000/signalr
         this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
         
 

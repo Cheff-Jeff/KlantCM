@@ -16,8 +16,11 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # docker build -t naam .
 
-#run front-end
+#run serviceworker-front-end
 # docker run -it -p 8001:80 --rm --name naam naam
+
+#run user-front-end
+# docker run -it -p 8002:80 --rm --name naam naam
 
 #run back-end
 # docker run -it -p 8000:80 --rm -e ASPNETCORE_ENVIRONMENT=Development --name naam naam

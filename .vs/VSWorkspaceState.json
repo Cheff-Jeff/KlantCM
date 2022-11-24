@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\back-end",
+    "\\back-end\\CM-API-EF"
   ],
-  "SelectedNode": "\\CM-API-EF.sln",
+  "SelectedNode": "\\back-end\\CM-API-EF\\Dockerfile",
   "PreviewInSolutionExplorer": false
 }
