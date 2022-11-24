@@ -1,8 +1,3 @@
-<script setup>
-import RegisterForm from '../components/RegisterForm.vue'
-import Header from '../components/Header.vue';
-</script>
-
 <template>
   <Header/>
   <section class="login">
@@ -29,9 +24,12 @@ import Header from '../components/Header.vue';
 </template>
 
 <script>
+import RegisterForm from '../components/RegisterForm.vue'
+import Header from '../components/Header.vue';
 export default{
   components:{
-    Header
+    Header,
+    RegisterForm
   }
 }
 

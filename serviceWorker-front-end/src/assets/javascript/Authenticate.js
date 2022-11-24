@@ -1,10 +1,8 @@
 import axios from 'axios'
-// import { compareSync } from 'bcryptjs';
-// import {HashPassword} from "./passwordHash";
 
 export const Login = async (email, password) => {
   try{
-    let response = await axios.post(`https://localhost:7117/Auth/login` ,{
+    let response = await axios.post(`${import.meta.env.VITE_API}Auth/login` ,{
     Email: email,
     Password: password
   })
@@ -57,7 +55,7 @@ export const RouteGaurdAdmin = async () =>{
 
 export const Register = async (username, email, password) => {
   const isadmin = false;
-  await axios.post(`https://localhost:7117/Auth/register` ,{
+  await axios.post(`${import.meta.env.VITE_API}Auth/register` ,{
     userName: username,
     Email: email,
     isAdmin: isadmin,
@@ -66,7 +64,7 @@ export const Register = async (username, email, password) => {
 }
 
 export const DoubleEmail = async (email) => {
-  let response = await axios.post(`https://localhost:7117/Auth/doubleemail?email=${email}`) //, {
+  let response = await axios.post(`${import.meta.env.VITE_API}doubleemail?email=${email}`) //, {
   return response.data;
   //   Email: email,
   // })
@@ -74,7 +72,7 @@ export const DoubleEmail = async (email) => {
 
 export const GetUserById = async (id) => {
   try{
-      let response = await axios.get(`https://localhost:7117/Auth/getuser?id=${id}`)
+      let response = await axios.get(`${import.meta.env.VITE_API}Auth/getuser?id=${id}`)
       return response.data
   }
   catch(error){
