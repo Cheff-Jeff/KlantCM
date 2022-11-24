@@ -15,26 +15,11 @@ export async function UploadRoom(roomId){
     if(u == null){
         return
     }
-    const user = await Getuser(u) 
-    console.log(user)
-    console.log(user[0])
-    if(user == null){
-        return
-    }
 
     await axios.post('https://localhost:7117/Room',{
-        RoomId: roomId,
         UserID: u,
-        User: user[0]
+        User: null
     }).then((res)=>{
         console.log(res)
     })
-}
-
-async function Getuser(UserId){
-    let User = null
-    await axios.get('https://localhost:7117/User/getuser', {params:{id:UserId}}).then((res)=>{
-        User =  res.data
-    })
-    return User 
 }
