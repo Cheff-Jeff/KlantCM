@@ -1,5 +1,5 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
-import axios from "axios";
+import { GetMaxRoomId } from "./Room";
 // import {createPost} from './MessageReceiver2';
 
 export class ChatHub {
@@ -72,10 +72,7 @@ export class ChatHub {
         if(this.connection.state != 'Connected'){
             this.connect()
         }
-        let roomId= null;
-        axios.get('https://localhost:7117/Room/Max').then((res)=>{
-            roomId = res.data
-        })
+        const roomId= GetMaxRoomId();
 
         this.connection.invoke("StartRoom",id, FirstName,roomId).catch(function (err) {
             return console.error(err)
