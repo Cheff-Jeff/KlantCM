@@ -5,7 +5,7 @@ import * as turkish from "../../languages/turkish.json"
 
 
 export const ChangeLanguage = async() => {
-    // console.log(data);
+    console.log("Check 1 - translate.js");
 
     const langEl = document.querySelector('.langWrap');
     const link = document.querySelectorAll('a');
@@ -14,40 +14,47 @@ export const ChangeLanguage = async() => {
     const CmBtnList = document.getElementsByTagName('cm-button');
     const MyProfile = CmBtnList[0];
     const LogOut = CmBtnList[1];
-    const EndChat = CmBtnList[2];
+    const ChooseLanguage = CmBtnList[2];
+    const EndChat = CmBtnList[3];
     const UsersEmpty = document.querySelector('.NoUsers');
     const Day = document.querySelector('.title');
     const Input = document.querySelector('.form-control');
-    // console.log(data["Profile"]);
 
     link.forEach(el => {
-            el.addEventListener('click', () => {
 
-                langEl.querySelector('.active').classList.remove('active');
+        console.log("Check 2 - link.forEach");
 
-                el.classList.add('active');
+        el.addEventListener('click', () => {
 
-                const attr = el.getAttribute('language');
+            console.log("Check 3 - el.EventListener")
 
-                console.log(attr)
+            langEl.querySelector('.active').classList.remove('active');
 
-                var lang = null
+            el.classList.add('active');
 
-                if (attr == "english") lang = english
-                else if (attr == "dutch") lang = dutch
-                else if (attr == "turkish") lang = turkish
+            const attr = el.getAttribute('language');
 
-                QueueText.textContent = lang["PeopleInQueue"]
-                StartRoomText.textContent = lang["StartRoom"]
-                MyProfile.dataset.label = lang["Profile"]
-                LogOut.dataset.label = lang["LoggingOut"]
-                EndChat.dataset.label = lang["EndChat"]
-                Day.dataset.label = lang["Today"]
-                Input.ariaPlaceholder = lang["InputPlaceholder"]
-                UsersEmpty.textContent = lang["NoUsers"]
-            });
-        }
+            console.log(attr)
 
-    )
+            var lang = null
+
+            if (attr == "english") lang = english
+            else if (attr == "dutch") lang = dutch
+            else if (attr == "turkish") {
+                lang = turkish
+                console.log("Check 4 - lang = turkish")
+            }
+
+            QueueText.textContent = lang["PeopleInQueue"]
+            StartRoomText.textContent = lang["StartRoom"]
+            MyProfile.dataset.label = lang["Profile"]
+            LogOut.dataset.label = lang["LoggingOut"]
+            ChooseLanguage.dataset.label = lang["ChangeLang"]
+            EndChat.dataset.label = lang["EndChat"]
+            Day.dataset.label = lang["Today"]
+            Input.ariaPlaceholder = lang["InputPlaceholder"]
+            UsersEmpty.textContent = lang["NoUsers"]
+        });
+    })
 
 }

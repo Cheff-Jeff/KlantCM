@@ -2,7 +2,7 @@
   import { RouterLink } from 'vue-router'
   import {Logout} from '../assets/javascript/Authenticate'
   import {GetUserById} from '../assets/javascript/Authenticate'
-import {ChangeLanguage} from '../assets/javascript/translate';
+  import {ChangeLanguage} from '../assets/javascript/translate';
 
   defineProps({
     CompanyName: {
@@ -47,21 +47,26 @@ import {ChangeLanguage} from '../assets/javascript/translate';
       </cm-button>
     </div>
     <div class="langWrap">
-      <button>
-        <a href="#" language="english" class="active" @click="ChangeLanguage()">
-          <img src="../assets/english flag.jpg" alt="">
-        </a>
-      </button>
-      <button>
-        <a href="#" language="dutch" @click="ChangeLanguage()">
-          <img src="../assets/dutch flag.webp" alt="">
-        </a>
-      </button>
-      <button>
-        <a href="#" language="turkish" @click="ChangeLanguage()">
-          <img src="../assets/turkish flag.webp" alt="">
-        </a>
-      </button>
+      <div class="dropdown">
+        <cm-button 
+          data-label="Choose language" 
+          data-button-style="cta" 
+          data-button-size="medium" 
+          data-custom-classes="dropbtn"
+          @click="myFunction()">
+        </cm-button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#" language="english" class="active" @click="ChangeLanguage()">
+            <img src="../assets/english flag.jpg" alt="">
+          </a>
+          <a href="#" language="dutch" @click="ChangeLanguage()">
+            <img src="../assets/dutch flag.webp" alt="">
+          </a>
+          <a href="#" language="turkish" @click="ChangeLanguage()">
+            <img src="../assets/turkish flag.webp" alt="">
+          </a>
+        </div>
+      </div>
     </div>
   </header>
 </template>
@@ -106,6 +111,22 @@ import {ChangeLanguage} from '../assets/javascript/translate';
       },
     }
   };
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+
+    ChangeLanguage();
+  }
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+    }
+  }
+}
+
 </script>
 
 <style lang="scss">
