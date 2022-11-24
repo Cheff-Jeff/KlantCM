@@ -70,7 +70,7 @@
     methods: {
       async GetLoggedInUser(){
         //JSON.parse om de "" weg te halen.
-        var userid = JSON.parse(localStorage.getItem("user"));
+        var userid = JSON.parse(sessionStorage.getItem("user"));
 
         this.user = await GetUserById(userid)
 
