@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest'
 import { Logout } from '../../assets/javascript/Authenticate'
 describe('Logout', () => {
   test('Deletes the localStorage item properly.', () => {
-    localStorage.setItem('user', JSON.stringify("Unit-Test"))
+    sessionStorage.setItem('user', JSON.stringify("Unit-Test"))
     expect(Logout()).toBe(true)
   })
 })
@@ -23,9 +23,9 @@ describe('Logout', () => {
 import { RouteGaurd } from '../../assets/javascript/Authenticate'
 describe('RouteGaurd', () => {
   test('User is found', () => {
-    localStorage.setItem('user', JSON.stringify("Unit-Test-New"))
+    sessionStorage.setItem('user', JSON.stringify("Unit-Test-New"))
     expect(RouteGaurd()).toBe(true)
-    localStorage.removeItem('user')
+    sessionStorage.removeItem('user')
   })
 })
 
