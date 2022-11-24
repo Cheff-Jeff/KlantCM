@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿    using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CM_API_EF.Models
@@ -10,6 +10,6 @@ namespace CM_API_EF.Models
         [ForeignKey("User")]
         [Required]
         public int UserID { get; set; }
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

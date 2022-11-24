@@ -73,14 +73,14 @@ namespace SignalRHub.Hubs
         /// <param name="FirstName">The name of the employee</param>
         /// <param name="RoomId">The name of the employee</param>
         /// <returns></returns>
-        public async Task StartRoom(int id, string FirstName,int RoomId)
+        public async Task StartRoom(int id, string FirstName,int? RoomId)
         {
             if(RoomId == null)
             {
                 return;
             }
             Employee e = new Employee {Id = id,ConnectionString = Context.ConnectionId, FirstName = FirstName };
-            Room r = new() { Id = RoomId ,employee = e };
+            Room r = new() { Id = (int)RoomId ,employee = e };
 
             _Roomdata.Add(r, r.Id);
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());

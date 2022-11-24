@@ -1,5 +1,6 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
 import { GetMaxRoomId } from "./Room";
+import { UploadRoom } from "./Room";
 // import {createPost} from './MessageReceiver2';
 
 export class ChatHub {
@@ -72,9 +73,10 @@ export class ChatHub {
         if(this.connection.state != 'Connected'){
             this.connect()
         }
-        const roomId= GetMaxRoomId();
+        const roomId = await GetMaxRoomId();
+        UploadRoom();
 
-        this.connection.invoke("StartRoom",id, FirstName,roomId).catch(function (err) {
+        this.connection.invoke("StartRoom",id, FirstName,parseInt(roomId)).catch(function (err) {
             return console.error(err)
         }
     )
