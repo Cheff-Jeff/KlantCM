@@ -11,7 +11,7 @@ jobs:
   unit_test:
     runs-on: ubuntu-latest
     strategy:
-      matrix: { dir: ['./Back-end/CM-API-EF'] }
+      matrix: { dir: ['./CM-API-EF'] }
 
     steps:
       - name: Checkout code
