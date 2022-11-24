@@ -16,6 +16,8 @@ namespace CM_API_EF_UnitTests
         public void AverageTest()
         {
             //arrange
+            //creating 2 different ratings one is true and the other false. 
+            //therefor the average of positives ratings is expected to be 50%
             List<Rating> ratings = new List<Rating>();
             Rating rating = new Rating();
             rating.Rate = true;
@@ -33,6 +35,7 @@ namespace CM_API_EF_UnitTests
         public void MedianTest()
         {
             //arrange
+            // Creating a list where the median is expected to by 4,5
             List<int> indexes = new List<int>();
             indexes.Add(9);
             indexes.Add(1);           
