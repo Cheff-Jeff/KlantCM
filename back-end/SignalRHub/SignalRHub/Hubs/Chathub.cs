@@ -85,7 +85,18 @@ namespace SignalRHub.Hubs
             _Roomdata.Add(r, r.Id);
             await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
 
-        }   
+        }
+
+        public async Task StopRoom(int? Roomid)
+        {
+            if(Roomid == null)
+            {
+                return;
+            }
+            _Roomdata.remove((int)Roomid);
+            await Clients.Client(Context.ConnectionId).SendAsync("StopRoom");
+
+        }
 
         public async Task StopChat(string Connection, string roomId)
         {

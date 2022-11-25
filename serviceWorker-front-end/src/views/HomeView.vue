@@ -4,8 +4,9 @@
   import Input from '../components/ChatInput.vue';
   import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
-  import ChatIndexButton from '../components/ChatIndexButton.vue';
-  import { ChangeLanguage } from '../assets/javascript/translate';
+import ChatIndexButton from '../components/ChatIndexButton.vue';
+import {UploadChat} from '../assets/javascript/UploadChat'
+import { ChangeLanguage } from '../assets/javascript/translate';
 </script>
 
 <template>
@@ -26,10 +27,14 @@
           </div>
 
           <div class="chat-btn-wrap-bottom">
-            <button type="button" class="btn btn-light mb-3 StartRoomBtn" @click="roomStart()">
-              Start chat
+            <button v-if="Working" type="button" class="btn btn-light mb-3 StartRoomBtn" @click="roomStop()">
+              Stop chats
             </button>
-            <div v-if="Room">
+            <button v-else type="button" class="btn btn-light mb-3 StartRoomBtn" @click="roomStart()">
+              Start chats
+            </button>
+            
+            <div v-if="Working">
               <cm-button
               data-label="Look for Clients"
               data-button-style="cta"
@@ -45,7 +50,7 @@
               @click="closeWorker()"
               v-else>
               </cm-button>
-           </div>
+           
 
             <cm-button
               class="EndChatBtn"
@@ -53,8 +58,9 @@
               data-button-style="cta"
               data-button-size="medium"
               data-custom-classes="terminate"
-              @click="stopChat()">
+              @click="stopChat(null)">
             </cm-button>
+          </div>
           </div>
         </div>
       </div>
@@ -94,7 +100,8 @@
         ChatWindows:[],
         activeChatKey : 0,
         OpenWorker:false,
-        Room:false
+        Room:false,
+        Working:false
       }
     },
     mounted(){
@@ -112,6 +119,7 @@
         //User gets disconnected
         this.RemoveUser(localStorage.getItem('DiscUser'))
       })
+      window.addEventListener('StopRoom',this.roomStop())
     },
     methods:{
       sendConverzation(text) {
@@ -166,16 +174,19 @@
       },
       RemoveUser(Connection){ 
         const i = this.FindUser(Connection)
+        this.SaveChat(i, Connection)
         this.ChatWindows[i].newChats = []
         this.ChatWindows[i].UserConnection = ''
         this.ActivateChat(0)
         this.ChatWindows.splice(i,1)
-        window.AddErrorNotification('User leaved')
+        window.AddErrorNotification('User left')
       },
-      stopChat(){
-        const connection = this.ChatWindows[this.activeChatKey].UserConnection
+      stopChat(connection){
+        if (connection == null){
+          connection = this.ChatWindows[this.activeChatKey].UserConnection
+        }
         this.RemoveUser(connection)
-        this.chat.StopChat(connection)
+        this.chat.StopRoom(connection)
       },
       openWorker(){
           this.OpenWorker = true;
@@ -183,12 +194,29 @@
       },
       closeWorker(){
         this.OpenWorker = false;
-        console.log('dit werkt')
         this.chat.CloseWorker()
       },
       roomStart(){
-        this.Room = true
         this.chat.StartRoom(1,'andreas')
+        console.log('het wekrt')
+        this.Working = true
+
+      },
+      roomStop(){
+        this.chat.StopRoom()
+          if (this.ChatWindows.length > 0){
+            this.ChatWindows.forEach(chatwin => {
+              this.stopChat(chatwin.UserConnection)
+            })
+          }
+          this.ChatWindows = []
+          this.Working = false
+          this
+      },
+      SaveChat(i){
+        if(this.ChatWindows[i].newChats.length > 0){
+          UploadChat(this.ChatWindows[i].UserConnection, this.ChatWindows[i].newChats)
+        }
       }
     }
   }
