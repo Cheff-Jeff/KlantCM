@@ -89,7 +89,7 @@ namespace SignalRHub.Hubs
                 return;
             }
             _Roomdata.remove((int)Roomid);
-            //add employee message here for status?
+            await Clients.Client(Context.ConnectionId).SendAsync("StopRoom");
 
         }
 

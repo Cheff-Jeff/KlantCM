@@ -40,9 +40,15 @@ export class ChatHub {
             window.dispatchEvent(DisconnectUser)
          });
 
+         this.connection.on("StopRoom", function () {
+            // user has to get disconnected from the chatwindow  
+            window.dispatchEvent(StopRoom)
+         });
+
         const NewChat = new Event('NewChat')
         const NewUser = new Event('NewUser')
         const DisconnectUser = new Event('DisconnectUser')
+        const StopRoom = new Event('StopRoom')
     }
 
     async connect(){
@@ -72,18 +78,14 @@ export class ChatHub {
         )
     }
     StartRoom(id,FirstName){
-        if(this.connection.state != 'Connected'){
-            this.connect()
-        }
         this.connection.invoke("StartRoom",id, FirstName).catch(function (err) {
             return console.error(err)
-        }
-    )
+        })
     }
-    StopChat(UserConnection){
+    StopRoom(UserConnection){
         let RoomId = localStorage.getItem('roomId')
         this.connection.invoke("StopChat",UserConnection,RoomId).catch((err)=>{
-            return console.error(err.toString())
+             return console.error(err.toString())
         })
     }
     OpenWorker(){

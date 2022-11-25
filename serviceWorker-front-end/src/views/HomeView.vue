@@ -4,7 +4,7 @@
   import Input from '../components/ChatInput.vue';
   import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
-import ChatIndexButton from '../components/ChatIndexButton.vue';
+  import ChatIndexButton from '../components/ChatIndexButton.vue';
 </script>
 
 <template>
@@ -25,10 +25,14 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           </div>
 
           <div class="chat-btn-wrap-bottom">
-            <button type="button" class="btn btn-light mb-3" @click="roomStart()">
-              Start chat
+            <button v-if="Working" type="button" class="btn btn-light mb-3" @click="roomStop()">
+              Stop chats
             </button>
-            <div v-if="Room">
+            <button v-else type="button" class="btn btn-light mb-3" @click="roomStart()">
+              Start chats
+            </button>
+            
+            <div v-if="Working">
               <cm-button
               data-label="Look for Clients"
               data-button-style="cta"
@@ -44,15 +48,16 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
               @click="closeWorker()"
               v-else>
               </cm-button>
-           </div>
+           
 
             <cm-button
               data-label="End active chat"
               data-button-style="cta"
               data-button-size="medium"
               data-custom-classes="terminate"
-              @click="stopChat()">
+              @click="stopChat(null)">
             </cm-button>
+          </div>
           </div>
         </div>
       </div>
@@ -92,7 +97,8 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         ChatWindows:[],
         activeChatKey : 0,
         OpenWorker:false,
-        Room:false
+        Room:false,
+        Working:false
       }
     },
     mounted(){
@@ -110,6 +116,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         //User gets disconnected
         this.RemoveUser(localStorage.getItem('DiscUser'))
       })
+      window.addEventListener('StopRoom',this.roomStop())
     },
     methods:{
       sendConverzation(text) {
@@ -168,10 +175,12 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         this.ChatWindows[i].UserConnection = ''
         this.ActivateChat(0)
         this.ChatWindows.splice(i,1)
-        window.AddErrorNotification('User leaved')
+        window.AddErrorNotification('User left')
       },
-      stopChat(){
-        const connection = this.ChatWindows[this.activeChatKey].UserConnection
+      stopChat(connection){
+        if (connection == null){
+          connection = this.ChatWindows[this.activeChatKey].UserConnection
+        }
         this.RemoveUser(connection)
         this.chat.StopChat(connection)
       },
@@ -181,12 +190,23 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
       },
       closeWorker(){
         this.OpenWorker = false;
-        console.log('dit werkt')
         this.chat.CloseWorker()
       },
       roomStart(){
-        this.Room = true
         this.chat.StartRoom(1,'andreas')
+        console.log('het wekrt')
+        this.Working = true
+
+      },
+      roomStop(){
+        this.chat.StopRoom()
+          if (this.ChatWindows.length > 0){
+            this.ChatWindows.forEach(chat => {
+              this.stopChat(chat.UserConnection)
+            })
+          }
+          this.ChatWindows = []
+          this.Working = false
       }
     }
   }
