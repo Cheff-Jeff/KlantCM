@@ -77,7 +77,8 @@ export class ChatHub {
         )
     }
     StartRoom(id,FirstName){
-        this.connection.invoke("StartRoom",id, FirstName).catch(function (err) {
+        const roomid = GetMaxRoomId()
+        this.connection.invoke("StartRoom",id, FirstName,parseInt(roomid)).catch(function (err) {
             return console.error(err)
         })
     }
