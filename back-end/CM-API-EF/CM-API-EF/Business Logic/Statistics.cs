@@ -51,6 +51,13 @@ namespace CM_API_EF.Business_Logic
 
 
         }
+        public TimeSpan ConvertToMinutes(int seconds)
+        {
+            TimeSpan t = TimeSpan.FromSeconds(seconds);
+            return t;
+        }
+
+        
 
 
 

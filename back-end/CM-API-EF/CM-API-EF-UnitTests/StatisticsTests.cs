@@ -55,5 +55,18 @@ namespace CM_API_EF_UnitTests
 
 
         }
+
+        [Fact]
+        public void ConvertSecondTest()
+        {
+            //arrange
+            //Making a second which when converted should return 7 minutes and 12 seconds
+            int seconds = 432;
+            //act
+            TimeSpan t = statistics.ConvertToMinutes(seconds);
+            //assert
+            Assert.Equal(t.Minutes, 7);
+            Assert.Equal(t.Seconds, 12);
+        }
     }
 }
