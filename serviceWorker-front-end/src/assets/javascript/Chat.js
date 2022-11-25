@@ -1,4 +1,6 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
+import { GetMaxRoomId } from "./Room";
+import { UploadRoom } from "./Room";
 // import {createPost} from './MessageReceiver2';
 
 export class ChatHub {
@@ -61,13 +63,10 @@ export class ChatHub {
     }
 
     SendMessage(message,connection){
-        // this.connection.invoke("SendMessage", message,RoomId,EndUser).catch(function (err) {
-        //     return console.error(err.toString())
-        // })
-            let roomid = localStorage.getItem('roomId')
-            this.connection.invoke("SendMessage", message,roomid,connection).catch(function (err) {
+        let roomid = localStorage.getItem('roomId')
+        this.connection.invoke("SendMessage", message,roomid,connection).catch(function (err) {
             return console.error(err.toString())
-         })
+        })
     }
 
     AddUser(){

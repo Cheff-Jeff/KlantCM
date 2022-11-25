@@ -4,8 +4,9 @@
   import Input from '../components/ChatInput.vue';
   import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
-  import ChatIndexButton from '../components/ChatIndexButton.vue';
-  import {UploadChat} from '../assets/javascript/UploadChat'
+import ChatIndexButton from '../components/ChatIndexButton.vue';
+import {UploadChat} from '../assets/javascript/UploadChat'
+import { ChangeLanguage } from '../assets/javascript/translate';
 </script>
 
 <template>
@@ -16,7 +17,7 @@
         <div class="chat-controller">
           <div class="chat-btn-wrap">
             <div class="queue">
-              <span>20 people waiting in line.</span>
+              <span class="WaitingInLine">20 people waiting in line.</span>
             </div>
             <div v-for="(chats,index) in ChatWindows">
               <span @click="ActivateChat(index)">
@@ -26,10 +27,10 @@
           </div>
 
           <div class="chat-btn-wrap-bottom">
-            <button v-if="Working" type="button" class="btn btn-light mb-3" @click="roomStop()">
+            <button v-if="Working" type="button" class="btn btn-light mb-3 StartRoomBtn" @click="roomStop()">
               Stop chats
             </button>
-            <button v-else type="button" class="btn btn-light mb-3" @click="roomStart()">
+            <button v-else type="button" class="btn btn-light mb-3 StartRoomBtn" @click="roomStart()">
               Start chats
             </button>
             
@@ -52,6 +53,7 @@
            
 
             <cm-button
+              class="EndChatBtn"
               data-label="End active chat"
               data-button-style="cta"
               data-button-size="medium"
@@ -83,7 +85,7 @@
             </div>
           </cm-conversation>
         </div>
-        <div v-else>
+        <div class="NoUsers" v-else>
             NO USERS 
         </div>
       </div>
