@@ -35,7 +35,9 @@
                 @blur="checkName"
                 @keyup="checkName" 
               >
-              {{nameError}}
+              <div class="error">
+                <span class="small">{{nameError}}</span>
+              </div>
             </div>
             <div class="input-wrap">
               <input 
@@ -45,7 +47,11 @@
                 @blur="checkEmail"
                 @keyup="checkEmail"
               >
-              {{emailError}}
+              <div class="error">
+                <span class="small">
+                  {{emailError}}
+                </span>
+              </div>
             </div>
             <div class="input-wrap">
               <input 
@@ -55,7 +61,11 @@
                 @blur="checkPass"
                 @keyup="checkPass"
               >
-              {{passwordError}}
+              <div class="error">
+                <span class="small">
+                  {{passwordError}}
+                </span>
+              </div>
             </div>
             <div class="input-wrap">
               <input 
@@ -65,23 +75,31 @@
                 @blur="checkRePass"
                 @keyup="checkRePass"
               >
-              {{matchPassErr}}
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <cm-button
-                  @click.prevent="cancel"
-                  data-label="Cancel"
-                  data-button-style="primary"
-                  data-button-size="medium">
-                </cm-button>
+              <div class="error">
+                <span class="small">
+                  {{matchPassErr}}
+                </span>
               </div>
-              <div class="col-md-6">
-                <cm-button
-                  data-label="Save"
-                  data-button-style="cta"
-                  data-button-size="medium">
-                </cm-button>
+            </div>
+            <div class="btn-row">
+              <div class="row">
+                <div class="col-md-6">
+                  <cm-button
+                    @click.prevent="cancel"
+                    data-label="Cancel"
+                    data-button-style="primary"
+                    data-button-size="medium">
+                  </cm-button>
+                </div>
+                <div class="col-md-6">
+                  <div class="btn-save">
+                    <cm-button
+                      data-label="Save"
+                      data-button-style="cta"
+                      data-button-size="medium">
+                    </cm-button>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -139,21 +157,26 @@ export default {
       this.$emit('switch')
     },
     async submit(){
+      console.log('submit')
       this.checkName(); this.checkEmail; this.checkId; this.checkPass; this.checkRePass;
-      if(this.nameError = '', this.emailError = '', this.idError = '', 
-      this.passwordError, this.matchPassErr)
+      if(this.nameError == '' && this.emailError == '' && this.idError == '' && 
+      this.passwordError == ''&& this.matchPassErr == '')
       {
+        console.log('in')
         const result = await UpdateUser(this.user)
         if(result.status == 200){
+          console.log('Test')
           this.$router.go()
         }
-        submitError = 'One or more fields have an error. Please check and try again.'
+        else{
+          submitError = 'One or more fields have an error. Please check and try again.'
+        }
       }
     },
   },
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import "../assets/styles/components/updateUser.scss";
 </style>

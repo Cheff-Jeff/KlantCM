@@ -82,7 +82,7 @@ export default{
           console.log('init')
           if(this.userId){
             const result = await DeleteUser(this.userId);
-            result == 200 ? this.$router.go() : 'DisplayError'
+            result.status == 200 ? this.$router.go() : 'DisplayError'
           }
         }
     },

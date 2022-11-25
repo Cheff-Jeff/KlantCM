@@ -24,6 +24,22 @@
         border-radius: 50px;
         border: solid 1px #d6d9dd;
       }
+      .error{
+        padding-left: 10px;
+        margin-top: -3px;
+        span{
+          color: #FF495C;
+        }
+      }
+    }
+    .btn-row{
+      margin-top: 20px;
+      .btn-save{
+        float: right;
+      }
+      button{
+        min-width: 79px;
+      }
     }
   }
 }
