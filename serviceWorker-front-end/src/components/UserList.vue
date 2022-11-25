@@ -75,6 +75,9 @@ export default{
             this.modelBody = ''
             this.modalToggle = 'hide'
         },
+        EditUser(user){
+          this.$emit('edit', user)
+        },
         async removeUser(){
           console.log('init')
           if(this.userId){

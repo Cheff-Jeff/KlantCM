@@ -1,6 +1,7 @@
 <script setup>
 import Header from '@/components/Header.vue';
 import UserList from '@/components/UserList.vue'
+import UpdateUserForm from '@/components/UpdateUserForm.vue'
 import {GetAllUsers} from '@/assets/javascript/User'
 </script>
 
@@ -10,7 +11,12 @@ import {GetAllUsers} from '@/assets/javascript/User'
         <UserList 
             v-if="manager"
             :userlist="userlist"
-            @EditUser="switchEdit"
+            @edit="switchEdit"
+        />
+        <UpdateUserForm
+            v-if="edit"
+            :User="user"
+            @switch="switchmanager"
         />
     </div>
 </template>
@@ -19,7 +25,7 @@ import {GetAllUsers} from '@/assets/javascript/User'
 export default{
     data(){
         return{
-            manager: '',
+            manager: 'open',
             edit: '',
             user: '',
             userlist: []
