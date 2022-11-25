@@ -5,6 +5,7 @@
   import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
   import ChatIndexButton from '../components/ChatIndexButton.vue';
+  import {UploadChat} from '../assets/javascript/UploadChat'
 </script>
 
 <template>
@@ -171,6 +172,7 @@
       },
       RemoveUser(Connection){ 
         const i = this.FindUser(Connection)
+        this.SaveChat(i, Connection)
         this.ChatWindows[i].newChats = []
         this.ChatWindows[i].UserConnection = ''
         this.ActivateChat(0)
@@ -182,7 +184,7 @@
           connection = this.ChatWindows[this.activeChatKey].UserConnection
         }
         this.RemoveUser(connection)
-        this.chat.StopChat(connection)
+        this.chat.StopRoom(connection)
       },
       openWorker(){
           this.OpenWorker = true;
@@ -201,12 +203,18 @@
       roomStop(){
         this.chat.StopRoom()
           if (this.ChatWindows.length > 0){
-            this.ChatWindows.forEach(chat => {
-              this.stopChat(chat.UserConnection)
+            this.ChatWindows.forEach(chatwin => {
+              this.stopChat(chatwin.UserConnection)
             })
           }
           this.ChatWindows = []
           this.Working = false
+          this
+      },
+      SaveChat(i){
+        if(this.ChatWindows[i].newChats.length > 0){
+          UploadChat(this.ChatWindows[i].UserConnection, this.ChatWindows[i].newChats)
+        }
       }
     }
   }
