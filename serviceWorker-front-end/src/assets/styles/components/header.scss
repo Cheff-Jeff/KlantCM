@@ -44,6 +44,9 @@ header {
                 color: black;
                 padding-top: 5px;
                 display: flex;
+                 :hover {
+                    background-color: #ddd;
+                }
             }
         }
         .show {
@@ -53,13 +56,9 @@ header {
             text-decoration: none;
             color: white;
             img {
-                border-radius: 10px;
                 width: 50px;
                 height: 38px;
                 margin-left: auto;
-            }
-            img:hover {
-                box-shadow: 1px 1px 5px 3px grey;
             }
         }
     }
