@@ -6,13 +6,22 @@ import {GetAllUsers} from '@/assets/javascript/User'
 
 <template>
     <Header/>
-    <UserList :userlist="userlist"/>
+    <div v-auto-animate>
+        <UserList 
+            v-if="manager"
+            :userlist="userlist"
+            @EditUser="switchEdit"
+        />
+    </div>
 </template>
 
 <script>
 export default{
     data(){
         return{
+            manager: '',
+            edit: '',
+            user: '',
             userlist: []
         }
     },
@@ -25,6 +34,16 @@ export default{
         console.log(this.userlist)
     },
     methods:{
+        switchEdit(user){
+            this.user = user
+            this.manager = ''
+            this.edit = 'open'
+        },
+        switchmanager(){
+            this.user = ''
+            this.edit = ''
+            this.manager = 'open'
+        },
         async FillUserList(){
             this.userlist = await GetAllUsers();
         }
