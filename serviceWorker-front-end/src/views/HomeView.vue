@@ -4,7 +4,8 @@
   import Input from '../components/ChatInput.vue';
   import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
-import ChatIndexButton from '../components/ChatIndexButton.vue';
+  import ChatIndexButton from '../components/ChatIndexButton.vue';
+  import { ChangeLanguage } from '../assets/javascript/translate';
 </script>
 
 <template>
@@ -15,7 +16,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
         <div class="chat-controller">
           <div class="chat-btn-wrap">
             <div class="queue">
-              <span>20 people waiting in line.</span>
+              <span class="WaitingInLine">20 people waiting in line.</span>
             </div>
             <div v-for="(chats,index) in ChatWindows">
               <span @click="ActivateChat(index)">
@@ -25,7 +26,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
           </div>
 
           <div class="chat-btn-wrap-bottom">
-            <button type="button" class="btn btn-light mb-3" @click="roomStart()">
+            <button type="button" class="btn btn-light mb-3 StartRoomBtn" @click="roomStart()">
               Start chat
             </button>
             <div v-if="Room">
@@ -47,6 +48,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
            </div>
 
             <cm-button
+              class="EndChatBtn"
               data-label="End active chat"
               data-button-style="cta"
               data-button-size="medium"
@@ -77,7 +79,7 @@ import ChatIndexButton from '../components/ChatIndexButton.vue';
             </div>
           </cm-conversation>
         </div>
-        <div v-else>
+        <div class="NoUsers" v-else>
             NO USERS 
         </div>
       </div>
