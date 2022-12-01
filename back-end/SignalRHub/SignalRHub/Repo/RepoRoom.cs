@@ -36,6 +36,10 @@ namespace SignalRHub
         public Room? FindFree()
         {
             List<Room> free = _data.Values.ToList();
+            if(free.Count == 0)
+            {
+                return null;
+            }
             free.Sort();
             if (free[0].EndUserIds.Count == 8 || free[0].employee.IsOpen == false) // 8 should not be hardcoded here
             {
