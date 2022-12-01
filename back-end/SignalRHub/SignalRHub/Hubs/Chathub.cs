@@ -11,6 +11,8 @@ namespace SignalRHub.Hubs
         private readonly IRepo<EndUser, string> _EndUserdata;
         private readonly  IRepo<Room, int> _Roomdata;
 
+        private static int Count;
+
         public Chathub(IRepo<EndUser, string> eud, IRepo<Room, int>rd)
         {
             _EndUserdata = eud;
@@ -48,6 +50,7 @@ namespace SignalRHub.Hubs
         /// <returns></returns>
         public async Task AddEndUserToRoom(EndUser? enduser, Room? r)
         {
+            Count--;
             if(r == null)
             {
                  r = _Roomdata.FindFree();
@@ -65,6 +68,7 @@ namespace SignalRHub.Hubs
             _Roomdata.Update(r, r.Id);
             await Clients.Client(enduser.ConnectionString).SendAsync("RecieveRoomId", r.Id.ToString());
             await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", enduser.ConnectionString);
+            await Clients.All.SendAsync("GetQueue", Count);
         }
         /// <summary>
         /// Function of the employee to start his room. De end-User is not allowed to acces this
@@ -75,16 +79,16 @@ namespace SignalRHub.Hubs
         /// <returns></returns>
         public async Task StartRoom(int id, string FirstName,int? RoomId)
         {
-            if(RoomId == null)
+            if (RoomId == null)
             {
                 return;
             }
-            Employee e = new Employee {Id = id,ConnectionString = Context.ConnectionId, FirstName = FirstName };
-            Room r = new() { Id = (int)RoomId ,employee = e };
+            Employee e = new Employee { Id = id, ConnectionString = Context.ConnectionId, FirstName = FirstName };
+            Room r = new() { Id = (int)RoomId, employee = e };
 
             _Roomdata.Add(r, r.Id);
-            await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId",r.Id.ToString());
-
+            await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveRoomId", r.Id.ToString());
+            
         }
 
         public async Task StopRoom(int? Roomid)
@@ -132,10 +136,13 @@ namespace SignalRHub.Hubs
         /// <returns></returns>
         public async Task ConnectUser()
         {
+            Count++;
             string id = Context.ConnectionId;
             EndUser e = new(id);
-            _EndUserdata.Add(e,id);
+            _EndUserdata.Add(e, id);
             await AddEndUserToRoom(e, null);
+            await Clients.All.SendAsync("Count", Count);
+            await Clients.All.SendAsync("GetQueue", Count);
         }
 
         /// <summary>
@@ -145,6 +152,7 @@ namespace SignalRHub.Hubs
         /// <returns></returns>
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
+            //Count--;
             string Connection = Context.ConnectionId;
             if (Connection != null)
             {
@@ -162,6 +170,12 @@ namespace SignalRHub.Hubs
 
             _EndUserdata.remove(Connection);
             await base.OnDisconnectedAsync(exception);
+        }
+
+        public override async Task OnConnectedAsync()
+        {
+            await Clients.All.SendAsync("GetQueue", Count);
+            await base.OnConnectedAsync();
         }
 
         public async void OpenWorker(string roomid)

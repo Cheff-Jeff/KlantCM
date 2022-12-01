@@ -36,6 +36,12 @@ export class ChatHub {
             window.AddSuccessNotification('Added new client')
         });
 
+        this.connection.on("GetQueue", function(message) {
+            console.log(message)
+            sessionStorage.setItem('Queue', message)
+            window.dispatchEvent(NewQueue)
+        });
+
         this.connection.on("DisconnectUser", function (message) {
             // user has to get disconnected from the chatwindow  
             localStorage.setItem('DiscUser',message)
@@ -51,6 +57,7 @@ export class ChatHub {
         const NewUser = new Event('NewUser')
         const DisconnectUser = new Event('DisconnectUser')
         const StopRoom = new Event('StopRoom')
+        const NewQueue = new Event('NewQueue')
     }
 
     async connect(){
