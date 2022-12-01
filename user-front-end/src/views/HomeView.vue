@@ -87,15 +87,12 @@
         opner: '',
         clickedGood: '',
         clickedBad: '',
-        rating: 'hide'
+        rating: 'hide',
+        connected: false
       }
     },
     mounted(){
       this.chat = new ChatHub()
-
-      setTimeout(()=>{
-        this.chat.ConnectUser()
-      },3000)
 
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'))
@@ -123,6 +120,13 @@
         }
       },
       toggleModal(){
+        if(!this.connected){
+          setTimeout(()=>{
+            this.chat.ConnectUser()
+          },3000)
+        }
+        this.connected = true
+
         this.modal = this.modal == '' ? 'open' : ''
         if(window.innerWidth <= 500)
         {
