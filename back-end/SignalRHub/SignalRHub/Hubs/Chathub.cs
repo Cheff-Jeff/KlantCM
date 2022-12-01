@@ -152,7 +152,6 @@ namespace SignalRHub.Hubs
         /// <returns></returns>
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            //Count--;
             string Connection = Context.ConnectionId;
             if (Connection != null)
             {
@@ -167,6 +166,7 @@ namespace SignalRHub.Hubs
                     }
                 }
             }
+            Count--;
 
             _EndUserdata.remove(Connection);
             await base.OnDisconnectedAsync(exception);
