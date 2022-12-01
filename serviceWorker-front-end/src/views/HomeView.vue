@@ -198,7 +198,6 @@ import { ChangeLanguage } from '../assets/javascript/translate';
       },
       roomStart(){
         this.chat.StartRoom(1,'andreas')
-        console.log('het wekrt')
         this.Working = true
 
       },
@@ -214,7 +213,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
           this
       },
       SaveChat(i){
-        if(this.ChatWindows[i].newChats.length > 0){
+        if(!this.ChatWindows[i].newChats.length){
           UploadChat(this.ChatWindows[i].UserConnection, this.ChatWindows[i].newChats)
         }
       }

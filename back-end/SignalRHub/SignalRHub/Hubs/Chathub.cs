@@ -174,7 +174,7 @@ namespace SignalRHub.Hubs
             await AddEndUserToRoom(null, r);
         }
 
-        public  void CloseWorker(string roomid)
+        public void CloseWorker(string roomid)
         {
             int RoomId = Convert.ToInt32(roomid);
             Room r = _Roomdata.get(RoomId);

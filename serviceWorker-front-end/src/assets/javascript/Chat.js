@@ -24,6 +24,7 @@ export class ChatHub {
         });
 
         this.connection.on("ReceiveRoomId", function (message) {
+                console.log(message)
                 this.RoomId = message
                 localStorage.setItem('roomId', this.RoomId)
         });
@@ -76,11 +77,11 @@ export class ChatHub {
         }
         )
     }
-    StartRoom(id,FirstName){
-        const roomid = GetMaxRoomId()
+    async StartRoom(id,FirstName){
+        const roomid = await GetMaxRoomId()
         this.connection.invoke("StartRoom",id, FirstName,parseInt(roomid)).catch(function (err) {
             return console.error(err)
-        })
+        }).then(UploadRoom())
     }
     StopRoom(UserConnection){
         let RoomId = localStorage.getItem('roomId')

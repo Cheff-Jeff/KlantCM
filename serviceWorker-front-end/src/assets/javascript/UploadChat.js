@@ -13,8 +13,18 @@ export const UploadChat = async (connection,chat) => {
     }
   }
 
-  async function UploadMessages(chat,messages){
-    console.log(chat)
-    console.log(messages)
+  async function UploadMessages(chatobj,messages){
+    try{
+        console.log(messages)
+        messages.forEach(message => {
+                axios.post(`${import.meta.env.VITE_API}Messages`,{
+                text: message.Text,
+                chatId: chatobj.chatId
+            })
+        });
+    }
+    catch(err){
+        console.log(err)
+    }
   }
 

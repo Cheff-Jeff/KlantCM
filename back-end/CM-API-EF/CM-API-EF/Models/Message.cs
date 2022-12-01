@@ -11,6 +11,6 @@ namespace CM_API_EF.Models
         public string Text { get; set; }
         [ForeignKey("Chat")]
         public int ChatId { get; set; }
-        public Chat Chat { get; set; }
+        public Chat? Chat { get; set; }
     }
 }
