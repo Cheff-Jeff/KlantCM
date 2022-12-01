@@ -99,6 +99,10 @@
         this.reciveConverzation(localStorage.getItem('NewChat'))
       })
       window.addEventListener("resize", this.checkWindow);
+
+      window.addEventListener("CloseChat",()=>{
+        this.openRating()
+      })
     },
     methods: {
       openRating(){
