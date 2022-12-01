@@ -25,7 +25,7 @@
     <div class="nav-wrap">
       <cm-button
         v-if="isadmin"
-        data-label="Register"
+        data-label="Mange users"
         data-button-style="cta"
         data-button-size="medium"
         @click="registerBtn"
@@ -86,7 +86,7 @@
     methods: {
       async GetLoggedInUser(){
         //JSON.parse om de "" weg te halen.
-        var userid = JSON.parse(localStorage.getItem("user"));
+        var userid = JSON.parse(sessionStorage.getItem("user"));
 
         this.user = await GetUserById(userid)
 
@@ -99,7 +99,7 @@
       },
       registerBtn() {
         //Navigeer naar test view;
-        this.$router.push("register");
+        this.$router.push("usermanagement");
       },
       LogoutBtn(){
         if(Logout()){
