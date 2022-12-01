@@ -9,10 +9,6 @@ export class ChatHub {
 
         this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
 
-        this.connection.onclose(async() => {
-            await this.connect();
-        })
-
         this.connect()
 
         this.connection.on("ReceiveMessage", function(message) {
@@ -35,9 +31,11 @@ export class ChatHub {
         });
 
         this.connection.on("CloseChat", () => {
-            this.connection.stop();
+            window.dispatchEvent(CloseChat)
+            this.connection.stop()
         })
 
+        const CloseChat = new Event('CloseChat')
         const NewChat = new Event('NewChat')
     }
     async connect() {

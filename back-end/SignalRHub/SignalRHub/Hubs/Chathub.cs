@@ -99,7 +99,6 @@ namespace SignalRHub.Hubs
             }
             _Roomdata.remove((int)Roomid);
             await Clients.Client(Context.ConnectionId).SendAsync("StopRoom");
-
         }
 
         public async Task StopChat(string Connection, string roomId)
@@ -118,7 +117,6 @@ namespace SignalRHub.Hubs
                 if(e != null)
                 {
                     e.RoomId = -1;
-                    e.inRoom = false;
                     _EndUserdata.Update(e,Connection);
                 }
             }
@@ -164,7 +162,7 @@ namespace SignalRHub.Hubs
                         r.EndUserIds.Remove(e.ConnectionString);
                         await Clients.Client(r.employee.ConnectionString).SendAsync("DisconnectUser", e.ConnectionString);
                     }
-                    else
+                    else if(e.RoomId == 1 && e.inRoom == true)
                     {
                         Count--;
                     }
