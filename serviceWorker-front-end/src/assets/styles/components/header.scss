@@ -21,8 +21,16 @@ header {
   }
   .nav-wrap {
       margin-left: auto;
-      button {
-          // margin-right: 5px;
+      svg{
+        width: 32px;
+        height: 32px;
+        transform: rotate(0deg);
+        transition: all .3s ease-in-out;
+        &:hover{
+            cursor: pointer;
+            transform: rotate(90deg);
+            transition: all .3s ease-in-out;
+        }
       }
   }
   .langWrap {
@@ -63,4 +71,17 @@ header {
           }
       }
   }
+}
+
+.modal.custom{
+    padding-right: 0;
+    z-index: 9 !important;
+    align-items: flex-start !important;
+    .modal-dialog{
+        margin-right: 0px !important;
+        margin-top: 0px;
+        .modal-content{
+            border-radius: 16px 0 0 16px;
+        }
+    }
 }
