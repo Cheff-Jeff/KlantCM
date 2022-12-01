@@ -92,7 +92,7 @@
     },
     mounted(){
       this.chat = new ChatHub()
-      
+
       setTimeout(()=>{
         this.chat.ConnectUser()
       },3000)
