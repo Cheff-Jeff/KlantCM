@@ -7,7 +7,7 @@ import * as turkish from "../../languages/turkish.json"
 export const ChangeLanguage = async() => {
     console.log("Check 1 - translate.js");
 
-    const langEl = document.querySelector('.langWrap');
+    const langEl = document.querySelector('.lang-drop');
     const link = document.querySelectorAll('a');
     const QueueText = document.querySelector('#QueueText');
     const StartRoomText = document.querySelector('.StartRoomBtn');

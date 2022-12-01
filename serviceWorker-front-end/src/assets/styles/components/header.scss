@@ -77,11 +77,122 @@ header {
     padding-right: 0;
     z-index: 9 !important;
     align-items: flex-start !important;
+    overflow: hidden;
+    margin-left: auto;
+    &.noshow{
+        width: 0px;
+        padding-left: 0;
+        padding-bottom: 0;
+        transition: width .5s ease-in-out;
+    }
+    &.show{
+        width: 100%;
+        transition: width .5s ease-in-out;
+    }
     .modal-dialog{
         margin-right: 0px !important;
         margin-top: 0px;
         .modal-content{
             border-radius: 16px 0 0 16px;
+            height: 91vh;
         }
+    }
+    .modal-header.second{
+        padding-top: 10px;
+    }
+    .modal-body{
+        flex: none;
+        &.account{
+            display: flex;
+            justify-content: space-between;
+            .nav-btn-wrapper{
+                svg{
+                    width: 30px;
+                    height: 30px;
+                    margin: auto;
+                    display: block;
+                    fill: #000;
+                    transition: fill .4s ease-in-out;
+                }
+                p{
+                    color: #000;
+                    transition: color .4s ease-in-out;
+                }
+                &:hover{
+                    cursor: pointer;
+                    svg{
+                        fill: #007FFF;
+                        transition: fill .4s ease-in-out;
+                    }
+                    p{
+                        color: #007FFF;
+                        transition: color .4s ease-in-out;
+                    }
+                }
+            }
+        }
+        &.settings{
+            .lang-drop{
+                width: 75%;
+                span{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background: #E5F2FF;
+                    border-radius: 10px 10px 0 0;
+                    padding: 10px;
+                    border-bottom: solid 1px #CCE5FF;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                    svg{
+                        width: 13px;
+                        height: 13px;
+                        transform: rotate(0deg);
+                        transition: all .5s ease-in-out;
+                    }
+                    &.open{
+                        svg{
+                            transform: rotate(180deg);
+                            transition: all .5s ease-in-out;
+                        }
+                    }
+                }
+                .droper{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                    background: #E5F2FF;
+                    border-radius: 0 0 10px 10px;
+                    transition: height .4s ease-in-out;
+                    overflow: hidden;
+                    &.hide{
+                        height: 0px;
+                    }
+                    &.open{
+                        height: 155px;
+                        padding-bottom: 5px;
+                        // overflow-y: scroll;
+                    }
+                    a{
+                        flex: 0 0 50%;
+                        display: flex;
+                        align-items: center;
+                        width: 100px;
+                        margin: 10px 0 5px;
+                        img{
+                            display: block;
+                            width: 100%;
+                            max-width: 90px;
+                            height: auto;
+                            margin: 0 auto 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .modal-footer{
+        margin-top: auto;
     }
 }
