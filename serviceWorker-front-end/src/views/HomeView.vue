@@ -17,7 +17,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         <div class="chat-controller">
           <div class="chat-btn-wrap">
             <div class="queue">
-              <span class="WaitingInLine">20 people waiting in line.</span>
+              <span class="WaitingInLine">{{Queue}} people waiting in line.</span>
             </div>
             <div v-for="(chats,index) in ChatWindows">
               <span @click="ActivateChat(index)">
@@ -101,7 +101,8 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         activeChatKey : 0,
         OpenWorker:false,
         Room:false,
-        Working:false
+        Working:false,
+        Queue: 0
       }
     },
     mounted(){
@@ -120,6 +121,11 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         this.RemoveUser(localStorage.getItem('DiscUser'))
       })
       window.addEventListener('StopRoom',this.roomStop())
+
+      window.addEventListener('NewQueue',()=>{
+        console.log("test");
+        this.Queue = sessionStorage.getItem('Queue')
+      })
     },
     methods:{
       sendConverzation(text) {

@@ -22,6 +22,10 @@ export class ChatHub {
             window.dispatchEvent(NewChat)
         });
 
+        this.connection.on("Count", function(message) {
+            console.log(message)
+        });
+
         this.connection.on("RecieveRoomId", function(message) {
             ///Event to get message 
             ///here you get the room id
