@@ -29,6 +29,15 @@ namespace CM_API_EF.Business_Logic
             return ratingPercentage;
 
         }
+
+        public double Average(List<int> Indexes)
+        {
+            double total = Indexes.Count;
+            double sum = Indexes.Sum();
+            double percentage = sum / total * 100;
+            return percentage;
+        }
+
         public double FindMedian(List<int> indexes)
         {
             double median = 0;
