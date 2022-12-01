@@ -27,9 +27,8 @@ export class ChatHub {
         });
 
         this.connection.on("RecieveRoomId", function(message) {
-            ///Event to get message 
             ///here you get the room id
-            localStorage.setItem('roomId', message)
+            sessionStorage.setItem('roomId', message)
             console.log("Connected to room")
             clearInterval(Queuetimer)
         });
@@ -50,7 +49,7 @@ export class ChatHub {
     }
 
     SendMessage(message) {
-        this.connection.invoke("SendMessage", message, localStorage.getItem('roomId'), null).catch(function(err) {
+        this.connection.invoke("SendMessage", message, sessionStorage.getItem('roomId'), null).catch(function(err) {
             return console.error(err.toString())
         })
     }
