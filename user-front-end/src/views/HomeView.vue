@@ -3,6 +3,7 @@
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
   import { ChatHub } from '../assets/javascript/Chat';
+  import { ratingUpload } from '../assets/javascript/Stats';
 </script>
 
 <template>
@@ -105,9 +106,11 @@
       },
       ratingGood(){
         this.clickedGood = 'clicked'
+        ratingUpload(true)
       },
       ratingbad(){
         this.clickedBad = 'clicked'
+        ratingUpload(false)
       },
       checkWindow() {
         if(window.innerWidth <= 500)
