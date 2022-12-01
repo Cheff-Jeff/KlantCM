@@ -50,7 +50,6 @@ namespace SignalRHub.Hubs
         /// <returns></returns>
         public async Task AddEndUserToRoom(EndUser? enduser, Room? r)
         {
-            Count--;
             if(r == null)
             {
                  r = _Roomdata.FindFree();
@@ -66,6 +65,7 @@ namespace SignalRHub.Hubs
             _EndUserdata.Update(enduser, enduser.ConnectionString);
             r.EndUserIds.Add(enduser.ConnectionString);
             _Roomdata.Update(r, r.Id);
+            Count--;
             await Clients.Client(enduser.ConnectionString).SendAsync("RecieveRoomId", r.Id.ToString());
             await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", enduser.ConnectionString);
             await Clients.All.SendAsync("GetQueue", Count);
@@ -164,9 +164,12 @@ namespace SignalRHub.Hubs
                         r.EndUserIds.Remove(e.ConnectionString);
                         await Clients.Client(r.employee.ConnectionString).SendAsync("DisconnectUser", e.ConnectionString);
                     }
+                    else
+                    {
+                        Count--;
+                    }
                 }
             }
-            Count--;
 
             _EndUserdata.remove(Connection);
             await base.OnDisconnectedAsync(exception);

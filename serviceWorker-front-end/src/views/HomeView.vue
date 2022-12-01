@@ -17,7 +17,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         <div class="chat-controller">
           <div class="chat-btn-wrap">
             <div class="queue">
-              <span class="WaitingInLine">{{Queue}} people waiting in line.</span>
+              <span class="WaitingInLine">{{Queue}}<div id="QueueText">people waiting in line.</div></span>
             </div>
             <div v-for="(chats,index) in ChatWindows">
               <span @click="ActivateChat(index)">

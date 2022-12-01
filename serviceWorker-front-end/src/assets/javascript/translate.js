@@ -9,7 +9,7 @@ export const ChangeLanguage = async() => {
 
     const langEl = document.querySelector('.langWrap');
     const link = document.querySelectorAll('a');
-    const QueueText = document.querySelector('.WaitingInLine');
+    const QueueText = document.querySelector('#QueueText');
     const StartRoomText = document.querySelector('.StartRoomBtn');
     const CmBtnList = document.getElementsByTagName('cm-button');
     const MyProfile = CmBtnList[0];
