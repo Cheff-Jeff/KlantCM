@@ -219,7 +219,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
           this
       },
       SaveChat(i){
-        if(!this.ChatWindows[i].newChats.length){
+        if(this.ChatWindows[i].newChats.length != 0){
           UploadChat(this.ChatWindows[i].UserConnection, this.ChatWindows[i].newChats)
         }
       }
