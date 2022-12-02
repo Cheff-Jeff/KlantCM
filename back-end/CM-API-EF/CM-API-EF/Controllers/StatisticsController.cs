@@ -23,6 +23,7 @@ namespace CM_API_EF.Controllers
             List<Rating> ratingList = await _context.Ratings.ToListAsync();
             Statistics stats = new Statistics();
             double percentage = stats.AverageRating(ratingList);
+            percentage = Math.Round(percentage, 2);
             return Ok(percentage);
         }
 
@@ -36,25 +37,24 @@ namespace CM_API_EF.Controllers
                                        select ra).ToList();
             Statistics stats = new Statistics();
             double percentage = stats.AverageRating(ratingList);
+            percentage = Math.Round(percentage, 2);
             return Ok(percentage);
         }
 
         [HttpGet("GetAverageRatingFromLastMonth")]
         public async Task<ActionResult> GetAverageRatingFromLastMonth()
         {
-            var startOfTthisMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            var firstDay = startOfTthisMonth.AddMonths(-1);
-            var lastDay = startOfTthisMonth.AddDays(-1);
+            var firstDay = DateTime.Today.AddDays(-30);
+            
 
-            List<Rating> ratingList = await _context.Ratings.
-                Where(r => 
-                r.TimeOfRating >= firstDay &&
-                r.TimeOfRating <= lastDay)
+            List<Rating> ratingList = await _context.Ratings
+                .Where(r => 
+                r.TimeOfRating >= firstDay) 
                 .ToListAsync();
             Statistics stats = new Statistics();
             double percentage = stats.AverageRating(ratingList);
-            if(percentage == null) { return BadRequest("Sumthing went wrung"); }
-
+            if(percentage == null || percentage == 0) { return BadRequest("Sumthing went wrung :("); }
+            percentage = Math.Round(percentage, 2);
             return Ok(percentage);
         }
 
