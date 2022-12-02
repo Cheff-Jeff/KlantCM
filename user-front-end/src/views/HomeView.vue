@@ -101,7 +101,9 @@
       window.addEventListener("resize", this.checkWindow);
 
       window.addEventListener("CloseChat",()=>{
-        this.openRating()
+        if(this.newChats.length > 0){
+          this.openRating()
+        }
       })
     },
     methods: {
