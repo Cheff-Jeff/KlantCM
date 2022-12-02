@@ -119,10 +119,11 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         //User gets disconnected
         this.RemoveUser(localStorage.getItem('DiscUser'))
       })
-      window.addEventListener('StopRoom',this.roomStop())
+      window.addEventListener('StopRoom',()=>{
+        this.roomStop()
+      })
 
       window.addEventListener('NewQueue',()=>{
-        console.log("test");
         this.Queue = sessionStorage.getItem('Queue')
       })
       this.GetAllActiveChats();
