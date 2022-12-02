@@ -129,6 +129,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
       this.GetAllActiveChats();
     },
     beforeUnmount() {
+    this.closeWorker()
     let obj = 
     {
       openworker: this.OpenWorker,
