@@ -24,6 +24,14 @@
     <div class="nav-wrap">
       <cm-button
         v-if="isadmin"
+        data-label="Statistics"
+        data-button-style="cta"
+        data-button-size="medium"
+        @click="statBtn"
+        >
+      </cm-button>
+      <cm-button
+        v-if="isadmin"
         data-label="Register"
         data-button-style="cta"
         data-button-size="medium"
@@ -76,6 +84,10 @@
 
         this.username = this.user[0].userName
         this.isadmin = this.user[0].isAdmin
+      },
+      statBtn() {
+        //Navigeer naar stats view;
+        this.$router.push("stats");
       },
       accountBtn() {
         //Navigeer naar test view;
