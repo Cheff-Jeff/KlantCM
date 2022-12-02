@@ -16,9 +16,10 @@ export const UploadChat = async (connection,chat) => {
   }
 
   async function UploadMessages(chatobj,messages){
-        messages.forEach(async message => {
-            await Uploadmessage(chatobj.chatId,message)
-        });
+    console.log(messages)
+        for (let index = 0; index < messages.length; index++) {
+            await Uploadmessage(chatobj.chatId,messages[index])
+        }
   }
 
   async function Uploadmessage(chatid,message){
