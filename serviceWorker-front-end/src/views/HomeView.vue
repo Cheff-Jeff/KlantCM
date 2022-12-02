@@ -2,7 +2,6 @@
   import ConverzationSend from '../components/ConverzationSend.vue';
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
-  import {ChatHub} from '../assets/javascript/Chat'
   import Header from '../components/Header.vue';
 import ChatIndexButton from '../components/ChatIndexButton.vue';
 import {UploadChat} from '../assets/javascript/UploadChat'
@@ -106,7 +105,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
       }
     },
     mounted(){
-      this.chat = new ChatHub()
+      this.chat = this.$chat
 
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
@@ -126,8 +125,27 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         console.log("test");
         this.Queue = sessionStorage.getItem('Queue')
       })
+      this.GetAllActiveChats();
+    },
+    beforeUnmount() {
+    let obj = 
+    {
+      openworker: this.OpenWorker,
+      chat: this.ChatWindows,
+      working: this.Working,
+    }
+    sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
     },
     methods:{
+      GetAllActiveChats(){
+        if(sessionStorage.getItem('ActiveChats') != null)
+        {
+          var obj = JSON.parse(sessionStorage.getItem('ActiveChats'))
+          this.OpenWorker = obj.openworker
+          this.ChatWindows = obj.chat
+          this.Working = obj.working
+        }
+      },
       sendConverzation(text) {
         const time = new Date();
 
@@ -193,6 +211,14 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         }
         this.RemoveUser(connection)
         this.chat.StopRoom(connection)
+
+        let obj = 
+        {
+          openworker: this.OpenWorker,
+          chat: this.ChatWindows,
+          working: this.Working,
+        }
+        sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
       },
       openWorker(){
           this.OpenWorker = true;
@@ -216,7 +242,6 @@ import { ChangeLanguage } from '../assets/javascript/translate';
           }
           this.ChatWindows = []
           this.Working = false
-          this
       },
       SaveChat(i){
         if(!this.ChatWindows[i].newChats.length){
