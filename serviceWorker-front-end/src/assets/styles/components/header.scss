@@ -20,16 +20,71 @@ header {
       }
   }
   .nav-wrap {
-      margin-left: auto;
+        margin-left: auto;
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 60px;
+        width: 15px;
       svg{
-        width: 32px;
-        height: 32px;
-        transform: rotate(0deg);
-        transition: all .3s ease-in-out;
+        height: 50px;
+        position: absolute;
+        width: 50px;
         &:hover{
             cursor: pointer;
-            transform: rotate(90deg);
-            transition: all .3s ease-in-out;
+        }
+        &.x{
+            transform: scale(0);
+            transition: transform 400ms 50ms;
+            .line {
+                stroke-width: 5.5px;
+            }
+        }
+        .line {
+            fill: none;
+            stroke: black;
+            stroke-width: 6px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transform-origin: 50%;
+            transition: stroke-dasharray 500ms 200ms, stroke-dashoffset 500ms 200ms, transform 500ms 200ms;
+            transition: stroke-dasharray 400ms 100ms, stroke-dashoffset 400ms 100ms, transform 400ms 100ms;
+        }
+        .line1 {
+            stroke-dasharray: 40 40;
+        }
+        .line2 {
+            stroke-dasharray: 21 39;
+        }
+        .line3 {
+            stroke-dasharray: 21 39;
+        }
+        .line4 {
+            stroke-dasharray: 40 40;
+        }
+      }
+      &.show{
+        .line {
+            transition: stroke-dasharray 400ms, stroke-dashoffset 400ms, transform 400ms;
+        }
+        .line1 {
+            stroke-dasharray: 1 40;
+            stroke-dashoffset: -33px;
+        }
+        .line2 {
+            stroke-dasharray: 5 39;
+            stroke-dashoffset: -37px;
+        }
+        .line3 {
+            stroke-dasharray: 5 39;
+            stroke-dashoffset: -37px;
+        }
+        .line4 {
+            stroke-dasharray: 1 40;
+            stroke-dashoffset: -33px;
+        }
+        .x {
+            transform: scale(1);
+            transition: transform 400ms 50ms;
         }
       }
   }
@@ -129,9 +184,21 @@ header {
                         transition: color .4s ease-in-out;
                     }
                 }
+                .router-link-active{
+                    svg{
+                        fill: #007FFF;
+                        transition: fill .4s ease-in-out;
+                    }
+                    p{
+                        color: #007FFF;
+                        transition: color .4s ease-in-out;
+                    } 
+                }
             }
         }
         &.settings{
+            max-height: 600px;
+            overflow-y: scroll;
             .lang-drop{
                 width: 75%;
                 span{
@@ -186,8 +253,35 @@ header {
                             max-width: 90px;
                             height: auto;
                             margin: 0 auto 0;
+                            border-radius: 5px;
+                            box-shadow: #000 1px 3px 10px 0px;
                         }
                     }
+                }
+            }
+        }
+        .muti-chat{
+            margin-top: 55px;
+            h5{
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+            .slect-chat-wrapper{
+                width: 75%;
+                margin-right: auto;
+                margin-bottom: 30px;
+                p{
+                    font-size: 12px;
+                    letter-spacing: 1px;
+                }
+                &.active{
+                    .image-wrapper{
+                        border-radius: 5px;
+                        border: solid 1px #3399FF;
+                    }
+                }
+                &:hover{
+                    cursor: pointer;
                 }
             }
         }
