@@ -9,6 +9,7 @@ namespace CM_API_EF.Models
         public int MessageId { get; set; }
         [Required]
         public string Text { get; set; }
+        public bool Worker { get; set; }
         [ForeignKey("Chat")]
         public int ChatId { get; set; }
         public Chat? Chat { get; set; }
