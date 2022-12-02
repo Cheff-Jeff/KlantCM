@@ -123,7 +123,6 @@ import { ChangeLanguage } from '../assets/javascript/translate';
       window.addEventListener('StopRoom',this.roomStop())
 
       window.addEventListener('NewQueue',()=>{
-        console.log("test");
         this.Queue = sessionStorage.getItem('Queue')
       })
     },
