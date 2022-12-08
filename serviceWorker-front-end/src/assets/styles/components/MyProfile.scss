@@ -1,0 +1,49 @@
+.spacer {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .container {
+        padding-top: 0px;
+    }
+    .form-wrapper {
+        width: 47%;
+        margin: auto;
+        background-color: #FBFBFC;
+        padding: 15px;
+        border-radius: 20px;
+        .input-wrap {
+            margin: 7px 0;
+            input {
+                width: 100%;
+                font-size: 17px;
+                letter-spacing: 1.2px;
+                height: 40px;
+                padding: 0px 15px;
+                border-radius: 50px;
+                border: solid 1px #d6d9dd;
+            }
+            .error {
+                padding-left: 10px;
+                margin-top: -3px;
+                span {
+                    color: #FF495C;
+                }
+            }
+        }
+        .btn-row {
+            margin-top: 20px;
+            .btn-save {
+                float: right;
+            }
+            button {
+                min-width: 79px;
+            }
+        }
+    }
+}
+
+.color-black {
+    color: black;
+}
