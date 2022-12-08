@@ -117,4 +117,11 @@ export class ChatHub {
             return console.error(err.toString())
         })
     }
+
+    SendMedia(base64){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("SendMedia",base64,RoomId, null).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
 }
