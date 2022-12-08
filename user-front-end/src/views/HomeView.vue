@@ -30,7 +30,7 @@
                     <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
                   </div>
                   <div v-else>
-                    <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                    <ConverzationSend :Text="chat.Text" :Time="chat.Time" :img="chat.img"/>
                   </div>
                 </div>
               </div>
@@ -123,7 +123,7 @@
         console.log(e)
         let img = await uploadImage(e)
         this.chat.SendMedia(String(img))
-        this.sendMedia(e)
+        this.sendMedia(img)
       },
       checkWindow() {
         if(window.innerWidth <= 500)
