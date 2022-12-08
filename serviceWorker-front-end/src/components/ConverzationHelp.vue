@@ -19,16 +19,16 @@
         lobortis tellus.`
     },
     img: {
-      type : Boolean,
+      type : String,
       required:false,
-      default:false
+      default:''
     }
   });
 </script>
 
 <template>
   <div class="row">
-    <cm-conversation-bubble v-if="img">
+    <cm-conversation-bubble v-if="img != ''">
       <img />
       <div class="time">{{ Time }}</div>
   </cm-conversation-bubble>
@@ -45,9 +45,8 @@
 <script>
 export default{
   mounted(){
-    const file = localStorage.getItem('img')
     let elList = document.getElementsByTagName('img')
-    setTimeout(()=>{elList[elList.length- 1].src= file},2000)
+    setTimeout(()=>{elList[elList.length- 1].src= this.img},2000)
   }
 }
 </script>

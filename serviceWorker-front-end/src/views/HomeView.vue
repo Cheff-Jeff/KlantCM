@@ -182,7 +182,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
           Text: '',
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: true,
-          Img: true
+          Img: localStorage.getItem('img')
         };
         let User = this.FindUser(connection)
         this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
