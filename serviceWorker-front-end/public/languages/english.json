@@ -1,0 +1,32 @@
+{
+    "data": {
+        "header": {
+            "nav": {
+                "account": "Account",
+                "chats": "Chats",
+                "employees": "Employees",
+                "logout": "Sign off"
+            },
+            "settings": {
+                "head": "Settings",
+                "Lang": "Languages",
+                "workstyle": "Work styles",
+                "single": "Single chat",
+                "multi": "Multi chat"
+            },
+            "close": "Close"
+        },
+        "home": {
+            "PeopleInQueue": " people are waiting in line.",
+            "StartRoom": "Start chat",
+            "Profile": "My profile",
+            "LoggingOut": "Log out",
+            "ChangeLang": "Choose language",
+            "EndChat": "End active chat",
+            "NoUsers": "NO USERS",
+            "Today": "Today",
+            "InputPlaceholder": "Start typing...",
+            "You": "You"
+        }
+    }
+}

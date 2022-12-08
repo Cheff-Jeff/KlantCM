@@ -1,15 +1,22 @@
 <script setup>
-  import ConverzationSend from '../components/ConverzationSend.vue';
-  import ConverzationHelp from '../components/ConverzationHelp.vue';
-  import Input from '../components/ChatInput.vue';
-  import Header from '../components/Header.vue';
-import ChatIndexButton from '../components/ChatIndexButton.vue';
-import {UploadChat} from '../assets/javascript/UploadChat'
-import { ChangeLanguage } from '../assets/javascript/translate';
+  import ConverzationSend from '@/components/ConverzationSend.vue';
+  import ConverzationHelp from '@/components/ConverzationHelp.vue';
+  import Input from '@/components/ChatInput.vue';
+  import Header from '@/components/Header.vue';
+  import ChatIndexButton from '@/components/ChatIndexButton.vue';
+  import {UploadChat} from '@/assets/javascript/UploadChat';
+  import { getLang } from '@/assets/javascript/translate';
+  import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
+  defineExpose({text})
 </script>
 
 <template>
-<Header />
+  <Header 
+    CompanyName="CM.com"
+    :Text="text.header"
+  />
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2 col-md-3">
@@ -18,7 +25,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
             <div class="queue">
               <span class="WaitingInLine">{{Queue}}<div id="QueueText">people waiting in line.</div></span>
             </div>
-            <div v-for="(chats,index) in ChatWindows">
+            <div v-for="(chats,index) in ChatWindows" :key="index">
               <span @click="ActivateChat(index)">
                 <ChatIndexButton  :active="chats.active" :key="chats.active" />
               </span>

@@ -1,0 +1,32 @@
+{
+    "data": {
+        "header": {
+            "nav": {
+                "account": "Hesap",
+                "chats": "Sohbetler",
+                "employees": "Çalışanlar",
+                "logout": "Oturumu kapat"
+            },
+            "settings": {
+                "head": "Ayarlar",
+                "Lang": "Diller",
+                "workstyle": "çalışma stilleri",
+                "single": "tek sohbet",
+                "multi": "çoklu sohbet"
+            },
+            "close": "Kapat"
+        },
+        "home": {
+            "PeopleInQueue": " kişi sırada bekliyor.",
+            "StartRoom": "sohbeti başlat",
+            "Profile": "Benim profilim",
+            "LoggingOut": "Çıkış Yap",
+            "ChangeLang": "Dil seçiniz",
+            "EndChat": "Etkin sohbeti sonlandır",
+            "NoUsers": "KULLANICI YOK",
+            "Today": "Bugün",
+            "InputPlaceholder": "Yazmaya başlayın...",
+            "You": "Sen"
+        }
+    }
+}
