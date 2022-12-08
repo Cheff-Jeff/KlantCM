@@ -120,9 +120,10 @@
         ratingUpload(false)
       },
       async uploadFile(e){
+        console.log(e)
         let img = await uploadImage(e)
         this.chat.SendMedia(String(img))
-        this.sendMedia(img)
+        this.sendMedia(e)
       },
       checkWindow() {
         if(window.innerWidth <= 500)
@@ -165,6 +166,7 @@
         this.chat.SendMessage(text)
       },
       sendMedia(File) {
+        console.log(File)
         const time = new Date();
 
         const bubble = {
@@ -172,7 +174,9 @@
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: false,
           img: File
-      }},
+        }
+        this.newChats = [...this.newChats, bubble];
+      },
       reciveConverzation(text) {
         const time = new Date();
 
