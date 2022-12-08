@@ -24,3 +24,35 @@ input{
     max-width: 265px !important;
   }
 }
+
+.upload-box{
+  position: absolute;
+  top: -440px;
+  left: -1px;
+  bottom: 0;
+  right: 0;
+  width: 0px;
+  height: 0px;
+  transition: all .2s ease-in-out;
+  display: block;
+  background: rgba(245, 245, 245, 0.85);
+  z-index: 999;
+  overflow: hidden;
+  max-height: 496px;
+  &.open{
+    transition: all .2s ease-in-out;
+    width: calc(100% + 65px);
+    height: 496px;
+  }
+  .close-cross{
+    top: 17px;
+    right: 13px;
+    background: rgba(245, 245, 245, 1);
+    border-radius: 50%;
+    transition: all .3s ease-in-out;
+    &:hover{
+      fill: #0074e8;
+      transition: all .3s ease-in-out;
+    }
+  }
+}
