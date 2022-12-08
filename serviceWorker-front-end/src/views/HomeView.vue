@@ -72,7 +72,7 @@ import { ChangeLanguage } from '../assets/javascript/translate';
               </cm-conversation-divider>
               <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
-                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
+                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
                 </div>
                 <div v-else>
                   <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
@@ -126,6 +126,10 @@ import { ChangeLanguage } from '../assets/javascript/translate';
       window.addEventListener('NewQueue',()=>{
         this.Queue = sessionStorage.getItem('Queue')
       })
+
+      window.addEventListener('NewMedia',()=>{
+        this.AddMedia( localStorage.getItem('FromUser'))
+      })
       this.GetAllActiveChats();
     },
     beforeUnmount() {
@@ -167,6 +171,18 @@ import { ChangeLanguage } from '../assets/javascript/translate';
           Text: text, 
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: true
+        };
+        let User = this.FindUser(connection)
+        this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
+      },
+      AddMedia(connection){
+        const time = new Date();
+
+        const bubble = {
+          Text: '',
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: true,
+          Img: true
         };
         let User = this.FindUser(connection)
         this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];

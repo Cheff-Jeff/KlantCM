@@ -36,7 +36,7 @@
             </cm-conversation>
           </div>
           <div class="footer">
-            <Input @text="sendConverzation"/>
+            <Input @text="sendConverzation" @uploadFile="uploadFile"/>
           </div>
         </div>
         <div class="review-wrapper" :class="rating">
@@ -118,6 +118,11 @@
         this.clickedBad = 'clicked'
         ratingUpload(false)
       },
+      async uploadFile(e){
+        let img = await uploadImage(e)
+        this.chat.SendMedia(String(img))
+        this.sendMedia(img)
+      },
       checkWindow() {
         if(window.innerWidth <= 500)
         {
@@ -158,6 +163,15 @@
         this.newChats = [...this.newChats, bubble];
         this.chat.SendMessage(text)
       },
+      sendMedia(File) {
+        const time = new Date();
+
+        const bubble = {
+          Text: '', 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false,
+          img: File
+      }},
       reciveConverzation(text) {
         const time = new Date();
 
