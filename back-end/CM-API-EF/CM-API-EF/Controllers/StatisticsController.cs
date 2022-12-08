@@ -58,5 +58,25 @@ namespace CM_API_EF.Controllers
             return Ok(percentage);
         }
 
+        [HttpGet("GetMessageCountByChatID")]
+        public async Task<ActionResult> GetMessageCountByChatID(int ChatID)
+        {
+            List<Message> messages = await _context.Messages
+                .Where(r => r.ChatId == ChatID).
+                ToListAsync();
+            int count = messages.Count;
+            return Ok(count);
+        }
+
+        [HttpGet("GetAverageMessageFromAllChats")]
+        public async Task<ActionResult> GetAverageMessageFromAllChats()
+        {
+            Statistics stats = new Statistics();
+            int messages = await _context.Messages.MaxAsync(e => e.MessageId);
+            int chats = await _context.Chats.MaxAsync(e => e.ChatId);
+            double average = stats.Average(messages, chats);
+            return Ok(average);
+        }
+
     }
 }

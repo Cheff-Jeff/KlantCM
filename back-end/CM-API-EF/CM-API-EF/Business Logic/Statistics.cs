@@ -30,12 +30,22 @@ namespace CM_API_EF.Business_Logic
 
         }
 
-        public double Average(List<int> Indexes)
+        public double AverageFromList(List<int> Indexes)
         {
             double total = Indexes.Count;
             double sum = Indexes.Sum();
             double percentage = sum / total * 100;
             return percentage;
+        }
+
+        public double Average(int one, int two)
+        {
+            double sum = one;
+            double total = two;
+
+            double average = sum / total;
+            average = Math.Round(average, 2);
+            return average;
         }
 
         public double FindMedian(List<int> indexes)

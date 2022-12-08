@@ -13,7 +13,7 @@ namespace CM_API_EF_UnitTests
         Statistics statistics = new Statistics();
 
         [Fact]
-        public void AverageTest()
+        public void AverageRatingTest()
         {
             //arrange
             //creating 2 different ratings one is true and the other false. 
