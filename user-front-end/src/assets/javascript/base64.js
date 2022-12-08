@@ -15,7 +15,6 @@ const convertBase64 = (file) => {
 
 export const uploadImage = async (file) => {
     const NewChat = new Event('NewChat')
-    console.log(file)
     const base64 = await convertBase64(file);
     
     return base64

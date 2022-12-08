@@ -18,7 +18,6 @@ const convertBase64 = (file) => {
 
 export const uploadImage = async (event) => {
     const NewChat = new Event('NewChat')
-    console.log(event)
 
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
@@ -34,3 +33,10 @@ export const  dataURLtoFile = (dataurl) =>{
     document.getElementById('main').appendChild(img)
     return img
 }
+
+// export const fileToBase64 = async(file) =>{
+//     const file = file.target.files[0];
+//     const base64 = await convertBase64(file);
+    
+//     return base64
+// }
