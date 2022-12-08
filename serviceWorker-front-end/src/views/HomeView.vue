@@ -5,7 +5,6 @@
   import Header from '../components/Header.vue';
 import ChatIndexButton from '../components/ChatIndexButton.vue';
 import {UploadChat} from '../assets/javascript/UploadChat'
-import { ChangeLanguage } from '../assets/javascript/translate';
 </script>
 
 <template>

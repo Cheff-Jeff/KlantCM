@@ -2,8 +2,7 @@
   import { RouterLink } from 'vue-router'
   import {Logout} from '../assets/javascript/Authenticate'
   import {GetUserById} from '../assets/javascript/Authenticate'
-  import {ChangeLanguage} from '../assets/javascript/translate';
-
+  import {switchLang} from '../assets/javascript/translate';
   defineProps({
     CompanyName: {
       type: String,
@@ -56,13 +55,13 @@
           @click="myFunction()">
         </cm-button>
         <div id="myDropdown" class="dropdown-content">
-          <a href="#" language="english" class="active" @click="ChangeLanguage()">
+          <a href="#" language="english" class="active" @click="langToggle('en')">
             <img src="../assets/english_flag.jpg" alt="">
           </a>
-          <a href="#" language="dutch" @click="ChangeLanguage()">
+          <a href="#" language="dutch" @click="langToggle('nl')">
             <img src="../assets/dutch_flag.webp" alt="">
           </a>
-          <a href="#" language="turkish" @click="ChangeLanguage()">
+          <a href="#" language="turkish" @click="langToggle('tr')">
             <img src="../assets/turkish_flag.webp" alt="">
           </a>
         </div>
@@ -93,6 +92,10 @@
         this.username = this.user[0].userName
         this.isadmin = this.user[0].isAdmin
       },
+      langToggle(lang){
+        switchLang(lang)
+        this.$router.go();
+      },
       accountBtn() {
         //Navigeer naar test view;
         this.$router.push("account");
@@ -113,8 +116,6 @@
   };
   function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
-
-    ChangeLanguage();
   }
 
 window.onclick = function(event) {

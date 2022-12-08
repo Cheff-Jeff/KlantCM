@@ -1,0 +1,16 @@
+{
+    "data": {
+        "home": {
+            "PeopleInQueue": " people are waiting in line.",
+            "StartRoom": "Start chat",
+            "Profile": "My profile",
+            "LoggingOut": "Log out",
+            "ChangeLang": "Choose language",
+            "EndChat": "End active chat",
+            "NoUsers": "NO USERS",
+            "Today": "Today",
+            "InputPlaceholder": "Start typing...",
+            "You": "You"
+        }
+    }
+}
