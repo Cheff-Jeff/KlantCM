@@ -13,5 +13,7 @@ namespace CM_API_EF.Models
         [ForeignKey("Chat")]
         public int ChatId { get; set; }
         public Chat? Chat { get; set; }
+
+        public byte []? MessageData { get; set; }
     }
 }
