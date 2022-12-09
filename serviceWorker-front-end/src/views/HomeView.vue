@@ -72,7 +72,7 @@
               </cm-conversation-divider>
               <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
-                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
+                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
                 </div>
                 <div v-else>
                   <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
@@ -128,6 +128,10 @@
 
       window.addEventListener('NewQueue',()=>{
         this.Queue = sessionStorage.getItem('Queue')
+      })
+
+      window.addEventListener('NewMedia',()=>{
+        this.AddMedia( localStorage.getItem('FromUser'))
       })
       this.GetAllActiveChats();
     },
@@ -191,6 +195,18 @@
           this.ChatWindows[User].messagealert = false;
         }
         this.UpdatePageTitle();
+      },
+      AddMedia(connection){
+        const time = new Date();
+
+        const bubble = {
+          Text: '',
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: true,
+          Img: localStorage.getItem('img')
+        };
+        let User = this.FindUser(connection)
+        this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
       },
       ActivateChat(index, connection){
         this.activeChatKey = index

@@ -75,4 +75,11 @@ export class ChatHub {
             window.dispatchEvent(NewChat)
         }, 10000);
     }
+
+    SendMedia(base64){
+        let RoomId = sessionStorage.getItem('roomId')
+        this.connection.invoke("SendMedia",base64,RoomId, null).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
 }

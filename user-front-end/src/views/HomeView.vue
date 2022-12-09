@@ -4,6 +4,7 @@
   import Input from '../components/ChatInput.vue';
   import { ChatHub } from '../assets/javascript/Chat';
   import { ratingUpload } from '../assets/javascript/Stats';
+  import { uploadImage } from '../assets/javascript/base64'
 </script>
 
 <template>
@@ -29,14 +30,14 @@
                     <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
                   </div>
                   <div v-else>
-                    <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                    <ConverzationSend :Text="chat.Text" :Time="chat.Time" :img="chat.img"/>
                   </div>
                 </div>
               </div>
             </cm-conversation>
           </div>
           <div class="footer">
-            <Input @text="sendConverzation"/>
+            <Input @text="sendConverzation" @uploadFile="uploadFile"/>
           </div>
         </div>
         <div class="review-wrapper" :class="rating">
@@ -118,6 +119,12 @@
         this.clickedBad = 'clicked'
         ratingUpload(false)
       },
+      async uploadFile(e){
+        console.log(e)
+        let img = await uploadImage(e)
+        this.chat.SendMedia(String(img))
+        this.sendMedia(img)
+      },
       checkWindow() {
         if(window.innerWidth <= 500)
         {
@@ -157,6 +164,18 @@
 
         this.newChats = [...this.newChats, bubble];
         this.chat.SendMessage(text)
+      },
+      sendMedia(File) {
+        console.log(File)
+        const time = new Date();
+
+        const bubble = {
+          Text: '', 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false,
+          img: File
+        }
+        this.newChats = [...this.newChats, bubble];
       },
       reciveConverzation(text) {
         const time = new Date();
