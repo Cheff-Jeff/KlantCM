@@ -3,9 +3,9 @@
   import ConverzationHelp from '../components/ConverzationHelp.vue';
   import Input from '../components/ChatInput.vue';
   import Header from '../components/Header.vue';
-import ChatIndexButton from '../components/ChatIndexButton.vue';
-import {UploadChat} from '../assets/javascript/UploadChat'
-import { ChangeLanguage } from '../assets/javascript/translate';
+  import ChatIndexButton from '../components/ChatIndexButton.vue';
+  import {UploadChat} from '../assets/javascript/UploadChat';
+  import { ChangeLanguage } from '../assets/javascript/translate';
 </script>
 
 <template>
@@ -19,8 +19,8 @@ import { ChangeLanguage } from '../assets/javascript/translate';
               <span class="WaitingInLine">{{Queue}}<div id="QueueText">people waiting in line.</div></span>
             </div>
             <div v-for="(chats,index) in ChatWindows">
-              <span @click="ActivateChat(index)">
-                <ChatIndexButton  :active="chats.active" :key="chats.active" />
+              <span @click="ActivateChat(index, chats.UserConnection)">
+                <ChatIndexButton  :active="chats.active" :messagealert="chats.messagealert" :key="chats.active"/>
               </span>
             </div>
           </div>
@@ -101,7 +101,8 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         OpenWorker:false,
         Room:false,
         Working:false,
-        Queue: 0
+        Queue: 0,
+        messagealert:false
       }
     },
     mounted(){
@@ -170,19 +171,26 @@ import { ChangeLanguage } from '../assets/javascript/translate';
         };
         let User = this.FindUser(connection)
         this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
+        this.ChatWindows[User].messagealert = true;
+        if(this.ChatWindows[User].active){
+          this.ChatWindows[User].messagealert = false;
+        }
       },
-      ActivateChat(index){
+      ActivateChat(index, connection){
         this.activeChatKey = index
         this.ChatWindows.forEach(element => {
           element.active =false;
         });
+        let User = this.FindUser(connection)
         this.ChatWindows[index].active = !this.ChatWindows[index].active
+        this.ChatWindows[User].messagealert = false;
       },
       AddUser(connection){
         let json = {
           newChats:[],
           UserConnection:'',
-          active:false
+          active:false,
+          messagealert:false
         }
         json.UserConnection = connection
         this.ChatWindows.push(json)
