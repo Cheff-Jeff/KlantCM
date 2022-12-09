@@ -102,7 +102,9 @@
         Room:false,
         Working:false,
         Queue: 0,
-        messagealert:false
+        messagealert:false,
+        chatlist: [],
+        newchatcounter: 0
       }
     },
     mounted(){
@@ -140,6 +142,19 @@
     sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
     },
     methods:{
+      UpdatePageTitle(){
+        this.chatlist = []
+        for (let i = 0; i < this.ChatWindows.length; i++) {
+          if(this.ChatWindows[i].messagealert == true){
+            this.chatlist.push(this.ChatWindows[i].messagealert)
+          }
+        }
+        this.newchatcounter = this.chatlist.length
+        if(this.newchatcounter >= 1){
+          document.title = `CustomerService - ${this.newchatcounter} Unread chat('s)`
+        }
+        else{document.title = `CustomerService`}
+      },
       GetAllActiveChats(){
         if(sessionStorage.getItem('ActiveChats') != null)
         {
@@ -175,6 +190,7 @@
         if(this.ChatWindows[User].active){
           this.ChatWindows[User].messagealert = false;
         }
+        this.UpdatePageTitle();
       },
       ActivateChat(index, connection){
         this.activeChatKey = index
@@ -184,6 +200,7 @@
         let User = this.FindUser(connection)
         this.ChatWindows[index].active = !this.ChatWindows[index].active
         this.ChatWindows[User].messagealert = false;
+        this.UpdatePageTitle();
       },
       AddUser(connection){
         let json = {
