@@ -67,6 +67,27 @@
                     "err": "Parola veya e-posta eşleşmedi."
                 }
             }
+        },
+        "Edit": {
+            "Heading": "Düzenlemek",
+            "form": {
+                "name": "İsim",
+                "email": "E-posta",
+                "pass": "Yeni Şifre",
+                "rePass": "Yeni şifreyi tekrar girin",
+                "cancel": "İptal",
+                "btn": "Kaydetmek",
+                "errors": {
+                    "emptyName": "İsim boş olamaz.",
+                    "errName": " geçerli bir isim değil.",
+                    "epmtyEmail": "E-posta boş olamaz.",
+                    "errEmail": " bir e-posta değildir.",
+                    "errId": "1 değerle ilgili bir sorun oluştu.",
+                    "errPass": "Şifre en az 8 karakter uzunluğunda olmalıdır.",
+                    "errRePass": "Tekrar şifresi eşleşmelidir.",
+                    "err": "Bir veya daha fazla alanda hata var. Lütfen kontrol edip tekrar deneyin."
+                }
+            }
         }
     }
 }

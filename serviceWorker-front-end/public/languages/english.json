@@ -67,6 +67,27 @@
                     "err": "Password or email did not match."
                 }
             }
+        },
+        "Edit": {
+            "Heading": "Edit",
+            "form": {
+                "name": "Name",
+                "email": "Email",
+                "pass": "New password",
+                "rePass": "Repeat new password",
+                "cancel": "Cancel",
+                "btn": "Save",
+                "errors": {
+                    "emptyName": "Name can not be empty.",
+                    "errName": " is not an valid name.",
+                    "epmtyEmail": "Email cannot be empty.",
+                    "errEmail": " is not an email.",
+                    "errId": "There was a problem with 1 of the values.",
+                    "errPass": "Password has to be atleast 8 characters long.",
+                    "errRePass": "Repeat password must match.",
+                    "err": "One or more fields have an error. Please check and try again."
+                }
+            }
         }
     }
 }

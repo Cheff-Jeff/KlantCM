@@ -67,6 +67,27 @@
                     "err": "Wachtwoord of e-mail komen niet overeen."
                 }
             }
+        },
+        "Edit": {
+            "Heading": "Bewerk",
+            "form": {
+                "name": "Naam",
+                "email": "E-mail",
+                "pass": "Niew wachtwoord",
+                "rePass": "Herhaal niew wachtwoord",
+                "cancel": "Annuleren",
+                "btn": "Opslaan",
+                "errors": {
+                    "emptyName": "Naam mag niet leeg zijn.",
+                    "errName": " is geen geldige naam.",
+                    "epmtyEmail": "E-mail mag niet leeg zijn.",
+                    "errEmail": " is geen e-mail.",
+                    "errId": "Er was een probleem met 1 van de waarden.",
+                    "errPass": "Wachtwoord moet minimaal 8 tekens lang zijn.",
+                    "errRePass": "Herhaal wachtwoord moet overeenkomen.",
+                    "err": "Een of meer velden bevatten een fout. Controleer en probeer het opnieuw."
+                }
+            }
         }
     }
 }

@@ -4,7 +4,12 @@
     validateName, validateEmail, validateId, 
     errNameEmp, errName, errEmailEmp, errEmail, errId
   } from "@/assets/javascript/validate";
+  import { getLang } from '@/assets/javascript/translate';
+  import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
 
+  defineExpose({text})
   defineProps({
     User: {
       required: true,
@@ -19,7 +24,7 @@
         <div class="row">
           <div class="col-m-12">
             <div class="title-wrap">
-              <h2>Edit {{User.userName}}</h2>
+              <h2>{{text.Edit.Heading}} {{User.userName}}</h2>
             </div>
           </div>
         </div>
@@ -30,7 +35,7 @@
             <div class="input-wrap">
               <input 
                 type="text" 
-                placeholder="Name"
+                :placeholder="text.Edit.form.name"
                 v-model="user.userName"
                 @blur="checkName"
                 @keyup="checkName" 
@@ -42,7 +47,7 @@
             <div class="input-wrap">
               <input 
                 type="email" 
-                placeholder="Email"
+                :placeholder="text.Edit.form.email"
                 v-model="user.email" 
                 @blur="checkEmail"
                 @keyup="checkEmail"
@@ -56,7 +61,7 @@
             <div class="input-wrap">
               <input 
                 type="password" 
-                placeholder="New password" 
+                :placeholder="text.Edit.form.pass" 
                 v-model="user.password"
                 @blur="checkPass"
                 @keyup="checkPass"
@@ -70,7 +75,7 @@
             <div class="input-wrap">
               <input 
                 type="password" 
-                placeholder="Repeat new password" 
+                :placeholder="text.Edit.form.rePass" 
                 v-model="repass"
                 @blur="checkRePass"
                 @keyup="checkRePass"
@@ -84,20 +89,15 @@
             <div class="btn-row">
               <div class="row">
                 <div class="col-md-6">
-                  <cm-button
-                    @click.prevent="cancel"
-                    data-label="Cancel"
-                    data-button-style="primary"
-                    data-button-size="medium">
-                  </cm-button>
+                  <button class="btn btn-primary medium" @click.prevent="cancel">
+                    {{text.Edit.form.cancel}}
+                  </button>
                 </div>
                 <div class="col-md-6">
                   <div class="btn-save">
-                    <cm-button
-                      data-label="Save"
-                      data-button-style="cta"
-                      data-button-size="medium">
-                    </cm-button>
+                    <button class="btn btn-cta medium">
+                      {{text.Edit.form.btn}}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -131,45 +131,42 @@ export default {
   },
   methods: {
     checkName(){
-      this.nameError = this.user.userName == '' ? errNameEmp() : (
-        validateName(this.user.userName) ? '' : errName(this.user.userName)
+      this.nameError = this.user.userName == '' ? text.Edit.form.errors.emptyName : (
+        validateName(this.user.userName) ? '' : this.user.userName + text.Edit.form.errors.errName
       )
     },
     checkEmail(){
-      this.emailError = this.user.email == '' ? errEmailEmp() : (
-        validateEmail(this.user.email) ? '' : errEmail(this.user.email)
+      this.emailError = this.user.email == '' ? text.Edit.form.errors.epmtyEmail : (
+        validateEmail(this.user.email) ? '' : this.user.email + text.Edit.form.errors.errEmail
       )
     },
     checkId(){
-      this.idError = this.user.id == '' ? errId() : (
-        validateId(this.user.id) ? '' : errId()
+      this.idError = this.user.id == '' ? text.Edit.form.errors.errId : (
+        validateId(this.user.id) ? '' : text.Edit.form.errors.errId
       )
     },
     checkPass(){
       this.passwordError = this.user.password != '' ? (
-        this.user.password.length < 8 ? 'Password must be at least 8 characters long.': ''
+        this.user.password.length < 8 ? text.Edit.form.errors.errPass: ''
       ) : ''
     },
     checkRePass(){
-      this.matchPassErr = this.repass == this.user.password ? '' : 'Password must match.'
+      this.matchPassErr = this.repass == this.user.password ? '' : text.Edit.form.errors.errRePass
     },
     cancel(){
       this.$emit('switch')
     },
     async submit(){
-      console.log('submit')
       this.checkName(); this.checkEmail; this.checkId; this.checkPass; this.checkRePass;
       if(this.nameError == '' && this.emailError == '' && this.idError == '' && 
       this.passwordError == ''&& this.matchPassErr == '')
       {
-        console.log('in')
         const result = await UpdateUser(this.user)
         if(result.status == 200){
-          console.log('Test')
           this.$router.go()
         }
         else{
-          submitError = 'One or more fields have an error. Please check and try again.'
+          submitError = text.Edit.form.errors.err
         }
       }
     },
