@@ -78,5 +78,17 @@ namespace CM_API_EF.Controllers
             return Ok(average);
         }
 
+        [HttpGet("GetAverageMessageByUserID")]
+        public async Task<ActionResult> GetAverageMessageByUserID(int UserID)
+        {
+            Statistics stats = new Statistics();
+            int messageCount = _context.Messages.Count(m => m.Chat.Room.UserID == UserID);
+
+            int chatCount = _context.Chats.Count(c => c.Room.UserID == UserID);
+
+            double average = stats.Average(messageCount,chatCount);
+            return Ok(average);
+        }
+
     }
 }
