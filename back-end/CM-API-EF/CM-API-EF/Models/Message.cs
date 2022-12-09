@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 
 namespace CM_API_EF.Models
 {
@@ -15,5 +16,6 @@ namespace CM_API_EF.Models
         public Chat? Chat { get; set; }
 
         public byte []? MessageData { get; set; }
+
     }
 }

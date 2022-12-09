@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CM_API_EF.Data;
 using CM_API_EF.Models;
+using System.Text.RegularExpressions;
 
 namespace CM_API_EF.Controllers
 {
@@ -78,10 +79,25 @@ namespace CM_API_EF.Controllers
         [HttpPost]
         public async Task<ActionResult<Message>> PostMessage(Message message)
         {
-            _context.Messages.Add(message);
-            await _context.SaveChangesAsync();
+            byte[] output = null;
+            try
+            {
+                string text = message.Text.Replace("data:image/png;base64,", String.Empty);
+                output = Convert.FromBase64String(text);
+                
+                Message Correctmessage = new() { MessageId = message.MessageId,Text = "",Chat=message.Chat, ChatId = message.ChatId, MessageData = output, Worker = message.Worker  };
+                _context.Messages.Add(Correctmessage);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMessage", new { id = message.MessageId }, message);
+                return CreatedAtAction("GetMessage", new { id = Correctmessage.MessageId }, Correctmessage);
+            }
+            catch (FormatException)
+            {
+                _context.Messages.Add(message);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetMessage", new { id = message.MessageId }, message);
+            }
         }
 
         // DELETE: api/Messages/5
@@ -103,13 +119,6 @@ namespace CM_API_EF.Controllers
         private bool MessageExists(int id)
         {
             return _context.Messages.Any(e => e.MessageId == id);
-        }
-
-        public static bool IsBase64String(this string s)
-        {
-            s = s.Trim();
-            return (s.Length % 4 == 0) && Regex.IsMatch(s, @"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None);
-
         }
     }
 }
