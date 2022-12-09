@@ -5,6 +5,7 @@
                 "account": "Account",
                 "chats": "Gesprekken",
                 "employees": "Werknemers",
+                "register": "Voeg een nieuwe medewerker toe.",
                 "logout": "Log uit"
             },
             "settings": {
@@ -22,11 +23,50 @@
             "Profile": "Mijn profiel",
             "LoggingOut": "Uitloggen",
             "ChangeLang": "Kies de taal",
-            "EndChat": "Beëindig gesprek",
+            "EndChat": "Sluit gesprekken",
+            "EndActive": "Beëindig actieve gesprek",
             "NoUsers": "GEEN GEBRUIKERS",
             "Today": "Vandaag",
             "InputPlaceholder": "Begin met typen...",
-            "You": "U"
+            "You": "U",
+            "Clients": "Zoek naar klanten",
+            "Looking": "Op zoek"
+        },
+        "SignUp": {
+            "Heading": "Voeg een nieuwe medewerker toe.",
+            "form": {
+                "Username": "Gebruikersnaam",
+                "Email": "E-mailadres",
+                "Password": "Wachtwoord",
+                "Repeat": "Herhaal wachtwoord",
+                "btn": "Registreer nieuwe gebruiker",
+                "errors": {
+                    "emptyUser": "Gebruikersnaam mag niet leeg zijn.",
+                    "errUser": " is geen geldige gebruikersnaam.",
+                    "emailInUse": "E-mail al bezet",
+                    "epmtyEmail": "E-mail mag niet leeg zijn.",
+                    "errEmail": " is geen e-mail.",
+                    "emptyPass": "Wachtwoord mag niet leeg zijn.",
+                    "errPass": "Wachtwoord moet minimaal 8 tekens lang zijn.",
+                    "rePass": "Herhaal wachtwoord mag niet leeg zijn.",
+                    "errRePass": "Herhaal wachtwoord moet overeenkomen.",
+                    "err": "Er is iets mis gegaan, probeer het alstublieft nogmaals!"
+                }
+            }
+        },
+        "SignIn": {
+            "Heading": "Login",
+            "form": {
+                "Email": "E-mailadres",
+                "Password": "Wachtwoord",
+                "btn": "Login",
+                "errors": {
+                    "epmtyEmail": "E-mail mag niet leeg zijn.",
+                    "errEmail": " is geen e-mail.",
+                    "emptyPass": "Wachtwoord mag niet leeg zijn.",
+                    "err": "Wachtwoord of e-mail komen niet overeen."
+                }
+            }
         }
     }
 }

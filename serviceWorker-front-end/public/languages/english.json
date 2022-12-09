@@ -5,6 +5,7 @@
                 "account": "Account",
                 "chats": "Chats",
                 "employees": "Employees",
+                "register": "Add a new employee.",
                 "logout": "Sign off"
             },
             "settings": {
@@ -17,16 +18,55 @@
             "close": "Close"
         },
         "home": {
-            "PeopleInQueue": " people are waiting in line.",
+            "PeopleInQueue": "people are waiting in line.",
             "StartRoom": "Start chat",
             "Profile": "My profile",
             "LoggingOut": "Log out",
             "ChangeLang": "Choose language",
-            "EndChat": "End active chat",
+            "EndChat": "Close chats",
+            "EndActive": "End active chat",
             "NoUsers": "NO USERS",
             "Today": "Today",
             "InputPlaceholder": "Start typing...",
-            "You": "You"
+            "You": "You",
+            "Clients": "Look for Clients",
+            "Looking": "Looking"
+        },
+        "SignUp": {
+            "Heading": "Add a new employee.",
+            "form": {
+                "Username": "Username",
+                "Email": "Email Adress",
+                "Password": "Password",
+                "Repeat": "Repeat password",
+                "btn": "Sign up new user",
+                "errors": {
+                    "emptyUser": "Username can not be empty.",
+                    "errUser": " is not an valid username.",
+                    "emailInUse": "Email already taken",
+                    "epmtyEmail": "Email cannot be empty.",
+                    "errEmail": " is not an email.",
+                    "emptyPass": "Password can not be empty.",
+                    "errPass": "Password has to be atleast 8 characters long.",
+                    "rePass": "Repeat password can not be empty.",
+                    "errRePass": "Repeat password must match.",
+                    "err": "Something went wrong, please try again!"
+                }
+            }
+        },
+        "SignIn": {
+            "Heading": "Sign In.",
+            "form": {
+                "Email": "Email Adress",
+                "Password": "Password",
+                "btn": "Sign In",
+                "errors": {
+                    "epmtyEmail": "Email cannot be empty.",
+                    "errEmail": " is not an email.",
+                    "emptyPass": "Password can not be empty.",
+                    "err": "Password or email did not match."
+                }
+            }
         }
     }
 }

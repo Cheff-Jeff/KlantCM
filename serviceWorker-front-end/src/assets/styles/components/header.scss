@@ -260,6 +260,35 @@ header {
                 }
             }
         }
+        .signup-wrapper{
+            margin-top: 20px;
+            margin-bottom: -25px;
+            .link{
+                display: flex;
+                svg{
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                }
+                p{
+                    margin-left: 20px;
+                    margin-bottom: 0px;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                }
+                &:hover, &.router-link-active{
+                    cursor: pointer;
+                    svg{
+                        fill: #007FFF;
+                        transition: fill .4s ease-in-out;
+                    }
+                    p{
+                        color: #007FFF;
+                        transition: color .4s ease-in-out;
+                    }
+                }
+            }
+        }
         .muti-chat{
             margin-top: 55px;
             h5{
