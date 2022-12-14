@@ -1,8 +1,7 @@
 <script setup>
   import {UpdateUser} from "@/assets/javascript/User";
   import {
-    validateName, validateEmail, validateId, 
-    errNameEmp, errName, errEmailEmp, errEmail, errId
+    validateName, validateEmail, validateId,
   } from "@/assets/javascript/validate";
   import { getLang } from '@/assets/javascript/translate';
   import { ref } from 'vue';

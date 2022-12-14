@@ -88,6 +88,17 @@
                     "err": "Bir veya daha fazla alanda hata var. Lütfen kontrol edip tekrar deneyin."
                 }
             }
+        },
+        "UserList": {
+            "Username": "Kullanıcı adı",
+            "Email": "e-posta",
+            "Administrator": "yönetici",
+            "Delete": {
+                "head": "Kullanıcıyı sil",
+                "confirm": "Bu kullanıcıyı silmek istediğinizden emin misiniz:",
+                "btnClose": "Kapat",
+                "btnSave": "Silmek"
+            }
         }
     }
 }

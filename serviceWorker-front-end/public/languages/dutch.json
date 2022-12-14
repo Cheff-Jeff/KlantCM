@@ -88,6 +88,17 @@
                     "err": "Een of meer velden bevatten een fout. Controleer en probeer het opnieuw."
                 }
             }
+        },
+        "UserList": {
+            "Username": "Gebruikersnaam",
+            "Email": "E-mail",
+            "Administrator": "Beheerder",
+            "Delete": {
+                "head": "Verwijder gebruiker",
+                "confirm": "Weet je zeker dat je deze gebruiker wil verwijderen:",
+                "btnClose": "Sluiten",
+                "btnSave": "Verwijderen"
+            }
         }
     }
 }
