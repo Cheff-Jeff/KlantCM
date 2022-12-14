@@ -26,8 +26,8 @@
               <span class="WaitingInLine">{{Queue}} {{text.home.PeopleInQueue}}</span>
             </div>
             <div v-for="(chats,index) in ChatWindows" :key="index">
-              <span @click="ActivateChat(index)">
-                <ChatIndexButton  :active="chats.active" :key="chats.active" />
+              <span @click="ActivateChat(index, chats.UserConnection)">
+                <ChatIndexButton  :active="chats.active" :messagealert="chats.messagealert" :key="chats.active"/>
               </span>
             </div>
           </div>
@@ -73,7 +73,7 @@
               </cm-conversation-divider>
               <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
-                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
+                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
                 </div>
                 <div v-else>
                   <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
@@ -102,7 +102,10 @@
         OpenWorker:false,
         Room:false,
         Working:false,
-        Queue: 0
+        Queue: 0,
+        messagealert:false,
+        chatlist: [],
+        newchatcounter: 0
       }
     },
     mounted(){
@@ -127,9 +130,14 @@
       window.addEventListener('NewQueue',()=>{
         this.Queue = sessionStorage.getItem('Queue')
       })
+
+      window.addEventListener('NewMedia',()=>{
+        this.AddMedia( localStorage.getItem('FromUser'))
+      })
       this.GetAllActiveChats();
     },
     beforeUnmount() {
+    this.closeWorker()
     let obj = 
     {
       openworker: this.OpenWorker,
@@ -139,6 +147,19 @@
     sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
     },
     methods:{
+      UpdatePageTitle(){
+        this.chatlist = []
+        for (let i = 0; i < this.ChatWindows.length; i++) {
+          if(this.ChatWindows[i].messagealert == true){
+            this.chatlist.push(this.ChatWindows[i].messagealert)
+          }
+        }
+        this.newchatcounter = this.chatlist.length
+        if(this.newchatcounter >= 1){
+          document.title = `CustomerService - ${this.newchatcounter} Unread chat('s)`
+        }
+        else{document.title = `CustomerService`}
+      },
       GetAllActiveChats(){
         if(sessionStorage.getItem('ActiveChats') != null)
         {
@@ -170,19 +191,40 @@
         };
         let User = this.FindUser(connection)
         this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
+        this.ChatWindows[User].messagealert = true;
+        if(this.ChatWindows[User].active){
+          this.ChatWindows[User].messagealert = false;
+        }
+        this.UpdatePageTitle();
       },
-      ActivateChat(index){
+      AddMedia(connection){
+        const time = new Date();
+
+        const bubble = {
+          Text: '',
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: true,
+          Img: localStorage.getItem('img')
+        };
+        let User = this.FindUser(connection)
+        this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
+      },
+      ActivateChat(index, connection){
         this.activeChatKey = index
         this.ChatWindows.forEach(element => {
           element.active =false;
         });
+        let User = this.FindUser(connection)
         this.ChatWindows[index].active = !this.ChatWindows[index].active
+        this.ChatWindows[User].messagealert = false;
+        this.UpdatePageTitle();
       },
       AddUser(connection){
         let json = {
           newChats:[],
           UserConnection:'',
-          active:false
+          active:false,
+          messagealert:false
         }
         json.UserConnection = connection
         this.ChatWindows.push(json)

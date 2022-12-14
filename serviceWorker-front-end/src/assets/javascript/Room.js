@@ -10,8 +10,7 @@ export async function GetMaxRoomId() {
 }
 
 export async function UploadRoom(){
-    const u = localStorage.getItem('user')
-    console.log(u)
+    const u = sessionStorage.getItem('user')
     if(u == null){
         return
     }

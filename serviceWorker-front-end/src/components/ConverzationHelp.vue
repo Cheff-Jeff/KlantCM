@@ -17,13 +17,22 @@
         rhoncus fermentum nec felis. Curabitur scelerisque nunc quis turpis blandit, vehicula efficitur nibh
         pellentesque. Nam odio neque, dictum sed purus ut, pulvinar bibendum purus. Nam vitae eleifend ex, a
         lobortis tellus.`
+    },
+    img: {
+      type : String,
+      required:false,
+      default:''
     }
   });
 </script>
 
 <template>
   <div class="row">
-      <cm-conversation-bubble>
+    <cm-conversation-bubble v-if="img != ''">
+      <img />
+      <div class="time">{{ Time }}</div>
+  </cm-conversation-bubble>
+      <cm-conversation-bubble v-else>
           {{ Text }}
           <div class="time">{{ Time }}</div>
       </cm-conversation-bubble>
@@ -32,3 +41,12 @@
       </div>
   </div>
 </template>
+
+<script>
+export default{
+  mounted(){
+    let elList = document.getElementsByTagName('img')
+    setTimeout(()=>{elList[elList.length- 1].src= this.img},2000)
+  }
+}
+</script>

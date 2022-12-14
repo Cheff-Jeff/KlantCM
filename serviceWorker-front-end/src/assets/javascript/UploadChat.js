@@ -23,8 +23,10 @@ export const UploadChat = async (connection,chat) => {
   }
 
   async function Uploadmessage(chatid,message){
+    let mesText = imgOrtext(message)
+    console.log(mesText)
    await axios.post(`${import.meta.env.VITE_API}Messages`,{
-        text: message.Text,
+        text: mesText,
         chatId: chatid,
         worker: !message.White
     }).then((res)=>{
@@ -32,5 +34,15 @@ export const UploadChat = async (connection,chat) => {
     }).catch((err)=>{
         console.log(err)
     })
+  }
+
+  function imgOrtext(message){
+    let mesText = ''
+    if(message.hasOwnProperty('Img')){
+        console.log('avg')
+        return mesText = message.Img
+    }else{
+        return mesText = message.Text
+    }
   }
 

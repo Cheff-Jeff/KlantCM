@@ -10,7 +10,13 @@ defineExpose({text})
 
 <template>
 <div class="container">
-    <table class="table table-striped table-hover">
+    <cm-button
+      @click="register"
+      data-label="Add new user"
+      data-button-style="primary"
+      data-button-size="medium">
+    </cm-button>
+    <table class="table table-striped table-hover pt-5">
         <thead>
             <tr>
                 <th>{{text.UserList.Username}}</th>
@@ -74,6 +80,9 @@ export default{
             this.userId = id;
             this.modelBody = name;
             this.modalToggle = 'open'
+        },
+        register(){
+          this.$router.push('register');
         },
         closeModal(){
             this.userId = ''
