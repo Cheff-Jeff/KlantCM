@@ -1,5 +1,15 @@
+<script setup>
+import { getLang } from '@/assets/javascript/translate';
+import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
+  defineExpose({text})
+</script>
 <template>
-  <Header/>
+  <Header
+    CompanyName="MasterChef"
+    :Text="text.header"
+  />
   <section class="login">
     <div class="container fix-padding">
       <div class="wrapper">
@@ -12,8 +22,8 @@
           <div class="col-md-6">
             <div class="inner form-wrapper">
               <div class="wrap">
-                <h1>Register</h1>
-                <RegisterForm/>
+                <h1>{{text.SignUp.Heading}}</h1>
+                <RegisterForm :Text="text.SignUp.form"/>
               </div>
             </div>
           </div>

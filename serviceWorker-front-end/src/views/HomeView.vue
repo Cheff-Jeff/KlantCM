@@ -1,24 +1,31 @@
 <script setup>
-  import ConverzationSend from '../components/ConverzationSend.vue';
-  import ConverzationHelp from '../components/ConverzationHelp.vue';
-  import Input from '../components/ChatInput.vue';
-  import Header from '../components/Header.vue';
-  import ChatIndexButton from '../components/ChatIndexButton.vue';
-  import {UploadChat} from '../assets/javascript/UploadChat';
-  import { ChangeLanguage } from '../assets/javascript/translate';
+  import ConverzationSend from '@/components/ConverzationSend.vue';
+  import ConverzationHelp from '@/components/ConverzationHelp.vue';
+  import Input from '@/components/ChatInput.vue';
+  import Header from '@/components/Header.vue';
+  import ChatIndexButton from '@/components/ChatIndexButton.vue';
+  import {UploadChat} from '@/assets/javascript/UploadChat';
+  import { getLang } from '@/assets/javascript/translate';
+  import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
+  defineExpose({text})
 </script>
 
 <template>
-<Header />
+  <Header 
+    CompanyName="MasterChef"
+    :Text="text.header"
+  />
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2 col-md-3">
         <div class="chat-controller">
           <div class="chat-btn-wrap">
             <div class="queue">
-              <span class="WaitingInLine">{{Queue}}<div id="QueueText">people waiting in line.</div></span>
+              <span class="WaitingInLine">{{Queue}} {{text.home.PeopleInQueue}}</span>
             </div>
-            <div v-for="(chats,index) in ChatWindows">
+            <div v-for="(chats,index) in ChatWindows" :key="index">
               <span @click="ActivateChat(index, chats.UserConnection)">
                 <ChatIndexButton  :active="chats.active" :messagealert="chats.messagealert" :key="chats.active"/>
               </span>
@@ -27,39 +34,33 @@
 
           <div class="chat-btn-wrap-bottom">
             <button v-if="Working" type="button" class="btn btn-light mb-3 StartRoomBtn" @click="roomStop()">
-              Stop chats
+              {{text.home.EndChat}}
             </button>
             <button v-else type="button" class="btn btn-light mb-3 StartRoomBtn" @click="roomStart()">
-              Start chats
+              {{text.home.StartRoom}}
             </button>
             
             <div v-if="Working">
-              <cm-button
-              data-label="Look for Clients"
-              data-button-style="cta"
-              data-button-size="medium"
-              @click="openWorker()"
-              v-if="OpenWorker == false">
-              </cm-button>
+              <button 
+                class="btn btn-primary" 
+                v-if="OpenWorker == false" 
+                @click="openWorker()"
+              >
+                {{text.home.Clients}}
+              </button>
 
-              <cm-button
-              data-label="Looking"
-              data-button-style="cta"
-              data-button-size="medium"
-              @click="closeWorker()"
-              v-else>
-              </cm-button>
-           
+              <button 
+                class="btn btn-primary"
+                @click="closeWorker()"
+                v-else
+              >
+                {{text.home.Looking}}
+              </button>
 
-            <cm-button
-              class="EndChatBtn"
-              data-label="End active chat"
-              data-button-style="cta"
-              data-button-size="medium"
-              data-custom-classes="terminate"
-              @click="stopChat(null)">
-            </cm-button>
-          </div>
+              <button class="btn btn-primary EndChatBtn terminate" @click="stopChat(null)">
+                {{text.home.EndActive}}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -85,7 +86,7 @@
           </cm-conversation>
         </div>
         <div class="NoUsers" v-else>
-            NO USERS 
+          {{text.home.NoUsers}}
         </div>
       </div>
     </div>

@@ -1,3 +1,11 @@
+<script setup>
+  defineProps({
+    Text: {
+      required: true,
+    }
+  })
+</script>
+
 <template>
   <form @submit.prevent="submit">
     <div class="row">
@@ -9,7 +17,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <div class="form-row">
-            <label for="email">Email address</label>
+            <label for="email">{{this.Text.Email}}</label>
             <input 
               type="email" 
               name="email" 
@@ -27,7 +35,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <div class="form-row spacing">
-            <label for="password">Password</label>
+            <label for="password">{{this.Text.Password}}</label>
             <div class="pass-wrap">
               <input 
                 :type="inputType" 
@@ -63,11 +71,9 @@
         </div>
       </div>
       <div class="col-md-12">
-        <cm-button
-          data-label="Sign In"
-          data-button-style="primary"
-          data-button-size="medium">
-        </cm-button>
+        <button type="submit" class="btn btn-primary medium">
+          {{this.Text.btn}}
+        </button>
       </div>
     </div>
   </form>
@@ -92,8 +98,8 @@ export default {
     },
     checkEmail() {
       this.loginError = this.loginError.length > 0 ? '' : ''
-      this.emailError = this.email.length == 0 ? 'Email can not be empty.' 
-      : (this.validateEmail(this.email) ? '' : this.email + ' is not an email.')
+      this.emailError = this.email.length == 0 ? this.Text.errors.epmtyEmail
+      : (this.validateEmail(this.email) ? '' : this.email + this.Text.errors.errEmail)
     },
     validateEmail(email) {
       const re = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -101,7 +107,7 @@ export default {
     },
     checkPassword() {
       this.loginError = this.loginError.length > 0 ? '' : ''
-      this.passwordError = this.password.length == 0 ? 'Password can not be empty.' : ''
+      this.passwordError = this.password.length == 0 ? this.Text.errors.emptyPass : ''
     },
     async submit() {
       this.checkEmail();
@@ -114,7 +120,7 @@ export default {
           this.$router.push("home");
         }
         else{
-          this.loginError = 'password or email did not match'
+          this.loginError = this.Text.errors.err
         }
       }
     }

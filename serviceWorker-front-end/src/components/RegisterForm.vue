@@ -1,3 +1,11 @@
+<script setup>
+  defineProps({
+    Text: {
+      required: true,
+    }
+  })
+</script>
+
 <template>
   <form @submit.prevent="submit">
     <div class="row">
@@ -9,7 +17,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <div class="form-row">
-              <label for="username">Username</label>
+              <label for="username">{{this.Text.Username}}</label>
               <input
                 type="text"
                 name="username"
@@ -27,7 +35,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <div class="form-row">
-              <label for="email">Email Adress</label>
+              <label for="email">{{this.Text.Email}}</label>
               <input
                 type="email"
                 name="email"
@@ -45,7 +53,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <div class="form-row spacing">
-              <label for="password">Password</label>
+              <label for="password">{{this.Text.Password}}</label>
               <div class="pass-wrap">
                 <input
                 :type="inputType"
@@ -83,7 +91,7 @@
           <div class="col-md-12">
           <div class="form-group">
             <div class="form-row spacing">
-              <label for="password">Password Validation</label>
+              <label for="password">{{this.Text.Repeat}}</label>
               <div class="pass-wrap">
                 <input
                 :type="inputType2"
@@ -118,11 +126,9 @@
               </div>
             </div>
             <div class="col-md-12">
-              <cm-button
-                data-label="Register new user"
-                data-button-style="primary"
-                data-button-size="medium">
-              </cm-button>
+              <button type="submit" class="btn btn-primary medium">
+                {{this.Text.btn}}
+              </button>
       </div>
           </div>
         </div>
@@ -160,8 +166,8 @@ methods:{
     },
     checkName(){
       // this.registerError = this.registerError.length > 0 ? '' : ''
-      this.usernameError = this.userName.length == 0 ? 'The username can not be empty'
-      :(this.validateName(this.userName) ? '' : this.userName + 'is not an  valid username')
+      this.usernameError = this.userName.length == 0 ? this.Text.errors.emptyUser
+      :(this.validateName(this.userName) ? '' : this.userName + this.Text.errors.errUser)
     },
     validateName(userName){
       const re = /^[a-zA-Z]+$/;
@@ -178,14 +184,14 @@ methods:{
 
             this.timer = setTimeout(async () => {
 
-            if(await DoubleEmail(this.email)){ this.emailError = 'Email already taken'}
+            if(await DoubleEmail(this.email)){ this.emailError = this.Text.errors.emailInUse }
             else{ this.emailError = ''}
 
         }, 1200);
         }
         
-      this.emailError = this.email.length == 0 ? 'Email cannot be empty.' 
-      : (this.validateEmail(this.email) ? '' : this.email + ' is not an email.')
+      this.emailError = this.email.length == 0 ? this.Text.errors.epmtyEmail 
+      : (this.validateEmail(this.email) ? '' : this.email + this.Text.errors.errEmail)
     },
     validateEmail(email) {
       const re = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -193,14 +199,14 @@ methods:{
     },
     checkPassword() {
       // this.registerError = this.registerError.length > 0 ? '' : ''
-      this.passwordError = this.password.length == 0 ? 'Password can not be empty.' : ''
-      this.passwordError = this.password.length <= 7 ? 'Password has to be atleast 8 characters long' : ''
+      this.passwordError = this.password.length == 0 ? this.Text.errors.emptyPass : ''
+      this.passwordError = this.password.length <= 7 ? this.Text.errors.errPass : ''
       this.RePasswordValidation();
     },
     RePasswordValidation(){
         // this.registerError = this.registerError.length > 0 ? '' : ''
-        this.repasswordError = this.repassword.length == 0 ? 'Repassword cannot be empty.' :
-        this.repasswordError = this.password != this.repassword ? 'Password and RePassword do not match.' : ''
+        this.repasswordError = this.repassword.length == 0 ? this.Text.errors.rePass :
+        this.repasswordError = this.password != this.repassword ? this.Text.errors.errRePass : ''
     },
     submit(){
         this.checkName();
@@ -212,7 +218,7 @@ methods:{
           this.$router.push({name: 'home'});
         }
         else{
-            this.registerError = 'Something went wrong, please try again!'
+            this.registerError = this.Text.errors.err
         }
         
     }
