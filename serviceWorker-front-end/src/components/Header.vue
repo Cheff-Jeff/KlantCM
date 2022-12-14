@@ -111,7 +111,7 @@
             <h5>{{Text.settings.workstyle}}</h5>
             <div class="single slect-chat-wrapper active">
               <div class="image-wrapper">
-                <img src="/images/Single.png">
+                <img src="/images/single.jpg">
               </div>
               <p>{{Text.settings.single}}</p>
             </div>
