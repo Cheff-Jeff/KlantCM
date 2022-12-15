@@ -66,8 +66,8 @@
       </div>
       <div class="col-lg-10 col-md-9 not-bootstrap">
         <div class="converzation-wrap" v-if="ChatWindows.length != 0">
-          <cm-conversation style="height: 85vh">
-            <div class="body">
+          <cm-conversation style="height: 85vh" id="chatWindow">
+            <div id="chatWindow" class="body">
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>
@@ -158,6 +158,15 @@
     sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
     },
     methods:{
+      scroll(){
+        let e = document.getElementById('chatWindow')
+        e.style.scrollBehavior = 'smooth'
+        if(e){
+          setTimeout(()=>{
+            e.scrollTo(0, e.scrollHeight)
+          }, 50)
+        }
+      },
       UpdatePageTitle(){
         this.chatlist = []
         for (let i = 0; i < this.ChatWindows.length; i++) {
@@ -191,6 +200,7 @@
 
         this.ChatWindows[this.activeChatKey].newChats.push(bubble);
         this.chat.SendMessage(text,this.ChatWindows[this.activeChatKey].UserConnection)
+        this.scroll();
       },
       reciveConverzation(text, connection) {
         const time = new Date();
@@ -215,6 +225,7 @@
           working: this.Working,
         }
         sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
+        this.scroll();
       },
       AddMedia(connection){
         const time = new Date();
