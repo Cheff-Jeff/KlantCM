@@ -214,6 +214,7 @@ namespace SignalRHub.Hubs
             if (r == null) return;
             r.employee.IsOpen = true;
             _Roomdata.Update(r, RoomId);
+            if (r.EndUserIds.Count > 8) return; //Config stuff
             await AddEndUserToRoom(null, r);
         }
 
