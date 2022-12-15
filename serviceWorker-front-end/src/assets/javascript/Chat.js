@@ -13,7 +13,15 @@ export class ChatHub {
             await this.connect();
         })
 
-        this.connect()
+        this.connect().then(()=>{
+            if(localStorage.getItem('roomId') != null){
+                this.connection.invoke("ConnectEmployee",Number(localStorage.getItem('roomId'))).catch((err)=>{
+                    console.log(err)
+                })
+            }
+        })
+
+
 
         this.connection.on("ReceiveMessageWorker", function (message, connection) {
             //Here we have to input revieved message in correct chat

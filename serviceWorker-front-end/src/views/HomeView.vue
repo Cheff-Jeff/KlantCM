@@ -26,7 +26,7 @@
               <span class="WaitingInLine">{{Queue}} {{text.home.PeopleInQueue}}</span>
             </div>
             <div v-for="(chats,index) in ChatWindows" :key="index">
-              <span @click="ActivateChat(index, chats.UserConnection)">
+              <span @click="ActivateChat(index)">
                 <ChatIndexButton  :active="chats.active" :messagealert="chats.messagealert" :key="chats.active"/>
               </span>
             </div>
@@ -73,10 +73,10 @@
               </cm-conversation-divider>
               <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
-                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
+                    <ConverzationHelp :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
                 </div>
                 <div v-else>
-                  <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                    <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
                 </div>
               </div>
             </div>
@@ -105,7 +105,8 @@
         Queue: 0,
         messagealert:false,
         chatlist: [],
-        newchatcounter: 0
+        newchatcounter: 0,
+        chattest: []
       }
     },
     mounted(){
@@ -133,6 +134,16 @@
 
       window.addEventListener('NewMedia',()=>{
         this.AddMedia( localStorage.getItem('FromUser'))
+      })
+
+      window.onbeforeunload = (()=>{
+        let obj = 
+        {
+          openworker: this.OpenWorker,
+          chat: this.ChatWindows,
+          working: this.Working,
+        }
+        sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
       })
       this.GetAllActiveChats();
     },
@@ -206,11 +217,18 @@
           this.ChatWindows[User].messagealert = false;
         }
         this.UpdatePageTitle();
+
+        let obj = 
+        {
+          openworker: this.OpenWorker,
+          chat: this.ChatWindows,
+          working: this.Working,
+        }
+        sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
         this.scroll();
       },
       AddMedia(connection){
         const time = new Date();
-
         const bubble = {
           Text: '',
           Time: `${time.getHours()}:${time.getMinutes()}`, 
@@ -220,14 +238,14 @@
         let User = this.FindUser(connection)
         this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
       },
-      ActivateChat(index, connection){
+      ActivateChat(index){
+        if(this.ChatWindows.length == 0) return
         this.activeChatKey = index
         this.ChatWindows.forEach(element => {
           element.active =false;
         });
-        let User = this.FindUser(connection)
         this.ChatWindows[index].active = !this.ChatWindows[index].active
-        this.ChatWindows[User].messagealert = false;
+        this.ChatWindows[index].messagealert = false;
         this.UpdatePageTitle();
       },
       AddUser(connection){
@@ -251,29 +269,19 @@
           }
         }
       },
-      RemoveUser(Connection){ 
+      async RemoveUser(Connection){ 
         const i = this.FindUser(Connection)
-        this.SaveChat(i, Connection)
-        this.ChatWindows[i].newChats = []
-        this.ChatWindows[i].UserConnection = ''
-        this.ActivateChat(0)
+        await this.SaveChat(i, Connection)
         this.ChatWindows.splice(i,1)
+        this.ActivateChat(0)
         window.AddErrorNotification('User left')
       },
-      stopChat(connection){
+      async stopChat(connection){
         if (connection == null){
           connection = this.ChatWindows[this.activeChatKey].UserConnection
         }
-        this.RemoveUser(connection)
-        this.chat.StopRoom(connection)
-
-        let obj = 
-        {
-          openworker: this.OpenWorker,
-          chat: this.ChatWindows,
-          working: this.Working,
-        }
-        sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
+        await this.RemoveUser(connection)
+        await this.chat.StopRoom(connection)
       },
       openWorker(){
           this.OpenWorker = true;
@@ -288,19 +296,23 @@
         this.Working = true
 
       },
-      roomStop(){
+      async roomStop(){
+        // for (let index = 0; index < this.ChatWindows.length; index++) {
+        //   console.log(index+'Pls doe het waarom skkip je er een')
+        //   const element = this.ChatWindows[index];
+        //   console.log(element)
+        //   await this.stopChat(element.UserConnection)
+        // }
+        while (this.ChatWindows.length != 0){
+          console.log(this.ChatWindows[0])
+          await this.stopChat(this.ChatWindows[0].UserConnection)
+        } 
+        this.Working = false
         this.chat.StopRoom()
-          if (this.ChatWindows.length > 0){
-            this.ChatWindows.forEach(chatwin => {
-              this.stopChat(chatwin.UserConnection)
-            })
-          }
-          this.ChatWindows = []
-          this.Working = false
       },
-      SaveChat(i){
+      async SaveChat(i){
         if(this.ChatWindows[i].newChats.length != 0){
-          UploadChat(this.ChatWindows[i].UserConnection, this.ChatWindows[i].newChats)
+          await UploadChat(this.ChatWindows[i].UserConnection, this.ChatWindows[i].newChats)
         }
       }
     }

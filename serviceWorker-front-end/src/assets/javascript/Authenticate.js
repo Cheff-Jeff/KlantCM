@@ -20,6 +20,12 @@ export const Logout = () => {
   const user = JSON.parse(sessionStorage.getItem('user'))
   if(user !== null){
     sessionStorage.removeItem('user');
+    
+
+    localStorage.removeItem('FromUser');
+    localStorage.removeItem('User');
+    localStorage.removeItem('NewChat');
+    localStorage.removeItem('roomId');
     return true;
   }
   else{

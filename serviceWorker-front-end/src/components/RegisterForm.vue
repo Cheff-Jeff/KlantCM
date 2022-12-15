@@ -170,7 +170,7 @@ methods:{
       :(this.validateName(this.userName) ? '' : this.userName + this.Text.errors.errUser)
     },
     validateName(userName){
-      const re = /^[a-zA-Z]+$/;
+      const re = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*$/;
       return re.test(userName)
     },
     checkEmail() {
