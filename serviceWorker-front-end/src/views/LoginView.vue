@@ -31,6 +31,14 @@ import { ref } from 'vue';
   </section>
 </template>
 
+<script>
+export default{
+  mounted(){
+    sessionStorage.removeItem('ActiveChats');
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   @import "../assets/styles/pages/login.scss";
 </style>

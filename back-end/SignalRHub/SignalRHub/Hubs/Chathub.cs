@@ -179,7 +179,7 @@ namespace SignalRHub.Hubs
                         r.EndUserIds.Remove(e.ConnectionString);
                         await Clients.Client(r.employee.ConnectionString).SendAsync("DisconnectUser", e.ConnectionString);
                     }
-                    else if(e.RoomId == 1 && e.inRoom == true)
+                    else if(e.inRoom == false)
                     {
                         Count--;
                     }
