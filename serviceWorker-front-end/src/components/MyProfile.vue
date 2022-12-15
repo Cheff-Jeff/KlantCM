@@ -16,9 +16,8 @@
   <div class="container">
     <h1>My account</h1>              
     <div class="color-black">
-      Name: {{user.userName}}
-      <br>
-      Email: {{user.email}}
+      <div id="myname"></div>
+      <div id="myemail"></div>
     </div>
     <div class="editBtn"><button @click="openEdit()"><img src="../assets/Images/editIcon.png" alt=""></button></div>
   </div>
@@ -67,9 +66,13 @@ export default {
     }
   },
   mounted() {
-    console.log(this.user)
+    this.fillDetails()
   },
   methods: {
+    fillDetails() {
+      document.getElementById("myname").innerHTML = "Name: <b>" + this.user.userName + "</b>"
+      document.getElementById("myemail").innerHTML = "Email: <b>" + this.user.email + "</b>"
+    },
     openEdit() {
       // this.nameError = "hallo"
 
@@ -79,13 +82,10 @@ export default {
       }
       else {
         document.getElementById("editForm").style.display = "none"
+
+
       }
     },
-    // editUser() {
-    //   this.user.userName = document.getElementById("name").value
-    //   this.user.email = document.getElementById("email").value
-    //   UpdateUser(this.user)
-    // },
     checkName(){
       this.nameError = this.user.userName == '' ? errNameEmp() : (
         validateName(this.user.userName) ? '' : errName(this.user.userName)
@@ -102,12 +102,11 @@ export default {
     async editUser(){
       console.log('submit')
       this.checkName(); this.checkPass; this.checkRePass;
-      if(this.nameError == '' && this.passwordError == ''&& this.matchPassErr == '')
+      if(this.nameError == '' && this.passwordError == '' && this.matchPassErr == '')
       {
         const result = await UpdateUser(this.user)
         if(result.status == 200){
           this.submitError = 'Your account has been updated!'
-          // this.$router.go()
         }
         else{
           submitError = 'One or more fields have an error. Please check and try again.'
