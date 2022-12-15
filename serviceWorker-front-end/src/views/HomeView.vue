@@ -135,6 +135,16 @@
       window.addEventListener('NewMedia',()=>{
         this.AddMedia( localStorage.getItem('FromUser'))
       })
+
+      window.onbeforeunload = (()=>{
+        let obj = 
+        {
+          openworker: this.OpenWorker,
+          chat: this.ChatWindows,
+          working: this.Working,
+        }
+        sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
+      })
       this.GetAllActiveChats();
     },
     beforeUnmount() {

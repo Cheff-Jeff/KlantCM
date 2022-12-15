@@ -159,6 +159,17 @@ namespace SignalRHub.Hubs
             await Clients.All.SendAsync("Count", Count);
             await Clients.All.SendAsync("GetQueue", Count);
         }
+        /// <summary>
+        /// Function to use when Emplyee refreshed. This is to keep the same room attached to him.
+        /// </summary>
+        /// <returns></returns>
+        public async Task ConnectEmployee(int RoomId)
+        {
+            Room r = _Roomdata.get(RoomId);
+            if (r == null) return;
+            r.employee.ConnectionString = Context.ConnectionId;
+            _Roomdata.Update(r, r.Id);
+        }
 
         /// <summary>
         /// Removes the user when they disconnect
