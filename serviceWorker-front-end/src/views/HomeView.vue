@@ -66,7 +66,7 @@
       </div>
       <div class="col-lg-10 col-md-9 not-bootstrap">
         <div class="converzation-wrap" v-if="ChatWindows.length != 0">
-          <cm-conversation style="height: 85vh">
+          <cm-conversation style="height: 85vh" id="chatWindow">
             <div id="chatWindow" class="body">
               <cm-conversation-divider>
                 <span class="title"> Today </span>
@@ -108,26 +108,11 @@
         newchatcounter: 0
       }
     },
-    // watch: {
-    //   ChatWindows(){
-    //     let e = document.getElementById('chatWindow')
-    //     console.log(e)
-    //     console.log("Hier")
-    //     // if(e){
-    //     //   e.scrollTop = e.scrollHeight
-    //     //   console.log("in")
-    //     //   console.log(e)
-    //     //   console.log(e.scrollHeight)
-    //     //   console.log(e.scrollTop)
-    //     // }
-    //   }
-    // },
     mounted(){
       this.chat = this.$chat
 
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
-        this.scroll();
       })
       window.addEventListener('NewUser',()=>{
         this.AddUser(localStorage.getItem('User'))
@@ -163,15 +148,12 @@
     },
     methods:{
       scroll(){
-        console.log("in")
         let e = document.getElementById('chatWindow')
-        console.log(e)
+        e.style.scrollBehavior = 'smooth'
         if(e){
-          e.scrollTop = e.scrollHeight
-          console.log("in")
-          console.log(e)
-          console.log(e.scrollHeight)
-          console.log(e.scrollTop)
+          setTimeout(()=>{
+            e.scrollTo(0, e.scrollHeight)
+          }, 50)
         }
       },
       UpdatePageTitle(){
@@ -207,6 +189,7 @@
 
         this.ChatWindows[this.activeChatKey].newChats.push(bubble);
         this.chat.SendMessage(text,this.ChatWindows[this.activeChatKey].UserConnection)
+        this.scroll();
       },
       reciveConverzation(text, connection) {
         const time = new Date();
@@ -223,6 +206,7 @@
           this.ChatWindows[User].messagealert = false;
         }
         this.UpdatePageTitle();
+        this.scroll();
       },
       AddMedia(connection){
         const time = new Date();
