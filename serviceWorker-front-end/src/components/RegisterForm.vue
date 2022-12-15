@@ -164,7 +164,7 @@ methods:{
       :(this.validateName(this.userName) ? '' : this.userName + 'is not an  valid username')
     },
     validateName(userName){
-      const re = /^[a-zA-Z]+$/;
+      const re = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]*$/;
       return re.test(userName)
     },
     checkEmail() {

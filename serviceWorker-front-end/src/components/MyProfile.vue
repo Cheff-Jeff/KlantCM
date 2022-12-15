@@ -1,5 +1,9 @@
 <script setup>
-import { UpdateUser } from '../assets/javascript/User';
+  import { UpdateUser } from '../assets/javascript/User';
+  import {
+    validateName, validateEmail, validateId, 
+    errNameEmp, errName, errEmailEmp, errEmail, errId
+  } from "@/assets/javascript/validate";
 
   defineProps({
     User: {
@@ -21,8 +25,22 @@ import { UpdateUser } from '../assets/javascript/User';
   <div class="formPopup" id="editForm" style="display: none;">
     <h3>Edit my account</h3>
     <form @submit="editUser()">
-      <input type="text" name="name" id="name" placeholder="Name" :value="user.userName">
-      <input type="email" name="email" id="email" placeholder="Email" :value="user.email">
+      <input type="text" name="name" id="name" placeholder="Name" v-model="user.userName" @blur="checkName" @keyup="checkName">
+      <div class="error">
+        <span class="small">{{nameError}}</span>
+      </div>
+      <input type="password" name="password" id="password" placeholder="New password" v-model="user.password" @blur="checkPass" @keyup="checkPass">
+      <div class="error">
+        <span class="small">
+          {{passwordError}}
+        </span>
+      </div>
+      <input type="password" name="repassword" id="repassword" placeholder="Repeat new password" v-model="this.repass" @blur="checkRePass" @keyup="checkRePass">
+      <div class="error">
+        <span class="small">
+          {{matchPassErr}}
+        </span>
+      </div>
       <button type="submit">Confirm</button>
     </form>
   </div>
@@ -53,19 +71,48 @@ export default {
   },
   methods: {
     openEdit() {
-    var formDisplay = document.getElementById("editForm").style.display
-    if(formDisplay == "none") {
-      document.getElementById("editForm").style.display = "block"
-    }
-    else {
-      document.getElementById("editForm").style.display = "none"
-    }
-      // document.getElementById("editForm").style.display = "block"
+      // this.nameError = "hallo"
+
+      var formDisplay = document.getElementById("editForm").style.display
+      if(formDisplay == "none") {
+        document.getElementById("editForm").style.display = "block"
+      }
+      else {
+        document.getElementById("editForm").style.display = "none"
+      }
     },
-    editUser() {
-      this.user.userName = document.getElementById("name").value
-      this.user.email = document.getElementById("email").value
-      UpdateUser(this.user)
+    // editUser() {
+    //   this.user.userName = document.getElementById("name").value
+    //   this.user.email = document.getElementById("email").value
+    //   UpdateUser(this.user)
+    // },
+    checkName(){
+      this.nameError = this.user.userName == '' ? errNameEmp() : (
+        validateName(this.user.userName) ? '' : errName(this.user.userName)
+      )
+    },
+    checkPass(){
+      this.passwordError = this.user.password != '' ? (
+        this.user.password.length < 8 ? 'Password must be at least 8 characters long.': ''
+      ) : ''
+    },
+    checkRePass(){
+      this.matchPassErr = this.repass == this.user.password ? '' : 'Password must match.'
+    },
+    async editUser(){
+      console.log('submit')
+      this.checkName(); this.checkPass; this.checkRePass;
+      if(this.nameError == '' && this.passwordError == ''&& this.matchPassErr == '')
+      {
+        const result = await UpdateUser(this.user)
+        if(result.status == 200){
+          this.submitError = 'Your account has been updated!'
+          // this.$router.go()
+        }
+        else{
+          submitError = 'One or more fields have an error. Please check and try again.'
+        }
+      }
     }
   }
 }
