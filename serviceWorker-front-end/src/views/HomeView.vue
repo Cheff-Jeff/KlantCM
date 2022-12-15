@@ -72,10 +72,10 @@
               </cm-conversation-divider>
               <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
-                  <ConverzationHelp :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
+                    <ConverzationHelp :Text="chat.Text" :Time="chat.Time" :img="chat.Img"/>
                 </div>
                 <div v-else>
-                  <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                    <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
                 </div>
               </div>
             </div>
@@ -104,7 +104,8 @@
         Queue: 0,
         messagealert:false,
         chatlist: [],
-        newchatcounter: 0
+        newchatcounter: 0,
+        chattest: []
       }
     },
     mounted(){
@@ -195,6 +196,14 @@
           this.ChatWindows[User].messagealert = false;
         }
         this.UpdatePageTitle();
+
+        let obj = 
+        {
+          openworker: this.OpenWorker,
+          chat: this.ChatWindows,
+          working: this.Working,
+        }
+        sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
       },
       AddMedia(connection){
         const time = new Date();

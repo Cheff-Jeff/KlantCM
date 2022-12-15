@@ -28,12 +28,8 @@ export default{
             manager: 'open',
             edit: '',
             user: '',
-            userlist: []
+            userlist: [],
         }
-    },
-    components:{
-        Header,
-        UserList
     },
     mounted(){
         this.FillUserList()
