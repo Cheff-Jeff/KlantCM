@@ -1,0 +1,104 @@
+{
+    "data": {
+        "header": {
+            "nav": {
+                "account": "Hesap",
+                "chats": "Sohbetler",
+                "employees": "Çalışanlar",
+                "register": "Yeni bir çalışan ekleyin.",
+                "logout": "Oturumu kapat"
+            },
+            "settings": {
+                "head": "Ayarlar",
+                "Lang": "Diller",
+                "workstyle": "çalışma stilleri",
+                "single": "tek sohbet",
+                "multi": "çoklu sohbet"
+            },
+            "close": "Kapat"
+        },
+        "home": {
+            "PeopleInQueue": " kişi sırada bekliyor.",
+            "StartRoom": "sohbeti başlat",
+            "Profile": "Benim profilim",
+            "LoggingOut": "Çıkış Yap",
+            "ChangeLang": "Dil seçiniz",
+            "EndChat": "sohbetleri kapat",
+            "EndActive": "Etkin sohbeti sonlandır",
+            "NoUsers": "KULLANICI YOK",
+            "Today": "Bugün",
+            "InputPlaceholder": "Yazmaya başlayın...",
+            "You": "Sen",
+            "Clients": "Müşteri Ara",
+            "Looking": "Bakıyor"
+        },
+        "SignUp": {
+            "Heading": "Yeni bir çalışan ekleyin.",
+            "form": {
+                "Username": "Username",
+                "Email": "Kullanıcı adı",
+                "Password": "Şifre",
+                "Repeat": "Şifreyi tekrar girin",
+                "btn": "yeni kullanıcı kaydol",
+                "errors": {
+                    "emptyUser": "Kullanıcı adı boş olamaz.",
+                    "errUser": " geçerli bir kullanıcı adı değil.",
+                    "emailInUse": "E-posta Zaten alındı",
+                    "epmtyEmail": "E-posta boş olamaz.",
+                    "errEmail": " bir e-posta değildir.",
+                    "emptyPass": "Şifre boş olamaz.",
+                    "errPass": "Şifre en az 8 karakter uzunluğunda olmalıdır.",
+                    "rePass": "Şifre tekrarı boş bırakılamaz.",
+                    "errRePass": "Tekrar şifresi eşleşmelidir.",
+                    "err": "Bir şeyler ters gitti lütfen tekrar deneyin!"
+                }
+            }
+        },
+        "SignIn": {
+            "Heading": "Kayıt olmak.",
+            "form": {
+                "Email": "Kullanıcı adı",
+                "Password": "Şifre",
+                "btn": "Kayıt olmak",
+                "errors": {
+                    "epmtyEmail": "E-posta boş olamaz.",
+                    "errEmail": " bir e-posta değildir.",
+                    "emptyPass": "Şifre boş olamaz.",
+                    "err": "Parola veya e-posta eşleşmedi."
+                }
+            }
+        },
+        "Edit": {
+            "Heading": "Düzenlemek",
+            "form": {
+                "name": "İsim",
+                "email": "E-posta",
+                "pass": "Yeni Şifre",
+                "rePass": "Yeni şifreyi tekrar girin",
+                "cancel": "İptal",
+                "btn": "Kaydetmek",
+                "errors": {
+                    "emptyName": "İsim boş olamaz.",
+                    "errName": " geçerli bir isim değil.",
+                    "epmtyEmail": "E-posta boş olamaz.",
+                    "errEmail": " bir e-posta değildir.",
+                    "errId": "1 değerle ilgili bir sorun oluştu.",
+                    "errPass": "Şifre en az 8 karakter uzunluğunda olmalıdır.",
+                    "errRePass": "Tekrar şifresi eşleşmelidir.",
+                    "err": "Bir veya daha fazla alanda hata var. Lütfen kontrol edip tekrar deneyin."
+                }
+            }
+        },
+        "UserList": {
+            "Username": "Kullanıcı adı",
+            "Email": "e-posta",
+            "Administrator": "yönetici",
+            "Delete": {
+                "head": "Kullanıcıyı sil",
+                "confirm": "Bu kullanıcıyı silmek istediğinizden emin misiniz:",
+                "btnClose": "Kapat",
+                "btnSave": "Silmek"
+            }
+        }
+    }
+}

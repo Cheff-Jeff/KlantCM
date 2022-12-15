@@ -1,0 +1,104 @@
+{
+    "data": {
+        "header": {
+            "nav": {
+                "account": "Account",
+                "chats": "Chats",
+                "employees": "Employees",
+                "register": "Add a new employee.",
+                "logout": "Sign off"
+            },
+            "settings": {
+                "head": "Settings",
+                "Lang": "Languages",
+                "workstyle": "Work styles",
+                "single": "Single chat",
+                "multi": "Multi chat"
+            },
+            "close": "Close"
+        },
+        "home": {
+            "PeopleInQueue": "people are waiting in line.",
+            "StartRoom": "Start chat",
+            "Profile": "My profile",
+            "LoggingOut": "Log out",
+            "ChangeLang": "Choose language",
+            "EndChat": "Close chats",
+            "EndActive": "End active chat",
+            "NoUsers": "NO USERS",
+            "Today": "Today",
+            "InputPlaceholder": "Start typing...",
+            "You": "You",
+            "Clients": "Look for Clients",
+            "Looking": "Looking"
+        },
+        "SignUp": {
+            "Heading": "Add a new employee.",
+            "form": {
+                "Username": "Username",
+                "Email": "Email Adress",
+                "Password": "Password",
+                "Repeat": "Repeat password",
+                "btn": "Sign up new user",
+                "errors": {
+                    "emptyUser": "Username can not be empty.",
+                    "errUser": " is not an valid username.",
+                    "emailInUse": "Email already taken",
+                    "epmtyEmail": "Email cannot be empty.",
+                    "errEmail": " is not an email.",
+                    "emptyPass": "Password can not be empty.",
+                    "errPass": "Password has to be atleast 8 characters long.",
+                    "rePass": "Repeat password can not be empty.",
+                    "errRePass": "Repeat password must match.",
+                    "err": "Something went wrong, please try again!"
+                }
+            }
+        },
+        "SignIn": {
+            "Heading": "Sign In.",
+            "form": {
+                "Email": "Email Adress",
+                "Password": "Password",
+                "btn": "Sign In",
+                "errors": {
+                    "epmtyEmail": "Email cannot be empty.",
+                    "errEmail": " is not an email.",
+                    "emptyPass": "Password can not be empty.",
+                    "err": "Password or email did not match."
+                }
+            }
+        },
+        "Edit": {
+            "Heading": "Edit",
+            "form": {
+                "name": "Name",
+                "email": "Email",
+                "pass": "New password",
+                "rePass": "Repeat new password",
+                "cancel": "Cancel",
+                "btn": "Save",
+                "errors": {
+                    "emptyName": "Name can not be empty.",
+                    "errName": " is not an valid name.",
+                    "epmtyEmail": "Email cannot be empty.",
+                    "errEmail": " is not an email.",
+                    "errId": "There was a problem with 1 of the values.",
+                    "errPass": "Password has to be atleast 8 characters long.",
+                    "errRePass": "Repeat password must match.",
+                    "err": "One or more fields have an error. Please check and try again."
+                }
+            }
+        },
+        "UserList": {
+            "Username": "Username",
+            "Email": "Email",
+            "Administrator": "Administrator",
+            "Delete": {
+                "head": "Delete User",
+                "confirm": "Are you sure you want to delete",
+                "btnClose": "Close",
+                "btnSave": "Delete"
+            }
+        }
+    }
+}

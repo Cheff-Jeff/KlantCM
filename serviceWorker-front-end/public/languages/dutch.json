@@ -1,0 +1,104 @@
+{
+    "data": {
+        "header": {
+            "nav": {
+                "account": "Account",
+                "chats": "Gesprekken",
+                "employees": "Werknemers",
+                "register": "Voeg een nieuwe medewerker toe.",
+                "logout": "Log uit"
+            },
+            "settings": {
+                "head": "Instellingen",
+                "Lang": "Talen",
+                "workstyle": "Werkstijlen",
+                "single": "Enkel gesprek",
+                "multi": "Enkele gesprekken"
+            },
+            "close": "Sluiten"
+        },
+        "home": {
+            "PeopleInQueue": "  Mensen wachten in de rij.",
+            "StartRoom": "Start gesprek",
+            "Profile": "Mijn profiel",
+            "LoggingOut": "Uitloggen",
+            "ChangeLang": "Kies de taal",
+            "EndChat": "Sluit gesprekken",
+            "EndActive": "Beëindig actieve gesprek",
+            "NoUsers": "GEEN GEBRUIKERS",
+            "Today": "Vandaag",
+            "InputPlaceholder": "Begin met typen...",
+            "You": "U",
+            "Clients": "Zoek naar klanten",
+            "Looking": "Op zoek"
+        },
+        "SignUp": {
+            "Heading": "Voeg een nieuwe medewerker toe.",
+            "form": {
+                "Username": "Gebruikersnaam",
+                "Email": "E-mailadres",
+                "Password": "Wachtwoord",
+                "Repeat": "Herhaal wachtwoord",
+                "btn": "Registreer nieuwe gebruiker",
+                "errors": {
+                    "emptyUser": "Gebruikersnaam mag niet leeg zijn.",
+                    "errUser": " is geen geldige gebruikersnaam.",
+                    "emailInUse": "E-mail al bezet",
+                    "epmtyEmail": "E-mail mag niet leeg zijn.",
+                    "errEmail": " is geen e-mail.",
+                    "emptyPass": "Wachtwoord mag niet leeg zijn.",
+                    "errPass": "Wachtwoord moet minimaal 8 tekens lang zijn.",
+                    "rePass": "Herhaal wachtwoord mag niet leeg zijn.",
+                    "errRePass": "Herhaal wachtwoord moet overeenkomen.",
+                    "err": "Er is iets mis gegaan, probeer het alstublieft nogmaals!"
+                }
+            }
+        },
+        "SignIn": {
+            "Heading": "Login",
+            "form": {
+                "Email": "E-mailadres",
+                "Password": "Wachtwoord",
+                "btn": "Login",
+                "errors": {
+                    "epmtyEmail": "E-mail mag niet leeg zijn.",
+                    "errEmail": " is geen e-mail.",
+                    "emptyPass": "Wachtwoord mag niet leeg zijn.",
+                    "err": "Wachtwoord of e-mail komen niet overeen."
+                }
+            }
+        },
+        "Edit": {
+            "Heading": "Bewerk",
+            "form": {
+                "name": "Naam",
+                "email": "E-mail",
+                "pass": "Niew wachtwoord",
+                "rePass": "Herhaal niew wachtwoord",
+                "cancel": "Annuleren",
+                "btn": "Opslaan",
+                "errors": {
+                    "emptyName": "Naam mag niet leeg zijn.",
+                    "errName": " is geen geldige naam.",
+                    "epmtyEmail": "E-mail mag niet leeg zijn.",
+                    "errEmail": " is geen e-mail.",
+                    "errId": "Er was een probleem met 1 van de waarden.",
+                    "errPass": "Wachtwoord moet minimaal 8 tekens lang zijn.",
+                    "errRePass": "Herhaal wachtwoord moet overeenkomen.",
+                    "err": "Een of meer velden bevatten een fout. Controleer en probeer het opnieuw."
+                }
+            }
+        },
+        "UserList": {
+            "Username": "Gebruikersnaam",
+            "Email": "E-mail",
+            "Administrator": "Beheerder",
+            "Delete": {
+                "head": "Verwijder gebruiker",
+                "confirm": "Weet je zeker dat je deze gebruiker wil verwijderen:",
+                "btnClose": "Sluiten",
+                "btnSave": "Verwijderen"
+            }
+        }
+    }
+}

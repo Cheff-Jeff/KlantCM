@@ -1,11 +1,19 @@
 <script setup>
-import {GetUserById} from '../assets/javascript/User'
-import Header from '../components/Header.vue';
+  import Header from '../components/Header.vue';
+  import { getLang } from '@/assets/javascript/translate';
+  import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
+  defineExpose({text})
 import MyProfileVue from '../components/MyProfile.vue';
+import {GetUserById} from '../assets/javascript/User'
 </script>
 
 <template>
-  <Header />
+  <Header 
+    CompanyName="MasterChef"
+    :Text="text.header"
+  />
   <MyProfileVue v-if="user" :User="user[0]" />
 </template>
 
