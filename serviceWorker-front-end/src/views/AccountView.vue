@@ -2,11 +2,11 @@
   import Header from '../components/Header.vue';
   import { getLang } from '@/assets/javascript/translate';
   import { ref } from 'vue';
+import MyProfileVue from '../components/MyProfile.vue';
+import {GetUserById} from '../assets/javascript/User'
   const text = ref(null);
   text.value = getLang();
   defineExpose({text})
-import MyProfileVue from '../components/MyProfile.vue';
-import {GetUserById} from '../assets/javascript/User'
 </script>
 
 <template>
