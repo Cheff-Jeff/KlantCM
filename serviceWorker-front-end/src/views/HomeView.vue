@@ -67,7 +67,7 @@
       <div class="col-lg-10 col-md-9 not-bootstrap">
         <div class="converzation-wrap" v-if="ChatWindows.length != 0">
           <cm-conversation style="height: 85vh">
-            <div class="body">
+            <div id="chatWindow" class="body">
               <cm-conversation-divider>
                 <span class="title"> Today </span>
               </cm-conversation-divider>
@@ -108,11 +108,26 @@
         newchatcounter: 0
       }
     },
+    // watch: {
+    //   ChatWindows(){
+    //     let e = document.getElementById('chatWindow')
+    //     console.log(e)
+    //     console.log("Hier")
+    //     // if(e){
+    //     //   e.scrollTop = e.scrollHeight
+    //     //   console.log("in")
+    //     //   console.log(e)
+    //     //   console.log(e.scrollHeight)
+    //     //   console.log(e.scrollTop)
+    //     // }
+    //   }
+    // },
     mounted(){
       this.chat = this.$chat
 
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
+        this.scroll();
       })
       window.addEventListener('NewUser',()=>{
         this.AddUser(localStorage.getItem('User'))
@@ -147,6 +162,18 @@
     sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
     },
     methods:{
+      scroll(){
+        console.log("in")
+        let e = document.getElementById('chatWindow')
+        console.log(e)
+        if(e){
+          e.scrollTop = e.scrollHeight
+          console.log("in")
+          console.log(e)
+          console.log(e.scrollHeight)
+          console.log(e.scrollTop)
+        }
+      },
       UpdatePageTitle(){
         this.chatlist = []
         for (let i = 0; i < this.ChatWindows.length; i++) {
