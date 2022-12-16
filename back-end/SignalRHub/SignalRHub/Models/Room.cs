@@ -9,8 +9,13 @@
         public int CompareTo(Room? other)
         {
             if (employee.IsOpen == false) return 1;
-            else if (EndUserIds.Count > other.EndUserIds.Count) return 1;
-            else if (EndUserIds.Count < other.EndUserIds.Count) return -1;
+
+            if (employee.IsOpen == true)
+            {
+                if (EndUserIds.Count > other.EndUserIds.Count) return 1;
+                else if (EndUserIds.Count == other.EndUserIds.Count) return 0;
+                else return -1;
+            }
             else return 0;
         }
     }
