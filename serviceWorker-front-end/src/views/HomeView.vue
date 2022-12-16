@@ -146,6 +146,10 @@
         sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
       })
       this.GetAllActiveChats();
+      const sessionQueue = sessionStorage.getItem('Queue')
+      if (sessionQueue != null) {
+        this.Queue = sessionQueue
+      }
     },
     beforeUnmount() {
     this.closeWorker()
