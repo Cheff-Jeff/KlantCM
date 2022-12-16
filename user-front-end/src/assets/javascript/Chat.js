@@ -72,7 +72,7 @@ export class ChatHub {
     }
 
     startTimer() {
-        const message = `Welcome to CM.com live chat, 
+        const message = `Welcome to MasterChef live chat, 
         currently we are experiencing alot of traffic.
         Please ask your question when an employee joins the room.`
 
