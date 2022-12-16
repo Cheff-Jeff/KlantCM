@@ -23,6 +23,12 @@
                   <span class="title"> Today </span>
                 </cm-conversation-divider>
 
+                <div v-if="this.joined == true">
+                  <cm-conversation-divider>
+                    <span id="joined" class="joined">"name" joined the room.</span>
+                  </cm-conversation-divider>
+                </div>
+
                 <div 
                   v-for="chat in newChats" :key="chat"
                 >
@@ -34,7 +40,7 @@
                   </div>
                 </div>
               </div>
-            </cm-conversation>
+            </cm-conversation> 
           </div>
           <div class="footer">
             <Input @text="sendConverzation" @uploadFile="uploadFile"/>
@@ -90,7 +96,8 @@
         clickedGood: '',
         clickedBad: '',
         rating: 'hide',
-        connected: false
+        connected: false,
+        joined: false
       }
     },
     mounted(){
@@ -98,6 +105,10 @@
 
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'))
+      })
+      window.addEventListener('Joined',()=>{
+        this.joined = true
+        console.log(this.joined)
       })
       window.addEventListener("resize", this.checkWindow);
 
