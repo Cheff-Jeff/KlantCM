@@ -22,7 +22,7 @@
       <div class="col-lg-2 col-md-3">
         <div class="chat-controller">
           <div class="chat-btn-wrap">
-            <div class="queue">
+            <div class="queue" v-if="Queue != 0">
               <span class="WaitingInLine">{{Queue}} {{text.home.PeopleInQueue}}</span>
             </div>
             <div v-for="(chats,index) in ChatWindows" :key="index">
