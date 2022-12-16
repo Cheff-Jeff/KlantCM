@@ -30,7 +30,11 @@
             "InputPlaceholder": "Begin met typen...",
             "You": "U",
             "Clients": "Zoek naar klanten",
-            "Looking": "Op zoek"
+            "Looking": "Op zoek",
+            "ChatIndex": {
+                "Chat":"chat",
+                "Active":"actieve chat"
+            }
         },
         "SignUp": {
             "Heading": "Voeg een nieuwe medewerker toe.",

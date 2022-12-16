@@ -69,7 +69,7 @@
           <cm-conversation style="height: 85vh" id="chatWindow">
             <div id="chatWindow" class="body">
               <cm-conversation-divider>
-                <span class="title"> Today </span>
+                <span class="title"> {{text.home.Today}} </span>
               </cm-conversation-divider>
               <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">

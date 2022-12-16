@@ -30,7 +30,11 @@
             "InputPlaceholder": "Start typing...",
             "You": "You",
             "Clients": "Look for Clients",
-            "Looking": "Looking"
+            "Looking": "Looking",
+            "ChatIndex": {
+                "Chat":"chat",
+                "Active":"active chat"
+            }
         },
         "SignUp": {
             "Heading": "Add a new employee.",

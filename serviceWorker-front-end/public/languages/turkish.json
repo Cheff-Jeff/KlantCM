@@ -30,7 +30,11 @@
             "InputPlaceholder": "Yazmaya başlayın...",
             "You": "Sen",
             "Clients": "Müşteri Ara",
-            "Looking": "Bakıyor"
+            "Looking": "Bakıyor",
+            "ChatIndex": {
+                "Chat":"sohbet",
+                "Active":"aktif sohbet"
+            }
         },
         "SignUp": {
             "Heading": "Yeni bir çalışan ekleyin.",
