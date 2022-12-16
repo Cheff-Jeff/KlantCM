@@ -99,6 +99,13 @@
                 "btnClose": "Close",
                 "btnSave": "Delete"
             }
+        },
+        "Account":{
+            "Title":"My profile",
+            "Edit":"Edit my account",
+            "Confirm":"Confirm",
+            "Name":"Name",
+            "Email":"Email"
         }
     }
 }

@@ -99,6 +99,13 @@
                 "btnClose": "Kapat",
                 "btnSave": "Silmek"
             }
+        },
+        "Account":{
+            "Title":"Benim profilim",
+            "Edit":"Hesabımı düzenle",
+            "Confirm":"Onaylamak",
+            "Name":"İsim",
+            "Email":"E-posta"
         }
     }
 }

@@ -99,6 +99,13 @@
                 "btnClose": "Sluiten",
                 "btnSave": "Verwijderen"
             }
+        },
+        "Account":{
+            "Title":"Mijn profiel",
+            "Edit":"Verander mijn profiel",
+            "Confirm":"Bevestigen",
+            "Name":"Naam",
+            "Email":"Email"
         }
     }
 }
