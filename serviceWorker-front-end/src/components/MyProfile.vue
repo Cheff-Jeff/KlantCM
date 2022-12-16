@@ -41,6 +41,11 @@
         </span>
       </div>
       <button type="submit">Confirm</button>
+      <div class="error">
+        <span class="small">
+          {{submitError}}
+        </span>
+      </div>
     </form>
   </div>
 </template>
@@ -74,16 +79,12 @@ export default {
       document.getElementById("myemail").innerHTML = "Email: <b>" + this.user.email + "</b>"
     },
     openEdit() {
-      // this.nameError = "hallo"
-
       var formDisplay = document.getElementById("editForm").style.display
       if(formDisplay == "none") {
         document.getElementById("editForm").style.display = "block"
       }
       else {
         document.getElementById("editForm").style.display = "none"
-
-
       }
     },
     checkName(){
