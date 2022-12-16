@@ -27,31 +27,59 @@
     <div class="editBtn"><button @click="openEdit()"><img src="../assets/Images/editIcon.png" alt=""></button></div>
   </div>
   <div class="formPopup" id="editForm" style="display: none;">
-    <h3>{{text.Account.Edit}}</h3>
-    <form @submit.prevent="editUser()">
-      <input type="text" name="name" id="name" placeholder="Name" v-model="user.userName" @blur="checkName" @keyup="checkName">
-      <div class="error">
-        <span class="small">{{nameError}}</span>
+    <div class="form-wrapper">
+      <div class="row">
+        <div class="col-m-12">
+          <div class="title-wrap">
+            <h2>{{text.Account.Edit}}</h2>
+          </div>
+        </div>
       </div>
-      <input type="password" name="password" id="password" placeholder="New password" v-model="user.password" @blur="checkPass" @keyup="checkPass">
-      <div class="error">
-        <span class="small">
-          {{passwordError}}
-        </span>
+      <div class="user-form">
+        <form @submit.prevent="editUser()">
+          <div class="input-wrap">
+            <input type="text" name="name" id="name" placeholder="Name" v-model="user.userName" @blur="checkName" @keyup="checkName">
+            <div class="error">
+              <span class="small">{{nameError}}</span>
+            </div>
+          </div>
+          <div class="input-wrap">
+            <input type="password" name="password" id="password" placeholder="New password" v-model="user.password" @blur="checkPass" @keyup="checkPass">
+            <div class="error">
+              <span class="small">
+                {{passwordError}}
+              </span>
+            </div>
+          </div>
+          <div class="input-wrap">
+            <input type="password" name="repassword" id="repassword" placeholder="Repeat new password" v-model="this.repass" @blur="checkRePass" @keyup="checkRePass">
+
+            <div class="error">
+              <span class="small">
+                {{matchPassErr}}
+              </span>
+            </div>
+          </div>
+          
+          <div class="error">
+            <span class="small">
+              {{submitError}}
+            </span>
+          </div>
+          <div class="btn-row">
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <div class="btn-save d-flex justify-content-center">
+                  <button class="btn btn-cta medium" type="submit">
+                    {{text.Account.Confirm}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-      <input type="password" name="repassword" id="repassword" placeholder="Repeat new password" v-model="this.repass" @blur="checkRePass" @keyup="checkRePass">
-      <div class="error">
-        <span class="small">
-          {{matchPassErr}}
-        </span>
-      </div>
-      <button type="submit">{{text.Account.Confirm}}</button>
-      <div class="error">
-        <span class="small">
-          {{submitError}}
-        </span>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 

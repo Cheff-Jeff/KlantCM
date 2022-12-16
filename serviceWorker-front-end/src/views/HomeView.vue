@@ -21,11 +21,11 @@
     <div class="row">
       <div class="col-lg-2 col-md-3">
         <div class="chat-controller">
-          <div class="chat-btn-wrap">
-            <div class="queue">
+          <div class="chat-btn-wrap" v-auto-animate>
+            <div class="queue" v-if="Queue != 0">
               <span class="WaitingInLine">{{Queue}} {{text.home.PeopleInQueue}}</span>
             </div>
-            <div v-for="(chats,index) in ChatWindows" :key="index">
+            <div v-for="(chats,index) in ChatWindows" :key="index" class="mb-2">
               <span @click="ActivateChat(index)">
                 <ChatIndexButton  :active="chats.active" :messagealert="chats.messagealert" :key="chats.active"/>
               </span>
@@ -57,7 +57,7 @@
                 {{text.home.Looking}}
               </button>
 
-              <button class="btn btn-primary EndChatBtn terminate" @click="stopChat(null)">
+              <button class="btn btn-primary EndChatBtn terminate mt-2 custom-color-white" @click="stopChat(null)">
                 {{text.home.EndActive}}
               </button>
             </div>
