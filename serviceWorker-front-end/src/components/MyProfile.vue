@@ -23,7 +23,7 @@
   </div>
   <div class="formPopup" id="editForm" style="display: none;">
     <h3>Edit my account</h3>
-    <form @submit="editUser()">
+    <form @submit.prevent="editUser()">
       <input type="text" name="name" id="name" placeholder="Name" v-model="user.userName" @blur="checkName" @keyup="checkName">
       <div class="error">
         <span class="small">{{nameError}}</span>
@@ -108,9 +108,10 @@ export default {
         const result = await UpdateUser(this.user)
         if(result.status == 200){
           this.submitError = 'Your account has been updated!'
+          document.getElementById("editForm").style.display = "none"
         }
         else{
-          submitError = 'One or more fields have an error. Please check and try again.'
+          this.submitError = 'One or more fields have an error. Please check and try again.'
         }
       }
     }
