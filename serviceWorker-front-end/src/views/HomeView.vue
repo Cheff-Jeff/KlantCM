@@ -57,7 +57,7 @@
                 {{text.home.Looking}}
               </button>
 
-              <button class="btn btn-primary EndChatBtn terminate mt-2" @click="stopChat(null)">
+              <button class="btn btn-primary EndChatBtn terminate mt-2 custom-color-white" @click="stopChat(null)">
                 {{text.home.EndActive}}
               </button>
             </div>
