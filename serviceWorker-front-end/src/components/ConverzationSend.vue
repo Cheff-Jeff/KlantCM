@@ -1,4 +1,9 @@
 <script setup>
+  import { getLang } from '@/assets/javascript/translate';
+  import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
+  defineExpose({text})
   defineProps({
     Time: {
       type: String,
@@ -19,6 +24,8 @@
         lobortis tellus.`
     }
   });
+
+
 </script>
 
 <template>
@@ -28,7 +35,7 @@
           <div class="time">{{ Time }}</div>
       </cm-conversation-bubble>
       <div class="speek-icon-wrap">
-        <span>You</span>
+        <span>{{text.home.You}}</span>
         <span class="cm-icon cm-icon-user-fill" aria-hidden="true"></span>
       </div>
   </div>
