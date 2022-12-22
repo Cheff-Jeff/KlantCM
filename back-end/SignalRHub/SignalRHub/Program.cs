@@ -4,6 +4,7 @@ using SignalRHub.Models;
 using SignalRHub.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
 
 builder.Services.AddSignalR(options =>
 {
@@ -42,4 +43,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.MapHub<Chathub>("/signalr");
+app.MapControllers();
+
 app.Run();
