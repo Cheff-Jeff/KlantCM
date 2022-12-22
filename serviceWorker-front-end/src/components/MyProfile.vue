@@ -4,6 +4,11 @@
     validateName, validateEmail, validateId, 
     errNameEmp, errName, errEmailEmp, errEmail, errId
   } from "@/assets/javascript/validate";
+import { getLang } from '@/assets/javascript/translate';
+import { ref } from 'vue';
+const text = ref(null);
+text.value = getLang();
+defineExpose({text})
 
   defineProps({
     User: {
@@ -14,15 +19,15 @@
 
 <template>
   <div class="container">
-    <h1>My account</h1>              
+    <h1>{{text.MyProfile.MyAcc}}</h1>              
     <div class="color-black">
-      <div id="myname"></div>
-      <div id="myemail"></div>
+      <div id="myname">{{text.MyProfile.Name}}:</div>
+      <div id="myemail">{{text.MyProfile.Email}}:</div>
     </div>
     <div class="editBtn"><button @click="openEdit()"><img src="../assets/Images/editIcon.png" alt=""></button></div>
   </div>
   <div class="formPopup" id="editForm" style="display: none;">
-    <h3>Edit my account</h3>
+    <h3>{{text.Edit.Heading}}</h3>
     <form @submit="editUser()">
       <input type="text" name="name" id="name" :placeholder="text.Edit.form.name" v-model="user.userName" @blur="checkName" @keyup="checkName">
       <div class="error">
@@ -40,7 +45,7 @@
           {{matchPassErr}}
         </span>
       </div>
-      <button type="submit">Confirm</button>
+      <button type="submit">{{text.Edit.form.btn}}</button>
     </form>
   </div>
 </template>
@@ -70,8 +75,8 @@ export default {
   },
   methods: {
     fillDetails() {
-      document.getElementById("myname").innerHTML = "Name: <b>" + this.user.userName + "</b>"
-      document.getElementById("myemail").innerHTML = "Email: <b>" + this.user.email + "</b>"
+      document.getElementById("myname").innerHTML += " <b>" + this.user.userName + "</b>"
+      document.getElementById("myemail").innerHTML += " <b>" + this.user.email + "</b>"
     },
     openEdit() {
       // this.nameError = "hallo"
@@ -93,11 +98,11 @@ export default {
     },
     checkPass(){
       this.passwordError = this.user.password != '' ? (
-        this.user.password.length < 8 ? 'Password must be at least 8 characters long.': ''
+        this.user.password.length < 8 ? this.text.Edit.form.errors.errPass: ''
       ) : ''
     },
     checkRePass(){
-      this.matchPassErr = this.repass == this.user.password ? '' : 'Password must match.'
+      this.matchPassErr = this.repass == this.user.password ? '' : this.text.Edit.form.errors.errRePass
     },
     async editUser(){
       console.log('submit')
@@ -106,10 +111,10 @@ export default {
       {
         const result = await UpdateUser(this.user)
         if(result.status == 200){
-          this.submitError = 'Your account has been updated!'
+          this.submitError = this.text.Edit.form.errors.success
         }
         else{
-          submitError = 'One or more fields have an error. Please check and try again.'
+          submitError = this.text.Edit.form.errors.err
         }
       }
     }

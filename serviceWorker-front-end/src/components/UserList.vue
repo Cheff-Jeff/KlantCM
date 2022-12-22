@@ -12,7 +12,7 @@ defineExpose({text})
 <div class="container">
     <cm-button
       @click="register"
-      data-label="Add new user"
+      :data-label="text.UserList.AddNew"
       data-button-style="primary"
       data-button-size="medium">
     </cm-button>

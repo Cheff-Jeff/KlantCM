@@ -68,8 +68,13 @@
                 }
             }
         },
+        "MyProfile": {
+            "MyAcc": "Mijn account",
+            "Name": "Naam",
+            "Email": "E-mail"
+        },
         "Edit": {
-            "Heading": "Bewerk",
+            "Heading": "Bewerk account",
             "form": {
                 "name": "Naam",
                 "email": "E-mail",
@@ -85,6 +90,7 @@
                     "errId": "Er was een probleem met 1 van de waarden.",
                     "errPass": "Wachtwoord moet minimaal 8 tekens lang zijn.",
                     "errRePass": "Herhaal wachtwoord moet overeenkomen.",
+                    "success": "Uw account is geupdate!",
                     "err": "Een of meer velden bevatten een fout. Controleer en probeer het opnieuw."
                 }
             }
@@ -93,9 +99,10 @@
             "Username": "Gebruikersnaam",
             "Email": "E-mail",
             "Administrator": "Beheerder",
+            "AddNew": "Voeg toe",
             "Delete": {
                 "head": "Verwijder gebruiker",
-                "confirm": "Weet je zeker dat je deze gebruiker wil verwijderen:",
+                "confirm": "Weet u zeker dat u deze gebruiker wil verwijderen:",
                 "btnClose": "Sluiten",
                 "btnSave": "Verwijderen"
             }

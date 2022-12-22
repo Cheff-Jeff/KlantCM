@@ -68,6 +68,11 @@
                 }
             }
         },
+        "MyProfile": {
+            "MyAcc": "Hesabım",
+            "Name": "İsim",
+            "Email": "E-posta"
+        },
         "Edit": {
             "Heading": "Düzenlemek",
             "form": {
@@ -85,6 +90,7 @@
                     "errId": "1 değerle ilgili bir sorun oluştu.",
                     "errPass": "Şifre en az 8 karakter uzunluğunda olmalıdır.",
                     "errRePass": "Tekrar şifresi eşleşmelidir.",
+                    "success": "Hesabın güncellendi!",
                     "err": "Bir veya daha fazla alanda hata var. Lütfen kontrol edip tekrar deneyin."
                 }
             }
@@ -93,6 +99,7 @@
             "Username": "Kullanıcı adı",
             "Email": "e-posta",
             "Administrator": "yönetici",
+            "AddNew": "Yeni Kullanıcı Ekle",
             "Delete": {
                 "head": "Kullanıcıyı sil",
                 "confirm": "Bu kullanıcıyı silmek istediğinizden emin misiniz:",
