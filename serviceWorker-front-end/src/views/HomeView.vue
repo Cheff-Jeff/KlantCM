@@ -106,11 +106,23 @@
         messagealert:false,
         chatlist: [],
         newchatcounter: 0,
-        chattest: []
+        chattest: [],
+        user:{
+          name:'',
+          id:''
+        }
       }
     },
     mounted(){
       this.chat = this.$chat
+
+      let sessionstorageuser = JSON.parse(sessionStorage.getItem('user'))
+      if(sessionstorageuser == null){
+        //retunn to login?
+      }
+
+      this.user.name = sessionstorageuser.name
+      this.user.id = sessionstorageuser.userId
 
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
@@ -296,7 +308,8 @@
         this.chat.CloseWorker()
       },
       roomStart(){
-        this.chat.StartRoom(1,'andreas')
+
+        this.chat.StartRoom(this.user.id,this.user.name)
         this.Working = true
 
       },

@@ -22,7 +22,7 @@
 
                 <div v-if="joined == true">
                   <cm-conversation-divider>
-                    <span id="joined" class="joined">"name" joined the room.</span>
+                    <span id="joined" class="joined">{{EmployeeName}} joined the room.</span>
                   </cm-conversation-divider>
                 </div>
 
@@ -94,18 +94,21 @@
         clickedBad: '',
         rating: 'hide',
         connected: false,
-        joined: false
+        joined: false,
+        EmployeeName:null,
       }
     },
     mounted(){
-      this.chat = new ChatHub()
-
+      this.chat = new ChatHub();
+      
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'))
       })
       window.addEventListener('Joined',()=>{
-        this.joined = true
-        console.log(this.joined)
+        setTimeout(()=>{
+          this.EmployeeName = sessionStorage.getItem('EmployeeName')
+          this.joined = true
+        },1000)
       })
       window.addEventListener("resize", this.checkWindow);
 

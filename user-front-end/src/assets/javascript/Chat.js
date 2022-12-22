@@ -36,6 +36,11 @@ export class ChatHub {
             this.connection.stop()
         })
 
+        this.connection.on("RecieveEmployeeName", (message) => {
+            sessionStorage.setItem('EmployeeName',message)
+        })
+
+
         const Joined = new Event('Joined')
         const CloseChat = new Event('CloseChat')
         const NewChat = new Event('NewChat')
