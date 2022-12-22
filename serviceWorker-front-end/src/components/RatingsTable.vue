@@ -74,6 +74,8 @@ defineProps({
     }
 </script>
 
+
+<!-- Hier moet een style maar ik weet niet welke  er stond usermangemang.css maar die bestaat niet--><!-- @import '../assets/styles/pages/usermanagement.css'; -->
 <style>
-    @import '../assets/styles/pages/usermanagement.css';
+    
 </style>
