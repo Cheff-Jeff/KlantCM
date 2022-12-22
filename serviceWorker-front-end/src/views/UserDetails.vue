@@ -2,6 +2,7 @@
 import {GetUserById} from '../assets/javascript/User';
 import {GetAverageRatingByUserID} from '../assets/javascript/User';
 import {GetRatingPercentageByUserIDForLast30Days} from '../assets/javascript/User';
+import {GetAverageFromLast30DaysRatingById} from '../assets/javascript/User';
 import Chart from 'chart.js/auto';
 import Header from '@/components/Header.vue';
 import { getLang } from '@/assets/javascript/translate';
@@ -40,6 +41,7 @@ const text = ref(null);
 </template>
 
 <script>
+import axios from 'axios'
 export default{
     data(){
         return{
@@ -58,19 +60,25 @@ export default{
       this.averigeRating = await GetAverageRatingByUserID(userid)
       document.getElementById('rating').style.width = this.averigeRating + "%";
 
-      this.datapoints = await GetRatingPercentageByUserIDForLast30Days(userid)
+      var days = [];
+      var percentage = [];
 
-        var dayarray = ["20-12-2022","21-12-2022","22-12-2022", "23-12-2022", "24-12-2022"]
+      const ctx = document.getElementById('chart');
 
-        const ctx = document.getElementById('chart');
+      await axios.get(`https://localhost:7117/GetAverageFromLast30DaysRatingById?id=${userid}`)
+      .then(res => {
+        for(const obj of res.data){
+          days.push(obj.date)
+          percentage.push(obj.per)
+        }
         const myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: dayarray,
+            labels: days,
             datasets: [
               {
                 label: 'Rating in %',
-                data: this.datapoints,
+                data: percentage,
                 fill: false,
                 borderColor: 'RGB(7,84, 156)',
                 backgroundColor: 'RGB(0,116, 232)',
@@ -87,6 +95,10 @@ export default{
             }
         }
       })
+      })
+      .catch(error => {
+        console.log(error)
+      });
     }
 }
 </script>
