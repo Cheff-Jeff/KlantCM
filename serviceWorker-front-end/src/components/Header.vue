@@ -155,6 +155,10 @@
         console.log(this.user)
         this.username = this.user[0].userName
         this.isadmin = this.user[0].isAdmin
+      },      
+      statBtn() {
+        //Navigeer naar stats view;
+        this.$router.push("stats");
       },
       switchLangPreff(code){
         switchLang(code)

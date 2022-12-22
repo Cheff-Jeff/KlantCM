@@ -22,12 +22,11 @@ const router = createRouter({
             path: '/register',
             name: 'register',
             component: RegisterView,
-            beforeEnter: async (to, from, next) => {
-                if(await RouteGaurdAdmin() == false){
-                    next({name: 'login'});
+            beforeEnter: async(to, from, next) => {
+                if (await RouteGaurdAdmin() == false) {
+                    next({ name: 'login' });
                     return false
-                }
-                else{
+                } else {
                     next();
                 }
             },
@@ -36,12 +35,11 @@ const router = createRouter({
             path: '/usermanagement',
             name: 'usermanagement',
             component: UserManagementView,
-            beforeEnter: async (to, from, next) => {
-                if(await RouteGaurdAdmin() == false){
-                    next({name: 'login'});
+            beforeEnter: async(to, from, next) => {
+                if (await RouteGaurdAdmin() == false) {
+                    next({ name: 'login' });
                     return false
-                }
-                else{
+                } else {
                     next();
                 }
             },
@@ -50,30 +48,35 @@ const router = createRouter({
             path: '/home',
             name: 'home',
             beforeEnter: (to, from, next) => {
-                if(!RouteGaurd()){
-                    next({name: 'login'});
+                if (!RouteGaurd()) {
+                    next({ name: 'login' });
                     return false
-                }
-                else{
+                } else {
                     next();
                 }
             },
-            component: () => import ('../views/HomeView.vue')
+            component: () =>
+                import ('../views/HomeView.vue')
         },
         {
             path: '/account',
             name: 'account',
             beforeEnter: (to, from, next) => {
-                if(!RouteGaurd()){
-                    next({name: 'login'});
+                if (!RouteGaurd()) {
+                    next({ name: 'login' });
                     return false
-                }
-                else{
+                } else {
                     next();
                 }
             },
             component: () =>
                 import ('../views/AccountView.vue')
+        },
+        {
+            path: '/stats',
+            name: 'stats',
+            component: () =>
+                import ('../views/StatsView.vue')
         },
         {
             path: '/error',
