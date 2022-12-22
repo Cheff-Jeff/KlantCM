@@ -7,7 +7,7 @@ export class ChatHub {
     constructor() {
         console.log("in hub")
 
-        this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
+        this.connection = new HubConnectionBuilder().withUrl("https://i483908.luna.fhict.nl/signalr").build()
 
         this.connect()
 

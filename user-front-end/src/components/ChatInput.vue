@@ -1,11 +1,3 @@
-<script setup>
-  import {
-    validateDescription, errDescriptionEmp, errDescription, validateFile, errImage, errImageEmp
-  } from '@/assets/javascript/validation'
-
-   const SendImg = new Event("MediaSend")
-</script>
-
 <template>
   <form action="#" @submit.prevent="submit">
     <div class="row">
@@ -19,7 +11,8 @@
                 class="form-control spacing-right-icons-2"
                 autocomplete="off"
                 placeholder="Start typing… "
-                v-model="input"
+                :value="message"
+                v-model="message"
               />
               <!-- <span class="input-left icon noHover">
                 <span class="cm-icon cm-icon-comment noHover" aria-hidden="true"></span>
@@ -77,10 +70,13 @@
 </template>
 
 <script>
+  import {
+    validateDescription, errDescriptionEmp, errDescription, validateFile, errImage, errImageEmp
+  } from '@/assets/javascript/validation'
   export default {
     data() {
       return{
-        input: '',
+        message: '',
         imgInput: '',
         imgType: '',
         name: 'Drag & drop <b style="display: block;">or browse</b>',
@@ -109,24 +105,25 @@
           validateFile(this.imgType) ? '' : errImage()) 
       },
       checkKeyEnter() {
-        if(this.input.length != 0)
+        if(this.message.length != 0)
         {
           this.inputError = '';
         }
       },
       checkInput()
       {
-        this.inputError = this.input.length == 0 ? 'Message can not be empty.' : ''
+        this.inputError = this.message.length == 0 ? 'Message can not be empty.' : ''
       },
       submit() {
         console.log('ik perform')
+        console.log(this.message)
         if(!this.boxWrapper)
         {
           this.checkInput();
           if(this.inputError == '')
           {
-            this.$emit('text', this.input);
-            this.input = '';
+            this.$emit('text', this.message);
+            this.message = '';
             this.inputError = '';
           } 
         }

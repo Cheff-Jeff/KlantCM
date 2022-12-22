@@ -20,7 +20,7 @@
                   <span class="title"> Today </span>
                 </cm-conversation-divider>
 
-                <div v-if="this.joined == true">
+                <div v-if="joined == true">
                   <cm-conversation-divider>
                     <span id="joined" class="joined">"name" joined the room.</span>
                   </cm-conversation-divider>
@@ -118,8 +118,8 @@
     methods: {
       scroll(){
         let e = document.getElementById('chatWindow')
-        e.style.scrollBehavior = 'smooth'
         if(e){
+          e.style.scrollBehavior = 'smooth'
           setTimeout(()=>{
             e.scrollTo(0, e.scrollHeight)
           }, 50)
