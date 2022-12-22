@@ -73,8 +73,8 @@
             "form": {
                 "name": "Naam",
                 "email": "E-mail",
-                "pass": "Niew wachtwoord",
-                "rePass": "Herhaal niew wachtwoord",
+                "pass": "Nieuw wachtwoord",
+                "rePass": "Herhaal nieuw wachtwoord",
                 "cancel": "Annuleren",
                 "btn": "Opslaan",
                 "errors": {

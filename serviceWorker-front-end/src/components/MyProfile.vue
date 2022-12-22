@@ -24,17 +24,17 @@
   <div class="formPopup" id="editForm" style="display: none;">
     <h3>Edit my account</h3>
     <form @submit="editUser()">
-      <input type="text" name="name" id="name" placeholder="Name" v-model="user.userName" @blur="checkName" @keyup="checkName">
+      <input type="text" name="name" id="name" :placeholder="text.Edit.form.name" v-model="user.userName" @blur="checkName" @keyup="checkName">
       <div class="error">
         <span class="small">{{nameError}}</span>
       </div>
-      <input type="password" name="password" id="password" placeholder="New password" v-model="user.password" @blur="checkPass" @keyup="checkPass">
+      <input type="password" name="password" id="password" :placeholder="text.Edit.form.pass" v-model="user.password" @blur="checkPass" @keyup="checkPass">
       <div class="error">
         <span class="small">
           {{passwordError}}
         </span>
       </div>
-      <input type="password" name="repassword" id="repassword" placeholder="Repeat new password" v-model="this.repass" @blur="checkRePass" @keyup="checkRePass">
+      <input type="password" name="repassword" id="repassword" :placeholder="text.Edit.form.rePass" v-model="this.repass" @blur="checkRePass" @keyup="checkRePass">
       <div class="error">
         <span class="small">
           {{matchPassErr}}
