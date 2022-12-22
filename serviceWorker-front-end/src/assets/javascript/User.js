@@ -45,3 +45,21 @@ export const GetUserById = async(id) => {
         console.log(error)
     }
 }
+
+export const GetAverageRatingByUserID = async(id) => {
+    try {
+        let response = await axios.get(`https://localhost:7117/GetAverageRatingByUserID?userID=${id}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const GetRatingPercentageByUserIDForLast30Days = async(id) => {
+    try {
+        let response = await axios.get(`https://localhost:7117/GetRatingPercentageByUserIDForLast30Days?UserID=${id}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
