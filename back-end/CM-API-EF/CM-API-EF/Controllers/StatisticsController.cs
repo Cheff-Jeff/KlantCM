@@ -90,5 +90,36 @@ namespace CM_API_EF.Controllers
             return Ok(average);
         }
 
+        [HttpGet("GetRatingPercentageByUserIDForLast30Days")]
+        public async Task<ActionResult> GetRatingPercentageByUserIDForLast30Days(int UserID)
+        {
+            List<double> percentages = new List<double>();
+            Statistics stats = new Statistics();
+            DateTime startdate = DateTime.Now.AddDays(-30);
+
+            List<Rating> ratings = (from ra in _context.Ratings
+                                    join ro in _context.Rooms
+                                    on ra.RoomId equals ro.RoomId
+                                    where ro.UserID == UserID && ra.TimeOfRating >= startdate
+                                    select ra).ToList();
+
+
+            var ratingsByDay = ratings.GroupBy(r => r.TimeOfRating.Day);
+
+            foreach(var group in ratingsByDay)
+            {
+                List<Rating> ratingssorted = new List<Rating>();
+                foreach(Rating rating in group)
+                {
+                    ratingssorted.Add(rating);
+                }
+                double percentage = stats.AverageRating(ratingssorted);
+                percentage = Math.Round(percentage, 2);
+                percentages.Add(percentage);
+            }
+            return Ok(percentages);
+            
+        }
+
     }
 }
