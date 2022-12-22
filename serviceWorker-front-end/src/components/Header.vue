@@ -148,10 +148,11 @@
     methods: {
       async GetLoggedInUser(){
         //JSON.parse om de "" weg te halen.
-        var userid = JSON.parse(sessionStorage.getItem("user"));
-
-        this.user = await GetUserById(userid)
-
+        var usersession = JSON.parse(sessionStorage.getItem("user"));
+        console.log(usersession)
+        console.log(usersession.userId)
+        this.user = await GetUserById(usersession.userId)
+        console.log(this.user)
         this.username = this.user[0].userName
         this.isadmin = this.user[0].isAdmin
       },      
