@@ -1,3 +1,11 @@
+<script setup>
+  import { getLang } from '@/assets/javascript/translate';
+  import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
+  defineExpose({text})
+</script>
+
 <template>
   <form action="#" @submit.prevent="submit">
     <div class="row">
@@ -10,7 +18,7 @@
                 type="text"
                 class="form-control spacing-right-icons-2"
                 autocomplete="off"
-                placeholder="Start typing… "
+                :placeholder="text.home.InputPlaceholder"
                 v-model="input"
               />
               <span class="input-left icon">

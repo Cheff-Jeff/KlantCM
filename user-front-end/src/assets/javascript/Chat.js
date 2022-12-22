@@ -25,6 +25,8 @@ export class ChatHub {
         this.connection.on("RecieveRoomId", function(message) {
             ///here you get the room id
             sessionStorage.setItem('roomId', message)
+            
+            window.dispatchEvent(Joined)
             console.log("Connected to room")
             clearInterval(Queuetimer)
         });
@@ -34,6 +36,12 @@ export class ChatHub {
             this.connection.stop()
         })
 
+        this.connection.on("RecieveEmployeeName", (message) => {
+            sessionStorage.setItem('EmployeeName',message)
+        })
+
+
+        const Joined = new Event('Joined')
         const CloseChat = new Event('CloseChat')
         const NewChat = new Event('NewChat')
     }
@@ -69,11 +77,13 @@ export class ChatHub {
     }
 
     startTimer() {
-        Queuetimer = setInterval(function() {
-            localStorage.setItem('NewChat', 'We are busy!')
-            const NewChat = new Event('NewChat')
-            window.dispatchEvent(NewChat)
-        }, 10000);
+        const message = `Welcome to MasterChef live chat, 
+        currently we are experiencing alot of traffic.
+        Please ask your question when an employee joins the room.`
+
+        localStorage.setItem('NewChat', message)
+        const NewChat = new Event('NewChat')
+        window.dispatchEvent(NewChat)
     }
 
     SendMedia(base64){
