@@ -1,5 +1,7 @@
 <script setup>
 import {GetUserById} from '../assets/javascript/User';
+import {GetAverageRatingByUserID} from '../assets/javascript/User';
+import {GetRatingPercentageByUserIDForLast30Days} from '../assets/javascript/User';
 import Chart from 'chart.js/auto';
 import Header from '@/components/Header.vue';
 import { getLang } from '@/assets/javascript/translate';
@@ -50,14 +52,15 @@ export default{
     async mounted(){
       var userid = sessionStorage.getItem('uDetails')
 
-      this.averigeRating = 20;
-      document.getElementById('rating').style.width = this.averigeRating + "%";
-
       this.User = await GetUserById(userid)
       this.userName = this.User[0].userName
 
+      this.averigeRating = await GetAverageRatingByUserID(userid)
+      document.getElementById('rating').style.width = this.averigeRating + "%";
+
+      this.datapoints = await GetRatingPercentageByUserIDForLast30Days(userid)
+
         var dayarray = ["20-12-2022","21-12-2022","22-12-2022", "23-12-2022", "24-12-2022"]
-        var ratingarray = [20, 80, 40, 60, 10]
 
         const ctx = document.getElementById('chart');
         const myChart = new Chart(ctx, {
@@ -67,7 +70,7 @@ export default{
             datasets: [
               {
                 label: 'Rating in %',
-                data: ratingarray,
+                data: this.datapoints,
                 fill: false,
                 borderColor: 'RGB(7,84, 156)',
                 backgroundColor: 'RGB(0,116, 232)',
