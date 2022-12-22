@@ -31,7 +31,7 @@ export default {
   methods: {
     async getUser() {
       this.userId = await JSON.parse(sessionStorage.getItem('user'))
-      this.user = await GetUserById(this.userId)
+      this.user = await GetUserById(this.userId.userId)
       console.log( this.user[0])
     }
   }
