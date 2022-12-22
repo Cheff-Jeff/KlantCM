@@ -84,6 +84,7 @@ namespace SignalRHub.Hubs
             _Roomdata.Update(r, r.Id);
             Count--;
             await Clients.Client(enduser.ConnectionString).SendAsync("RecieveRoomId", r.Id.ToString());
+            await Clients.Client(enduser.ConnectionString).SendAsync("RecieveEmployeeName", r.employee.FirstName);
             await Clients.Client(r.employee.ConnectionString).SendAsync("RecieveEndUserId", enduser.ConnectionString);
             await Clients.All.SendAsync("GetQueue", Count);
         }
