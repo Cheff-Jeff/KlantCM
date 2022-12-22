@@ -1,5 +1,10 @@
 <script setup>
 import LoginForm from '../components/LoginForm.vue'
+import { getLang } from '@/assets/javascript/translate';
+import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
+  defineExpose({text})
 </script>
 
 <template>
@@ -15,8 +20,8 @@ import LoginForm from '../components/LoginForm.vue'
           <div class="col-md-6">
             <div class="inner form-wrapper">
               <div class="wrap">
-                <h1>Sign In</h1>
-                <LoginForm/>
+                <h1>{{text.SignIn.Heading}}</h1>
+                <LoginForm :Text="text.SignIn.form"/>
               </div>
             </div>
           </div>
@@ -25,6 +30,14 @@ import LoginForm from '../components/LoginForm.vue'
     </div>
   </section>
 </template>
+
+<script>
+export default{
+  mounted(){
+    sessionStorage.removeItem('ActiveChats');
+  }
+}
+</script>
 
 <style lang="scss" scoped>
   @import "../assets/styles/pages/login.scss";

@@ -16,18 +16,33 @@ export const UploadChat = async (connection,chat) => {
   }
 
   async function UploadMessages(chatobj,messages){
-    try{
-        messages.forEach(message => {
-                axios.post(`${import.meta.env.VITE_API}Messages`,{
-                text: message.Text,
-                chatId: chatobj.chatId
-            }).then((res)=>{
-                console.log(res)
-            })
-        });
-    }
-    catch(err){
+    console.log(messages)
+        for (let index = 0; index < messages.length; index++) {
+            await Uploadmessage(chatobj.chatId,messages[index])
+        }
+  }
+
+  async function Uploadmessage(chatid,message){
+    let mesText = imgOrtext(message)
+    console.log(mesText)
+   await axios.post(`${import.meta.env.VITE_API}Messages`,{
+        text: mesText,
+        chatId: chatid,
+        worker: !message.White
+    }).then((res)=>{
+        console.log(res)
+    }).catch((err)=>{
         console.log(err)
+    })
+  }
+
+  function imgOrtext(message){
+    let mesText = ''
+    if(message.hasOwnProperty('Img')){
+        console.log('avg')
+        return mesText = message.Img
+    }else{
+        return mesText = message.Text
     }
   }
 

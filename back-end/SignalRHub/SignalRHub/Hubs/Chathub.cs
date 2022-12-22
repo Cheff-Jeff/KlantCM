@@ -43,6 +43,23 @@ namespace SignalRHub.Hubs
                 await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessageWorker", message, Context.ConnectionId);
             }
         }
+        public async Task SendMedia(string base64, string roomId, string? ConnectionId)
+        {
+            int RoomId = Convert.ToInt32(roomId);
+            Room r = _Roomdata.get(RoomId);
+            if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
+            {
+                return;
+            }
+            if (ConnectionId != null)
+            {//currently unused
+                await Clients.Client(ConnectionId).SendAsync("ReceiveMedia", base64);
+            }
+            else
+            {
+                await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMediaWorker", base64, Context.ConnectionId);
+            }
+        }
         /// <summary>
         /// Add new user to the room that requested it.
         /// </summary>
@@ -142,6 +159,17 @@ namespace SignalRHub.Hubs
             await Clients.All.SendAsync("Count", Count);
             await Clients.All.SendAsync("GetQueue", Count);
         }
+        /// <summary>
+        /// Function to use when Emplyee refreshed. This is to keep the same room attached to him.
+        /// </summary>
+        /// <returns></returns>
+        public async Task ConnectEmployee(int RoomId)
+        {
+            Room r = _Roomdata.get(RoomId);
+            if (r == null) return;
+            r.employee.ConnectionString = Context.ConnectionId;
+            _Roomdata.Update(r, r.Id);
+        }
 
         /// <summary>
         /// Removes the user when they disconnect
@@ -162,7 +190,7 @@ namespace SignalRHub.Hubs
                         r.EndUserIds.Remove(e.ConnectionString);
                         await Clients.Client(r.employee.ConnectionString).SendAsync("DisconnectUser", e.ConnectionString);
                     }
-                    else if(e.RoomId == 1 && e.inRoom == true)
+                    else if(e.inRoom == false)
                     {
                         Count--;
                     }
@@ -186,6 +214,7 @@ namespace SignalRHub.Hubs
             if (r == null) return;
             r.employee.IsOpen = true;
             _Roomdata.Update(r, RoomId);
+            if (r.EndUserIds.Count > 8) return; //Config stuff
             await AddEndUserToRoom(null, r);
         }
 

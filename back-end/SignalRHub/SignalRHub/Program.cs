@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR(options =>
 {
     options.EnableDetailedErrors = true;
+    options.StreamBufferCapacity = 10 * 1024 * 1024;
+    options.MaximumReceiveMessageSize = 2147483647;
 });
 
 builder.Services.AddSingleton<IRepo<EndUser, string>, RepoEndUser>();

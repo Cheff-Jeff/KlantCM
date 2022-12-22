@@ -3,10 +3,18 @@ import Header from '@/components/Header.vue';
 import UserList from '@/components/UserList.vue'
 import UpdateUserForm from '@/components/UpdateUserForm.vue'
 import {GetAllUsers} from '@/assets/javascript/User'
+import { getLang } from '@/assets/javascript/translate';
+import { ref } from 'vue';
+  const text = ref(null);
+  text.value = getLang();
+  defineExpose({text})
 </script>
 
 <template>
-    <Header/>
+    <Header
+        CompanyName="MasterChef"
+        :Text="text.header"
+    />
     <div v-auto-animate>
         <UserList 
             v-if="manager"
@@ -28,12 +36,8 @@ export default{
             manager: 'open',
             edit: '',
             user: '',
-            userlist: []
+            userlist: [],
         }
-    },
-    components:{
-        Header,
-        UserList
     },
     mounted(){
         this.FillUserList()

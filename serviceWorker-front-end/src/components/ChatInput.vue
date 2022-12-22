@@ -16,9 +16,6 @@
               <span class="input-left icon">
                 <span class="cm-icon cm-icon-comment" aria-hidden="true"></span>
               </span>
-              <span class="input-right icon">
-                <span class="cm-icon cm-icon-attachment m-r-8" aria-hidden="true"></span>
-              </span>
             </div>
             <span v-if="inputError" class="small text-danger mt-1 d-block errorBlock">
               {{inputError}}

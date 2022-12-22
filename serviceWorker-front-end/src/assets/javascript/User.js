@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-export const UpdateUser = async (user) => {
+export const UpdateUser = async(user) => {
     try {
         let result
         await axios({
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             method: 'put',
             url: `${import.meta.env.VITE_API}User/edituser`,
             data: JSON.stringify(user)
@@ -19,20 +19,28 @@ export const UpdateUser = async (user) => {
     }
 }
 
-export const GetAllUsers = async () => {
-    try{
+export const GetAllUsers = async() => {
+    try {
         let response = await axios.get(`${import.meta.env.VITE_API}User/getallusers`)
         return response.data
-    }
-    catch(error){
+    } catch (error) {
         console.log(error)
     }
-  }
+}
 
-export const DeleteUser = async (id) => {
+export const DeleteUser = async(id) => {
     try {
         let response = await axios.delete(`https://localhost:7117/User/deleteuser?id=${id}`)
         return response
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const GetUserById = async(id) => {
+    try {
+        let response = await axios.get(`${import.meta.env.VITE_API}User/getuser?id=${id}`)
+        return response.data
     } catch (error) {
         console.log(error)
     }

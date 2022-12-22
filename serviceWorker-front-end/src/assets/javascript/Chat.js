@@ -13,7 +13,15 @@ export class ChatHub {
             await this.connect();
         })
 
-        this.connect()
+        this.connect().then(()=>{
+            if(localStorage.getItem('roomId') != null){
+                this.connection.invoke("ConnectEmployee",Number(localStorage.getItem('roomId'))).catch((err)=>{
+                    console.log(err)
+                })
+            }
+        })
+
+
 
         this.connection.on("ReceiveMessageWorker", function (message, connection) {
             //Here we have to input revieved message in correct chat
@@ -54,6 +62,15 @@ export class ChatHub {
             window.dispatchEvent(StopRoom)
          });
 
+         this.connection.on("ReceiveMediaWorker", async function (message, connection) {
+            localStorage.setItem('img',message)
+            localStorage.setItem('FromUser',connection)
+            //bad fix is not async
+            setTimeout(window.dispatchEvent(NewMedia),50000)
+         });
+
+
+         const NewMedia = new Event('NewMedia')
         const NewChat = new Event('NewChat')
         const NewUser = new Event('NewUser')
         const DisconnectUser = new Event('DisconnectUser')
@@ -105,6 +122,13 @@ export class ChatHub {
     CloseWorker(){
         let RoomId = localStorage.getItem('roomId')
         this.connection.invoke("CloseWorker",RoomId).catch((err)=>{
+            return console.error(err.toString())
+        })
+    }
+
+    SendMedia(base64){
+        let RoomId = localStorage.getItem('roomId')
+        this.connection.invoke("SendMedia",base64,RoomId, null).catch((err)=>{
             return console.error(err.toString())
         })
     }

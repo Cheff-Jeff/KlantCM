@@ -1,16 +1,27 @@
 <script setup>
 import { remove } from '@vue/shared';
 import { DeleteUser } from '../assets/javascript/User';
+import { getLang } from '@/assets/javascript/translate';
+import { ref } from 'vue';
+const text = ref(null);
+text.value = getLang();
+defineExpose({text})
 </script>
 
 <template>
 <div class="container">
-    <table class="table table-striped table-hover">
+    <cm-button
+      @click="register"
+      data-label="Add new user"
+      data-button-style="primary"
+      data-button-size="medium">
+    </cm-button>
+    <table class="table table-striped table-hover pt-5">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Administrator</th>
+                <th>{{text.UserList.Username}}</th>
+                <th>{{text.UserList.Email}}</th>
+                <th>{{text.UserList.Administrator}}</th>
                 <th/>
                 <th/>
                 <th/>
@@ -33,7 +44,7 @@ import { DeleteUser } from '../assets/javascript/User';
   <div class="modal-dialog" role="document">
     <div @click.stop class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{text.UserList.Delete.head}}</h5>
         <button @click="closeModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <svg cm-icon-name="cm-icon-close" viewBox="0 0 24 24" fill="currentColor">
             <path d="M13.4261944,11.9997479 L17.7050296,7.72091264 C17.9016765,7.52426573 18.0005042,7.26610362 18.0005042,7.00794151 C18.0005042,6.7497794 17.9016765,6.49262574 17.7050296,6.29497038 C17.3107273,5.90167654 16.6723812,5.90167654 16.2790874,6.29497038 L12.0002521,10.5738056 L7.72141687,6.29497038 C7.32812303,5.90167654 6.68977688,5.90167654 6.2954746,6.29497038 C6.09882768,6.49262574 6,6.7497794 6,7.00794151 C6,7.26610362 6.09882768,7.52426573 6.2954746,7.72091264 L10.5743098,11.9997479 L6.2954746,16.2785831 C6.09882768,16.4752301 6,16.7333922 6,16.9915543 C6,17.2497164 6.09882768,17.50687 6.2954746,17.7045254 C6.49312996,17.9011723 6.75028363,18 7.00844573,18 C7.26660784,18 7.52476995,17.9011723 7.72141687,17.7045254 L12.0002521,13.4256902 L16.2790874,17.7045254 C16.4757343,17.9011723 16.7338964,18 16.9920585,18 C17.2502206,18 17.5073743,17.9011723 17.7050296,17.7045254 C17.9016765,17.50687 18.0005042,17.2497164 18.0005042,16.9915543 C18.0005042,16.7333922 17.9016765,16.4752301 17.7050296,16.2785831 L13.4261944,11.9997479 Z"></path>
@@ -41,11 +52,11 @@ import { DeleteUser } from '../assets/javascript/User';
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete {{modelBody}}?</p>
+        <p>{{text.UserList.Delete.confirm}} {{modelBody}}?</p>
       </div>
       <div class="modal-footer">
-        <button @click="closeModal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-        <button @click="removeUser" type="button" class="btn btn-primary btn-save">Save changes</button>
+        <button @click="closeModal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">{{text.UserList.Delete.btnClose}}</button>
+        <button @click="removeUser" type="button" class="btn btn-primary btn-save">{{text.UserList.Delete.btnSave}}</button>
       </div>
     </div>
   </div>
@@ -69,6 +80,9 @@ export default{
             this.userId = id;
             this.modelBody = name;
             this.modalToggle = 'open'
+        },
+        register(){
+          this.$router.push('register');
         },
         closeModal(){
             this.userId = ''

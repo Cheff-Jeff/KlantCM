@@ -4,6 +4,7 @@
   import Input from '../components/ChatInput.vue';
   import { ChatHub } from '../assets/javascript/Chat';
   import { ratingUpload } from '../assets/javascript/Stats';
+  import { uploadImage } from '../assets/javascript/base64'
 </script>
 
 <template>
@@ -16,7 +17,7 @@
         <svg class="close-cross" @click="toggleModal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M175 175C184.4 165.7 199.6 165.7 208.1 175L255.1 222.1L303 175C312.4 165.7 327.6 165.7 336.1 175C346.3 184.4 346.3 199.6 336.1 208.1L289.9 255.1L336.1 303C346.3 312.4 346.3 327.6 336.1 336.1C327.6 346.3 312.4 346.3 303 336.1L255.1 289.9L208.1 336.1C199.6 346.3 184.4 346.3 175 336.1C165.7 327.6 165.7 312.4 175 303L222.1 255.1L175 208.1C165.7 199.6 165.7 184.4 175 175V175zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z"/></svg>
         <div class="chat-wrapper">
           <div class="converzation-wrap">
-            <cm-conversation style="height: 424px;margin-bottom: 10px;border-bottom: solid #f5f5f5 2px;">
+            <cm-conversation style="height: 424px;margin-bottom: 10px;border-bottom: solid #f5f5f5 2px;" id="chatWindow">
               <div class="body">
                 <cm-conversation-divider>
                   <span class="title"> Today </span>
@@ -29,14 +30,14 @@
                     <ConverzationHelp :Text="chat.Text" :Time="chat.Time"/>
                   </div>
                   <div v-else>
-                    <ConverzationSend :Text="chat.Text" :Time="chat.Time"/>
+                    <ConverzationSend :Text="chat.Text" :Time="chat.Time" :img="chat.img"/>
                   </div>
                 </div>
               </div>
             </cm-conversation>
           </div>
           <div class="footer">
-            <Input @text="sendConverzation"/>
+            <Input @text="sendConverzation" @uploadFile="uploadFile"/>
           </div>
         </div>
         <div class="review-wrapper" :class="rating">
@@ -101,10 +102,21 @@
       window.addEventListener("resize", this.checkWindow);
 
       window.addEventListener("CloseChat",()=>{
-        this.openRating()
+        if(this.newChats.length > 0){
+          this.openRating()
+        }
       })
     },
     methods: {
+      scroll(){
+        let e = document.getElementById('chatWindow')
+        e.style.scrollBehavior = 'smooth'
+        if(e){
+          setTimeout(()=>{
+            e.scrollTo(0, e.scrollHeight)
+          }, 50)
+        }
+      },
       openRating(){
         this.rating ='open'
       },
@@ -115,6 +127,12 @@
       ratingbad(){
         this.clickedBad = 'clicked'
         ratingUpload(false)
+      },
+      async uploadFile(e){
+        console.log(e)
+        let img = await uploadImage(e)
+        this.chat.SendMedia(String(img))
+        this.sendMedia(img)
       },
       checkWindow() {
         if(window.innerWidth <= 500)
@@ -155,6 +173,20 @@
 
         this.newChats = [...this.newChats, bubble];
         this.chat.SendMessage(text)
+        this.scroll();
+      },
+      sendMedia(File) {
+        console.log(File)
+        const time = new Date();
+
+        const bubble = {
+          Text: '', 
+          Time: `${time.getHours()}:${time.getMinutes()}`, 
+          White: false,
+          img: File
+        }
+        this.newChats = [...this.newChats, bubble];
+        this.scroll();
       },
       reciveConverzation(text) {
         const time = new Date();
@@ -166,6 +198,7 @@
         };
 
         this.newChats = [...this.newChats, bubble];
+        this.scroll();
       }
     }
   };
