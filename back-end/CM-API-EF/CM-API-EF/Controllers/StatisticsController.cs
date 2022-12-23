@@ -97,7 +97,7 @@ namespace CM_API_EF.Controllers
         public async Task<ActionResult> GetRatingPercentageByUserIDForLast30Days(int UserID)
         {
             List<double> percentages = new List<double>();
-            
+
             DateTime startdate = DateTime.Now.AddDays(-30);
 
             List<Rating> ratings = (from ra in _context.Ratings
@@ -123,6 +123,7 @@ namespace CM_API_EF.Controllers
             return Ok(percentages);
             
         }
+
 
         [HttpGet("GetAverageFromLast30DaysRatingById")]
         public async Task<ActionResult> GetAverageFromLast30DaysRatingById(int id)
