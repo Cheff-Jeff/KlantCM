@@ -1,4 +1,5 @@
 <script setup>
+  import RatingGraph from '../components/RatingGraph.vue';
   import Header from '../components/Header.vue';
   import { getLang } from '@/assets/javascript/translate';
   import { ref } from 'vue';
@@ -15,6 +16,8 @@
     :Text="text.header"
   />
   <MyProfileVue v-if="user" :User="user[0]" />
+
+  <RatingGraph/>
 </template>
 
 <script>
@@ -27,6 +30,8 @@ export default {
   },
   async mounted() {
     await this.getUser()
+
+    sessionStorage.setItem('uDetails', this.userId)
   },
   methods: {
     async getUser() {
