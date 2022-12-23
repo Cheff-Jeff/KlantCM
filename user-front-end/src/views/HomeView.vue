@@ -20,7 +20,7 @@
                   <span class="title"> Today </span>
                 </cm-conversation-divider>
 
-                <div v-if="this.joined == true">
+                <div v-if="joined == true">
                   <cm-conversation-divider>
                     <span id="joined" class="joined">{{EmployeeName}} joined the room.</span>
                   </cm-conversation-divider>
@@ -110,7 +110,6 @@
           this.joined = true
         },1000)
       })
-      window.addEventListener("resize", this.checkWindow);
 
       window.addEventListener("CloseChat",()=>{
         if(this.newChats.length > 0){
@@ -121,8 +120,8 @@
     methods: {
       scroll(){
         let e = document.getElementById('chatWindow')
-        e.style.scrollBehavior = 'smooth'
         if(e){
+          e.style.scrollBehavior = 'smooth'
           setTimeout(()=>{
             e.scrollTo(0, e.scrollHeight)
           }, 50)
@@ -144,16 +143,6 @@
         let img = await uploadImage(e)
         this.chat.SendMedia(String(img))
         this.sendMedia(img)
-      },
-      checkWindow() {
-        if(window.innerWidth <= 500)
-        {
-          this.opner = this.opner == '' ? 'hide': '' 
-        }
-        else
-        {
-          this.opner = ''
-        }
       },
       toggleModal(){
         if(!this.connected){

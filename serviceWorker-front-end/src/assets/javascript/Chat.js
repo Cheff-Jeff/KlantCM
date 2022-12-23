@@ -6,7 +6,7 @@ import { UploadRoom } from "./Room";
 export class ChatHub {
     constructor(){
         //signalr runnen met docker = http://localhost:8000/signalr
-        this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
+        this.connection = new HubConnectionBuilder().withUrl("https://i483908.luna.fhict.nl/signalr").build()
         
 
         this.connection.onclose(async () => {

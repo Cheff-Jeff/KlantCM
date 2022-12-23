@@ -118,7 +118,8 @@ input{
     max-height: 100vh;
     top: -94vh;
     &.open{
-      height: 100vh;
+      height: calc(100vh - 50px);
+      margin-top: auto;
     }
 
     .close-cross{

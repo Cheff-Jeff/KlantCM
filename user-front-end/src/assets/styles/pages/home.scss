@@ -163,19 +163,20 @@ svg.close-cross{
 }
 
 @media only screen and (max-width: 500px) {
+  html, body {margin: 0; height: 100%; overflow: hidden}
   .chat-wrap.open{
     width: 100%;
     top: 0;
     right: 0;
     position: absolute;
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: calc(100vh - 50px);
+    max-height: calc(100vh - 50px);
     border-radius: 0px;
   }
 
   .converzation-wrap{
     cm-conversation{
-      height: 92.5vh !important;
+      height: calc(100vh - 115px) !important;
     }
   }
 }
