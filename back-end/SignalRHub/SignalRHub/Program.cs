@@ -18,7 +18,6 @@ builder.Services.AddSingleton<IRepo<EndUser, string>, RepoEndUser>();
 builder.Services.AddSingleton<IRepo<Room, int>, RepoRoom>();
 
 
-
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
         builder =>
         {
@@ -33,7 +32,9 @@ var app = builder.Build();
 
 
 app.UseRouting();
+app.UseStaticFiles();
 app.UseCors("CorsPolicy");
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
