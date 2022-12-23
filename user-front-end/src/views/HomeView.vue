@@ -130,10 +130,7 @@
         ratingUpload(false)
       },
       async uploadFile(e){
-        console.log(e)
         PostFormdata(e)
-        let img = await uploadImage(e)
-        this.chat.SendMedia(String(img))
         this.sendMedia(img)
       },
       checkWindow() {
@@ -182,10 +179,9 @@
         const time = new Date();
 
         const bubble = {
-          Text: '', 
+          Text: `<b>hoi</b>`, 
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: false,
-          img: File
         }
         this.newChats = [...this.newChats, bubble];
         this.scroll();

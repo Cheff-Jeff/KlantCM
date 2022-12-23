@@ -1,14 +1,16 @@
 import axios from "axios";
 
-export const PostFormdata = (Image) => {
-    const headers = {
-        'Content-Type': 'image/png'
-      }
-    let formData = new FormData();
+export const PostFormdata = async (Image) => {
     console.log(Image)
-    formData.append('image', Image);
-    console.log(formData)
-    axios.post(`${import.meta.env.VITE_API}api/ChatHub`,Image,headers).then((res)=>{
+    let Form = {
+        file: Image,
+    }
+    await axios({
+        headers: { 'Content-type': 'multipart/form-data'},
+        method: 'post',
+        url:`${import.meta.env.VITE_API}api/ChatHub`,
+        data: Form
+    }).then((res)=>{
         console.log(res)
-      })
+    })
 }
