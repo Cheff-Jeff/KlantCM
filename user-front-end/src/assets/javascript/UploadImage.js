@@ -1,8 +1,13 @@
-// Create a new FormData instance
-let formData = new FormData();
+import axios from "axios";
 
-// Read the image file into a Blob
-let imageBlob = new Blob(['image data'], {type: 'image/jpeg'});
-
-// Add the image file to the FormData instance
-formData.append('image', imageBlob, 'image.jpg');
+export const PostFormdata = (Image) => {
+    const headers = {
+        'Content-Type': 'multipart/form-data'
+      }
+    let formData = new FormData();
+    console.log(Image)
+    formData.append('image', Image);
+    axios.post(`${import.meta.env.VITE_API}api/ChatHub`,formData,headers).then((res)=>{
+        console.log(res)
+      })
+}

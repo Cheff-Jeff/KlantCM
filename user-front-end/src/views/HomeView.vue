@@ -5,6 +5,7 @@
   import { ChatHub } from '../assets/javascript/Chat';
   import { ratingUpload } from '../assets/javascript/Stats';
   import { uploadImage } from '../assets/javascript/base64'
+  import {PostFormdata} from '../assets/javascript/UploadImage'
 </script>
 
 <template>
@@ -130,6 +131,7 @@
       },
       async uploadFile(e){
         console.log(e)
+        PostFormdata(e)
         let img = await uploadImage(e)
         this.chat.SendMedia(String(img))
         this.sendMedia(img)

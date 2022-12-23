@@ -13,11 +13,10 @@ namespace SignalRHub.Hubs
 
         private static int Count;
 
-        public Chathub(IRepo<EndUser, string> eud, IRepo<Room, int>rd, IHttpClientFactory httpClientFactory)
+        public Chathub(IRepo<EndUser, string> eud, IRepo<Room, int>rd)
         {
             _EndUserdata = eud;
-            _Roomdata = rd;
-            _httpClientFactory = httpClientFactory;
+            _Roomdata = rd; 
         }
         /// <summary>
         /// Sends message to enduser or to the worker
