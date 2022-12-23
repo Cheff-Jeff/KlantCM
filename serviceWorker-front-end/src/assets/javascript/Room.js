@@ -10,13 +10,13 @@ export async function GetMaxRoomId() {
 }
 
 export async function UploadRoom(){
-    const u = sessionStorage.getItem('user')
+    const u = JSON.parse(sessionStorage.getItem('user'))
     if(u == null){
         return
     }
 
     await axios.post('https://localhost:7117/Room',{
-        UserID: u,
+        UserID: u.userId,
         User: null
     }).then((res)=>{
         console.log(res)
