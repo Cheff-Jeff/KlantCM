@@ -85,7 +85,17 @@
         inputToggle: '',
       }
     },
+    mounted(){
+      window.addEventListener('resize', () => {
+        this.resize();
+      });
+      this.resize();
+    },
     methods: {
+      resize(){
+        const size = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${size}px`);
+      },
       toggleImgUpload(){
         this.boxWrapper = this.boxWrapper == '' ? 'open' : ''
       },

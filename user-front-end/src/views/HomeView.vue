@@ -116,8 +116,17 @@
           this.openRating()
         }
       })
+
+      window.addEventListener('resize', () => {
+        this.resize();
+      });
+      this.resize();
     },
     methods: {
+      resize(){
+        const size = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${size}px`);
+      },
       scroll(){
         let e = document.getElementById('chatWindow')
         if(e){

@@ -163,20 +163,30 @@ svg.close-cross{
 }
 
 @media only screen and (max-width: 500px) {
-  html, body {margin: 0; height: 100%; overflow: hidden}
+  html,body {
+    width: 100%;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+  }
   .chat-wrap.open{
     width: 100%;
     top: 0;
     right: 0;
     position: absolute;
-    min-height: calc(100vh - 50px);
-    max-height: calc(100vh - 50px);
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    max-height: none !important;
     border-radius: 0px;
   }
 
   .converzation-wrap{
     cm-conversation{
-      height: calc(100vh - 115px) !important;
+      height: 100vh !important; /* Fallback for browsers that do not support Custom Properties */
+      height: calc(var(--vh, 1vh) * 100 - 60px) !important;
+      max-height: none !important;
     }
   }
 }
