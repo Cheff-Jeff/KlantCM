@@ -8,8 +8,7 @@ export class ChatHub {
     constructor(){
         //signalr runnen met docker = http://localhost:8000/signalr
         // https://i483908.luna.fhict.nl/signalr
-        let ip = "https://localhost:44302/"
-        this.connection = new HubConnectionBuilder().withUrl(ip+"signalr").build()
+        this.connection = new HubConnectionBuilder().withUrl('https://localhost:44302/signalr').build()
     
         this.connection.onclose(async () => {
             await this.connect();
@@ -67,7 +66,6 @@ export class ChatHub {
          this.connection.on("ReceiveMediaWorker", function (message,index) {
             sessionStorage.setItem('MediaFrom',message)
             sessionStorage.setItem('imgIndex',index)
-            console.log(index)
             window.dispatchEvent(NewMedia)
          });
 
@@ -104,11 +102,10 @@ export class ChatHub {
         )
     }
     async StartRoom(id,FirstName){
-        //const roomid = await GetMaxRoomId()
+        const roomid = await GetMaxRoomId()
         this.connection.invoke("StartRoom",id, FirstName,99999).catch(function (err) {
             return console.error(err)
-        }).then(//UploadRoom())
-        )
+        }).then(UploadRoom())
     }
     StopRoom(UserConnection){
         let RoomId = localStorage.getItem('roomId')
