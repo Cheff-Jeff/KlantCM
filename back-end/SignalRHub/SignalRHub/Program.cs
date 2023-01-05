@@ -4,6 +4,7 @@ using SignalRHub.Models;
 using SignalRHub.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
 
 builder.Services.AddSignalR(options =>
 {
@@ -16,6 +17,7 @@ builder.Services.AddSingleton<IRepo<EndUser, string>, RepoEndUser>();
 
 builder.Services.AddSingleton<IRepo<Room, int>, RepoRoom>();
 
+builder.Services.AddSingleton<IRepo<List<string>, string>, RepoImage>();
 
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
@@ -32,7 +34,9 @@ var app = builder.Build();
 
 
 app.UseRouting();
+app.UseStaticFiles();
 app.UseCors("CorsPolicy");
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -42,4 +46,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.MapHub<Chathub>("/signalr");
+app.MapControllers();
+
 app.Run();

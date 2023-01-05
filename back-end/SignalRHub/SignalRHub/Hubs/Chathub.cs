@@ -16,7 +16,7 @@ namespace SignalRHub.Hubs
         public Chathub(IRepo<EndUser, string> eud, IRepo<Room, int>rd)
         {
             _EndUserdata = eud;
-            _Roomdata = rd;
+            _Roomdata = rd; 
         }
         /// <summary>
         /// Sends message to enduser or to the worker
@@ -43,22 +43,16 @@ namespace SignalRHub.Hubs
                 await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessageWorker", message, Context.ConnectionId);
             }
         }
-        public async Task SendMedia(string base64, string roomId, string? ConnectionId)
+        public async Task SendMedia( int roomId, int index)
         {
             int RoomId = Convert.ToInt32(roomId);
+
             Room r = _Roomdata.get(RoomId);
-            if (r == null || !r.EndUserIds.Contains(Context.ConnectionId) && r.employee.ConnectionString != Context.ConnectionId)
+            if (r == null)
             {
                 return;
             }
-            if (ConnectionId != null)
-            {//currently unused
-                await Clients.Client(ConnectionId).SendAsync("ReceiveMedia", base64);
-            }
-            else
-            {
-                await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMediaWorker", base64, Context.ConnectionId);
-            }
+            await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMediaWorker", Context.ConnectionId, index);
         }
         /// <summary>
         /// Add new user to the room that requested it.

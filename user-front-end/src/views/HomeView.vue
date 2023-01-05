@@ -4,7 +4,7 @@
   import Input from '../components/ChatInput.vue';
   import { ChatHub } from '../assets/javascript/Chat';
   import { ratingUpload } from '../assets/javascript/Stats';
-  import { uploadImage } from '../assets/javascript/base64'
+  import {PostFormdata} from '../assets/javascript/UploadImage'
 </script>
 
 <template>
@@ -94,6 +94,7 @@
         clickedBad: '',
         rating: 'hide',
         connected: false,
+        imgCount:0,
         joined: false,
         EmployeeName:null,
       }
@@ -148,10 +149,9 @@
         ratingUpload(false)
       },
       async uploadFile(e){
-        console.log(e)
-        let img = await uploadImage(e)
-        this.chat.SendMedia(String(img))
-        this.sendMedia(img)
+        await PostFormdata(e)
+        this.sendMedia(e)
+        this.chat.SendMedia(this.imgCount++)
       },
       toggleModal(){
         if(!this.connected){
@@ -189,7 +189,7 @@
         const time = new Date();
 
         const bubble = {
-          Text: '', 
+          Text: `loading`, 
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: false,
           img: File

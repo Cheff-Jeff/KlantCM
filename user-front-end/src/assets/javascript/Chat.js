@@ -9,7 +9,9 @@ export class ChatHub {
 
         this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
 
-        this.connect()
+        this.connect().then(()=>{
+            sessionStorage.setItem("connectionId",this.connection.connectionId)
+        })
 
         this.connection.on("ReceiveMessage", function(message) {
             ///Event to get message 
@@ -86,9 +88,9 @@ export class ChatHub {
         window.dispatchEvent(NewChat)
     }
 
-    SendMedia(base64){
+    SendMedia(imgcount){
         let RoomId = sessionStorage.getItem('roomId')
-        this.connection.invoke("SendMedia",base64,RoomId, null).catch((err)=>{
+        this.connection.invoke("SendMedia",Number (RoomId),Number(imgcount)).catch((err)=>{
             return console.error(err.toString())
         })
     }

@@ -5,6 +5,7 @@
   import Header from '@/components/Header.vue';
   import ChatIndexButton from '@/components/ChatIndexButton.vue';
   import {UploadChat} from '@/assets/javascript/UploadChat';
+  import {deleteImg} from '@/assets/javascript/UploadChat';
   import { getLang } from '@/assets/javascript/translate';
   import { ref } from 'vue';
   const text = ref(null);
@@ -145,7 +146,9 @@
       })
 
       window.addEventListener('NewMedia',()=>{
-        this.AddMedia( localStorage.getItem('FromUser'))
+        const from = sessionStorage.getItem('MediaFrom')
+        const index = sessionStorage.getItem('imgIndex')
+        this.AddMedia(from,index)
       })
 
       window.onbeforeunload = (()=>{
@@ -243,16 +246,30 @@
         sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
         this.scroll();
       },
-      AddMedia(connection){
+      AddMedia(connection,index){
         const time = new Date();
         const bubble = {
-          Text: '',
+          Text: 'This is an image',
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: true,
-          Img: localStorage.getItem('img')
+          Img: 'https://localhost:44302/api/ChatHub?connectionid='+connection+'&index='+index
         };
         let User = this.FindUser(connection)
         this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];
+        this.ChatWindows[User].messagealert = true;
+        if(this.ChatWindows[User].active){
+          this.ChatWindows[User].messagealert = false;
+        }
+        this.UpdatePageTitle();
+
+        let obj = 
+        {
+          openworker: this.OpenWorker,
+          chat: this.ChatWindows,
+          working: this.Working,
+        }
+        sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
+        this.scroll();
       },
       ActivateChat(index){
         if(this.ChatWindows.length == 0) return
@@ -288,6 +305,7 @@
       async RemoveUser(Connection){ 
         const i = this.FindUser(Connection)
         await this.SaveChat(i, Connection)
+        deleteImg(Connection)
         this.ChatWindows.splice(i,1)
         this.ActivateChat(0)
         window.AddErrorNotification('User left')
