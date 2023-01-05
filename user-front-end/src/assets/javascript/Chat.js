@@ -9,7 +9,9 @@ export class ChatHub {
 
         this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
 
-        this.connect()
+        this.connect().then(()=>{
+            sessionStorage.setItem("connectionId",this.connection.connectionId)
+        })
 
         this.connection.on("ReceiveMessage", function(message) {
             ///Event to get message 

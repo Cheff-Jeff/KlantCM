@@ -17,6 +17,8 @@ builder.Services.AddSingleton<IRepo<EndUser, string>, RepoEndUser>();
 
 builder.Services.AddSingleton<IRepo<Room, int>, RepoRoom>();
 
+builder.Services.AddSingleton<IRepo<string, string>, RepoImage>();
+
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
         builder =>

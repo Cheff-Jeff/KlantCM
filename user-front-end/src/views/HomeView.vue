@@ -4,7 +4,6 @@
   import Input from '../components/ChatInput.vue';
   import { ChatHub } from '../assets/javascript/Chat';
   import { ratingUpload } from '../assets/javascript/Stats';
-  import { uploadImage } from '../assets/javascript/base64'
   import {PostFormdata} from '../assets/javascript/UploadImage'
 </script>
 
