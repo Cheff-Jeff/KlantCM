@@ -30,7 +30,8 @@
 <template>
   <div class="row me">
     <cm-conversation-bubble v-if="img">
-      <img class="sendImg"/>
+      <img :src="imageUrl"/>
+      <img class="test">
       <div class="time">{{ Time }}</div>
   </cm-conversation-bubble>
       <cm-conversation-bubble v-else>
@@ -46,9 +47,20 @@
 
 <script>
 export default{
+  data() {
+    return {
+      imageUrl: null
+    }
+  },
   mounted(){
-    let elList = document.getElementsByTagName('img')
-    setTimeout(()=>{elList[elList.length- 1].src= this.img},2000)
+    console.log(this.img)
+    if(this.img){
+      this.imageUrl = URL.createObjectURL(this.img)
+      console.log(this.imageUrl)
+    }
+  },
+  unmounted(){
+    URL.revokeObjectURL(this.imageUrl)
   }
 }
 </script>

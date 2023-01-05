@@ -130,7 +130,7 @@
       },
       async uploadFile(e){
         PostFormdata(e)
-        this.sendMedia(img)
+        this.sendMedia(e)
       },
       checkWindow() {
         if(window.innerWidth <= 500)
@@ -178,9 +178,10 @@
         const time = new Date();
 
         const bubble = {
-          Text: `<b>hoi</b>`, 
+          Text: `loading`, 
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: false,
+          img: File
         }
         this.newChats = [...this.newChats, bubble];
         this.scroll();

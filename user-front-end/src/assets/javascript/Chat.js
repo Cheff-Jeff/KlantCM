@@ -78,9 +78,9 @@ export class ChatHub {
         }, 10000);
     }
 
-    SendMedia(base64){
+    SendMedia(){
         let RoomId = sessionStorage.getItem('roomId')
-        this.connection.invoke("SendMedia",base64,RoomId, null).catch((err)=>{
+        this.connection.invoke("SendMedia",Number (RoomId)).catch((err)=>{
             return console.error(err.toString())
         })
     }

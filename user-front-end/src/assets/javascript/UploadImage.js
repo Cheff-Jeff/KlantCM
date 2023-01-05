@@ -9,8 +9,8 @@ export const PostFormdata = async (Image) => {
         await axios({
             headers: { 'Content-type': 'multipart/form-data'},
             method: 'post',
-            url:`${import.meta.env.VITE_API}api/ChatHub`,
-            data: {Form,connectionid}
+            url:`${import.meta.env.VITE_API}api/ChatHub?connectionid=`+ connectionid,
+            data: Form
         }).then((res)=>{
             console.log(res)
         })
