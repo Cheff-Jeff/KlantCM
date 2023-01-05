@@ -78,9 +78,9 @@ export class ChatHub {
         }, 10000);
     }
 
-    SendMedia(){
+    SendMedia(imgcount){
         let RoomId = sessionStorage.getItem('roomId')
-        this.connection.invoke("SendMedia",Number (RoomId)).catch((err)=>{
+        this.connection.invoke("SendMedia",Number (RoomId),Number(imgcount)).catch((err)=>{
             return console.error(err.toString())
         })
     }

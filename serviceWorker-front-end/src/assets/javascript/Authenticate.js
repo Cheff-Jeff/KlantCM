@@ -34,14 +34,15 @@ export const Logout = () => {
 }
 
 export const RouteGaurd = () =>{
-  const user = JSON.parse(sessionStorage.getItem('user'));
-  console.log(user)
-  if(user !== null){
-    return true
-  }
-  else{
-    return false
-  }
+  // const user = JSON.parse(sessionStorage.getItem('user'));
+  // console.log(user)
+  // if(user !== null){
+  //   return true
+  // }
+  // else{
+  //   return false
+  // }
+  return true
 }
 
 export const RouteGaurdAdmin = async () =>{

@@ -1,11 +1,11 @@
 ﻿namespace SignalRHub.Repo
 {
-    public class RepoImage : IRepo<string, string>
+    public class RepoImage : IRepo<List<string>, string>
     {
-        public readonly Dictionary<string, string> _data =
-        new Dictionary<string, string>();
+        public readonly Dictionary<string, List<string>> _data =
+        new Dictionary<string, List<string>>();
 
-        public void Add(string item, string key)
+        public void Add(List<string> item, string key)
         {
             _data.Add(key, item);
         }
@@ -20,12 +20,12 @@
             return _data.ContainsKey(key);
         }
 
-        public string? FindFree()
+        public List<string>? FindFree()
         {
             throw new NotImplementedException();
         }
 
-        public string? get(string key)
+        public List<string>? get(string key)
         {
             _data.TryGetValue(key, out var p);
             return p;
@@ -36,7 +36,7 @@
             _data.Remove(key);
         }
 
-        public void Update(string item, string key)
+        public void Update(List<string> item, string key)
         {
             _data[key] = item;
         }

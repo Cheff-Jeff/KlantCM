@@ -21,15 +21,15 @@
     img: {
       type : String,
       required:false,
-      default:''
+      default:false
     }
   });
 </script>
 
 <template>
   <div class="row">
-    <cm-conversation-bubble v-if="img != ''">
-      <img />
+    <cm-conversation-bubble v-if="img">
+      <img :src="img"/>
       <div class="time">{{ Time }}</div>
   </cm-conversation-bubble>
       <cm-conversation-bubble v-else>
@@ -43,10 +43,4 @@
 </template>
 
 <script>
-export default{
-  mounted(){
-    let elList = document.getElementsByTagName('img')
-    setTimeout(()=>{elList[elList.length- 1].src= this.img},2000)
-  }
-}
 </script>

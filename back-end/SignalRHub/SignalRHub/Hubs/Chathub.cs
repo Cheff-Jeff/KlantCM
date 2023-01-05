@@ -43,7 +43,7 @@ namespace SignalRHub.Hubs
                 await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMessageWorker", message, Context.ConnectionId);
             }
         }
-        public async Task SendMedia( int roomId)
+        public async Task SendMedia( int roomId, int index)
         {
             int RoomId = Convert.ToInt32(roomId);
 
@@ -52,7 +52,7 @@ namespace SignalRHub.Hubs
             {
                 return;
             }
-            await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMediaWorker");
+            await Clients.Client(r.employee.ConnectionString).SendAsync("ReceiveMediaWorker", Context.ConnectionId, index);
         }
         /// <summary>
         /// Add new user to the room that requested it.

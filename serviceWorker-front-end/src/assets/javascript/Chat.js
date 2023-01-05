@@ -1,12 +1,14 @@
 import { HubConnectionBuilder } from "@microsoft/signalr"
 import { GetMaxRoomId } from "./Room";
 import { UploadRoom } from "./Room";
+import axios, { Axios } from "axios";
 // import {createPost} from './MessageReceiver2';
 
 export class ChatHub {
     constructor(){
         //signalr runnen met docker = http://localhost:8000/signalr
-        this.connection = new HubConnectionBuilder().withUrl("https://localhost:44302/signalr").build()
+        let ip = "https://localhost:44302/"
+        this.connection = new HubConnectionBuilder().withUrl(ip+"signalr").build()
         
 
         this.connection.onclose(async () => {
@@ -62,16 +64,16 @@ export class ChatHub {
             window.dispatchEvent(StopRoom)
          });
 
-         this.connection.on("ReceiveMediaWorker", async function (message, connection) {
-            localStorage.setItem('img',message)
-            localStorage.setItem('FromUser',connection)
-            //bad fix is not async
-            setTimeout(window.dispatchEvent(NewMedia),50000)
+         this.connection.on("ReceiveMediaWorker", function (message,index) {
+            sessionStorage.setItem('MediaFrom',message)
+            sessionStorage.setItem('imgIndex',index)
+            console.log(index)
+            window.dispatchEvent(NewMedia)
          });
 
 
-         const NewMedia = new Event('NewMedia')
-        const NewChat = new Event('NewChat')
+        const NewMedia = new Event("NewMedia")
+        const NewChat = new Event('NewChat')    
         const NewUser = new Event('NewUser')
         const DisconnectUser = new Event('DisconnectUser')
         const StopRoom = new Event('StopRoom')
@@ -102,10 +104,11 @@ export class ChatHub {
         )
     }
     async StartRoom(id,FirstName){
-        const roomid = await GetMaxRoomId()
-        this.connection.invoke("StartRoom",id, FirstName,parseInt(roomid)).catch(function (err) {
+        //const roomid = await GetMaxRoomId()
+        this.connection.invoke("StartRoom",id, FirstName,99999).catch(function (err) {
             return console.error(err)
-        }).then(UploadRoom())
+        }).then(//UploadRoom())
+        )
     }
     StopRoom(UserConnection){
         let RoomId = localStorage.getItem('roomId')

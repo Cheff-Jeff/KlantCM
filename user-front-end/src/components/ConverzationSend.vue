@@ -31,7 +31,6 @@
   <div class="row me">
     <cm-conversation-bubble v-if="img">
       <img :src="imageUrl"/>
-      <img class="test">
       <div class="time">{{ Time }}</div>
   </cm-conversation-bubble>
       <cm-conversation-bubble v-else>

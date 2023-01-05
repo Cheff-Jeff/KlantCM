@@ -90,7 +90,8 @@
         clickedGood: '',
         clickedBad: '',
         rating: 'hide',
-        connected: false
+        connected: false,
+        imgCount:0
       }
     },
     mounted(){
@@ -129,8 +130,9 @@
         ratingUpload(false)
       },
       async uploadFile(e){
-        PostFormdata(e)
+        await PostFormdata(e)
         this.sendMedia(e)
+        this.chat.SendMedia(this.imgCount++)
       },
       checkWindow() {
         if(window.innerWidth <= 500)

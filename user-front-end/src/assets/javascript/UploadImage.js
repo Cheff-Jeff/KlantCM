@@ -15,4 +15,5 @@ export const PostFormdata = async (Image) => {
             console.log(res)
         })
 }
+return true
 }
