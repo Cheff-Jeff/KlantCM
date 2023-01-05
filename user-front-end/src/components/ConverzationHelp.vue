@@ -19,6 +19,8 @@
         lobortis tellus.`
     }
   });
+
+  const EmployeeName = sessionStorage.getItem('EmployeeName')
 </script>
 
 <template>
@@ -27,7 +29,8 @@
           {{ Text }}
           <div class="time">{{ Time }}</div>
       </cm-conversation-bubble>
-      <div>
+      <div class="speek-icon-wrap">
+        <span>{{EmployeeName}}</span>
         <span class="cm-icon cm-icon-user-fill" aria-hidden="true"></span>
       </div>
   </div>

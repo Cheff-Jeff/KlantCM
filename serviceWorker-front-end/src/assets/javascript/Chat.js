@@ -7,10 +7,10 @@ import axios, { Axios } from "axios";
 export class ChatHub {
     constructor(){
         //signalr runnen met docker = http://localhost:8000/signalr
+        // https://i483908.luna.fhict.nl/signalr
         let ip = "https://localhost:44302/"
         this.connection = new HubConnectionBuilder().withUrl(ip+"signalr").build()
-        
-
+    
         this.connection.onclose(async () => {
             await this.connect();
         })

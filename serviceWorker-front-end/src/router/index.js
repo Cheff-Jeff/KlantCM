@@ -45,6 +45,20 @@ const router = createRouter({
             },
         },
         {
+            path: '/userdetails',
+            name: 'userdetails',
+            beforeEnter: async (to, from, next) => {
+                if(await RouteGaurdAdmin() == false){
+                    next({name: 'login'});
+                    return false
+                }
+                else{
+                    next();
+                }
+            },
+            component: () => import ('../views/UserDetails.vue')
+        },
+        {
             path: '/home',
             name: 'home',
             beforeEnter: (to, from, next) => {

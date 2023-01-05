@@ -22,11 +22,11 @@
     <div class="row">
       <div class="col-lg-2 col-md-3">
         <div class="chat-controller">
-          <div class="chat-btn-wrap">
-            <div class="queue">
+          <div class="chat-btn-wrap" v-auto-animate>
+            <div class="queue" v-if="Queue != 0">
               <span class="WaitingInLine">{{Queue}} {{text.home.PeopleInQueue}}</span>
             </div>
-            <div v-for="(chats,index) in ChatWindows" :key="index">
+            <div v-for="(chats,index) in ChatWindows" :key="index" class="mb-2">
               <span @click="ActivateChat(index)">
                 <ChatIndexButton  :active="chats.active" :messagealert="chats.messagealert" :key="chats.active"/>
               </span>
@@ -58,7 +58,7 @@
                 {{text.home.Looking}}
               </button>
 
-              <button class="btn btn-primary EndChatBtn terminate" @click="stopChat(null)">
+              <button class="btn btn-primary EndChatBtn terminate mt-2 custom-color-white" @click="stopChat(null)">
                 {{text.home.EndActive}}
               </button>
             </div>
@@ -70,7 +70,7 @@
           <cm-conversation style="height: 85vh" id="chatWindow">
             <div id="chatWindow" class="body">
               <cm-conversation-divider>
-                <span class="title"> Today </span>
+                <span class="title"> {{text.home.Today}} </span>
               </cm-conversation-divider>
               <div v-for="chat in ChatWindows[activeChatKey].newChats" :key="chat">
                 <div v-if="chat.White">
@@ -107,11 +107,23 @@
         messagealert:false,
         chatlist: [],
         newchatcounter: 0,
-        chattest: []
+        chattest: [],
+        user:{
+          name:'',
+          id:''
+        }
       }
     },
     mounted(){
       this.chat = this.$chat
+
+      let sessionstorageuser = JSON.parse(sessionStorage.getItem('user'))
+      if(sessionstorageuser == null){
+        //retunn to login?
+      }
+
+      this.user.name = sessionstorageuser.name
+      this.user.id = sessionstorageuser.userId
 
       window.addEventListener('NewChat',()=>{
         this.reciveConverzation(localStorage.getItem('NewChat'), localStorage.getItem('FromUser'))
@@ -149,6 +161,10 @@
         sessionStorage.setItem('ActiveChats', JSON.stringify(obj));
       })
       this.GetAllActiveChats();
+      const sessionQueue = sessionStorage.getItem('Queue')
+      if (sessionQueue != null) {
+        this.Queue = sessionQueue
+      }
     },
     beforeUnmount() {
     this.closeWorker()
@@ -310,7 +326,8 @@
         this.chat.CloseWorker()
       },
       roomStart(){
-        this.chat.StartRoom(1,'andreas')
+
+        this.chat.StartRoom(this.user.id,this.user.name)
         this.Working = true
 
       },

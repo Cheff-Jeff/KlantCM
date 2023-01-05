@@ -51,7 +51,7 @@ export const RouteGaurdAdmin = async () =>{
     return false;
   }
   
-  const user = await GetUserById(userid)
+  const user = await GetUserById(userid.userId)
   if(user[0].isAdmin){
     return true
   }

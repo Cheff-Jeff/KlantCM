@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function GetMaxRoomId() {
     let Roomid = null;
-    await axios.get('https://localhost:7117/Room/Max').then((res)=>{
+    await axios.get('https://i492404.luna.fhict.nl/Room/Max').then((res)=>{
         console.log(res)
         Roomid = res.data + 1
     })
@@ -10,13 +10,13 @@ export async function GetMaxRoomId() {
 }
 
 export async function UploadRoom(){
-    const u = sessionStorage.getItem('user')
+    const u = JSON.parse(sessionStorage.getItem('user'))
     if(u == null){
         return
     }
 
-    await axios.post('https://localhost:7117/Room',{
-        UserID: u,
+    await axios.post('https://i492404.luna.fhict.nl/Room',{
+        UserID: u.userId,
         User: null
     }).then((res)=>{
         console.log(res)

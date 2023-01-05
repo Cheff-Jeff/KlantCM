@@ -1,4 +1,5 @@
 ﻿using CM_API_EF.Data;
+using CM_API_EF.DTO_s;
 using CM_API_EF.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -51,7 +52,8 @@ namespace CM_API_EF.Controllers
             {
                 if(verify.VerifyPasswordHash(request.Password, Myuser.passwordHash, Myuser.passwordSalt))
                 {
-                    return Ok(Myuser.userId);
+                    UserName user = new() { UserId = Myuser.userId, Name = Myuser.userName };
+                    return Ok(user);
                 }
             }
             return BadRequest("user not found");

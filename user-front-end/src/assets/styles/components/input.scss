@@ -108,17 +108,26 @@ input{
 }
 @media only screen and (max-width: 500px)
 {
+  html,body {
+    width: 100%;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+  } 
   input{
-    // width: calc(100% + 17px);
-    min-width: 315px !important;
-    max-width: 315px !important;
+    min-width: calc(100vw - 21%) !important;
   }
 
   .upload-box{
     max-height: 100vh;
     top: -94vh;
     &.open{
-      height: 100vh;
+      height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+      height: calc(var(--vh, 1vh) * 100);
+      max-height: none !important;
+      margin-top: auto;
     }
 
     .close-cross{
@@ -129,13 +138,5 @@ input{
     .box{
       width: 99%;
     }
-  }
-}
-
-@media only screen and (max-width: 365px)
-{
-  input{
-    min-width: 265px !important;
-    max-width: 265px !important;
   }
 }
