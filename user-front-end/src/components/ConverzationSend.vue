@@ -30,7 +30,7 @@
 <template>
   <div class="row me">
     <cm-conversation-bubble v-if="img">
-      <img :src="imageUrl"/>
+      <img class="sendImg" :src="imageUrl"/>
       <div class="time">{{ Time }}</div>
   </cm-conversation-bubble>
       <cm-conversation-bubble v-else>
@@ -52,7 +52,6 @@ export default{
     }
   },
   mounted(){
-    console.log(this.img)
     if(this.img){
       this.imageUrl = URL.createObjectURL(this.img)
       console.log(this.imageUrl)
