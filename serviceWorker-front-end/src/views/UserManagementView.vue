@@ -2,6 +2,7 @@
 import Header from '@/components/Header.vue';
 import UserList from '@/components/UserList.vue'
 import UpdateUserForm from '@/components/UpdateUserForm.vue'
+import RatingGraph from '@/components/RatingGraph.vue';
 import {GetAllUsers} from '@/assets/javascript/User'
 import { getLang } from '@/assets/javascript/translate';
 import { ref } from 'vue';
@@ -20,11 +21,17 @@ import { ref } from 'vue';
             v-if="manager"
             :userlist="userlist"
             @edit="switchEdit"
+            @details="switchDetails"
         />
         <UpdateUserForm
             v-if="edit"
             :User="user"
             @switch="switchmanager"
+        />
+        <RatingGraph
+            v-if="stats"
+            :id="user"
+            @switchBack="switchmanager"
         />
     </div>
 </template>
@@ -36,6 +43,7 @@ export default{
             manager: 'open',
             edit: '',
             user: '',
+            stats: '',
             userlist: [],
         }
     },
@@ -47,11 +55,19 @@ export default{
         switchEdit(user){
             this.user = user
             this.manager = ''
+            this.stats = ''
             this.edit = 'open'
+        },
+        switchDetails(id){
+            this.user = id
+            this.edit = ''
+            this.manager = ''
+            this.stats = 'open'
         },
         switchmanager(){
             this.user = ''
             this.edit = ''
+            this.stats = ''
             this.manager = 'open'
         },
         async FillUserList(){

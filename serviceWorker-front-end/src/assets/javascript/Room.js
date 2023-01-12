@@ -2,6 +2,7 @@ import axios from "axios";
 
 export async function GetMaxRoomId() {
     let Roomid = null;
+
     await axios.get(`${import.meta.env.VITE_API}Room/Max`).then((res)=>{
         console.log(res)
         Roomid = res.data + 1
@@ -14,6 +15,7 @@ export async function UploadRoom(){
     if(u == null){
         return
     }
+
 
     await axios.post(`${import.meta.env.VITE_API}Room`,{
         UserID: u.userId,
