@@ -71,7 +71,7 @@ export default{
 
       const ctx = document.getElementById('chart');
 
-      await axios.get(`https://localhost:7117/GetAverageFromLast30DaysRatingById?id=${userid}`)
+      await axios.get(`${import.meta.env.VITE_API}GetAverageFromLast30DaysRatingById?id=${userid}`)
       .then(res => {
         for(const obj of res.data){
           days.push(obj.date)
