@@ -103,7 +103,7 @@ export class ChatHub {
     }
     async StartRoom(id,FirstName){
         const roomid = await GetMaxRoomId()
-        this.connection.invoke("StartRoom",id, FirstName,99999).catch(function (err) {
+        this.connection.invoke("StartRoom",id, FirstName,roomid).catch(function (err) {
             return console.error(err)
         }).then(UploadRoom())
     }
