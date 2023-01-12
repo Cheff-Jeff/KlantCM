@@ -8,7 +8,7 @@ export class ChatHub {
     constructor(){
         //signalr runnen met docker = http://localhost:8000/signalr
         // https://i483908.luna.fhict.nl/signalr
-        this.connection = new HubConnectionBuilder().withUrl('https://localhost:44302/signalr').build()
+        this.connection = new HubConnectionBuilder().withUrl(`${import.meta.env.VITE_SIGNALR}signalr`).build()
     
         this.connection.onclose(async () => {
             await this.connect();

@@ -35,7 +35,7 @@ export const UploadChat = async (connection,chat) => {
   }
 
   export const deleteImg = async (connection) => {
-    axios.delete("https://localhost:44302/api/ChatHub?connection="+connection).then((res)=>{
+    axios.delete(`${import.meta.env.VITE_API}api/ChatHub?connection=`+connection).then((res)=>{
         console.log(res)
     })
   }

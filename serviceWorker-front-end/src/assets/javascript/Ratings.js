@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export const GetAllRatings = async() => {
     const result = ref(null)
     try {
-        await axios.get('https://localhost:7117/Rating/getallratings').then((res) => {
+        await axios.get(`${import.meta.env.VITE_API}Rating/getallratings`).then((res) => {
             result.value = res.data
         })
 
