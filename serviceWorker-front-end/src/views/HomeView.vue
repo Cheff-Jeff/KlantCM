@@ -252,7 +252,7 @@
           Text: 'This is an image',
           Time: `${time.getHours()}:${time.getMinutes()}`, 
           White: true,
-          Img: 'https://localhost:44302/api/ChatHub?connectionid='+connection+'&index='+index
+          Img: `${import.meta.env.VITE_SIGNALR}api/ChatHub?connectionid=`+connection+'&index='+index
         };
         let User = this.FindUser(connection)
         this.ChatWindows[User].newChats = [...this.ChatWindows[User].newChats, bubble];

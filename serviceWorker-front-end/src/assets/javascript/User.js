@@ -30,7 +30,7 @@ export const GetAllUsers = async() => {
 
 export const DeleteUser = async(id) => {
     try {
-        let response = await axios.delete(`https://localhost:7117/User/deleteuser?id=${id}`)
+        let response = await axios.delete(`${import.meta.env.VITE_API}User/deleteuser?id=${id}`)
         return response
     } catch (error) {
         console.log(error)
@@ -48,7 +48,7 @@ export const GetUserById = async(id) => {
 
 export const GetAverageRatingByUserID = async(id) => {
     try {
-        let response = await axios.get(`https://localhost:7117/GetAverageRatingByUserID?userID=${id}`)
+        let response = await axios.get(`${import.meta.env.VITE_API}GetAverageRatingByUserID?userID=${id}`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -57,7 +57,7 @@ export const GetAverageRatingByUserID = async(id) => {
 
 export const GetRatingPercentageByUserIDForLast30Days = async(id) => {
     try {
-        let response = await axios.get(`https://localhost:7117/GetRatingPercentageByUserIDForLast30Days?UserID=${id}`)
+        let response = await axios.get(`${import.meta.env.VITE_API}GetRatingPercentageByUserIDForLast30Days?UserID=${id}`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -66,7 +66,7 @@ export const GetRatingPercentageByUserIDForLast30Days = async(id) => {
 
 export const GetAverageFromLast30DaysRatingById = async(id) => {
     try {
-        let response = await axios.get(`https://localhost:7117/GetAverageFromLast30DaysRatingById?id=${id}`)
+        let response = await axios.get(`${import.meta.env.VITE_API}GetAverageFromLast30DaysRatingById?id=${id}`)
         return response.data
     } catch (error) {
         console.log(error)
