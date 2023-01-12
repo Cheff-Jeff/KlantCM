@@ -1,5 +1,5 @@
 <script setup>
-  import RatingGraph from '../components/RatingGraph.vue';
+  // import RatingGraph from '../components/RatingGraph.vue';
   import Header from '../components/Header.vue';
   import { getLang } from '@/assets/javascript/translate';
   import { ref } from 'vue';
@@ -17,7 +17,7 @@
   />
   <MyProfileVue v-if="user" :User="user[0]" />
 
-  <RatingGraph/>
+  <!-- <RatingGraph/> -->
 </template>
 
 <script>
