@@ -87,8 +87,9 @@ export default{
           this.$emit('edit', user)
         },
         openDetails(id){
-          sessionStorage.setItem('uDetails', id)
-          this.$router.push('userdetails')
+          this.$emit('details', id)
+          // sessionStorage.setItem('uDetails', id)
+          // this.$router.push('userdetails')
         },
         async removeUser(){
           console.log('init')
